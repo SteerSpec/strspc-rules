@@ -36,7 +36,7 @@ def compute_hash(data: dict) -> str:
 
 def process_file(path: Path) -> bool:
     """Compute and update hash in a single entity file. Returns True if changed."""
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         data = json.load(f)
 
     new_hash = compute_hash(data)
