@@ -32,11 +32,11 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "revision", "state", "body", "added_by", "added_at", "supersedes"],
+        "required": ["id", "revision", "state", "body", "added_by", "added_at"],
         "properties": {
           "id": { "type": "string" },
           "revision": { "type": "integer", "minimum": 0 },
-          "state": { "enum": ["D", "A", "P", "I", "R", "T"] },
+          "state": { "type": "string", "enum": ["D", "A", "P", "I", "R", "T"] },
           "body": { "type": "string" },
           "added_by": { "type": "string" },
           "added_at": { "type": "string" },
