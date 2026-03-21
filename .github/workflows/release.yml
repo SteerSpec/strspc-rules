@@ -76,6 +76,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: SteerSpec/strspc-www
+          ref: main
           token: ${{ secrets.WWW_PAT }}
           path: www
 
