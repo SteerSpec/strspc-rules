@@ -14,7 +14,7 @@ Core entities for the SteerSpec Sync specification. These define the fundamental
 - [SYNCMFST-008.0/D] HAS a Blake3 hash for integrity verification.
 
 Version(s):
-	- 0.1.0-draft (2026-03-07): initial draft
+  - 0.1.0-draft (2026-03-07): initial draft
 
 Notes:
 
@@ -30,10 +30,10 @@ Notes:
 - [TMPLT-008.0/D] MAY define template-specific variables.
 
 Version(s):
-	- 0.1.0-draft (2026-03-07): initial draft
+  - 0.1.0-draft (2026-03-07): initial draft
 
 Notes:
-	- [TMPLT-006/001] Mustache is best for fully templated files. Marker is best for CLAUDE.md files where repos may have local sections between managed markers. Full-replace is best for agents and skills that should be identical everywhere.
+  - [TMPLT-006/001] Mustache is best for fully templated files. Marker is best for CLAUDE.md files where repos may have local sections between managed markers. Full-replace is best for agents and skills that should be identical everywhere.
 
 ## TemplateVersion
 
@@ -44,7 +44,7 @@ Notes:
 - [TMPLTVRS-005.0/D] IS tracked via git tags in the format `tmpl/<template-id>/v<version>`.
 
 Version(s):
-	- 0.1.0-draft (2026-03-07): initial draft
+  - 0.1.0-draft (2026-03-07): initial draft
 
 Notes:
 
@@ -57,7 +57,7 @@ Notes:
 - [CMPREG-005.0/D] MAY use GitHub topics for dynamic repository resolution.
 
 Version(s):
-	- 0.1.0-draft (2026-03-07): initial draft
+  - 0.1.0-draft (2026-03-07): initial draft
 
 Notes:
 
@@ -71,7 +71,7 @@ Notes:
 - [CMPTGT-006.0/D] HAS an `enabled` boolean flag (default: true).
 
 Version(s):
-	- 0.1.0-draft (2026-03-07): initial draft
+  - 0.1.0-draft (2026-03-07): initial draft
 
 Notes:
 
@@ -87,7 +87,7 @@ Notes:
 - [SYNCOP-008.0/D] MUST record results in the DeploymentState.
 
 Version(s):
-	- 0.1.0-draft (2026-03-07): initial draft
+  - 0.1.0-draft (2026-03-07): initial draft
 
 Notes:
 
@@ -101,10 +101,10 @@ Notes:
 - [SYNCPR-006.0/D] MUST close stale version PRs for the same template when a newer version PR is created.
 
 Version(s):
-	- 0.1.0-draft (2026-03-07): initial draft
+  - 0.1.0-draft (2026-03-07): initial draft
 
 Notes:
-	- [SYNCPR-005/001] This follows the Dependabot pattern of updating PRs in place to avoid PR flooding.
+  - [SYNCPR-005/001] This follows the Dependabot pattern of updating PRs in place to avoid PR flooding.
 
 ## DeploymentState
 
@@ -115,6 +115,6 @@ Notes:
 - [DPLYST-005.0/D] HAS a Blake3 hash for integrity verification.
 
 Version(s):
-	- 0.1.0-draft (2026-03-07): initial draft
+  - 0.1.0-draft (2026-03-07): initial draft
 
 Notes:

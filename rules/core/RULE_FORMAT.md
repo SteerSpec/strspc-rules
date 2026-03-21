@@ -13,7 +13,7 @@ In DDD, an **Entity** is an object that has a unique identity and a lifecycle.
 - [ENT-005.0/D] HAS an Entity Unique Identifier.
 
 Version(s):
-	- 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync
+  - 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync
 
 Notes:
 
@@ -24,7 +24,7 @@ Notes:
 - [ENTUQID-003.0/D] IS unique within the Realm.
 
 Version(s):
-	- 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync
+  - 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync
 
 Notes:
 
@@ -39,7 +39,7 @@ Notes:
 - [RLIFRMT-007.0/D] MUST define a Rule State splitter which can be either "/", "\" or "|", default is "/".
 
 Version(s):
-	- 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync
+  - 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync
 
 Notes:
 
@@ -57,7 +57,7 @@ A **Rule** defines a business constraint, property, or expected behavior of an e
 - [RUL-008.0/D] Once a Rule IS immutable, modifications must be introduced by superseding it with a new rule.
 
 Version(s):
-	- 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync
+  - 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync
 
 Notes:
 
@@ -73,7 +73,7 @@ Notes:
 - [RULST-008.0/D] Terminated applies to Rule which aren't in force anymore.
 
 Version(s):
-	- 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync
+  - 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync
 
 Notes:
 
@@ -85,7 +85,7 @@ A **Rule Set** groups all rules applicable to a specific entity.
 - [RST-002.0/D] HAS a Rule Set Version which uniquely defines a specific set of changes applied to it.
 
 Version(s):
-	- 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync
+  - 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync
 
 Notes:
 
@@ -97,7 +97,7 @@ Notes:
 - [RSTVRS-004.0/D] IS automatically created when a Rule Set Change is committed in a specific Rule Set Branch.
 
 Version(s):
-	- 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync
+  - 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync
 
 Notes:
 
@@ -107,7 +107,7 @@ Notes:
 - [RSTHSH-002.0/D] MUST be a Blake3 hash.
 
 Version(s):
-	- 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync
+  - 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync
 
 Notes:
 
@@ -123,6 +123,6 @@ A **Note** is a supplemental explanation attached to a specific rule.
 - [NTE-006.0/D] MUST be concise but may span multiple paragraphs if needed for clarity.
 
 Version(s):
-	- 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync
+  - 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync
 
 Notes:
