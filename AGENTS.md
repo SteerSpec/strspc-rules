@@ -36,6 +36,46 @@ Version(s):
 **One statement per rule.**
 Each rule MUST be expressed as a single phrase. Use Notes for context, rationale, or examples.
 
+## JSON Entity System
+
+Rules are maintained in two parallel formats:
+
+- **Markdown** (`KEYWORDS.md`, `RULE_FORMAT.md`) — human-readable source of truth.
+- **JSON** (`ENT.json`, `KWRD.json`, `NTE.json`, etc.) — machine-readable entities validated
+  against a JSON Schema.
+
+The schema lives in `rules/core/_schema/`:
+
+- `entity.v1.schema.json` — full schema, **generated** by `tools/build-schema.py` from the
+  rules themselves (self-recursive: rules define the schema that validates the rules).
+- `bootstrap.schema.json` — minimal hand-maintained schema used by CI when the generator
+  hasn't run.
+
+### Python Tooling
+
+| Script | Purpose |
+| ------ | ------- |
+| `scripts/validate-rules.py` | Validates Markdown rule files (format, IDs, versions) |
+| `tools/build-schema.py` | Generates `entity.v1.schema.json` from the rules; `--check` validates without overwriting |
+| `tools/compute-hash.py` | Computes Blake3 content hashes for `rule_set.hash` fields |
+
+When modifying JSON entity files, run:
+
+```bash
+python3 tools/build-schema.py --check   # validate schema
+python3 tools/compute-hash.py           # recompute hashes if rule content changed
+```
+
+### Python Code Quality
+
+All Python files are linted with [Ruff](https://docs.astral.sh/ruff/) (configured in
+`pyproject.toml`). Before committing Python changes:
+
+```bash
+ruff check .              # lint
+ruff format --check .     # format check (use `ruff format .` to auto-fix)
+```
+
 ## Commit Format
 
 All commits MUST follow the [Conventional Commits](https://www.conventionalcommits.org/) specification
@@ -62,7 +102,8 @@ pre-commit install  # also install the pre-commit stage hooks
 - Use `bd` (beads) for ALL task tracking — no markdown TODOs.
 - Open a GitHub issue documenting the plan before starting any work.
 - Run `python3 scripts/validate-rules.py` locally before committing.
-- CI gates every PR — the validate, lint, and lint-commits jobs must pass.
+- CI gates every PR — the `validate`, `validate-json`, `lint-python`, `lint-commits`,
+  and `lint` jobs must all pass.
 - To release: open a PR from `develop` to `main`. On merge, the release workflow
   automatically bumps the semver tag based on conventional commit types (`feat`→minor,
   `fix`/etc→patch, breaking→major) and publishes the GitHub release with archives.
