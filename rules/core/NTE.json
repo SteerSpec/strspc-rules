@@ -8,14 +8,14 @@
   "rule_set": {
     "version": "0.1.0",
     "timestamp": "2026-03-21T00:00:00Z",
-    "hash": "blake3:d809834268f6a94a15d4819b283e32c03d0c44f0d59c9f8a561c97d3c2f73919"
+    "hash": "blake3:8ed20e9f5149db3aaffcb28607c6a0806bd6cfaaeecfefae2fc2be2c18c2e9ea"
   },
   "rules": [
     {
       "id": "NTE-001",
       "revision": 0,
       "state": "D",
-      "body": "IS associated with a single rule and must reference the rule's identifier explicitly.",
+      "body": "IS associated with a single rule and must reference the rule's identifier explicitly (e.g., [<rule id>/<incremental note id (OOn)]).",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
       "supersedes": null

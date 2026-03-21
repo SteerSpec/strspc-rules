@@ -140,12 +140,10 @@ def extract_constraints(
         if m:
             constraints["minLength"] = int(m.group(1))
             constraints["maxLength"] = int(m.group(2))
-            continue
 
         # Alphanumeric pattern
         if RE_ALPHANUMERIC.search(body):
             constraints["pattern"] = "^[a-zA-Z0-9]+$"
-            continue
 
         # State enum
         m = RE_STATE_ENUM.search(body)
@@ -154,17 +152,14 @@ def extract_constraints(
             states = re.findall(r"\(([A-Z])\)", m.group(1))
             if states:
                 constraints["enum"] = states
-            continue
 
         # Semver
         if RE_SEMVER.search(body):
             constraints["pattern"] = SEMVER_PATTERN
-            continue
 
         # Blake3
         if RE_BLAKE3.search(body):
             constraints["pattern"] = "^blake3:[a-f0-9]{64}$"
-            continue
 
         # Rules that define required fields (HAS, IS associated) or
         # optional fields (MAY) are handled structurally, not via
@@ -275,7 +270,7 @@ def build_schema(
             "state": state_schema,
             "body": {"type": "string", "minLength": 1},
             "added_by": {"type": "string", "minLength": 1},
-            "added_at": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}"},
+            "added_at": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
             "supersedes": {
                 "oneOf": [
                     {"type": "string", "pattern": "^[A-Z0-9]+-\\d{3}$"},
@@ -304,7 +299,7 @@ def build_schema(
             "type": note_type_schema,
             "content": {"type": "string", "minLength": 1},
             "added_by": {"type": "string", "minLength": 1},
-            "added_at": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}"},
+            "added_at": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
             "revision": {"type": "integer", "minimum": 0},
         },
         "additionalProperties": False,
@@ -341,7 +336,7 @@ def build_schema(
                     "version": version_schema,
                     "timestamp": {
                         "type": "string",
-                        "pattern": "^\\d{4}-\\d{2}-\\d{2}T",
+                        "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}",
                     },
                     "hash": hash_schema,
                 },
@@ -360,7 +355,14 @@ def build_schema(
 def validate_full(
     files: list[tuple[Path, dict]], schema: dict
 ) -> bool:
-    """Validate all core JSON files against the generated schema."""
+    """Validate all core JSON files against the generated schema.
+
+    NOTE: This validation is circular by design — the schema is derived from
+    the same files it validates. It catches structural inconsistencies (e.g.,
+    a rule body claiming 6 states but a file using a 7th), but it cannot
+    detect constraint *regression* (e.g., reducing allowed states from 6 to 2).
+    Regression detection belongs in the PR validator (rule-diff, spec §7.2).
+    """
     validator = Draft202012Validator(schema)
     all_ok = True
 
