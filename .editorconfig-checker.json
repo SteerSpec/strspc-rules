@@ -1,0 +1,10 @@
+{
+  "Exclude": [
+    "\\.git/",
+    "\\.beads/"
+  ],
+  "Disable": {
+    "IndentSize": true,
+    "Indentation": true
+  }
+}
