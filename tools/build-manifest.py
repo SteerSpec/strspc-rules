@@ -39,6 +39,9 @@ def build_manifest(version: str, rules_dir: Path, schema_dir: Path) -> dict:
             }
         )
 
+    if not rules:
+        raise FileNotFoundError(f"no rule JSON files found in {rules_dir}")
+
     schemas = {}
     expected_schemas = [
         ("entity.v1.schema.json", "entity.v1", "schemas/entity/v1.json"),

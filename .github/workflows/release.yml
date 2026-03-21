@@ -7,6 +7,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -85,8 +89,9 @@ jobs:
         run: |
           VERSION="${{ needs.release.outputs.version }}"
           rm -rf "www/rules/v${VERSION}"
-          mkdir -p "www/rules/v${VERSION}"
+          mkdir -p "www/rules/v${VERSION}/_schema"
           cp rules/core/*.json "www/rules/v${VERSION}/"
+          cp rules/core/_schema/*.json "www/rules/v${VERSION}/_schema/"
 
       - name: Generate manifest
         run: |
