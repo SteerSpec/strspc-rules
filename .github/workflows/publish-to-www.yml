@@ -1,0 +1,83 @@
+name: Publish to steerspec.dev
+
+on:
+  workflow_run:
+    workflows: ["Release"]
+    types: [completed]
+  workflow_dispatch: # manual fallback
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    steps:
+      - name: Checkout strspc-rules
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get latest release tag
+        id: tag
+        run: |
+          TAG=$(git describe --tags --abbrev=0)
+          VERSION="${TAG#v}"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Publishing version $VERSION (tag $TAG)"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Checkout strspc-www
+        uses: actions/checkout@v4
+        with:
+          repository: SteerSpec/strspc-www
+          ssh-key: ${{ secrets.WWW_DEPLOY_KEY }}
+          path: www
+
+      - name: Copy schemas
+        run: |
+          mkdir -p www/schemas/entity
+          cp rules/core/_schema/entity.v1.schema.json www/schemas/entity/v1.json
+          cp rules/core/_schema/bootstrap.schema.json www/schemas/entity/bootstrap.json
+
+      - name: Copy versioned rules
+        run: |
+          VERSION="${{ steps.tag.outputs.version }}"
+          mkdir -p "www/rules/v${VERSION}"
+          cp rules/core/*.json "www/rules/v${VERSION}/"
+
+      - name: Generate manifest
+        run: |
+          VERSION="${{ steps.tag.outputs.version }}"
+          python3 tools/build-manifest.py \
+            --version "$VERSION" \
+            --output "www/rules/v${VERSION}/index.json"
+
+      - name: Update latest
+        run: |
+          VERSION="${{ steps.tag.outputs.version }}"
+          rm -rf www/rules/latest
+          cp -r "www/rules/v${VERSION}" www/rules/latest
+
+      - name: Commit and push to strspc-www
+        run: |
+          VERSION="${{ steps.tag.outputs.version }}"
+          cd www
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add schemas/ rules/
+          git diff --cached --quiet && echo "No changes to publish" && exit 0
+          git commit -m "chore: publish rules v${VERSION}"
+          git push
