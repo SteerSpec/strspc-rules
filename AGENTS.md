@@ -30,7 +30,7 @@ modify rules in that section. Format:
 
 ```text
 Version(s):
-	- <semver> (<YYYY-MM-DD>): <description of change>
+  - <semver> (<YYYY-MM-DD>): <description of change>
 ```
 
 **One statement per rule.**
@@ -41,7 +41,7 @@ Each rule MUST be expressed as a single phrase. Use Notes for context, rationale
 All commits MUST follow the [Conventional Commits](https://www.conventionalcommits.org/) specification
 (enforced by commitlint on commit-msg hook and in CI):
 
-```
+```text
 <type>[optional scope][optional !]: <description>
 ```
 
@@ -63,7 +63,9 @@ pre-commit install  # also install the pre-commit stage hooks
 - Open a GitHub issue documenting the plan before starting any work.
 - Run `python3 scripts/validate-rules.py` locally before committing.
 - CI gates every PR — the validate, lint, and lint-commits jobs must pass.
-- To release a new version: update `VERSION`, commit, tag as `vX.Y.Z`, push the tag.
+- To release: open a PR from `develop` to `main`. On merge, the release workflow
+  automatically bumps the semver tag based on conventional commit types (`feat`→minor,
+  `fix`/etc→patch, breaking→major) and publishes the GitHub release with archives.
 
 ## Non-Interactive Shell Commands
 
