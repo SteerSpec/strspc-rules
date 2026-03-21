@@ -14,8 +14,16 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Pre-flight validation
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Pre-flight validation (Markdown)
         run: python3 scripts/validate-rules.py
+      - name: Pre-flight validation (JSON schema)
+        run: python3 tools/build-schema.py --check
       - name: Bump version and create tag
         id: tag
         uses: mathieudutour/github-tag-action@v6.2

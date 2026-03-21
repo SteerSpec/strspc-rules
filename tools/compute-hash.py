@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+"""Compute and update Blake3 hashes for SteerSpec entity JSON files.
+
+Usage:
+  python3 tools/compute-hash.py [FILE...]
+
+If no files are given, processes all rules/core/*.json files.
+Sets rule_set.hash to "blake3:<hex>" computed over canonical JSON
+(sorted keys, minified) with the hash field set to null.
+"""
+
+import json
+import sys
+from pathlib import Path
+
+import blake3
+
+
+def canonical_json(data: dict) -> bytes:
+    """Serialize to canonical JSON: sorted keys, no whitespace, hash nulled."""
+    obj = json.loads(json.dumps(data, sort_keys=True))
+    # Null out hash before computing (avoids circularity)
+    if "rule_set" in obj and "hash" in obj["rule_set"]:
+        obj["rule_set"]["hash"] = None
+    # Also null hashes in sub-entities
+    for sub in obj.get("sub_entities", []):
+        if "rule_set" in sub and "hash" in sub["rule_set"]:
+            sub["rule_set"]["hash"] = None
+    return json.dumps(obj, sort_keys=True, separators=(",", ":")).encode("utf-8")
+
+
+def compute_hash(data: dict) -> str:
+    """Compute Blake3 hash of canonical JSON."""
+    return "blake3:" + blake3.blake3(canonical_json(data)).hexdigest()
+
+
+def process_file(path: Path) -> bool:
+    """Compute and update hash in a single entity file. Returns True if changed."""
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    new_hash = compute_hash(data)
+    old_hash = data.get("rule_set", {}).get("hash")
+
+    if old_hash == new_hash:
+        print(f"  {path.name}: unchanged ({new_hash[:20]}...)")
+        return False
+
+    data["rule_set"]["hash"] = new_hash
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+        f.write("\n")
+
+    print(f"  {path.name}: {new_hash[:20]}...")
+    return True
+
+
+def main() -> int:
+    if len(sys.argv) > 1:
+        files = [Path(p) for p in sys.argv[1:]]
+    else:
+        root = Path(__file__).parent.parent / "rules" / "core"
+        files = sorted(root.glob("*.json"))
+
+    if not files:
+        print("No JSON files found.", file=sys.stderr)
+        return 1
+
+    changed = 0
+    for path in files:
+        if process_file(path):
+            changed += 1
+
+    print(f"\nProcessed {len(files)} file(s), {changed} updated.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

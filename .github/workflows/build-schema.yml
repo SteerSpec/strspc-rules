@@ -1,0 +1,80 @@
+name: Build Schema
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'rules/core/*.json'
+      - 'rules/core/_schema/**'
+      - 'tools/build-schema.py'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'rules/core/*.json'
+      - 'rules/core/_schema/**'
+      - 'tools/build-schema.py'
+
+permissions:
+  contents: read
+
+jobs:
+  build-schema:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Validate core JSONs against bootstrap schema
+        run: |
+          python3 -c "
+          import json
+          from jsonschema import validate
+          from pathlib import Path
+          schema = json.loads(Path('rules/core/_schema/bootstrap.schema.json').read_text())
+          files = sorted(Path('rules/core').glob('*.json'))
+          for f in files:
+              validate(instance=json.loads(f.read_text()), schema=schema)
+              print(f'  OK: {f.name}')
+          print(f'Bootstrap: {len(files)} files valid')
+          "
+
+      - name: Verify schema is not stale
+        run: python3 tools/build-schema.py --check
+
+      - name: Verify Blake3 hashes
+        run: |
+          python3 -c "
+          import json
+          from pathlib import Path
+          import blake3
+
+          def canonical_for_hash(data):
+              obj = json.loads(json.dumps(data, sort_keys=True))
+              if 'rule_set' in obj and 'hash' in obj['rule_set']:
+                  obj['rule_set']['hash'] = None
+              for sub in obj.get('sub_entities', []):
+                  if 'rule_set' in sub and 'hash' in sub['rule_set']:
+                      sub['rule_set']['hash'] = None
+              return json.dumps(obj, sort_keys=True, separators=(',', ':')).encode()
+
+          files = sorted(Path('rules/core').glob('*.json'))
+          for f in files:
+              data = json.loads(f.read_text())
+              stored = data.get('rule_set', {}).get('hash')
+              if stored is None:
+                  print(f'  SKIP: {f.name} (hash is null)')
+                  continue
+              computed = 'blake3:' + blake3.blake3(canonical_for_hash(data)).hexdigest()
+              if stored != computed:
+                  print(f'  FAIL: {f.name}: stored={stored[:30]}... computed={computed[:30]}...')
+                  exit(1)
+              print(f'  OK: {f.name}')
+          print('All hashes verified')
+          "
