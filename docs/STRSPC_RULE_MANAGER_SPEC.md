@@ -138,7 +138,7 @@ Sub-entities follow the same schema as top-level entities. The nesting can be ar
 
 ### 3.2 State Machine
 
-```
+```text
 D (Draft) ──────→ P (Published) ──→ I (Implemented) ──→ R (Retired) ──→ T (Terminated)
    │
    └─────────────→ A (Abandoned)
@@ -180,7 +180,7 @@ The JSON stores `id`, `revision`, and `state` as separate fields. The rendered i
 
 ### 5.1 Repository Layout
 
-```
+```text
 rules/core/
 ├── ENT.json              ← Entity + Entity Unique Identifier (nested)
 ├── RLIFRMT.json          ← Rule Identifier Format
@@ -328,7 +328,7 @@ For each changed entity file, the validator compares the before and after states
 
 A developer's repository contains a `.strspc/` directory that configures which rule sets apply and how they are evaluated.
 
-```
+```text
 project-repo/
 ├── .strspc/
 │   ├── config.yaml       ← rule sources, evaluation settings

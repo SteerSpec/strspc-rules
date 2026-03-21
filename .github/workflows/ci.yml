@@ -67,5 +67,6 @@ jobs:
           globs: |
             **/*.md
             !node_modules/**
+            !.beads/**
       - name: editorconfig-checker
         uses: editorconfig-checker/action-editorconfig-checker@v2
