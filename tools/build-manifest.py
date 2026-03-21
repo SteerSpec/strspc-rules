@@ -44,8 +44,8 @@ def build_manifest(version: str, rules_dir: Path, schema_dir: Path) -> dict:
 
     schemas = {}
     expected_schemas = [
-        ("entity.v1.schema.json", "entity.v1", "schemas/entity/v1.json"),
-        ("bootstrap.schema.json", "bootstrap", "schemas/entity/bootstrap.json"),
+        ("entity.v1.schema.json", "entity.v1", "/schemas/entity/v1.json"),
+        ("bootstrap.schema.json", "bootstrap", "/schemas/entity/bootstrap.json"),
     ]
     for filename, key, served_path in expected_schemas:
         if not (schema_dir / filename).exists():
