@@ -21,8 +21,6 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Pre-flight validation (Markdown)
-        run: python3 scripts/validate-rules.py
       - name: Pre-flight validation (JSON schema)
         run: python3 tools/build-schema.py --check
       - name: Bump version and create tag

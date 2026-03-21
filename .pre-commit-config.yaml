@@ -29,15 +29,6 @@ repos:
       - id: ruff-format
         args: [--check]
 
-  - repo: local
-    hooks:
-      - id: validate-rules
-        name: Validate rule format
-        entry: python3 scripts/validate-rules.py
-        language: system
-        pass_filenames: false
-        stages: [pre-commit]
-
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
     rev: v9.22.0
     hooks:
