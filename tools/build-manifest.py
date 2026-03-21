@@ -29,10 +29,7 @@ def build_manifest(version: str, rules_dir: Path, schema_dir: Path) -> dict:
 
         computed_hash = compute_hash(data)
         if stored_hash != computed_hash:
-            raise ValueError(
-                f"hash mismatch in {path}: "
-                f"stored={stored_hash} computed={computed_hash}"
-            )
+            raise ValueError(f"hash mismatch in {path}: stored={stored_hash} computed={computed_hash}")
 
         rules.append(
             {
