@@ -2,7 +2,8 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
-SteerSpec Core Rules — the canonical rule format specification for the SteerSpec ecosystem.
+SteerSpec Core Rules — the canonical rule format specification for the
+[SteerSpec](https://steerspec.dev) ecosystem.
 
 This repository contains the foundational rule definitions that govern how all SteerSpec
 specifications are structured, versioned, and interpreted. The rules are written using the
