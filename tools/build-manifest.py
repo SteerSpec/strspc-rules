@@ -10,7 +10,7 @@ If --output is omitted, prints to stdout.
 import argparse
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from hash_util import compute_hash
@@ -58,7 +58,7 @@ def build_manifest(version: str, rules_dir: Path, schema_dir: Path) -> dict:
 
     return {
         "version": version,
-        "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "generated_at": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "schemas": schemas,
         "rules": rules,
     }
