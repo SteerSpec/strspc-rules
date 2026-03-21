@@ -21,7 +21,7 @@ import re
 import sys
 from pathlib import Path
 
-from jsonschema import Draft202012Validator, ValidationError
+from jsonschema import Draft202012Validator
 
 ROOT = Path(__file__).parent.parent
 CORE_DIR = ROOT / "rules" / "core"
@@ -45,17 +45,13 @@ ENTITY_SCHEMA_MAP = {
 # --- Constraint extraction patterns ---
 
 # "MUST have a length of at least N and at most M characters"
-RE_LENGTH = re.compile(
-    r"MUST have a length of at least (\d+) and at most (\d+) characters"
-)
+RE_LENGTH = re.compile(r"MUST have a length of at least (\d+) and at most (\d+) characters")
 
 # "IS a string of letters or numbers only"
 RE_ALPHANUMERIC = re.compile(r"IS a string of letters or numbers only")
 
 # "MAY have a state: X (C), Y (C), ..."
-RE_STATE_ENUM = re.compile(
-    r"MAY have a state:\s*(.+)"
-)
+RE_STATE_ENUM = re.compile(r"MAY have a state:\s*(.+)")
 
 # "MUST be in the semantic versioning format"
 RE_SEMVER = re.compile(r"MUST be in the semantic versioning format")
@@ -117,16 +113,12 @@ def collect_rules_by_entity(
             # Handle nested sub-entities (depth 2)
             for subsub in sub.get("sub_entities", []):
                 ssid = subsub["entity"]["id"]
-                result.setdefault((eid, ssid), []).extend(
-                    subsub.get("rules", [])
-                )
+                result.setdefault((eid, ssid), []).extend(subsub.get("rules", []))
 
     return result
 
 
-def extract_constraints(
-    rules: list[dict], schema_path: str
-) -> dict:
+def extract_constraints(rules: list[dict], schema_path: str) -> dict:
     """Extract JSON Schema constraints from rule bodies."""
     constraints: dict = {}
     warnings: list[str] = []
@@ -164,13 +156,8 @@ def extract_constraints(
         # Rules that define required fields (HAS, IS associated) or
         # optional fields (MAY) are handled structurally, not via
         # pattern extraction. Log unmatched for visibility.
-        if not any(
-            kw in body
-            for kw in ["HAS", "IS ", "DEFINES", "MUST", "MAY", "Once"]
-        ):
-            warnings.append(
-                f"  WARNING: {rule_id} → no constraint extracted: {body[:60]}..."
-            )
+        if not any(kw in body for kw in ["HAS", "IS ", "DEFINES", "MUST", "MAY", "Once"]):
+            warnings.append(f"  WARNING: {rule_id} → no constraint extracted: {body[:60]}...")
 
     for w in warnings:
         print(w)
@@ -308,7 +295,7 @@ def build_schema(
     # Entity file schema (recursive for sub_entities)
     entity_file_schema = {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "$id": "https://steerspec.io/schemas/entity/v1.json",
+        "$id": "https://steerspec.dev/schemas/entity/v1.json",
         "title": "SteerSpec Entity File Schema",
         "description": (
             "Full schema for SteerSpec entity files. Generated from core rule "
@@ -352,9 +339,7 @@ def build_schema(
     return entity_file_schema
 
 
-def validate_full(
-    files: list[tuple[Path, dict]], schema: dict
-) -> bool:
+def validate_full(files: list[tuple[Path, dict]], schema: dict) -> bool:
     """Validate all core JSON files against the generated schema.
 
     NOTE: This validation is circular by design — the schema is derived from
@@ -394,8 +379,7 @@ def main() -> int:
     print(f"\nPhase 3: Self-validation ({len(files)} files)")
     if not validate_full(files, schema):
         print(
-            "\nERROR: Generated schema rejects core files. "
-            "This indicates an incoherent rule change.",
+            "\nERROR: Generated schema rejects core files. This indicates an incoherent rule change.",
             file=sys.stderr,
         )
         return 1
@@ -410,15 +394,13 @@ def main() -> int:
                 return 0
             else:
                 print(
-                    "\nERROR: Committed schema is stale. "
-                    "Run 'python3 tools/build-schema.py' and commit the result.",
+                    "\nERROR: Committed schema is stale. Run 'python3 tools/build-schema.py' and commit the result.",
                     file=sys.stderr,
                 )
                 return 1
         else:
             print(
-                "\nERROR: Schema file does not exist. "
-                "Run 'python3 tools/build-schema.py' to generate it.",
+                "\nERROR: Schema file does not exist. Run 'python3 tools/build-schema.py' to generate it.",
                 file=sys.stderr,
             )
             return 1

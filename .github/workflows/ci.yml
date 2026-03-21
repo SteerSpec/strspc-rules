@@ -10,13 +10,6 @@ permissions:
   contents: read
 
 jobs:
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Validate rule format
-        run: python3 scripts/validate-rules.py
-
   validate-json:
     runs-on: ubuntu-latest
     steps:
@@ -50,6 +43,21 @@ jobs:
       - uses: wagoid/commitlint-github-action@v6
         with:
           configFile: .commitlintrc.yml
+
+  lint-python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Ruff
+        run: pip install ruff
+      - name: Ruff lint
+        run: ruff check .
+      - name: Ruff format check
+        run: ruff format --check .
 
   lint:
     runs-on: ubuntu-latest

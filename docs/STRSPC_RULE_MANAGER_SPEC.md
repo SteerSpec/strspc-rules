@@ -197,7 +197,7 @@ Each `.json` file is one top-level entity with its sub-entities nested. The `_sc
 
 ```json
 {
-  "$schema": "https://steerspec.io/schemas/entity/v1.json",
+  "$schema": "https://steerspec.dev/schemas/entity/v1.json",
   "entity": {
     "id": "<EUID>",
     "title": "<human-readable name>",
@@ -380,7 +380,7 @@ The `fail_on` list references rule states, not severity levels (since severity i
 
 ### 8.5 Cloud Mode (CI Action, Paid Tier)
 
-- GitHub Action calls `api.steerspec.io/evaluate`.
+- GitHub Action calls `api.steerspec.dev/evaluate`.
 - Sends: the diff, the resolved rule set references.
 - SteerSpec cloud resolves rules, runs AI evaluation, returns results.
 - Server-side caching across organizations using the same global rules.
