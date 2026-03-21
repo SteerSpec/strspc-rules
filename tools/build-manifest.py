@@ -13,6 +13,24 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+import blake3
+
+
+def canonical_json(data: dict) -> bytes:
+    """Serialize to canonical JSON: sorted keys, no whitespace, hash nulled."""
+    obj = json.loads(json.dumps(data, sort_keys=True))
+    if "rule_set" in obj and "hash" in obj["rule_set"]:
+        obj["rule_set"]["hash"] = None
+    for sub in obj.get("sub_entities", []):
+        if "rule_set" in sub and "hash" in sub["rule_set"]:
+            sub["rule_set"]["hash"] = None
+    return json.dumps(obj, sort_keys=True, separators=(",", ":")).encode("utf-8")
+
+
+def compute_hash(data: dict) -> str:
+    """Compute Blake3 hash of canonical JSON."""
+    return "blake3:" + blake3.blake3(canonical_json(data)).hexdigest()
+
 
 def build_manifest(version: str, rules_dir: Path, schema_dir: Path) -> dict:
     """Build manifest dict from rule and schema files."""
@@ -20,21 +38,39 @@ def build_manifest(version: str, rules_dir: Path, schema_dir: Path) -> dict:
     for path in sorted(rules_dir.glob("*.json")):
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
+
+        stored_hash = data.get("rule_set", {}).get("hash")
+        if stored_hash is None:
+            print(f"ERROR: missing rule_set.hash in {path}", file=sys.stderr)
+            sys.exit(1)
+
+        computed_hash = compute_hash(data)
+        if stored_hash != computed_hash:
+            print(
+                f"ERROR: hash mismatch in {path}: "
+                f"stored={stored_hash} computed={computed_hash}",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+
         rules.append(
             {
                 "file": path.name,
                 "entity_id": data["entity"]["id"],
-                "hash": data["rule_set"]["hash"],
+                "hash": computed_hash,
             }
         )
 
-    schemas = []
-    for name, served_path in [
-        ("entity.v1.schema.json", "schemas/entity/v1.json"),
-        ("bootstrap.schema.json", "schemas/entity/bootstrap.json"),
-    ]:
-        if (schema_dir / name).exists():
-            schemas.append({"file": name, "path": served_path})
+    schemas = {}
+    expected_schemas = [
+        ("entity.v1.schema.json", "entity.v1", "schemas/entity/v1.json"),
+        ("bootstrap.schema.json", "bootstrap", "schemas/entity/bootstrap.json"),
+    ]
+    for filename, key, served_path in expected_schemas:
+        if not (schema_dir / filename).exists():
+            print(f"ERROR: missing expected schema file: {schema_dir / filename}", file=sys.stderr)
+            sys.exit(1)
+        schemas[key] = served_path
 
     return {
         "version": version,

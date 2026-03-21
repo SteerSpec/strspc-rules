@@ -4,7 +4,11 @@ on:
   workflow_run:
     workflows: ["Release"]
     types: [completed]
-  workflow_dispatch: # manual fallback
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to publish (e.g. v0.3.1)'
+        required: true
 
 permissions:
   contents: read
@@ -16,19 +20,25 @@ jobs:
       github.event_name == 'workflow_dispatch' ||
       github.event.workflow_run.conclusion == 'success'
     steps:
-      - name: Checkout strspc-rules
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Get latest release tag
+      - name: Resolve release tag
         id: tag
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          TAG=$(git describe --tags --abbrev=0)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG="${{ github.event.inputs.tag }}"
+          else
+            TAG=$(gh api repos/${{ github.repository }}/releases/latest --jq '.tag_name')
+          fi
           VERSION="${TAG#v}"
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "Publishing version $VERSION (tag $TAG)"
+
+      - name: Checkout strspc-rules at release tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.tag.outputs.tag }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
