@@ -21,7 +21,7 @@
     },
     "rule_set": {
       "type": "object",
-      "required": ["version"],
+      "required": ["version", "timestamp", "hash"],
       "properties": {
         "version": { "type": "string" },
         "timestamp": { "type": "string" },
@@ -32,11 +32,11 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "state", "body"],
+        "required": ["id", "revision", "state", "body", "added_by", "added_at"],
         "properties": {
           "id": { "type": "string" },
-          "revision": { "type": "integer" },
-          "state": { "type": "string" },
+          "revision": { "type": "integer", "minimum": 0 },
+          "state": { "type": "string", "enum": ["D", "A", "P", "I", "R", "T"] },
           "body": { "type": "string" },
           "added_by": { "type": "string" },
           "added_at": { "type": "string" },
