@@ -295,7 +295,7 @@ def build_schema(
     # Entity file schema (recursive for sub_entities)
     entity_file_schema = {
         "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "$id": "https://steerspec.io/schemas/entity/v1.json",
+        "$id": "https://steerspec.dev/schemas/entity/v1.json",
         "title": "SteerSpec Entity File Schema",
         "description": (
             "Full schema for SteerSpec entity files. Generated from core rule "
