@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "server",
+  "dolt_database": "strspc_rules",
+  "project_id": "a56e22dd-0411-4fb8-9e71-9052c4f323d6"
+}
