@@ -48,10 +48,7 @@ def validate_file(path: Path, seen_ids: dict[str, Path]) -> list[str]:
 
         # Duplicate ID check
         if rule_id in seen_ids:
-            errors.append(
-                f"{path}:{lineno}: duplicate rule ID [{rule_id}] "
-                f"(first seen in {seen_ids[rule_id]})"
-            )
+            errors.append(f"{path}:{lineno}: duplicate rule ID [{rule_id}] (first seen in {seen_ids[rule_id]})")
         else:
             seen_ids[rule_id] = path
 
