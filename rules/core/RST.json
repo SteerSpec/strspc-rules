@@ -1,0 +1,126 @@
+{
+  "$schema": "./_schema/entity.v1.schema.json",
+  "entity": {
+    "id": "RST",
+    "title": "Rule Set",
+    "description": "A collection of all rules applicable to a specific entity, versioned as a unit."
+  },
+  "rule_set": {
+    "version": "0.1.0",
+    "timestamp": "2026-03-21T00:00:00Z",
+    "hash": "blake3:8f8d8e7e0a6e128bcdf1f40de0a48270d0f72e33d87ad27bbb999f8f13a5a5e7"
+  },
+  "rules": [
+    {
+      "id": "RST-001",
+      "revision": 0,
+      "state": "D",
+      "body": "IS a collection of Rules associated with an Entity.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "RST-002",
+      "revision": 0,
+      "state": "D",
+      "body": "HAS a Rule Set Version which uniquely defines a specific set of changes applied to it.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    }
+  ],
+  "sub_entities": [
+    {
+      "$schema": "./_schema/entity.v1.schema.json",
+      "entity": {
+        "id": "RSTVRS",
+        "title": "Rule Set Version",
+        "description": "The semantic version associated with a Rule Set, tracking changes over time.",
+        "parent": "RST"
+      },
+      "rule_set": {
+        "version": "0.1.0",
+        "timestamp": "2026-03-21T00:00:00Z",
+        "hash": null
+      },
+      "rules": [
+        {
+          "id": "RSTVRS-001",
+          "revision": 0,
+          "state": "D",
+          "body": "MUST be in the semantic versioning format.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-07",
+          "supersedes": null
+        },
+        {
+          "id": "RSTVRS-002",
+          "revision": 0,
+          "state": "D",
+          "body": "IS associated to a Rule Set Hash.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-07",
+          "supersedes": null
+        },
+        {
+          "id": "RSTVRS-003",
+          "revision": 0,
+          "state": "D",
+          "body": "HAS a UTC timestamp.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-07",
+          "supersedes": null
+        },
+        {
+          "id": "RSTVRS-004",
+          "revision": 0,
+          "state": "D",
+          "body": "IS automatically created when a Rule Set Change is committed in a specific Rule Set Branch.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-07",
+          "supersedes": null
+        }
+      ],
+      "sub_entities": [],
+      "notes": []
+    },
+    {
+      "$schema": "./_schema/entity.v1.schema.json",
+      "entity": {
+        "id": "RSTHSH",
+        "title": "Rule Set Hash",
+        "description": "The Blake3 hash of a Rule Set's canonical JSON content, used for change detection.",
+        "parent": "RST"
+      },
+      "rule_set": {
+        "version": "0.1.0",
+        "timestamp": "2026-03-21T00:00:00Z",
+        "hash": null
+      },
+      "rules": [
+        {
+          "id": "RSTHSH-001",
+          "revision": 0,
+          "state": "D",
+          "body": "IS hash of the Rule Set content.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-07",
+          "supersedes": null
+        },
+        {
+          "id": "RSTHSH-002",
+          "revision": 0,
+          "state": "D",
+          "body": "MUST be a Blake3 hash.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-07",
+          "supersedes": null
+        }
+      ],
+      "sub_entities": [],
+      "notes": []
+    }
+  ],
+  "notes": []
+}

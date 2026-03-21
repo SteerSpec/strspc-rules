@@ -1,0 +1,180 @@
+{
+  "$schema": "./_schema/entity.v1.schema.json",
+  "entity": {
+    "id": "RUL",
+    "title": "Rule",
+    "description": "A single-phrase behavioral constraint or property definition attached to an entity."
+  },
+  "rule_set": {
+    "version": "0.1.0",
+    "timestamp": "2026-03-21T00:00:00Z",
+    "hash": "blake3:f40689199b8d475b721c38801dce73a8739e6129f6452ea9a19ca2fca65c113d"
+  },
+  "rules": [
+    {
+      "id": "RUL-001",
+      "revision": 0,
+      "state": "D",
+      "body": "DEFINES a single property of an entity or describes the behavior of that property.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-002",
+      "revision": 0,
+      "state": "D",
+      "body": "IS uniquely identified using a Rule Format.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-003",
+      "revision": 0,
+      "state": "D",
+      "body": "Rule identifiers MUST NOT be reused, even if the rule is deprecated or deleted.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-004",
+      "revision": 0,
+      "state": "D",
+      "body": "MUST be expressed as a single phrase.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-005",
+      "revision": 0,
+      "state": "D",
+      "body": "MAY be supplemented by one or more notes to provide context or clarification.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-006",
+      "revision": 0,
+      "state": "D",
+      "body": "HAS a Rule State.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-007",
+      "revision": 0,
+      "state": "D",
+      "body": "Once a Rule IS in State other than Draft then it is immutable.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-008",
+      "revision": 0,
+      "state": "D",
+      "body": "Once a Rule IS immutable, modifications must be introduced by superseding it with a new rule.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    }
+  ],
+  "sub_entities": [
+    {
+      "$schema": "./_schema/entity.v1.schema.json",
+      "entity": {
+        "id": "RULST",
+        "title": "Rule State",
+        "description": "The lifecycle state of a rule, governing its mutability and enforcement.",
+        "parent": "RUL"
+      },
+      "rule_set": {
+        "version": "0.1.0",
+        "timestamp": "2026-03-21T00:00:00Z",
+        "hash": null
+      },
+      "rules": [
+        {
+          "id": "RULST-001",
+          "revision": 1,
+          "state": "D",
+          "body": "A Rule MAY have a state: Draft (D), Abandoned (A), Published (P), Implemented (I), Retired (R), Terminated (T).",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-07",
+          "supersedes": null
+        },
+        {
+          "id": "RULST-002",
+          "revision": 0,
+          "state": "D",
+          "body": "Each State can only be applied once to a Rule.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-07",
+          "supersedes": null
+        },
+        {
+          "id": "RULST-003",
+          "revision": 0,
+          "state": "D",
+          "body": "Draft IS the initial state.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-07",
+          "supersedes": null
+        },
+        {
+          "id": "RULST-004",
+          "revision": 0,
+          "state": "D",
+          "body": "Abandoned IS a terminal state which applies to Rules which were previously in Draft.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-07",
+          "supersedes": null
+        },
+        {
+          "id": "RULST-005",
+          "revision": 0,
+          "state": "D",
+          "body": "Published applies to Rule which have been validated but aren't yet implemented.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-07",
+          "supersedes": null
+        },
+        {
+          "id": "RULST-006",
+          "revision": 0,
+          "state": "D",
+          "body": "Implemented applies to Rule which are in force.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-07",
+          "supersedes": null
+        },
+        {
+          "id": "RULST-007",
+          "revision": 1,
+          "state": "D",
+          "body": "Retired applies to Rule which are still in force or present but must be removed.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-07",
+          "supersedes": null
+        },
+        {
+          "id": "RULST-008",
+          "revision": 0,
+          "state": "D",
+          "body": "Terminated applies to Rule which aren't in force anymore.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-07",
+          "supersedes": null
+        }
+      ],
+      "sub_entities": [],
+      "notes": []
+    }
+  ],
+  "notes": []
+}

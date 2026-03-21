@@ -63,13 +63,13 @@ Notes:
 
 ### Rule State
 
-- [RULST-001.0/D] A Rule MAY have a state: Draft (D), Abandoned (A), Published (P), Implemented (I), Deprecated (D), Terminated (T).
+- [RULST-001.1/D] A Rule MAY have a state: Draft (D), Abandoned (A), Published (P), Implemented (I), Retired (R), Terminated (T).
 - [RULST-002.0/D] Each State can only be applied once to a Rule.
 - [RULST-003.0/D] Draft IS the initial state.
 - [RULST-004.0/D] Abandoned IS a terminal state which applies to Rules which were previously in Draft.
 - [RULST-005.0/D] Published applies to Rule which have been validated but aren't yet implemented.
 - [RULST-006.0/D] Implemented applies to Rule which are in force.
-- [RULST-007.0/D] Deprecated applies to Rule which are still in force or present but must be removed.
+- [RULST-007.1/D] Retired applies to Rule which are still in force or present but must be removed.
 - [RULST-008.0/D] Terminated applies to Rule which aren't in force anymore.
 
 Version(s):

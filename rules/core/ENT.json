@@ -1,0 +1,108 @@
+{
+  "$schema": "./_schema/entity.v1.schema.json",
+  "entity": {
+    "id": "ENT",
+    "title": "Entity",
+    "description": "An object with a unique identity and lifecycle. The unit of organization in the SteerSpec rule system."
+  },
+  "rule_set": {
+    "version": "0.1.0",
+    "timestamp": "2026-03-21T00:00:00Z",
+    "hash": "blake3:d3d8ccfbfc91654f86681c1b7cebb6bb457e8418147fb96adf30739dabb18808"
+  },
+  "rules": [
+    {
+      "id": "ENT-001",
+      "revision": 0,
+      "state": "D",
+      "body": "IS an object that has a unique identity that persists over time.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-002",
+      "revision": 0,
+      "state": "D",
+      "body": "MAY transition through multiple states during its lifecycle.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-003",
+      "revision": 0,
+      "state": "D",
+      "body": "MAY possess one or more properties.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-004",
+      "revision": 0,
+      "state": "D",
+      "body": "The behavior of an entity IS defined entirely by the Rules applicable to its identity, properties, and states.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-005",
+      "revision": 0,
+      "state": "D",
+      "body": "HAS an Entity Unique Identifier.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    }
+  ],
+  "sub_entities": [
+    {
+      "$schema": "./_schema/entity.v1.schema.json",
+      "entity": {
+        "id": "ENTUQID",
+        "title": "Entity Unique Identifier",
+        "description": "The unique identifier assigned to each entity within a Realm.",
+        "parent": "ENT"
+      },
+      "rule_set": {
+        "version": "0.1.0",
+        "timestamp": "2026-03-21T00:00:00Z",
+        "hash": null
+      },
+      "rules": [
+        {
+          "id": "ENTUQID-001",
+          "revision": 0,
+          "state": "D",
+          "body": "MUST have a length of at least 3 and at most 18 characters.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-07",
+          "supersedes": null
+        },
+        {
+          "id": "ENTUQID-002",
+          "revision": 0,
+          "state": "D",
+          "body": "IS a string of letters or numbers only.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-07",
+          "supersedes": null
+        },
+        {
+          "id": "ENTUQID-003",
+          "revision": 0,
+          "state": "D",
+          "body": "IS unique within the Realm.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-07",
+          "supersedes": null
+        }
+      ],
+      "sub_entities": [],
+      "notes": []
+    }
+  ],
+  "notes": []
+}

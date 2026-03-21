@@ -1,0 +1,71 @@
+{
+  "$schema": "./_schema/entity.v1.schema.json",
+  "entity": {
+    "id": "KWRD",
+    "title": "Key Word",
+    "description": "RFC-2119-derived keyword semantics governing the interpretation of rule statements."
+  },
+  "rule_set": {
+    "version": "0.1.0",
+    "timestamp": "2026-03-21T00:00:00Z",
+    "hash": "blake3:48ebca064ab563e84ef525f57bff49c9aab026feb2bd73a20bb893baef175335"
+  },
+  "rules": [
+    {
+      "id": "KWRD-001",
+      "revision": 0,
+      "state": "D",
+      "body": "Key Words are derived from RFC-2119.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "KWRD-002",
+      "revision": 0,
+      "state": "D",
+      "body": "MUST, or the terms \"REQUIRED\" or \"SHALL\" or \"HAS\" or \"IS\" or \"DEFINE\", mean that the rule is an absolute requirement of the specification.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "KWRD-003",
+      "revision": 0,
+      "state": "D",
+      "body": "MUST NOT, or the phrase \"SHALL NOT\", mean that the definition is an absolute prohibition of the specification.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "KWRD-004",
+      "revision": 0,
+      "state": "D",
+      "body": "SHOULD, or the adjective \"RECOMMENDED\", mean that there may exist valid reasons in particular circumstances to ignore a particular item, but the full implications must be understood and carefully weighed before choosing a different course.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "KWRD-005",
+      "revision": 0,
+      "state": "D",
+      "body": "SHOULD NOT, or the phrase \"NOT RECOMMENDED\" mean that there may exist valid reasons in particular circumstances when the particular behavior is acceptable or even useful, but the full implications should be understood and the case carefully weighed before implementing any behavior described with this label.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "KWRD-006",
+      "revision": 0,
+      "state": "D",
+      "body": "MAY, or the adjective \"OPTIONAL\", mean that an item is truly optional.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-07",
+      "supersedes": null
+    }
+  ],
+  "sub_entities": [],
+  "notes": []
+}
