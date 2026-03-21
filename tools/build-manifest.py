@@ -25,17 +25,14 @@ def build_manifest(version: str, rules_dir: Path, schema_dir: Path) -> dict:
 
         stored_hash = data.get("rule_set", {}).get("hash")
         if stored_hash is None:
-            print(f"ERROR: missing rule_set.hash in {path}", file=sys.stderr)
-            sys.exit(1)
+            raise ValueError(f"missing rule_set.hash in {path}")
 
         computed_hash = compute_hash(data)
         if stored_hash != computed_hash:
-            print(
-                f"ERROR: hash mismatch in {path}: "
-                f"stored={stored_hash} computed={computed_hash}",
-                file=sys.stderr,
+            raise ValueError(
+                f"hash mismatch in {path}: "
+                f"stored={stored_hash} computed={computed_hash}"
             )
-            sys.exit(1)
 
         rules.append(
             {
@@ -52,8 +49,7 @@ def build_manifest(version: str, rules_dir: Path, schema_dir: Path) -> dict:
     ]
     for filename, key, served_path in expected_schemas:
         if not (schema_dir / filename).exists():
-            print(f"ERROR: missing expected schema file: {schema_dir / filename}", file=sys.stderr)
-            sys.exit(1)
+            raise FileNotFoundError(f"missing expected schema file: {schema_dir / filename}")
         schemas[key] = served_path
 
     return {

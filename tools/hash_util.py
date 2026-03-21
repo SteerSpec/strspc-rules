@@ -5,14 +5,20 @@ import json
 import blake3 as _blake3
 
 
+def _null_rule_hash(entity: dict) -> None:
+    """Recursively null out rule_set.hash on an entity and all sub_entities."""
+    rule_set = entity.get("rule_set")
+    if isinstance(rule_set, dict) and "hash" in rule_set:
+        rule_set["hash"] = None
+    for sub in entity.get("sub_entities", []):
+        if isinstance(sub, dict):
+            _null_rule_hash(sub)
+
+
 def canonical_json(data: dict) -> bytes:
     """Serialize to canonical JSON: sorted keys, no whitespace, hash nulled."""
     obj = json.loads(json.dumps(data, sort_keys=True))
-    if "rule_set" in obj and "hash" in obj["rule_set"]:
-        obj["rule_set"]["hash"] = None
-    for sub in obj.get("sub_entities", []):
-        if "rule_set" in sub and "hash" in sub["rule_set"]:
-            sub["rule_set"]["hash"] = None
+    _null_rule_hash(obj)
     return json.dumps(obj, sort_keys=True, separators=(",", ":")).encode("utf-8")
 
 
