@@ -8,6 +8,6 @@
 - [KWRD-006.0/D] MAY, or the adjective "OPTIONAL", mean that an item is truly optional.
 
 Version(s):
-	- 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync, derived from SteerSpec CORE.md
+  - 0.1.0-draft (2026-03-07): self-contained copy for SteerSpec Sync, derived from SteerSpec CORE.md
 
 Notes:

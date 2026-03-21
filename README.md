@@ -33,13 +33,13 @@ Each release includes:
 
 Pin to a release tag to reference a stable, immutable snapshot:
 
-```
+```text
 https://github.com/SteerSpec/strspc-rules/blob/v0.1.0/rules/core/RULE_FORMAT.md
 ```
 
 Download the archive for offline use:
 
-```
+```text
 https://github.com/SteerSpec/strspc-rules/releases/download/v0.1.0/strspc-rules-0.1.0.tar.gz
 ```
 

@@ -1,0 +1,10 @@
+# Rule files contain specification content with formatting that does not follow
+# standard Markdown conventions:
+#   - Lines cannot be wrapped without altering meaning (MD013)
+#   - Version(s): blocks use indented lists without blank separators (MD007, MD032)
+MD007: false
+MD010: false
+MD013: false
+MD032: false
+MD033: false
+MD041: false
