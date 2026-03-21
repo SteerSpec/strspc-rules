@@ -17,6 +17,17 @@ jobs:
       - name: Validate rule format
         run: python3 scripts/validate-rules.py
 
+  lint-commits:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: wagoid/commitlint-github-action@v6
+        with:
+          configFile: .commitlintrc.yml
+
   lint:
     runs-on: ubuntu-latest
     steps:

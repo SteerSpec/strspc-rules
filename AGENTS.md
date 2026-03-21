@@ -36,12 +36,33 @@ Version(s):
 **One statement per rule.**
 Each rule MUST be expressed as a single phrase. Use Notes for context, rationale, or examples.
 
+## Commit Format
+
+All commits MUST follow the [Conventional Commits](https://www.conventionalcommits.org/) specification
+(enforced by commitlint on commit-msg hook and in CI):
+
+```
+<type>[optional scope][optional !]: <description>
+```
+
+Allowed types: `feat`, `fix`, `docs`, `chore`, `ci`, `refactor`, `style`, `revert`, `test`, `perf`
+
+Max header length: 120 characters.
+
+Install the hook locally:
+
+```bash
+pip install pre-commit
+pre-commit install --hook-type commit-msg
+pre-commit install  # also install the pre-commit stage hooks
+```
+
 ## Workflow
 
 - Use `bd` (beads) for ALL task tracking — no markdown TODOs.
 - Open a GitHub issue documenting the plan before starting any work.
 - Run `python3 scripts/validate-rules.py` locally before committing.
-- CI gates every PR — the validate and lint jobs must pass.
+- CI gates every PR — the validate, lint, and lint-commits jobs must pass.
 - To release a new version: update `VERSION`, commit, tag as `vX.Y.Z`, push the tag.
 
 ## Non-Interactive Shell Commands
