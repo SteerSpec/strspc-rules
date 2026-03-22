@@ -21,16 +21,27 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Validate JSON against bootstrap schema
+      - name: Validate entity JSONs against bootstrap schema
         run: |
           python3 -c "
           import json
           from jsonschema import validate
           from pathlib import Path
           schema = json.loads(Path('rules/core/_schema/bootstrap.schema.json').read_text())
-          for f in sorted(Path('rules/core').glob('*.json')):
+          for f in sorted(f for f in Path('rules/core').glob('*.json') if f.name != 'realm.json'):
               validate(instance=json.loads(f.read_text()), schema=schema)
               print(f'  OK: {f.name}')
+          "
+      - name: Validate realm.json against realm schema
+        run: |
+          python3 -c "
+          import json
+          from jsonschema import validate
+          from pathlib import Path
+          schema = json.loads(Path('rules/core/_schema/realm.v1.schema.json').read_text())
+          data = json.loads(Path('rules/core/realm.json').read_text())
+          validate(instance=data, schema=schema)
+          print('  OK: realm.json')
           "
 
   lint-commits:

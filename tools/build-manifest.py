@@ -19,7 +19,7 @@ from hash_util import compute_hash
 def build_manifest(version: str, rules_dir: Path, schema_dir: Path) -> dict:
     """Build manifest dict from rule and schema files."""
     rules = []
-    for path in sorted(rules_dir.glob("*.json")):
+    for path in sorted(f for f in rules_dir.glob("*.json") if f.name != "realm.json"):
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
 
@@ -46,18 +46,31 @@ def build_manifest(version: str, rules_dir: Path, schema_dir: Path) -> dict:
     expected_schemas = [
         ("entity.v1.schema.json", "entity.v1", "/schemas/entity/v1.json"),
         ("bootstrap.schema.json", "bootstrap", "/schemas/entity/bootstrap.json"),
+        ("realm.v1.schema.json", "realm.v1", "/schemas/realm/v1.json"),
     ]
     for filename, key, served_path in expected_schemas:
         if not (schema_dir / filename).exists():
             raise FileNotFoundError(f"missing expected schema file: {schema_dir / filename}")
         schemas[key] = served_path
 
-    return {
+    # Read realm metadata if present
+    realm_path = rules_dir / "realm.json"
+    realm = None
+    if realm_path.exists():
+        with open(realm_path, encoding="utf-8") as f:
+            realm_data = json.load(f)
+        realm = realm_data.get("realm")
+
+    manifest: dict = {
         "version": version,
         "generated_at": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "schemas": schemas,
         "rules": rules,
     }
+    if realm is not None:
+        manifest["realm"] = realm
+
+    return manifest
 
 
 def main() -> int:
