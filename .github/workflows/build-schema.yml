@@ -32,18 +32,29 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Validate core JSONs against bootstrap schema
+      - name: Validate entity JSONs against bootstrap schema
         run: |
           python3 -c "
           import json
           from jsonschema import validate
           from pathlib import Path
           schema = json.loads(Path('rules/core/_schema/bootstrap.schema.json').read_text())
-          files = sorted(Path('rules/core').glob('*.json'))
+          files = sorted(f for f in Path('rules/core').glob('*.json') if f.name != 'realm.json')
           for f in files:
               validate(instance=json.loads(f.read_text()), schema=schema)
               print(f'  OK: {f.name}')
           print(f'Bootstrap: {len(files)} files valid')
+          "
+      - name: Validate realm.json against realm schema
+        run: |
+          python3 -c "
+          import json
+          from jsonschema import validate
+          from pathlib import Path
+          schema = json.loads(Path('rules/core/_schema/realm.v1.schema.json').read_text())
+          data = json.loads(Path('rules/core/realm.json').read_text())
+          validate(instance=data, schema=schema)
+          print('  OK: realm.json')
           "
 
       - name: Verify schema is not stale
@@ -65,7 +76,7 @@ jobs:
                       sub['rule_set']['hash'] = None
               return json.dumps(obj, sort_keys=True, separators=(',', ':')).encode()
 
-          files = sorted(Path('rules/core').glob('*.json'))
+          files = sorted(f for f in Path('rules/core').glob('*.json') if f.name != 'realm.json')
           for f in files:
               data = json.loads(f.read_text())
               stored = data.get('rule_set', {}).get('hash')

@@ -26,8 +26,10 @@ rules/
     └── (no Markdown — JSON is the source of truth)
 
 tools/
+├── build-manifest.py     Generates index.json manifest for published rules
 ├── build-schema.py       Generates entity.v1.schema.json from the rules themselves
-└── compute-hash.py       Computes Blake3 content hashes for rule-set integrity
+├── compute-hash.py       Computes Blake3 content hashes for rule-set integrity
+└── hash_util.py          Shared Blake3 canonicalization and hashing utilities
 ```
 
 ## Schema System
@@ -80,29 +82,48 @@ Every PR is gated by these jobs (`.github/workflows/ci.yml`):
 | `lint-commits` | Conventional Commits enforcement (PR only) |
 | `lint` | actionlint, yamllint, markdownlint, editorconfig-checker |
 
+## Published at steerspec.dev
+
+Every release automatically publishes schemas and rules to
+[steerspec.dev](https://steerspec.dev) (GitHub Pages). This makes schema `$id`
+URLs resolvable and provides stable endpoints for CLI and tooling consumers.
+
+| URL | Description |
+| --- | ----------- |
+| `https://steerspec.dev/schemas/entity/v1.json` | Full entity schema (matches `$id`) |
+| `https://steerspec.dev/schemas/entity/bootstrap.json` | Bootstrap schema (matches `$id`) |
+| `https://steerspec.dev/schemas/realm/v1.json` | Realm manifest schema (matches `$id`) |
+| `https://steerspec.dev/rules/latest/index.json` | Manifest with filenames, versions, blake3 hashes |
+| `https://steerspec.dev/rules/latest/<ENTITY>.json` | Latest rule files |
+| `https://steerspec.dev/rules/v<version>/` | Versioned snapshots |
+
+The publish step runs as a job in the Release workflow (`.github/workflows/release.yml`)
+and pushes to the [strspc-www](https://github.com/SteerSpec/strspc-www) repository.
+
 ## Versioning
 
 Releases follow [semantic versioning](https://semver.org/) and are published as Git tags
-in the format `v<MAJOR>.<MINOR>.<PATCH>` (e.g., `v0.1.0`).
+in the format `v<MAJOR>.<MINOR>.<PATCH>` (e.g., `v1.1.1`).
 
 Each release includes:
 
 - The full `rules/` directory
 - `LICENSE` and `NOTICE` files
 - Archives: `strspc-rules-<version>.tar.gz` and `strspc-rules-<version>.zip`
+- Auto-publish to steerspec.dev (schemas, rules, manifest)
 
 ## Referencing a Specific Version
 
-Pin to a release tag to reference a stable, immutable snapshot:
+Use steerspec.dev for stable, versioned access:
 
 ```text
-https://github.com/SteerSpec/strspc-rules/blob/v0.1.0/rules/core/RUL.json
+https://steerspec.dev/rules/v1.1.1/RUL.json
 ```
 
-Download the archive for offline use:
+Or download the archive for offline use:
 
 ```text
-https://github.com/SteerSpec/strspc-rules/releases/download/v0.1.0/strspc-rules-0.1.0.tar.gz
+https://github.com/SteerSpec/strspc-rules/releases/download/v1.1.1/strspc-rules-1.1.1.tar.gz
 ```
 
 ## License

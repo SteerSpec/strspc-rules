@@ -72,7 +72,7 @@ def load_bootstrap_schema() -> dict:
 
 
 def load_core_files() -> list[tuple[Path, dict]]:
-    files = sorted(CORE_DIR.glob("*.json"))
+    files = sorted(f for f in CORE_DIR.glob("*.json") if f.name != "realm.json")
     if not files:
         print("ERROR: No JSON files found in rules/core/", file=sys.stderr)
         sys.exit(1)
