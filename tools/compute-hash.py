@@ -21,6 +21,10 @@ def process_file(path: Path) -> bool:
     with open(path, encoding="utf-8") as f:
         data = json.load(f)
 
+    if "rule_set" not in data:
+        print(f"  {path.name}: skipped (no rule_set)")
+        return False
+
     new_hash = compute_hash(data)
     old_hash = data.get("rule_set", {}).get("hash")
 
@@ -42,7 +46,7 @@ def main() -> int:
         files = [Path(p) for p in sys.argv[1:]]
     else:
         root = Path(__file__).parent.parent / "rules" / "core"
-        files = sorted(root.glob("*.json"))
+        files = sorted(f for f in root.glob("*.json") if f.name != "realm.json")
 
     if not files:
         print("No JSON files found.", file=sys.stderr)

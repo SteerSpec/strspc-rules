@@ -30,6 +30,17 @@ jobs:
         run: pip install -r requirements.txt
       - name: Pre-flight validation (JSON schema)
         run: python3 tools/build-schema.py --check
+      - name: Validate realm.json
+        run: |
+          python3 -c "
+          import json
+          from jsonschema import validate
+          from pathlib import Path
+          schema = json.loads(Path('rules/core/_schema/realm.v1.schema.json').read_text())
+          data = json.loads(Path('rules/core/realm.json').read_text())
+          validate(instance=data, schema=schema)
+          print('  OK: realm.json')
+          "
       - name: Bump version and create tag
         id: tag
         uses: mathieudutour/github-tag-action@v6.2
@@ -85,6 +96,8 @@ jobs:
           mkdir -p www/schemas/entity
           cp rules/core/_schema/entity.v1.schema.json www/schemas/entity/v1.json
           cp rules/core/_schema/bootstrap.schema.json www/schemas/entity/bootstrap.json
+          mkdir -p www/schemas/realm
+          cp rules/core/_schema/realm.v1.schema.json www/schemas/realm/v1.json
 
       - name: Copy versioned rules
         run: |
