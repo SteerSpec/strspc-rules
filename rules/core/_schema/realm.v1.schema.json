@@ -35,7 +35,11 @@
         "required": ["realm_id", "version"],
         "properties": {
           "realm_id": { "type": "string" },
-          "version": { "type": "string" }
+          "version": { "type": "string" },
+          "source": {
+            "type": "string",
+            "description": "Fetch location for this dependency (e.g. github://owner/repo@version/path)"
+          }
         },
         "additionalProperties": false
       }
