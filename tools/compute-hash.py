@@ -42,7 +42,7 @@ def main() -> int:
         files = [Path(p) for p in sys.argv[1:]]
     else:
         root = Path(__file__).parent.parent / "rules" / "core"
-        files = sorted(root.glob("*.json"))
+        files = sorted(f for f in root.glob("*.json") if f.name != "realm.json")
 
     if not files:
         print("No JSON files found.", file=sys.stderr)

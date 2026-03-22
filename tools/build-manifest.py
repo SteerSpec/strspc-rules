@@ -60,6 +60,8 @@ def build_manifest(version: str, rules_dir: Path, schema_dir: Path) -> dict:
         with open(realm_path, encoding="utf-8") as f:
             realm_data = json.load(f)
         realm = realm_data.get("realm")
+        if realm is None or not isinstance(realm, dict):
+            raise ValueError(f"invalid realm.json in {realm_path}: missing top-level 'realm' object")
 
     manifest: dict = {
         "version": version,
