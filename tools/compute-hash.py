@@ -21,6 +21,10 @@ def process_file(path: Path) -> bool:
     with open(path, encoding="utf-8") as f:
         data = json.load(f)
 
+    if "rule_set" not in data:
+        print(f"  {path.name}: skipped (no rule_set)")
+        return False
+
     new_hash = compute_hash(data)
     old_hash = data.get("rule_set", {}).get("hash")
 

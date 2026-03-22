@@ -92,6 +92,7 @@ URLs resolvable and provides stable endpoints for CLI and tooling consumers.
 | --- | ----------- |
 | `https://steerspec.dev/schemas/entity/v1.json` | Full entity schema (matches `$id`) |
 | `https://steerspec.dev/schemas/entity/bootstrap.json` | Bootstrap schema (matches `$id`) |
+| `https://steerspec.dev/schemas/realm/v1.json` | Realm manifest schema (matches `$id`) |
 | `https://steerspec.dev/rules/latest/index.json` | Manifest with filenames, versions, blake3 hashes |
 | `https://steerspec.dev/rules/latest/<ENTITY>.json` | Latest rule files |
 | `https://steerspec.dev/rules/v<version>/` | Versioned snapshots |
