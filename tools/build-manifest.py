@@ -53,7 +53,10 @@ def build_manifest(version: str, rules_dir: Path, schema_dir: Path) -> dict:
             raise FileNotFoundError(f"missing expected schema file: {schema_dir / filename}")
         schemas[key] = served_path
 
-    # Read realm metadata if present
+    # Read realm metadata if present.
+    # Note: realm.json is published alongside entity files at the versioned URL
+    # (e.g. /rules/v1.0.0/realm.json) but is NOT listed in the "rules" array
+    # because it is a namespace manifest, not an entity file.
     realm_path = rules_dir / "realm.json"
     realm = None
     if realm_path.exists():
