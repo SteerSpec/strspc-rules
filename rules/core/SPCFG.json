@@ -1,0 +1,337 @@
+{
+  "$schema": "./_schema/entity.v1.schema.json",
+  "entity": {
+    "id": "SPCFG",
+    "title": "SteerSpec Configuration",
+    "description": "The consumer-side configuration that declares which rules a project subscribes to and how they are enforced."
+  },
+  "rule_set": {
+    "version": "0.1.0",
+    "timestamp": "2026-03-23T00:00:00Z",
+    "hash": "blake3:b0b9520810d510ed64d596f27d2eeafd5ec647444339ea140a9f210f2978b5fc"
+  },
+  "rules": [
+    {
+      "id": "SPCFG-001",
+      "revision": 0,
+      "state": "D",
+      "body": "IS a directory named `.strspc/` at the root of a project that consumes SteerSpec rules.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-23",
+      "supersedes": null
+    },
+    {
+      "id": "SPCFG-002",
+      "revision": 0,
+      "state": "D",
+      "body": "MUST contain a `config.yaml` manifest file.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-23",
+      "supersedes": null
+    },
+    {
+      "id": "SPCFG-003",
+      "revision": 0,
+      "state": "D",
+      "body": "MAY contain a local cache for resolved rules and evaluation results.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-23",
+      "supersedes": null
+    },
+    {
+      "id": "SPCFG-004",
+      "revision": 0,
+      "state": "D",
+      "body": "MUST declare at least one rule source.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-23",
+      "supersedes": null
+    },
+    {
+      "id": "SPCFG-005",
+      "revision": 0,
+      "state": "D",
+      "body": "MAY reference a local Realm as a rule source, enabling a project to both author and consume rules.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-23",
+      "supersedes": null
+    },
+    {
+      "id": "SPCFG-006",
+      "revision": 0,
+      "state": "D",
+      "body": "MAY configure an evaluator for rule enforcement.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-23",
+      "supersedes": null
+    },
+    {
+      "id": "SPCFG-007",
+      "revision": 0,
+      "state": "D",
+      "body": "MAY declare fail conditions referencing rule lifecycle states.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-23",
+      "supersedes": null
+    },
+    {
+      "id": "SPCFG-008",
+      "revision": 0,
+      "state": "D",
+      "body": "Severity of a rule violation IS determined by the consumer configuration, not by the rule itself.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-23",
+      "supersedes": null
+    }
+  ],
+  "sub_entities": [
+    {
+      "$schema": "./_schema/entity.v1.schema.json",
+      "entity": {
+        "id": "SPCFGSRC",
+        "title": "Rule Source",
+        "description": "A rule source entry in config.yaml that declares where rules are fetched from and their applicability scope.",
+        "parent": "SPCFG"
+      },
+      "rule_set": {
+        "version": "0.1.0",
+        "timestamp": "2026-03-23T00:00:00Z",
+        "hash": null
+      },
+      "rules": [
+        {
+          "id": "SPCFGSRC-001",
+          "revision": 0,
+          "state": "D",
+          "body": "IS an entry in the `rules` array of config.yaml.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-23",
+          "supersedes": null
+        },
+        {
+          "id": "SPCFGSRC-002",
+          "revision": 0,
+          "state": "D",
+          "body": "MUST have a `source` property of type string.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-23",
+          "supersedes": null
+        },
+        {
+          "id": "SPCFGSRC-003",
+          "revision": 0,
+          "state": "D",
+          "body": "MUST have a `scope` property with allowed values: global, local.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-23",
+          "supersedes": null
+        }
+      ],
+      "sub_entities": [],
+      "notes": [
+        {
+          "id": "SPCFGSRC-002/01",
+          "rule_ref": "SPCFGSRC-002",
+          "type": "example",
+          "content": "Valid source formats: `github://SteerSpec/strspc-rules@v1/rules/core` (remote, version-pinned), `./rules/` (local Realm directory).",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-23",
+          "revision": 0
+        },
+        {
+          "id": "SPCFGSRC-003/01",
+          "rule_ref": "SPCFGSRC-003",
+          "type": "clarification",
+          "content": "`global` means the source's rules apply to all files in the project. `local` means the rules apply only within the source's own directory tree. Scope is a hint for the evaluator, not a hard filter.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-23",
+          "revision": 0
+        }
+      ]
+    },
+    {
+      "$schema": "./_schema/entity.v1.schema.json",
+      "entity": {
+        "id": "SPCFGEVAL",
+        "title": "Evaluator",
+        "description": "The evaluator configuration in config.yaml that determines which AI provider is used for rule enforcement.",
+        "parent": "SPCFG"
+      },
+      "rule_set": {
+        "version": "0.1.0",
+        "timestamp": "2026-03-23T00:00:00Z",
+        "hash": null
+      },
+      "rules": [
+        {
+          "id": "SPCFGEVAL-001",
+          "revision": 0,
+          "state": "D",
+          "body": "IS the `evaluator` object in config.yaml.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-23",
+          "supersedes": null
+        },
+        {
+          "id": "SPCFGEVAL-002",
+          "revision": 0,
+          "state": "D",
+          "body": "MUST have a `provider` property of type string.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-23",
+          "supersedes": null
+        },
+        {
+          "id": "SPCFGEVAL-003",
+          "revision": 0,
+          "state": "D",
+          "body": "MAY have an `endpoint` property of type string or null.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-23",
+          "supersedes": null
+        }
+      ],
+      "sub_entities": [],
+      "notes": [
+        {
+          "id": "SPCFGEVAL-002/01",
+          "rule_ref": "SPCFGEVAL-002",
+          "type": "example",
+          "content": "Known providers: `claude` (Anthropic API), `openai` (OpenAI API), `ollama` (local model), `static-only` (no AI evaluation, structural checks only).",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-23",
+          "revision": 0
+        },
+        {
+          "id": "SPCFGEVAL-003/01",
+          "rule_ref": "SPCFGEVAL-003",
+          "type": "clarification",
+          "content": "When null or absent, the evaluator uses the default endpoint for the chosen provider. Custom endpoints enable private deployments or proxy configurations.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-23",
+          "revision": 0
+        }
+      ]
+    },
+    {
+      "$schema": "./_schema/entity.v1.schema.json",
+      "entity": {
+        "id": "SPCFGCCH",
+        "title": "Cache",
+        "description": "The cache configuration in config.yaml that controls local storage of resolved rules and evaluation results.",
+        "parent": "SPCFG"
+      },
+      "rule_set": {
+        "version": "0.1.0",
+        "timestamp": "2026-03-23T00:00:00Z",
+        "hash": null
+      },
+      "rules": [
+        {
+          "id": "SPCFGCCH-001",
+          "revision": 0,
+          "state": "D",
+          "body": "IS the `cache` object in config.yaml.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-23",
+          "supersedes": null
+        },
+        {
+          "id": "SPCFGCCH-002",
+          "revision": 0,
+          "state": "D",
+          "body": "MAY have a `ttl` property of type string.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-23",
+          "supersedes": null
+        }
+      ],
+      "sub_entities": [],
+      "notes": []
+    },
+    {
+      "$schema": "./_schema/entity.v1.schema.json",
+      "entity": {
+        "id": "SPCFGFAIL",
+        "title": "Fail Conditions",
+        "description": "The fail_on configuration in config.yaml that determines which rule lifecycle states trigger enforcement failures.",
+        "parent": "SPCFG"
+      },
+      "rule_set": {
+        "version": "0.1.0",
+        "timestamp": "2026-03-23T00:00:00Z",
+        "hash": null
+      },
+      "rules": [
+        {
+          "id": "SPCFGFAIL-001",
+          "revision": 0,
+          "state": "D",
+          "body": "IS the `fail_on` array in config.yaml.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-23",
+          "supersedes": null
+        },
+        {
+          "id": "SPCFGFAIL-002",
+          "revision": 0,
+          "state": "D",
+          "body": "Each item MUST be a valid rule lifecycle state code: Draft (D), Abandoned (A), Published (P), Implemented (I), Retired (R), Terminated (T).",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-23",
+          "supersedes": null
+        }
+      ],
+      "sub_entities": [],
+      "notes": [
+        {
+          "id": "SPCFGFAIL-002/01",
+          "rule_ref": "SPCFGFAIL-002",
+          "type": "example",
+          "content": "Typical configuration: `fail_on: [I]` fails only on Implemented rule violations. Stricter: `fail_on: [P, I]` also fails on Published rules. The array references rule lifecycle states defined by RULST.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-23",
+          "revision": 0
+        }
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "id": "SPCFG-001/01",
+      "rule_ref": "SPCFG-001",
+      "type": "rationale",
+      "content": "The `.strspc/` prefix follows the dotfile convention for tool configuration (cf. `.git/`, `.vscode/`). The name derives from the SteerSpec project abbreviation.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-23",
+      "revision": 0
+    },
+    {
+      "id": "SPCFG-004/01",
+      "rule_ref": "SPCFG-004",
+      "type": "example",
+      "content": "A source can reference a remote Realm (`github://SteerSpec/strspc-rules@v1/rules/core`) or a local directory (`./rules/`). At least one must be declared for the configuration to be meaningful.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-23",
+      "revision": 0
+    },
+    {
+      "id": "SPCFG-005/01",
+      "rule_ref": "SPCFG-005",
+      "type": "example",
+      "content": "A project with both `.strspc/config.yaml` and `rules/realm.json` is simultaneously a rule consumer and a rule author. The config references the local Realm via `source: ./rules/`.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-23",
+      "revision": 0
+    },
+    {
+      "id": "SPCFG-008/01",
+      "rule_ref": "SPCFG-008",
+      "type": "rationale",
+      "content": "A rule defines what must be true. How critical a violation is depends on the consuming project's context. The same rule might be a hard failure for a fintech API and a warning for an internal tool. This separation prevents rule authors from imposing enforcement policy on consumers (Rule Manager Spec §1.1).",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-23",
+      "revision": 0
+    }
+  ]
+}
