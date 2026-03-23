@@ -557,11 +557,7 @@ def main() -> int:
     config_schema = build_config_schema(rules_by_entity)
 
     generated_json = json.dumps(schema, indent=2, ensure_ascii=False) + "\n"
-    generated_config_json = (
-        json.dumps(config_schema, indent=2, ensure_ascii=False) + "\n"
-        if config_schema
-        else None
-    )
+    generated_config_json = json.dumps(config_schema, indent=2, ensure_ascii=False) + "\n" if config_schema else None
 
     if check_mode:
         all_ok = True
