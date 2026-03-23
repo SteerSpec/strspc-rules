@@ -1,5 +1,12 @@
 # Agent Instructions
 
+## Rule Manager Specification
+
+The canonical specification for this project lives at [`docs/SPEC.md`](docs/SPEC.md).
+All modules (rule-lint, rule-diff, rule-eval, realm-resolve, realm-lint, etc.) implement
+against this spec. When implementing or modifying any module, consult the relevant spec
+sections — particularly §2 (Data Model), §6 (Module Breakdown), and §7–8 (Workflows & Enforcement).
+
 ## Self-Referential Rules
 
 The rules in this repository govern themselves. When modifying any file under `rules/`,
