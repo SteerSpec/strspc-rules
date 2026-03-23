@@ -448,22 +448,30 @@ def build_config_schema(
         _eid, sid = key
         print(f"  {sid}: {len(rules)} rules → {len(extracted.get('properties', {}))} properties")
 
+    # Guard: the config schema requires a "rules" array, so SPCFGSRC must be present.
+    if "$.rules[]" not in sections or not sections["$.rules[]"]:
+        print(
+            "  ERROR: SPCFGSRC rules not found — cannot generate config schema",
+            file=sys.stderr,
+        )
+        return None
+
     # Assemble the config schema
     config_properties: dict = {}
 
     # $.rules[] → array of rule source objects
-    src = sections.get("$.rules[]", {})
-    if src:
-        items_obj: dict = {"type": "object", "additionalProperties": False}
-        if src.get("required"):
-            items_obj["required"] = src["required"]
-        if src.get("properties"):
-            items_obj["properties"] = src["properties"]
-        config_properties["rules"] = {
-            "type": "array",
-            "minItems": 1,
-            "items": items_obj,
-        }
+    src = sections["$.rules[]"]
+    items_obj: dict = {"type": "object", "additionalProperties": False}
+    if src.get("required"):
+        items_obj["required"] = src["required"]
+    if src.get("properties"):
+        items_obj["properties"] = src["properties"]
+    config_properties["rules"] = {
+        "type": "array",
+        # minItems: 1 mirrors SPCFG-004 ("MUST declare at least one rule source")
+        "minItems": 1,
+        "items": items_obj,
+    }
 
     # $.evaluator → evaluator object
     evl = sections.get("$.evaluator", {})
