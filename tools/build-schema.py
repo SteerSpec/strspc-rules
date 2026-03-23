@@ -429,6 +429,7 @@ def build_config_schema(
     """Build config.v1.schema.json from SPCFG sub-entity rules.
 
     Returns None if SPCFG entity is not found (no config schema to generate).
+    Raises RuntimeError if SPCFG exists but required sub-entities are missing.
     """
     # Check if SPCFG exists
     if ("SPCFG", None) not in rules_by_entity:
@@ -449,12 +450,9 @@ def build_config_schema(
         print(f"  {sid}: {len(rules)} rules → {len(extracted.get('properties', {}))} properties")
 
     # Guard: the config schema requires a "rules" array, so SPCFGSRC must be present.
+    # Raise rather than returning None — SPCFG exists, so this is a broken state.
     if "$.rules[]" not in sections or not sections["$.rules[]"]:
-        print(
-            "  ERROR: SPCFGSRC rules not found — cannot generate config schema",
-            file=sys.stderr,
-        )
-        return None
+        raise RuntimeError("SPCFG entity exists but SPCFGSRC rules not found — cannot generate config schema")
 
     # Assemble the config schema
     config_properties: dict = {}
