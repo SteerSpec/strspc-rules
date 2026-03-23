@@ -1,5 +1,14 @@
 # Agent Instructions
 
+## Rule Manager Specification
+
+The Rule Manager Specification defines how the rules in this repository are validated,
+versioned, and enforced. The canonical spec lives in strspc-manager:
+[`docs/SPEC.md`](https://github.com/SteerSpec/strspc-manager/blob/main/docs/SPEC.md).
+
+This repo (strspc-rules) is the **data layer** — it defines the rules and schemas.
+strspc-manager is the **engine layer** — it implements the spec.
+
 ## Self-Referential Rules
 
 The rules in this repository govern themselves. When modifying any file under `rules/`,
