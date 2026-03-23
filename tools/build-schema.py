@@ -242,9 +242,11 @@ def build_schema(
 
     note_types = build_note_type_enum(files)
 
-    # Log unmapped entities (skip those mapped in CONFIG_SCHEMA_MAP)
+    # Log unmapped entities (skip those mapped in CONFIG_SCHEMA_MAP or
+    # serving as the top-level driver for config schema generation)
+    config_entities = set(CONFIG_SCHEMA_MAP) | {("SPCFG", None)}
     for key in rules_by_entity:
-        if key not in ENTITY_SCHEMA_MAP and key not in CONFIG_SCHEMA_MAP:
+        if key not in ENTITY_SCHEMA_MAP and key not in config_entities:
             eid, sid = key
             label = f"{eid}.{sid}" if sid else eid
             print(f"  INFO: Entity {label} has no schema mapping (informational)")
