@@ -4,7 +4,7 @@
 The schemas are derived from the rules themselves, making the system
 self-recursive: rules define the schema, the schema validates the rules.
 
-Two-phase validation:
+Validation phases:
   1. Bootstrap schema validates structural shape (the axiom)
   2. This builder reads rules, extracts constraints, produces the full schemas
   3. The entity schema validates the core files (self-check)
@@ -80,9 +80,6 @@ RE_OPTIONAL_PROP = re.compile(r"MAY have (?:a|an) `(\w+)` property")
 
 # "of type string or null"
 RE_TYPE_STRING_OR_NULL = re.compile(r"of type string or null")
-
-# "of type string" (but not "of type string or null")
-RE_TYPE_STRING = re.compile(r"of type string(?! or null)")
 
 # "with allowed values: X, Y"
 RE_ALLOWED_VALUES = re.compile(r"with allowed values:\s*(.+?)\.?$")
