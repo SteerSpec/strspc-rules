@@ -448,7 +448,7 @@ def build_config_schema(
             continue
         extracted = extract_config_constraints(rules)
         sections[schema_path] = extracted
-        eid, sid = key
+        _eid, sid = key
         print(f"  {sid}: {len(rules)} rules → {len(extracted.get('properties', {}))} properties")
 
     # Assemble the config schema
@@ -576,7 +576,8 @@ def main() -> int:
                 print("\nEntity schema is up to date.")
             else:
                 print(
-                    "\nERROR: Committed entity schema is stale. Run 'python3 tools/build-schema.py' and commit the result.",
+                    "\nERROR: Committed entity schema is stale."
+                    " Run 'python3 tools/build-schema.py' and commit the result.",
                     file=sys.stderr,
                 )
                 all_ok = False
@@ -595,7 +596,8 @@ def main() -> int:
                     print("Config schema is up to date.")
                 else:
                     print(
-                        "\nERROR: Committed config schema is stale. Run 'python3 tools/build-schema.py' and commit the result.",
+                        "\nERROR: Committed config schema is stale."
+                        " Run 'python3 tools/build-schema.py' and commit the result.",
                         file=sys.stderr,
                     )
                     all_ok = False
