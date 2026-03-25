@@ -8,7 +8,7 @@
   "rule_set": {
     "version": "0.2.0",
     "timestamp": "2026-03-25T00:00:00Z",
-    "hash": "blake3:0ec7c45996435a57ed2bf2a9dc6b5686a7c2635c6dffa783eab9403c3818bd78"
+    "hash": "blake3:2b5e1141cb53c4e4e4342dc7e32cb587ff9d388056d382d09c2523f26615d968"
   },
   "rules": [
     {
@@ -96,7 +96,7 @@
       "id": "RLM-010",
       "revision": 0,
       "state": "D",
-      "body": "MAY declare sub-realms via a `sub_realms` array in its manifest, where each entry is a subdirectory name containing a child Realm.",
+      "body": "MAY declare sub-realms via a `sub_realms` array in its manifest, where each entry is a single directory name (no `/` or `..`), relative to the parent Realm directory, containing a child Realm.",
       "added_by": "@pleberre",
       "added_at": "2026-03-25",
       "supersedes": null
@@ -105,7 +105,7 @@
       "id": "RLM-011",
       "revision": 0,
       "state": "D",
-      "body": "A sub-realm's identifier MUST equal `<parent-realm-id>.<subdirectory-name>`.",
+      "body": "A sub-realm's identifier MUST equal `<parent-realm-id>.<subdirectory-name>`, where the subdirectory name MUST satisfy the realm-id segment grammar (`[a-z][a-z0-9]*`).",
       "added_by": "@pleberre",
       "added_at": "2026-03-25",
       "supersedes": null
