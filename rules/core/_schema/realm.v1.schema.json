@@ -44,6 +44,21 @@
         "additionalProperties": false
       }
     },
+    "sub_realms": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "description": "Single directory name satisfying the realm-id segment grammar."
+          },
+          "uniqueItems": true
+        },
+        { "type": "null" }
+      ],
+      "description": "Subdirectory names of child Realms (RLM-010). Null or absent if none."
+    },
     "rule_identifier_format": {
       "oneOf": [
         { "type": "object" },
