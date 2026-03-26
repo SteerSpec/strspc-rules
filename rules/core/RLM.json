@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.1.0",
-    "timestamp": "2026-03-22T00:00:00Z",
-    "hash": "blake3:61ca57c674128f213c08d0c8c6ac2157877d439da65303e65a1e2fe3ff78c29e"
+    "version": "0.2.0",
+    "timestamp": "2026-03-25T00:00:00Z",
+    "hash": "blake3:61d47e7287a7a4f9e38ebcee552f3102640a50c3e08b6d7f975e75200e849359"
   },
   "rules": [
     {
@@ -91,6 +91,51 @@
       "added_by": "@pleberre",
       "added_at": "2026-03-22",
       "supersedes": null
+    },
+    {
+      "id": "RLM-010",
+      "revision": 0,
+      "state": "D",
+      "body": "MAY declare sub-realms via a `sub_realms` array in its manifest, where each entry is a single directory name (no `/` or `..`), relative to the parent Realm directory, containing a child Realm.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-25",
+      "supersedes": null
+    },
+    {
+      "id": "RLM-011",
+      "revision": 0,
+      "state": "D",
+      "body": "A sub-realm's identifier MUST equal `<parent-realm-id>.<subdirectory-name>`, where the subdirectory name MUST satisfy the realm-id segment grammar (`[a-z][a-z0-9]*`).",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-25",
+      "supersedes": null
+    },
+    {
+      "id": "RLM-012",
+      "revision": 0,
+      "state": "D",
+      "body": "Sub-realms are limited to one level of nesting; a sub-realm MUST NOT declare its own `sub_realms`.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-25",
+      "supersedes": null
+    },
+    {
+      "id": "RLM-013",
+      "revision": 0,
+      "state": "D",
+      "body": "EUID uniqueness (RLM-001) spans the parent Realm and all its declared sub-realms.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-25",
+      "supersedes": null
+    },
+    {
+      "id": "RLM-014",
+      "revision": 0,
+      "state": "D",
+      "body": "A sub-realm inherits its parent's dependencies (RLM-005) and MAY declare additional dependencies of its own.",
+      "added_by": "@pleberre",
+      "added_at": "2026-03-25",
+      "supersedes": null
     }
   ],
   "sub_entities": [
@@ -103,8 +148,8 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.0",
-        "timestamp": "2026-03-22T00:00:00Z",
+        "version": "0.2.0",
+        "timestamp": "2026-03-25T00:00:00Z",
         "hash": null
       },
       "rules": [
@@ -142,6 +187,15 @@
           "body": "MAY override the Rule Identifier Format defaults for the Realm.",
           "added_by": "@pleberre",
           "added_at": "2026-03-22",
+          "supersedes": null
+        },
+        {
+          "id": "RLMMNFST-005",
+          "revision": 0,
+          "state": "D",
+          "body": "MAY declare a `sub_realms` field, which MUST be either null or an array of unique strings matching the realm-id segment grammar (`[a-z][a-z0-9]*`), where each string is the name of a subdirectory that MUST contain a valid `realm.json`.",
+          "added_by": "@pleberre",
+          "added_at": "2026-03-25",
           "supersedes": null
         }
       ],
