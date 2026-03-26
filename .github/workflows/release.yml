@@ -98,6 +98,8 @@ jobs:
           cp rules/core/_schema/bootstrap.schema.json www/schemas/entity/bootstrap.json
           mkdir -p www/schemas/realm
           cp rules/core/_schema/realm.v1.schema.json www/schemas/realm/v1.json
+          mkdir -p www/schemas/config
+          cp rules/core/_schema/config.v1.schema.json www/schemas/config/v1.json
 
       - name: Copy versioned rules
         run: |
