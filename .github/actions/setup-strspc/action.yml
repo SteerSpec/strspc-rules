@@ -1,0 +1,76 @@
+name: Setup SteerSpec CLI tools
+description: >
+  Download and install strspc-cli and strspc-manager binaries
+  from GitHub Releases with checksum verification.
+  Fails immediately if download or verification fails.
+
+inputs:
+  cli-version:
+    description: >
+      strspc-cli version to install (bare semver without leading "v",
+      e.g. "1.14.1")
+    required: false
+    default: "1.14.1"
+  manager-version:
+    description: >
+      strspc-manager version to install (bare semver without leading "v",
+      e.g. "1.14.1")
+    required: false
+    default: "1.14.1"
+
+runs:
+  using: composite
+  steps:
+    - name: Install strspc-cli
+      shell: bash
+      run: |
+        set -euo pipefail
+        VERSION="${{ inputs.cli-version }}"
+        ARCHIVE="strspc-CLI_${VERSION}_linux_amd64.tar.gz"
+        BASE_URL="https://github.com/SteerSpec/strspc-cli/releases/download/v${VERSION}"
+
+        TMP="$(mktemp -d)"
+        curl -fsSL "${BASE_URL}/${ARCHIVE}" -o "${TMP}/${ARCHIVE}"
+        curl -fsSL "${BASE_URL}/strspc-CLI_${VERSION}_checksums.txt" -o "${TMP}/checksums.txt"
+
+        EXPECTED="$(grep "  ${ARCHIVE}$" "${TMP}/checksums.txt" | cut -d' ' -f1 || true)"
+        if [ -z "$EXPECTED" ]; then
+          echo "::error::Checksum entry not found for ${ARCHIVE}" >&2
+          exit 1
+        fi
+        echo "${EXPECTED}  ${TMP}/${ARCHIVE}" | sha256sum -c -
+
+        mkdir -p "$HOME/.local/bin"
+        tar -xzf "${TMP}/${ARCHIVE}" -C "$HOME/.local/bin"
+        chmod +x "$HOME/.local/bin/strspc"
+        echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+        rm -rf "$TMP"
+
+    - name: Install strspc-manager
+      shell: bash
+      run: |
+        set -euo pipefail
+        VERSION="${{ inputs.manager-version }}"
+        ARCHIVE="strspc-manager_${VERSION}_linux_amd64.tar.gz"
+        BASE_URL="https://github.com/SteerSpec/strspc-manager/releases/download/v${VERSION}"
+
+        TMP="$(mktemp -d)"
+        curl -fsSL "${BASE_URL}/${ARCHIVE}" -o "${TMP}/${ARCHIVE}"
+        curl -fsSL "${BASE_URL}/checksums.txt" -o "${TMP}/checksums.txt"
+
+        EXPECTED="$(grep "  ${ARCHIVE}$" "${TMP}/checksums.txt" | cut -d' ' -f1 || true)"
+        if [ -z "$EXPECTED" ]; then
+          echo "::error::Checksum entry not found for ${ARCHIVE}" >&2
+          exit 1
+        fi
+        echo "${EXPECTED}  ${TMP}/${ARCHIVE}" | sha256sum -c -
+
+        tar -xzf "${TMP}/${ARCHIVE}" -C "$HOME/.local/bin"
+        chmod +x "$HOME/.local/bin/strspc-manager"
+        rm -rf "$TMP"
+
+    - name: Verify installations
+      shell: bash
+      run: |
+        strspc version
+        strspc-manager version
