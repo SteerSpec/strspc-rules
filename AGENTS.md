@@ -48,11 +48,11 @@ violate. **Always prefer CLI commands over direct JSON editing.**
 - Realm management: `strspc realm init`, `strspc realm add`, `strspc realm validate`,
   `strspc realm dep add/remove`
 - Validation: `strspc lint`, `strspc render`
+- PR validation: `strspc diff`
 
 ### Not yet available (manual edit with human approval)
 
 - Rule lifecycle: `strspc rule add/update/promote/retire/abandon/supersede`
-- PR validation: `strspc diff`
 
 ### Manual edit checklist (when CLI doesn't support the operation)
 
@@ -140,7 +140,7 @@ pre-commit install  # also install the pre-commit stage hooks
 
 - Feature branches → `develop` via PR. `develop` → `main` via PR for releases.
 - Use `bd` (beads) for ALL task tracking — no markdown TODOs.
-- CI gates every PR — the `validate-json`, `build-schema`, `lint-python`, `lint-commits`,
+- CI gates every PR — the `validate-rules`, `build-schema`, `lint-python`, `lint-commits`,
   and `lint` jobs must all pass.
 - To release: open a PR from `develop` to `main`. On merge, the release workflow
   automatically bumps the semver tag based on conventional commit types (`feat`→minor,
