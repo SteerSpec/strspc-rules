@@ -7,11 +7,11 @@ inputs:
   cli-version:
     description: strspc-cli version to install
     required: false
-    default: "1.14.0"
+    default: "1.14.1"
   manager-version:
     description: strspc-manager version to install
     required: false
-    default: "1.14.0"
+    default: "1.14.1"
 
 runs:
   using: composite
