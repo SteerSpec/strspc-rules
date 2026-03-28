@@ -1,0 +1,41 @@
+name: Setup SteerSpec CLI tools
+description: >
+  Download and install strspc-cli and strspc-manager binaries
+  from GitHub Releases. Fails immediately if either download fails.
+
+inputs:
+  cli-version:
+    description: strspc-cli version to install
+    required: false
+    default: "1.14.0"
+  manager-version:
+    description: strspc-manager version to install
+    required: false
+    default: "1.14.0"
+
+runs:
+  using: composite
+  steps:
+    - name: Install strspc-cli
+      shell: bash
+      run: |
+        VERSION="${{ inputs.cli-version }}"
+        URL="https://github.com/SteerSpec/strspc-cli/releases/download/v${VERSION}/strspc-CLI_${VERSION}_linux_amd64.tar.gz"
+        mkdir -p "$HOME/.local/bin"
+        curl -fsSL "$URL" | tar -xz -C "$HOME/.local/bin"
+        chmod +x "$HOME/.local/bin/strspc"
+        echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+    - name: Install strspc-manager
+      shell: bash
+      run: |
+        VERSION="${{ inputs.manager-version }}"
+        URL="https://github.com/SteerSpec/strspc-manager/releases/download/v${VERSION}/strspc-manager_${VERSION}_linux_amd64.tar.gz"
+        curl -fsSL "$URL" | tar -xz -C "$HOME/.local/bin"
+        chmod +x "$HOME/.local/bin/strspc-manager"
+
+    - name: Verify installations
+      shell: bash
+      run: |
+        strspc version
+        strspc-manager version
