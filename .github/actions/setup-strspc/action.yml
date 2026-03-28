@@ -33,7 +33,7 @@ runs:
         curl -fsSL "${BASE_URL}/${ARCHIVE}" -o "${TMP}/${ARCHIVE}"
         curl -fsSL "${BASE_URL}/strspc-CLI_${VERSION}_checksums.txt" -o "${TMP}/checksums.txt"
 
-        EXPECTED="$(grep "  ${ARCHIVE}$" "${TMP}/checksums.txt" | cut -d' ' -f1)"
+        EXPECTED="$(grep "  ${ARCHIVE}$" "${TMP}/checksums.txt" | cut -d' ' -f1 || true)"
         if [ -z "$EXPECTED" ]; then
           echo "::error::Checksum entry not found for ${ARCHIVE}" >&2
           exit 1
@@ -58,7 +58,7 @@ runs:
         curl -fsSL "${BASE_URL}/${ARCHIVE}" -o "${TMP}/${ARCHIVE}"
         curl -fsSL "${BASE_URL}/checksums.txt" -o "${TMP}/checksums.txt"
 
-        EXPECTED="$(grep "  ${ARCHIVE}$" "${TMP}/checksums.txt" | cut -d' ' -f1)"
+        EXPECTED="$(grep "  ${ARCHIVE}$" "${TMP}/checksums.txt" | cut -d' ' -f1 || true)"
         if [ -z "$EXPECTED" ]; then
           echo "::error::Checksum entry not found for ${ARCHIVE}" >&2
           exit 1
