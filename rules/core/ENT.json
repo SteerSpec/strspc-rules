@@ -6,9 +6,9 @@
     "description": "An object with a unique identity and lifecycle. The unit of organization in the SteerSpec rule system."
   },
   "rule_set": {
-    "version": "0.6.0",
-    "timestamp": "2026-10-18T11:12:26Z",
-    "hash": "blake3:25a06551d6995dec773a784a5a1e85c94d019c5fcc8be5253f8afcfdbaa81280"
+    "version": "0.7.0",
+    "timestamp": "2026-10-18T11:20:06Z",
+    "hash": "blake3:3983fc0822c608990fe4348958483106ebf37b95f103299b74e4bbb608658776"
   },
   "rules": [
     {
@@ -67,15 +67,15 @@
         "parent": "ENT"
       },
       "rule_set": {
-        "version": "0.1.0",
-        "timestamp": "2026-03-21T00:00:00Z",
+        "version": "0.4.0",
+        "timestamp": "2026-10-18T11:20:06Z",
         "hash": null
       },
       "rules": [
         {
           "id": "ENTUQID-001",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "MUST have a length of at least 3 and at most 18 characters.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",
@@ -84,7 +84,7 @@
         {
           "id": "ENTUQID-002",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "IS a string of letters or numbers only.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",
@@ -93,7 +93,7 @@
         {
           "id": "ENTUQID-003",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "IS unique within the Realm.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",
