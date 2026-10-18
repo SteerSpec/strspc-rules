@@ -6,15 +6,15 @@
     "description": "A collection of all rules applicable to a specific entity, versioned as a unit."
   },
   "rule_set": {
-    "version": "0.1.0",
-    "timestamp": "2026-03-21T00:00:00Z",
-    "hash": "blake3:8f8d8e7e0a6e128bcdf1f40de0a48270d0f72e33d87ad27bbb999f8f13a5a5e7"
+    "version": "0.3.0",
+    "timestamp": "2026-10-18T11:12:28Z",
+    "hash": "blake3:6d47f53db62bde786a069af1fad6b007c6afe2e39c3dbb76edf40d9f0722dd69"
   },
   "rules": [
     {
       "id": "RST-001",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "IS a collection of Rules associated with an Entity.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -23,7 +23,7 @@
     {
       "id": "RST-002",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "HAS a Rule Set Version which uniquely defines a specific set of changes applied to it.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -40,15 +40,15 @@
         "parent": "RST"
       },
       "rule_set": {
-        "version": "0.1.0",
-        "timestamp": "2026-03-21T00:00:00Z",
+        "version": "0.5.0",
+        "timestamp": "2026-10-18T11:12:29Z",
         "hash": null
       },
       "rules": [
         {
           "id": "RSTVRS-001",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "MUST be in the semantic versioning format.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",
@@ -57,7 +57,7 @@
         {
           "id": "RSTVRS-002",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "IS associated to a Rule Set Hash.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",
@@ -66,7 +66,7 @@
         {
           "id": "RSTVRS-003",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "HAS a UTC timestamp.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",
@@ -75,14 +75,13 @@
         {
           "id": "RSTVRS-004",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "IS automatically created when a Rule Set Change is committed in a specific Rule Set Branch.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",
           "supersedes": null
         }
       ],
-      "sub_entities": [],
       "notes": []
     },
     {
@@ -94,15 +93,15 @@
         "parent": "RST"
       },
       "rule_set": {
-        "version": "0.1.0",
-        "timestamp": "2026-03-21T00:00:00Z",
+        "version": "0.3.0",
+        "timestamp": "2026-10-18T11:12:29Z",
         "hash": null
       },
       "rules": [
         {
           "id": "RSTHSH-001",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "IS hash of the Rule Set content.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",
@@ -111,14 +110,13 @@
         {
           "id": "RSTHSH-002",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "MUST be a Blake3 hash.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",
           "supersedes": null
         }
       ],
-      "sub_entities": [],
       "notes": []
     }
   ],
