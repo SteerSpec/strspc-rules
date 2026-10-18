@@ -6,15 +6,15 @@
     "description": "An object with a unique identity and lifecycle. The unit of organization in the SteerSpec rule system."
   },
   "rule_set": {
-    "version": "0.1.0",
-    "timestamp": "2026-03-21T00:00:00Z",
-    "hash": "blake3:d3d8ccfbfc91654f86681c1b7cebb6bb457e8418147fb96adf30739dabb18808"
+    "version": "0.6.0",
+    "timestamp": "2026-10-18T11:12:26Z",
+    "hash": "blake3:25a06551d6995dec773a784a5a1e85c94d019c5fcc8be5253f8afcfdbaa81280"
   },
   "rules": [
     {
       "id": "ENT-001",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "IS an object that has a unique identity that persists over time.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -23,7 +23,7 @@
     {
       "id": "ENT-002",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MAY transition through multiple states during its lifecycle.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -32,7 +32,7 @@
     {
       "id": "ENT-003",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MAY possess one or more properties.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -41,7 +41,7 @@
     {
       "id": "ENT-004",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "The behavior of an entity IS defined entirely by the Rules applicable to its identity, properties, and states.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -50,7 +50,7 @@
     {
       "id": "ENT-005",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "HAS an Entity Unique Identifier.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -100,7 +100,6 @@
           "supersedes": null
         }
       ],
-      "sub_entities": [],
       "notes": []
     }
   ],
