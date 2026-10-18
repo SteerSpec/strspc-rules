@@ -8,7 +8,7 @@
   "rule_set": {
     "version": "0.10.0",
     "timestamp": "2026-10-18T11:20:58Z",
-    "hash": "blake3:9f3ba8001348c626125c4e1a42ecf5e0b352d5a12d403514164e404ec7f960a7"
+    "hash": "blake3:1a89368cf581530ec5be60b20ca866db0ab79a18e9697537edb04103fe096924"
   },
   "rules": [
     {
@@ -240,10 +240,10 @@
           "id": "SPCFGEVAL-002/02",
           "rule_ref": "SPCFGEVAL-002",
           "type": "clarification",
-          "content": "`null` (or an absent evaluator block) disables AI evaluation: only structural checks run. This is the default written by `strspc init`.",
+          "content": "`null` (or an absent evaluator block) disables AI evaluation: only structural checks run. `strspc init --provider null` writes this value; the default is `claude`.",
           "added_by": "@pleberre",
           "added_at": "2026-10-18",
-          "revision": 0
+          "revision": 1
         }
       ]
     },
