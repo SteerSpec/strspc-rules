@@ -8,9 +8,9 @@ inputs:
   cli-version:
     description: >
       strspc-cli version to install (bare semver without leading "v",
-      e.g. "1.14.1")
+      e.g. "1.14.2")
     required: false
-    default: "1.14.1"
+    default: "1.14.2"
   manager-version:
     description: >
       strspc-manager version to install (bare semver without leading "v",
