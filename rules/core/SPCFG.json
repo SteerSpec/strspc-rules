@@ -6,9 +6,9 @@
     "description": "The consumer-side configuration that declares which rules a project subscribes to and how they are enforced."
   },
   "rule_set": {
-    "version": "0.10.0",
-    "timestamp": "2026-10-18T11:20:58Z",
-    "hash": "blake3:1a89368cf581530ec5be60b20ca866db0ab79a18e9697537edb04103fe096924"
+    "version": "0.10.1",
+    "timestamp": "2026-10-18T16:34:32Z",
+    "hash": "blake3:0eb67604923d98da19a1a865a9c8e2af1caff0a568d3844b47cc062f6338b86a"
   },
   "rules": [
     {
@@ -104,8 +104,8 @@
       },
       "rule_set": {
         "version": "0.4.0",
-        "timestamp": "2026-10-18T11:20:58Z",
-        "hash": null
+        "timestamp": "2026-10-18T16:34:32Z",
+        "hash": "blake3:73a85152f042a88d57443fa557e8a9ca88231810937d4c77eba51067ec543c7e"
       },
       "rules": [
         {
@@ -166,9 +166,9 @@
         "parent": "SPCFG"
       },
       "rule_set": {
-        "version": "0.3.0",
-        "timestamp": "2026-10-18T11:20:58Z",
-        "hash": null
+        "version": "0.4.0",
+        "timestamp": "2026-10-18T16:34:32Z",
+        "hash": "blake3:ad0d04ac16e14b90433a1e994716227599906598ea6a078677cb61daf74bed6c"
       },
       "rules": [
         {
@@ -183,7 +183,7 @@
         {
           "id": "SPCFGEVAL-002",
           "revision": 1,
-          "state": "D",
+          "state": "P",
           "body": "MUST have a `provider` property of type string or null.",
           "added_by": "@pleberre",
           "added_at": "2026-03-23",
@@ -257,8 +257,8 @@
       },
       "rule_set": {
         "version": "0.3.0",
-        "timestamp": "2026-10-18T11:20:58Z",
-        "hash": null
+        "timestamp": "2026-10-18T16:34:32Z",
+        "hash": "blake3:f72458ec091d5b14833e161825f8f8ef66b90bf3eef33670a76c909c46c82175"
       },
       "rules": [
         {
@@ -292,8 +292,8 @@
       },
       "rule_set": {
         "version": "0.3.0",
-        "timestamp": "2026-10-18T11:20:58Z",
-        "hash": null
+        "timestamp": "2026-10-18T16:34:32Z",
+        "hash": "blake3:b6551c85f4e4a0de530d9fd8855cbb3ddfb0d0e3dc9328cc6710599ada991d56"
       },
       "rules": [
         {

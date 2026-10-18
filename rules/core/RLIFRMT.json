@@ -6,15 +6,15 @@
     "description": "Defines the display format for Rule Identifiers within a Realm."
   },
   "rule_set": {
-    "version": "0.8.0",
-    "timestamp": "2026-10-18T11:12:57Z",
-    "hash": "blake3:5f5d44837da05b6dd187d6e49e9c7835f3e354bf4c527b90dde1c55504a8d9ce"
+    "version": "0.13.0",
+    "timestamp": "2026-10-18T16:34:32Z",
+    "hash": "blake3:664e697d0f701e06b8becd05bc23e160bf4d645ed01f8dc1a7e0f3128a6c77c5"
   },
   "rules": [
     {
       "id": "RLIFRMT-001",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "DEFINES the format that Rule Identifier must comply with within a Realm.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -23,7 +23,7 @@
     {
       "id": "RLIFRMT-002",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "MUST define the starting and closing character pair, allowed values: \"(,)\", \"{,}\",\"[,]\", default is \"[,]\".",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -41,7 +41,7 @@
     {
       "id": "RLIFRMT-004",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "MUST define the position of the Rule Set Unique Number as taking the opposing position of the Entity Unique Identifier.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -59,7 +59,7 @@
     {
       "id": "RLIFRMT-006",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "MUST define a Rule Revision splitter which can be either \".\" or \"#\", default is \".\".",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -68,7 +68,7 @@
     {
       "id": "RLIFRMT-007",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "MUST define a Rule State splitter which can be either \"/\", \"\\\" or \"|\", default is \"/\".",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",

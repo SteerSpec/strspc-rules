@@ -6,15 +6,15 @@
     "description": "A collection of all rules applicable to a specific entity, versioned as a unit."
   },
   "rule_set": {
-    "version": "0.3.0",
-    "timestamp": "2026-10-18T11:12:28Z",
-    "hash": "blake3:6d47f53db62bde786a069af1fad6b007c6afe2e39c3dbb76edf40d9f0722dd69"
+    "version": "0.5.5",
+    "timestamp": "2026-10-18T16:34:32Z",
+    "hash": "blake3:9a7f0ed333e454cf0abc4a307d866d90612dd03faad5dad05bdafe520ea556e4"
   },
   "rules": [
     {
       "id": "RST-001",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "IS a collection of Rules associated with an Entity.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -23,7 +23,7 @@
     {
       "id": "RST-002",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "HAS a Rule Set Version which uniquely defines a specific set of changes applied to it.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -40,15 +40,15 @@
         "parent": "RST"
       },
       "rule_set": {
-        "version": "0.5.0",
-        "timestamp": "2026-10-18T11:12:29Z",
-        "hash": null
+        "version": "0.8.0",
+        "timestamp": "2026-10-18T16:34:32Z",
+        "hash": "blake3:338566802b456ad2e2d6d1369ce371b276d9e4b6addf9cce52366d34fb7f3ea8"
       },
       "rules": [
         {
           "id": "RSTVRS-001",
           "revision": 0,
-          "state": "P",
+          "state": "I",
           "body": "MUST be in the semantic versioning format.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",
@@ -57,7 +57,7 @@
         {
           "id": "RSTVRS-002",
           "revision": 0,
-          "state": "P",
+          "state": "I",
           "body": "IS associated to a Rule Set Hash.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",
@@ -75,7 +75,7 @@
         {
           "id": "RSTVRS-004",
           "revision": 0,
-          "state": "P",
+          "state": "I",
           "body": "IS automatically created when a Rule Set Change is committed in a specific Rule Set Branch.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",
@@ -93,15 +93,15 @@
         "parent": "RST"
       },
       "rule_set": {
-        "version": "0.3.0",
-        "timestamp": "2026-10-18T11:12:29Z",
-        "hash": null
+        "version": "0.5.0",
+        "timestamp": "2026-10-18T16:34:32Z",
+        "hash": "blake3:09ebc0b965f0b3c0c4a8b67544e0b388b70a3fdccf733dec24bbbc0a1a5d3c5f"
       },
       "rules": [
         {
           "id": "RSTHSH-001",
           "revision": 0,
-          "state": "P",
+          "state": "I",
           "body": "IS hash of the Rule Set content.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",
@@ -110,7 +110,7 @@
         {
           "id": "RSTHSH-002",
           "revision": 0,
-          "state": "P",
+          "state": "I",
           "body": "MUST be a Blake3 hash.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",
