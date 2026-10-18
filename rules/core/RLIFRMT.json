@@ -6,15 +6,15 @@
     "description": "Defines the display format for Rule Identifiers within a Realm."
   },
   "rule_set": {
-    "version": "0.1.0",
-    "timestamp": "2026-03-21T00:00:00Z",
-    "hash": "blake3:122ea0ce7a3bfa4262abbfdd2390b3e57ee1ccf2c8bb7b2955003fc3f02583dd"
+    "version": "0.8.0",
+    "timestamp": "2026-10-18T11:12:57Z",
+    "hash": "blake3:5f5d44837da05b6dd187d6e49e9c7835f3e354bf4c527b90dde1c55504a8d9ce"
   },
   "rules": [
     {
       "id": "RLIFRMT-001",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "DEFINES the format that Rule Identifier must comply with within a Realm.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -23,7 +23,7 @@
     {
       "id": "RLIFRMT-002",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MUST define the starting and closing character pair, allowed values: \"(,)\", \"{,}\",\"[,]\", default is \"[,]\".",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -32,7 +32,7 @@
     {
       "id": "RLIFRMT-003",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MUST define the position of the Entity Unique Identifier as either the opening part of the Rule Unique Identifier or as the closing part, default is opening part.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -41,7 +41,7 @@
     {
       "id": "RLIFRMT-004",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MUST define the position of the Rule Set Unique Number as taking the opposing position of the Entity Unique Identifier.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -50,7 +50,7 @@
     {
       "id": "RLIFRMT-005",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MUST define a unique Rule Identifier split character which will separate the Entity Unique Identifier and Rule Set Unique Number, allowed values are: \"-\", \"_\", default is \"-\".",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -59,7 +59,7 @@
     {
       "id": "RLIFRMT-006",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MUST define a Rule Revision splitter which can be either \".\" or \"#\", default is \".\".",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -68,13 +68,12 @@
     {
       "id": "RLIFRMT-007",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MUST define a Rule State splitter which can be either \"/\", \"\\\" or \"|\", default is \"/\".",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     }
   ],
-  "sub_entities": [],
   "notes": []
 }

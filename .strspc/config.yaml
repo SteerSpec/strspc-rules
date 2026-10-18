@@ -1,0 +1,15 @@
+# SteerSpec configuration for strspc-rules.
+# This repo authors dev.steerspec.core and consumes it as its own single
+# local source (SPCFG-005). Schema: https://steerspec.dev/schemas/config/v1.json
+rules:
+  - source: ./rules/core
+    scope: global
+
+evaluator:
+  provider: null  # no AI evaluation yet; structural checks only
+
+cache:
+  ttl: 24h
+
+fail_on:
+  - I

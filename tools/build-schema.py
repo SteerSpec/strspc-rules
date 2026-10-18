@@ -87,6 +87,10 @@ RE_ALLOWED_VALUES = re.compile(r"with allowed values:\s*(.+?)\.?$")
 # "state code: Draft (D), Abandoned (A), ..."  — reuses state enum extraction
 RE_STATE_CODE_LIST = re.compile(r"state code:\s*(.+)")
 
+# "MAY declare an `evaluate_on` array of rule lifecycle state codes"
+# (top-level SPCFG rule; the array shares its item schema with fail_on)
+RE_STATE_CODE_ARRAY = re.compile(r"MAY declare (?:a|an) `(\w+)` array of rule lifecycle state codes")
+
 # Semver regex (simplified but covers standard semver)
 SEMVER_PATTERN = (
     "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)"
@@ -405,6 +409,9 @@ def extract_config_constraints(rules: list[dict]) -> dict:
             schema = {"type": "string"}
             if RE_TYPE_STRING_OR_NULL.search(body):
                 schema = {"oneOf": [{"type": "string"}, {"type": "null"}]}
+            vm = RE_ALLOWED_VALUES.search(body)
+            if vm:
+                schema["enum"] = [v.strip() for v in vm.group(1).split(",")]
             properties[field] = schema
             continue
 
@@ -498,6 +505,24 @@ def build_config_schema(
         if fail.get("items_schema"):
             fail_obj["items"] = fail["items_schema"]
         config_properties["fail_on"] = fail_obj
+
+    # Top-level SPCFG rules declaring further state-code arrays (e.g. evaluate_on)
+    # share the item schema extracted from SPCFGFAIL.
+    for rule in rules_by_entity.get(("SPCFG", None), []):
+        m = RE_STATE_CODE_ARRAY.search(rule["body"])
+        if not m:
+            continue
+        field = m.group(1)
+        if not fail.get("items_schema"):
+            raise RuntimeError(f"{rule['id']} declares `{field}` as state codes but SPCFGFAIL has no state code list")
+        config_properties[field] = {"type": "array", "items": fail["items_schema"]}
+        print(f"  SPCFG: `{field}` → array of state codes (shared with fail_on)")
+
+    # Guard: SPCFG-009 requires evaluate_on to exist and mirror fail_on's items.
+    if "evaluate_on" in config_properties and config_properties["evaluate_on"]["items"] != fail_obj["items"]:
+        raise RuntimeError("evaluate_on item schema diverged from fail_on")
+    if ("SPCFG", None) in rules_by_entity and "evaluate_on" not in config_properties:
+        raise RuntimeError("SPCFG rules do not declare `evaluate_on` — config schema would silently lose it")
 
     config_schema = {
         "$schema": "https://json-schema.org/draft/2020-12/schema",

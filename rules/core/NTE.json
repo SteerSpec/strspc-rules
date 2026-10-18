@@ -6,16 +6,16 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.1.0",
-    "timestamp": "2026-03-21T00:00:00Z",
-    "hash": "blake3:8ed20e9f5149db3aaffcb28607c6a0806bd6cfaaeecfefae2fc2be2c18c2e9ea"
+    "version": "0.7.0",
+    "timestamp": "2026-10-18T11:12:55Z",
+    "hash": "blake3:da447a2dd48cc18c2d505a34faa7e06a7be02b2021362ef80f99400641555f03"
   },
   "rules": [
     {
       "id": "NTE-001",
       "revision": 0,
-      "state": "D",
-      "body": "IS associated with a single rule and must reference the rule's identifier explicitly (e.g., [<rule id>/<incremental note id (OOn)]).",
+      "state": "P",
+      "body": "IS associated with a single rule and must reference the rule's identifier explicitly (e.g., [\u003crule id\u003e/\u003cincremental note id (OOn)]).",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
@@ -23,7 +23,7 @@
     {
       "id": "NTE-002",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "A Note provides clarification, context, or elaboration and must not modify the rule it supplements.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -32,7 +32,7 @@
     {
       "id": "NTE-003",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MUST be stored in the same directory as the entity and rule it references.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -41,7 +41,7 @@
     {
       "id": "NTE-004",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MAY include: Business rationale, Examples or use cases, Historical context, Clarifications of terminology.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -50,7 +50,7 @@
     {
       "id": "NTE-005",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MUST be versioned and maintained alongside the rules they support.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -59,13 +59,21 @@
     {
       "id": "NTE-006",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MUST be concise but may span multiple paragraphs if needed for clarity.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
+    },
+    {
+      "id": "NTE-007",
+      "revision": 0,
+      "state": "D",
+      "body": "Notes of type `supersedes`, `extends`, or `related` MUST reference rules by identifier `\u003cEUID\u003e-NNN`, or `\u003crealm-id\u003e:\u003cEUID\u003e-NNN` across realms.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-18",
+      "supersedes": null
     }
   ],
-  "sub_entities": [],
   "notes": []
 }
