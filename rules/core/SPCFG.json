@@ -6,9 +6,9 @@
     "description": "The consumer-side configuration that declares which rules a project subscribes to and how they are enforced."
   },
   "rule_set": {
-    "version": "0.1.0",
-    "timestamp": "2026-03-23T00:00:00Z",
-    "hash": "blake3:b0b9520810d510ed64d596f27d2eeafd5ec647444339ea140a9f210f2978b5fc"
+    "version": "0.1.3",
+    "timestamp": "2026-10-18T11:19:40Z",
+    "hash": "blake3:9d99c5c764af27c8c8c427fe10667afa5906a5e703e24d2c96d8155deadeaa25"
   },
   "rules": [
     {
@@ -82,6 +82,15 @@
       "added_by": "@pleberre",
       "added_at": "2026-03-23",
       "supersedes": null
+    },
+    {
+      "id": "SPCFG-009",
+      "revision": 0,
+      "state": "D",
+      "body": "MAY declare an `evaluate_on` array of rule lifecycle state codes restricting which rules are sent to the evaluator.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-18",
+      "supersedes": null
     }
   ],
   "sub_entities": [
@@ -127,7 +136,6 @@
           "supersedes": null
         }
       ],
-      "sub_entities": [],
       "notes": [
         {
           "id": "SPCFGSRC-002/01",
@@ -158,8 +166,8 @@
         "parent": "SPCFG"
       },
       "rule_set": {
-        "version": "0.1.0",
-        "timestamp": "2026-03-23T00:00:00Z",
+        "version": "0.1.3",
+        "timestamp": "2026-10-18T11:19:40Z",
         "hash": null
       },
       "rules": [
@@ -174,9 +182,9 @@
         },
         {
           "id": "SPCFGEVAL-002",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "MUST have a `provider` property of type string.",
+          "body": "MUST have a `provider` property of type string or null.",
           "added_by": "@pleberre",
           "added_at": "2026-03-23",
           "supersedes": null
@@ -189,9 +197,26 @@
           "added_by": "@pleberre",
           "added_at": "2026-03-23",
           "supersedes": null
+        },
+        {
+          "id": "SPCFGEVAL-004",
+          "revision": 0,
+          "state": "D",
+          "body": "MAY have a `model` property of type string.",
+          "added_by": "@pleberre",
+          "added_at": "2026-10-18",
+          "supersedes": null
+        },
+        {
+          "id": "SPCFGEVAL-005",
+          "revision": 0,
+          "state": "D",
+          "body": "MAY have an `effort` property with allowed values: low, medium, high.",
+          "added_by": "@pleberre",
+          "added_at": "2026-10-18",
+          "supersedes": null
         }
       ],
-      "sub_entities": [],
       "notes": [
         {
           "id": "SPCFGEVAL-002/01",
@@ -209,6 +234,15 @@
           "content": "When null or absent, the evaluator uses the default endpoint for the chosen provider. Custom endpoints enable private deployments or proxy configurations.",
           "added_by": "@pleberre",
           "added_at": "2026-03-23",
+          "revision": 0
+        },
+        {
+          "id": "SPCFGEVAL-002/02",
+          "rule_ref": "SPCFGEVAL-002",
+          "type": "clarification",
+          "content": "`null` (or an absent evaluator block) disables AI evaluation: only structural checks run. This is the default written by `strspc init`.",
+          "added_by": "@pleberre",
+          "added_at": "2026-10-18",
           "revision": 0
         }
       ]
@@ -246,7 +280,6 @@
           "supersedes": null
         }
       ],
-      "sub_entities": [],
       "notes": []
     },
     {
@@ -282,7 +315,6 @@
           "supersedes": null
         }
       ],
-      "sub_entities": [],
       "notes": [
         {
           "id": "SPCFGFAIL-002/01",
@@ -331,6 +363,15 @@
       "content": "A rule defines what must be true. How critical a violation is depends on the consuming project's context. The same rule might be a hard failure for a fintech API and a warning for an internal tool. This separation prevents rule authors from imposing enforcement policy on consumers (Rule Manager Spec §1.1).",
       "added_by": "@pleberre",
       "added_at": "2026-03-23",
+      "revision": 0
+    },
+    {
+      "id": "SPCFG-009/01",
+      "rule_ref": "SPCFG-009",
+      "type": "clarification",
+      "content": "When absent, the evaluator receives rules in states Draft (D), Published (P) and Implemented (I). `evaluate_on` narrows which rules are evaluated; `fail_on` (SPCFGFAIL) decides which violations fail the run.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-18",
       "revision": 0
     }
   ]

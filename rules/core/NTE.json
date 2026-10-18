@@ -6,16 +6,16 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.1.0",
-    "timestamp": "2026-03-21T00:00:00Z",
-    "hash": "blake3:8ed20e9f5149db3aaffcb28607c6a0806bd6cfaaeecfefae2fc2be2c18c2e9ea"
+    "version": "0.1.1",
+    "timestamp": "2026-10-18T11:09:28Z",
+    "hash": "blake3:6029d127eb6b33f3be7e80654e1c00b08726984ecd7013e1a0a5cf908e05a609"
   },
   "rules": [
     {
       "id": "NTE-001",
       "revision": 0,
       "state": "D",
-      "body": "IS associated with a single rule and must reference the rule's identifier explicitly (e.g., [<rule id>/<incremental note id (OOn)]).",
+      "body": "IS associated with a single rule and must reference the rule's identifier explicitly (e.g., [\u003crule id\u003e/\u003cincremental note id (OOn)]).",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
@@ -64,8 +64,16 @@
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
+    },
+    {
+      "id": "NTE-007",
+      "revision": 0,
+      "state": "D",
+      "body": "Notes of type `supersedes`, `extends`, or `related` MUST reference rules by identifier `\u003cEUID\u003e-NNN`, or `\u003crealm-id\u003e:\u003cEUID\u003e-NNN` across realms.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-18",
+      "supersedes": null
     }
   ],
-  "sub_entities": [],
   "notes": []
 }
