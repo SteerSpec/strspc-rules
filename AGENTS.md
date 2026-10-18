@@ -43,30 +43,26 @@ The strspc-CLI is the intended interface for mutating rules and realms. It enfor
 constraints (ID sequencing, state transitions, hash computation) that manual edits can
 violate. **Always prefer CLI commands over direct JSON editing.**
 
-### Available CLI commands
+### Available CLI commands (strspc-CLI v1.14+)
 
 - Realm management: `strspc realm init`, `strspc realm add`, `strspc realm validate`,
   `strspc realm dep add/remove`
+- Rule lifecycle: `strspc rule add/update/promote/retire/abandon/supersede --dir rules/core`
+  (bumps `rule_set.version`, refreshes the timestamp and recomputes the hash)
 - Validation: `strspc lint`, `strspc render`
-- PR validation: `strspc diff`
+- PR validation: `strspc diff --base <ref>` (rejects skipped lifecycle states, e.g.
+  Draft → Implemented in a single PR; promote D → P and P → I in separate PRs)
 
-### Not yet available (manual edit with human approval)
+### Still manual (with human approval)
 
-- Rule lifecycle: `strspc rule add/update/promote/retire/abandon/supersede`
+The CLI operates on top-level entities only. Rules of sub-entities (`ENTUQID`, `RULST`,
+`RSTVRS`, `RSTHSH`, `RLMMNFST`, `SPCFG*`) and notes are edited by hand:
 
-### Manual edit checklist (when CLI doesn't support the operation)
-
-1. Get explicit human approval before editing any file under `rules/`
-2. Read and understand the relevant entity rules (self-referential)
-3. Edit the JSON entity file(s)
-4. Bump `rule_set.version` and update `rule_set.timestamp`
-5. Run `python3 tools/compute-hash.py` — recompute Blake3 hashes
-6. Run `python3 tools/build-schema.py --check` — verify schema consistency
-7. Run `ruff check . && ruff format --check .` — lint Python if touched
-8. Commit on a feature branch with conventional commit message
-
-As the CLI matures, this fallback list should shrink. Update this section when new
-CLI commands ship.
+1. Edit the JSON mirroring what the CLI would do: `rule add` bumps the sub-entity
+   `rule_set.version` patch, `rule promote` bumps minor; refresh `rule_set.timestamp`
+2. Run `python3 tools/compute-hash.py rules/core/<FILE>.json` — recompute the file hash
+3. Run `python3 tools/build-schema.py` and commit the regenerated schemas if they changed
+4. Run `strspc diff rules/core --base origin/develop` and `strspc-manager realm-lint rules/core/`
 
 ## Rule Authoring Constraints
 
@@ -140,12 +136,18 @@ pre-commit install  # also install the pre-commit stage hooks
 
 - Feature branches → `develop` via PR. `develop` → `main` via PR for releases.
 - Use `bd` (beads) for ALL task tracking — no markdown TODOs.
-- CI gates every PR — the `validate-rules`, `build-schema`, `lint-python`, `lint-commits`,
-  and `lint` jobs must all pass.
-- To release: open a PR from `develop` to `main`. On merge, the release workflow
-  automatically bumps the semver tag based on conventional commit types (`feat`→minor,
-  `fix`/etc→patch, breaking→major), publishes the GitHub release, and deploys rules
-  to steerspec.dev via strspc-www.
+- CI gates every PR — the `validate-rules`, `lint-commits`, `lint-python` and `lint` jobs
+  (`ci.yml`) and the `build-schema` job (`build-schema.yml`) must all pass.
+- To release: bump `realm.version` in `rules/core/realm.json`, then open a PR from `develop`
+  to `main`. On merge, the release workflow tags `v<realm.version>`, publishes the GitHub
+  release and deploys rules to steerspec.dev via strspc-www. If that tag already exists the
+  workflow skips the release, so docs-only and promotion merges stay green.
+
+## Versioning
+
+The realm version **is** the release tag: `rules/core/realm.json` `realm.version` `1.6.0`
+is released as `v1.6.0`, and dependent realms pin `dev.steerspec.core@1.6.0`. Bump it
+(semver) in the PR that introduces the change being released; never release without a bump.
 
 ## Non-Interactive Shell Commands
 

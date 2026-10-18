@@ -95,10 +95,13 @@ Every PR is gated by these jobs (`.github/workflows/ci.yml`):
 
 | Job | Description |
 | --- | ----------- |
-| `validate-json` | JSON entity files against bootstrap schema |
-| `lint-python` | Ruff lint + format check |
+| `validate-rules` | `strspc-manager realm-lint` on `rules/core/`, then `strspc diff` lifecycle checks vs. the PR base |
 | `lint-commits` | Conventional Commits enforcement (PR only) |
+| `lint-python` | Ruff lint + format check |
 | `lint` | actionlint, yamllint, markdownlint, editorconfig-checker |
+
+The `build-schema` job (`.github/workflows/build-schema.yml`) additionally runs
+`python3 tools/build-schema.py --check` whenever rules, schemas or the generator change.
 
 ## Published at steerspec.dev
 
@@ -122,7 +125,12 @@ and pushes to the [strspc-www](https://github.com/SteerSpec/strspc-www) reposito
 ## Versioning
 
 Releases follow [semantic versioning](https://semver.org/) and are published as Git tags
-in the format `v<MAJOR>.<MINOR>.<PATCH>` (e.g., `v1.1.1`).
+in the format `v<MAJOR>.<MINOR>.<PATCH>` (e.g., `v1.6.0`).
+
+**The realm version is the release tag.** `realm.version` in `rules/core/realm.json`
+(e.g. `1.6.0`) is what the release workflow tags (`v1.6.0`) when `develop` merges into
+`main`; dependent realms pin it as `dev.steerspec.core@1.6.0`. If the tag already exists
+the release is skipped, so bump `realm.version` in the PR that should trigger a release.
 
 Each release includes:
 
@@ -136,13 +144,13 @@ Each release includes:
 Use steerspec.dev for stable, versioned access:
 
 ```text
-https://steerspec.dev/rules/v1.1.1/RUL.json
+https://steerspec.dev/rules/v1.6.0/RUL.json
 ```
 
 Or download the archive for offline use:
 
 ```text
-https://github.com/SteerSpec/strspc-rules/releases/download/v1.1.1/strspc-rules-1.1.1.tar.gz
+https://github.com/SteerSpec/strspc-rules/releases/download/v1.6.0/strspc-rules-1.6.0.tar.gz
 ```
 
 ## License
