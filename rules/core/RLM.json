@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.29.4",
-    "timestamp": "2026-10-19T11:21:56Z",
-    "hash": "blake3:70de33379968d12c046a873a49a2d8399aa8539f1d67ab85dccc6c776ff24e6d"
+    "timestamp": "2026-10-19T11:30:53Z",
+    "hash": "blake3:eeeb6c191d0e80352125b66da879d7fd6c0b409dc71e9d82c39289c684e68739"
   },
   "rules": [
     {
@@ -149,8 +149,8 @@
       },
       "rule_set": {
         "version": "0.11.0",
-        "timestamp": "2026-10-19T11:21:56Z",
-        "hash": "blake3:ca52c9bcb33da079a2bc6cb68ae4e431db5b729ec4d97ba09b34375c4538cadd"
+        "timestamp": "2026-10-19T11:30:53Z",
+        "hash": "blake3:4371ca70fd54767c9f0a97560460da69638f7cdbfcdab6fc392696d00fa6fefc"
       },
       "rules": [
         {
@@ -174,7 +174,7 @@
         {
           "id": "RLMMNFST-003",
           "revision": 0,
-          "state": "I",
+          "state": "P",
           "body": "MAY declare dependencies on other Realms with pinned version references.",
           "added_by": "@pleberre",
           "added_at": "2026-03-22",
