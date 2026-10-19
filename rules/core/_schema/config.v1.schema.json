@@ -40,7 +40,14 @@
       ],
       "properties": {
         "provider": {
-          "type": "string"
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "endpoint": {
           "oneOf": [
@@ -50,6 +57,17 @@
             {
               "type": "null"
             }
+          ]
+        },
+        "model": {
+          "type": "string"
+        },
+        "effort": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
           ]
         }
       }
@@ -64,6 +82,20 @@
       }
     },
     "fail_on": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "D",
+          "A",
+          "P",
+          "I",
+          "R",
+          "T"
+        ]
+      }
+    },
+    "evaluate_on": {
       "type": "array",
       "items": {
         "type": "string",

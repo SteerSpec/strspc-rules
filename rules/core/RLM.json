@@ -6,15 +6,15 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.2.0",
-    "timestamp": "2026-03-25T00:00:00Z",
-    "hash": "blake3:61d47e7287a7a4f9e38ebcee552f3102640a50c3e08b6d7f975e75200e849359"
+    "version": "0.29.4",
+    "timestamp": "2026-10-19T12:00:34Z",
+    "hash": "blake3:98b23ea5da2f728039757e013f389eb74b13260923b3bb050ef7a3d871c84e83"
   },
   "rules": [
     {
       "id": "RLM-001",
       "revision": 0,
-      "state": "D",
+      "state": "I",
       "body": "IS a namespace in which Entity Unique Identifiers are unique.",
       "added_by": "@pleberre",
       "added_at": "2026-03-22",
@@ -23,7 +23,7 @@
     {
       "id": "RLM-002",
       "revision": 0,
-      "state": "D",
+      "state": "I",
       "body": "HAS a Rule Identifier Format configuration.",
       "added_by": "@pleberre",
       "added_at": "2026-03-22",
@@ -32,7 +32,7 @@
     {
       "id": "RLM-003",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MUST contain a `_schema/` directory with schema files used to validate its entities.",
       "added_by": "@pleberre",
       "added_at": "2026-03-22",
@@ -41,7 +41,7 @@
     {
       "id": "RLM-004",
       "revision": 0,
-      "state": "D",
+      "state": "I",
       "body": "MUST contain a `realm.json` manifest at its root.",
       "added_by": "@pleberre",
       "added_at": "2026-03-22",
@@ -50,7 +50,7 @@
     {
       "id": "RLM-005",
       "revision": 0,
-      "state": "D",
+      "state": "I",
       "body": "MAY declare dependencies on other Realms, importing their rules as read-only references.",
       "added_by": "@pleberre",
       "added_at": "2026-03-22",
@@ -59,7 +59,7 @@
     {
       "id": "RLM-006",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MUST NOT define Entity Unique Identifiers that collide with any Realm it depends on.",
       "added_by": "@pleberre",
       "added_at": "2026-03-22",
@@ -68,7 +68,7 @@
     {
       "id": "RLM-007",
       "revision": 0,
-      "state": "D",
+      "state": "I",
       "body": "An Entity MUST reside in the directory tree of exactly one Realm.",
       "added_by": "@pleberre",
       "added_at": "2026-03-22",
@@ -77,7 +77,7 @@
     {
       "id": "RLM-008",
       "revision": 0,
-      "state": "D",
+      "state": "I",
       "body": "MUST have an identifier that follows reverse domain notation (e.g., `com.example.realm`) to ensure global uniqueness across organizations.",
       "added_by": "@pleberre",
       "added_at": "2026-03-22",
@@ -86,7 +86,7 @@
     {
       "id": "RLM-009",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "Cross-realm entity references MUST use the qualified form `<realm-id>:<EUID>`. Within the same Realm, the short form (EUID only) is sufficient.",
       "added_by": "@pleberre",
       "added_at": "2026-03-22",
@@ -95,7 +95,7 @@
     {
       "id": "RLM-010",
       "revision": 0,
-      "state": "D",
+      "state": "I",
       "body": "MAY declare sub-realms via a `sub_realms` array in its manifest, where each entry is a single directory name (no `/` or `..`), relative to the parent Realm directory, containing a child Realm.",
       "added_by": "@pleberre",
       "added_at": "2026-03-25",
@@ -104,7 +104,7 @@
     {
       "id": "RLM-011",
       "revision": 0,
-      "state": "D",
+      "state": "I",
       "body": "A sub-realm's identifier MUST equal `<parent-realm-id>.<subdirectory-name>`, where the subdirectory name MUST satisfy the realm-id segment grammar (`[a-z][a-z0-9]*`).",
       "added_by": "@pleberre",
       "added_at": "2026-03-25",
@@ -113,7 +113,7 @@
     {
       "id": "RLM-012",
       "revision": 0,
-      "state": "D",
+      "state": "I",
       "body": "Sub-realms are limited to one level of nesting; a sub-realm MUST NOT declare its own `sub_realms`.",
       "added_by": "@pleberre",
       "added_at": "2026-03-25",
@@ -122,7 +122,7 @@
     {
       "id": "RLM-013",
       "revision": 0,
-      "state": "D",
+      "state": "I",
       "body": "EUID uniqueness (RLM-001) spans the parent Realm and all its declared sub-realms.",
       "added_by": "@pleberre",
       "added_at": "2026-03-25",
@@ -131,7 +131,7 @@
     {
       "id": "RLM-014",
       "revision": 0,
-      "state": "D",
+      "state": "I",
       "body": "A sub-realm inherits its parent's dependencies (RLM-005) and MAY declare additional dependencies of its own.",
       "added_by": "@pleberre",
       "added_at": "2026-03-25",
@@ -148,15 +148,15 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.2.0",
-        "timestamp": "2026-03-25T00:00:00Z",
-        "hash": null
+        "version": "0.11.0",
+        "timestamp": "2026-10-19T12:00:34Z",
+        "hash": "blake3:9673170ffdb4a14a2adf4b030e37511cfcd59b9cb6bb34f61a018371fbfa1b29"
       },
       "rules": [
         {
           "id": "RLMMNFST-001",
           "revision": 0,
-          "state": "D",
+          "state": "I",
           "body": "IS a JSON file named `realm.json` at the root of a Realm directory.",
           "added_by": "@pleberre",
           "added_at": "2026-03-22",
@@ -165,7 +165,7 @@
         {
           "id": "RLMMNFST-002",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "MUST declare the Realm's identifier, title, and version.",
           "added_by": "@pleberre",
           "added_at": "2026-03-22",
@@ -174,7 +174,7 @@
         {
           "id": "RLMMNFST-003",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "MAY declare dependencies on other Realms with pinned version references.",
           "added_by": "@pleberre",
           "added_at": "2026-03-22",
@@ -183,7 +183,7 @@
         {
           "id": "RLMMNFST-004",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "MAY override the Rule Identifier Format defaults for the Realm.",
           "added_by": "@pleberre",
           "added_at": "2026-03-22",
@@ -192,14 +192,13 @@
         {
           "id": "RLMMNFST-005",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "MAY declare a `sub_realms` field, which MUST be either null or an array of unique strings matching the realm-id segment grammar (`[a-z][a-z0-9]*`), where each string is the name of a subdirectory that MUST contain a valid `realm.json`.",
           "added_by": "@pleberre",
           "added_at": "2026-03-25",
           "supersedes": null
         }
       ],
-      "sub_entities": [],
       "notes": []
     }
   ],
