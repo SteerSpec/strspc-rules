@@ -6,15 +6,15 @@
     "description": "A collection of all rules applicable to a specific entity, versioned as a unit."
   },
   "rule_set": {
-    "version": "0.3.0",
-    "timestamp": "2026-10-18T11:12:28Z",
-    "hash": "blake3:6d47f53db62bde786a069af1fad6b007c6afe2e39c3dbb76edf40d9f0722dd69"
+    "version": "0.5.5",
+    "timestamp": "2026-10-19T11:53:58Z",
+    "hash": "blake3:339fcd22d052bfb55f72f205cad1ba6c06878e8701747fe2ea0d7dfc13fccb7b"
   },
   "rules": [
     {
       "id": "RST-001",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "IS a collection of Rules associated with an Entity.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -23,7 +23,7 @@
     {
       "id": "RST-002",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "HAS a Rule Set Version which uniquely defines a specific set of changes applied to it.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
@@ -40,15 +40,15 @@
         "parent": "RST"
       },
       "rule_set": {
-        "version": "0.5.0",
-        "timestamp": "2026-10-18T11:12:29Z",
-        "hash": null
+        "version": "0.8.0",
+        "timestamp": "2026-10-19T11:53:58Z",
+        "hash": "blake3:d6e21895d7208ed4bb3951e8e68a483d7fc23fe46cb56e5524b192c9bd705fe6"
       },
       "rules": [
         {
           "id": "RSTVRS-001",
           "revision": 0,
-          "state": "P",
+          "state": "I",
           "body": "MUST be in the semantic versioning format.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",
@@ -57,7 +57,7 @@
         {
           "id": "RSTVRS-002",
           "revision": 0,
-          "state": "P",
+          "state": "I",
           "body": "IS associated to a Rule Set Hash.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",
@@ -93,9 +93,9 @@
         "parent": "RST"
       },
       "rule_set": {
-        "version": "0.3.0",
-        "timestamp": "2026-10-18T11:12:29Z",
-        "hash": null
+        "version": "0.5.0",
+        "timestamp": "2026-10-19T11:21:56Z",
+        "hash": "blake3:a025f3b0b1249ab2f91a6d88f837d1fc8c9ab377b19f796ad94988f4a9c3e1b7"
       },
       "rules": [
         {
@@ -110,7 +110,7 @@
         {
           "id": "RSTHSH-002",
           "revision": 0,
-          "state": "P",
+          "state": "I",
           "body": "MUST be a Blake3 hash.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",
