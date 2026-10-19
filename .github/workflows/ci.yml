@@ -22,14 +22,19 @@ jobs:
       - uses: ./.github/actions/setup-strspc
       - name: Validate realm and entity files
         run: strspc-manager realm-lint rules/core/
+      # Lifecycle transitions are validated one PR at a time on the way into
+      # develop. A release (develop → main, and the resulting push to main)
+      # aggregates those steps, which rulediff reads as skipped states
+      # (RD003) and body-edit-plus-promotion (RD001), so main is exempt.
       - name: Diff rules (pull_request)
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && github.base_ref != 'main'
         run: strspc diff rules/core/ --pr ${{ github.event.pull_request.number }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Diff rules (push)
         if: >-
           github.event_name == 'push'
+          && github.ref != 'refs/heads/main'
           && github.event.before != '0000000000000000000000000000000000000000'
         run: strspc diff rules/core/ --base ${{ github.event.before }}
 
