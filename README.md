@@ -95,7 +95,7 @@ Every PR is gated by these jobs (`.github/workflows/ci.yml`):
 
 | Job | Description |
 | --- | ----------- |
-| `validate-rules` | `strspc-manager realm-lint` on `rules/core/`, then `strspc diff` lifecycle checks vs. the PR base |
+| `validate-rules` | `realm-lint` on `rules/core/`, then `strspc diff` lifecycle checks vs. the base (not on `main`) |
 | `lint-commits` | Conventional Commits enforcement (PR only) |
 | `lint-python` | Ruff lint + format check |
 | `lint` | actionlint, yamllint, markdownlint, editorconfig-checker |
@@ -120,7 +120,12 @@ URLs resolvable and provides stable endpoints for CLI and tooling consumers.
 | `https://steerspec.dev/rules/v<version>/` | Versioned snapshots |
 
 The publish step runs as a job in the Release workflow (`.github/workflows/release.yml`)
-and pushes to the [strspc-www](https://github.com/SteerSpec/strspc-www) repository.
+and opens a pull request on the [strspc-www](https://github.com/SteerSpec/strspc-www)
+repository (`publish/rules-v<version>`); merging it deploys the files. The commit is signed when the
+SteerSpec GitHub App credentials (`STEERSPEC_APP_ID`, `STEERSPEC_APP_PRIVATE_KEY`) are configured.
+
+Release PRs (`develop` → `main`) skip the `strspc diff` lifecycle check: they aggregate transitions
+that were validated one PR at a time on the way into `develop`.
 
 ## Versioning
 
