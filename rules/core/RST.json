@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.5.5",
-    "timestamp": "2026-10-19T11:21:56Z",
-    "hash": "blake3:a45c98b92f0e596985a0e03a67c84d4d61cbf47b28aae887270d020cd1360035"
+    "timestamp": "2026-10-19T11:53:58Z",
+    "hash": "blake3:339fcd22d052bfb55f72f205cad1ba6c06878e8701747fe2ea0d7dfc13fccb7b"
   },
   "rules": [
     {
@@ -41,8 +41,8 @@
       },
       "rule_set": {
         "version": "0.8.0",
-        "timestamp": "2026-10-18T16:34:32Z",
-        "hash": "blake3:338566802b456ad2e2d6d1369ce371b276d9e4b6addf9cce52366d34fb7f3ea8"
+        "timestamp": "2026-10-19T11:53:58Z",
+        "hash": "blake3:d6e21895d7208ed4bb3951e8e68a483d7fc23fe46cb56e5524b192c9bd705fe6"
       },
       "rules": [
         {
@@ -75,7 +75,7 @@
         {
           "id": "RSTVRS-004",
           "revision": 0,
-          "state": "I",
+          "state": "P",
           "body": "IS automatically created when a Rule Set Change is committed in a specific Rule Set Branch.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",

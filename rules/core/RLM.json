@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.29.4",
-    "timestamp": "2026-10-19T11:30:53Z",
-    "hash": "blake3:eeeb6c191d0e80352125b66da879d7fd6c0b409dc71e9d82c39289c684e68739"
+    "timestamp": "2026-10-19T11:53:58Z",
+    "hash": "blake3:666fe80343432e0332ce4062be98a3efefd895d5ef4ec93491cc4f8c5cfa7669"
   },
   "rules": [
     {
@@ -32,7 +32,7 @@
     {
       "id": "RLM-003",
       "revision": 0,
-      "state": "I",
+      "state": "P",
       "body": "MUST contain a `_schema/` directory with schema files used to validate its entities.",
       "added_by": "@pleberre",
       "added_at": "2026-03-22",
