@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.29.4",
-    "timestamp": "2026-10-19T11:53:58Z",
-    "hash": "blake3:666fe80343432e0332ce4062be98a3efefd895d5ef4ec93491cc4f8c5cfa7669"
+    "timestamp": "2026-10-19T12:00:34Z",
+    "hash": "blake3:98b23ea5da2f728039757e013f389eb74b13260923b3bb050ef7a3d871c84e83"
   },
   "rules": [
     {
@@ -149,8 +149,8 @@
       },
       "rule_set": {
         "version": "0.11.0",
-        "timestamp": "2026-10-19T11:30:53Z",
-        "hash": "blake3:4371ca70fd54767c9f0a97560460da69638f7cdbfcdab6fc392696d00fa6fefc"
+        "timestamp": "2026-10-19T12:00:34Z",
+        "hash": "blake3:9673170ffdb4a14a2adf4b030e37511cfcd59b9cb6bb34f61a018371fbfa1b29"
       },
       "rules": [
         {
@@ -165,7 +165,7 @@
         {
           "id": "RLMMNFST-002",
           "revision": 0,
-          "state": "I",
+          "state": "P",
           "body": "MUST declare the Realm's identifier, title, and version.",
           "added_by": "@pleberre",
           "added_at": "2026-03-22",
