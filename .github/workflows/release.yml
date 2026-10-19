@@ -114,12 +114,34 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      # strspc-www main is protected (pull request, approval, verified
+      # signatures), so the publish lands as a pull request. Signed commits
+      # need a bot token: with the SteerSpec GitHub App configured the action
+      # commits through the API as the App; with only WWW_PAT the commit is
+      # unsigned and must be re-signed before the PR can merge. The same token
+      # checks the repository out, so an App-only setup works without a PAT.
+      - name: Detect GitHub App credentials
+        id: app-creds
+        env:
+          HAS_APP: ${{ secrets.STEERSPEC_APP_ID != '' && secrets.STEERSPEC_APP_PRIVATE_KEY != '' }}
+        run: echo "present=${HAS_APP}" >> "$GITHUB_OUTPUT"
+
+      - name: Mint GitHub App token for strspc-www
+        if: steps.app-creds.outputs.present == 'true'
+        id: app
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510  # v3.3.0
+        with:
+          app-id: ${{ secrets.STEERSPEC_APP_ID }}
+          private-key: ${{ secrets.STEERSPEC_APP_PRIVATE_KEY }}
+          owner: SteerSpec
+          repositories: strspc-www
+
       - name: Checkout strspc-www
         uses: actions/checkout@v4
         with:
           repository: SteerSpec/strspc-www
           ref: main
-          token: ${{ secrets.WWW_PAT }}
+          token: ${{ steps.app.outputs.token || secrets.WWW_PAT }}
           path: www
 
       - name: Copy schemas
@@ -152,27 +174,6 @@ jobs:
           VERSION="${{ needs.release.outputs.version }}"
           rm -rf www/rules/latest
           cp -r "www/rules/v${VERSION}" www/rules/latest
-
-      # strspc-www main is protected (pull request, approval, verified
-      # signatures), so the publish lands as a pull request. Signed commits
-      # need a bot token: with the SteerSpec GitHub App configured the action
-      # commits through the API as the App; with only WWW_PAT the commit is
-      # unsigned and must be re-signed before the PR can merge.
-      - name: Detect GitHub App credentials
-        id: app-creds
-        env:
-          HAS_APP: ${{ secrets.STEERSPEC_APP_ID != '' && secrets.STEERSPEC_APP_PRIVATE_KEY != '' }}
-        run: echo "present=${HAS_APP}" >> "$GITHUB_OUTPUT"
-
-      - name: Mint GitHub App token for strspc-www
-        if: steps.app-creds.outputs.present == 'true'
-        id: app
-        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510  # v3.3.0
-        with:
-          app-id: ${{ secrets.STEERSPEC_APP_ID }}
-          private-key: ${{ secrets.STEERSPEC_APP_PRIVATE_KEY }}
-          owner: SteerSpec
-          repositories: strspc-www
 
       - name: Open publish pull request on strspc-www
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1  # v8.1.1
