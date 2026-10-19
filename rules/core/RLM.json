@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.29.4",
-    "timestamp": "2026-10-19T12:00:34Z",
-    "hash": "blake3:98b23ea5da2f728039757e013f389eb74b13260923b3bb050ef7a3d871c84e83"
+    "version": "0.30.0",
+    "timestamp": "2026-10-19T15:13:55Z",
+    "hash": "blake3:a3652c0426467be436a0b7b4f59614025d6c69dca76a412b4f5e75506ea35fdb"
   },
   "rules": [
     {
@@ -59,7 +59,7 @@
     {
       "id": "RLM-006",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "MUST NOT define Entity Unique Identifiers that collide with any Realm it depends on.",
       "added_by": "@pleberre",
       "added_at": "2026-03-22",
