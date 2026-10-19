@@ -95,7 +95,7 @@ Every PR is gated by these jobs (`.github/workflows/ci.yml`):
 
 | Job | Description |
 | --- | ----------- |
-| `validate-rules` | `strspc-manager realm-lint` on `rules/core/`, then `strspc diff` lifecycle checks vs. the PR base (not on `main`, see below) |
+| `validate-rules` | `realm-lint` on `rules/core/`, then `strspc diff` lifecycle checks vs. the base (not on `main`) |
 | `lint-commits` | Conventional Commits enforcement (PR only) |
 | `lint-python` | Ruff lint + format check |
 | `lint` | actionlint, yamllint, markdownlint, editorconfig-checker |
