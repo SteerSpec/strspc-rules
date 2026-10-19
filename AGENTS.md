@@ -62,7 +62,7 @@ The CLI operates on top-level entities only. Rules of sub-entities (`ENTUQID`, `
    `rule_set.version` patch, `rule promote` bumps minor; refresh `rule_set.timestamp`
 2. Run `python3 tools/compute-hash.py rules/core/<FILE>.json` — recompute the file hash
 3. Run `python3 tools/build-schema.py` and commit the regenerated schemas if they changed
-4. Run `strspc diff rules/core --base origin/develop` and `strspc-manager realm-lint rules/core/`
+4. Run `strspc diff rules/core --base origin/develop` and `strspc realm validate rules/core/ --recursive --strict`
 
 ## Rule Authoring Constraints
 
