@@ -160,12 +160,14 @@ jobs:
       # unsigned and must be re-signed before the PR can merge.
       - name: Detect GitHub App credentials
         id: app-creds
-        run: echo "present=${{ secrets.STEERSPEC_APP_ID != '' && secrets.STEERSPEC_APP_PRIVATE_KEY != '' }}" >> "$GITHUB_OUTPUT"
+        env:
+          HAS_APP: ${{ secrets.STEERSPEC_APP_ID != '' && secrets.STEERSPEC_APP_PRIVATE_KEY != '' }}
+        run: echo "present=${HAS_APP}" >> "$GITHUB_OUTPUT"
 
       - name: Mint GitHub App token for strspc-www
         if: steps.app-creds.outputs.present == 'true'
         id: app
-        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510  # v3.3.0
         with:
           app-id: ${{ secrets.STEERSPEC_APP_ID }}
           private-key: ${{ secrets.STEERSPEC_APP_PRIVATE_KEY }}
@@ -173,7 +175,7 @@ jobs:
           repositories: strspc-www
 
       - name: Open publish pull request on strspc-www
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1  # v8.1.1
         with:
           path: www
           token: ${{ steps.app.outputs.token || secrets.WWW_PAT }}
