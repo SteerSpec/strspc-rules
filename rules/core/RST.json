@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.5.5",
-    "timestamp": "2026-10-18T16:34:32Z",
-    "hash": "blake3:9a7f0ed333e454cf0abc4a307d866d90612dd03faad5dad05bdafe520ea556e4"
+    "timestamp": "2026-10-19T11:21:56Z",
+    "hash": "blake3:a45c98b92f0e596985a0e03a67c84d4d61cbf47b28aae887270d020cd1360035"
   },
   "rules": [
     {
@@ -94,14 +94,14 @@
       },
       "rule_set": {
         "version": "0.5.0",
-        "timestamp": "2026-10-18T16:34:32Z",
-        "hash": "blake3:09ebc0b965f0b3c0c4a8b67544e0b388b70a3fdccf733dec24bbbc0a1a5d3c5f"
+        "timestamp": "2026-10-19T11:21:56Z",
+        "hash": "blake3:a025f3b0b1249ab2f91a6d88f837d1fc8c9ab377b19f796ad94988f4a9c3e1b7"
       },
       "rules": [
         {
           "id": "RSTHSH-001",
           "revision": 0,
-          "state": "I",
+          "state": "P",
           "body": "IS hash of the Rule Set content.",
           "added_by": "@pleberre",
           "added_at": "2026-03-07",

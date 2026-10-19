@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.29.4",
-    "timestamp": "2026-10-18T16:34:32Z",
-    "hash": "blake3:0e21ffef93c249871a6335ccf3da79493c63280e7c19dc0dd89cc6aa1beee913"
+    "timestamp": "2026-10-19T11:21:56Z",
+    "hash": "blake3:70de33379968d12c046a873a49a2d8399aa8539f1d67ab85dccc6c776ff24e6d"
   },
   "rules": [
     {
@@ -86,7 +86,7 @@
     {
       "id": "RLM-009",
       "revision": 0,
-      "state": "I",
+      "state": "P",
       "body": "Cross-realm entity references MUST use the qualified form `<realm-id>:<EUID>`. Within the same Realm, the short form (EUID only) is sufficient.",
       "added_by": "@pleberre",
       "added_at": "2026-03-22",
@@ -149,8 +149,8 @@
       },
       "rule_set": {
         "version": "0.11.0",
-        "timestamp": "2026-10-18T16:34:32Z",
-        "hash": "blake3:ae340a414b72e2b545f2a486dcdc9868092bd7587ff720e10593381148532373"
+        "timestamp": "2026-10-19T11:21:56Z",
+        "hash": "blake3:ca52c9bcb33da079a2bc6cb68ae4e431db5b729ec4d97ba09b34375c4538cadd"
       },
       "rules": [
         {
@@ -192,7 +192,7 @@
         {
           "id": "RLMMNFST-005",
           "revision": 0,
-          "state": "I",
+          "state": "P",
           "body": "MAY declare a `sub_realms` field, which MUST be either null or an array of unique strings matching the realm-id segment grammar (`[a-z][a-z0-9]*`), where each string is the name of a subdirectory that MUST contain a valid `realm.json`.",
           "added_by": "@pleberre",
           "added_at": "2026-03-25",
