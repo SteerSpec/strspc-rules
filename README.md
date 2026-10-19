@@ -120,7 +120,8 @@ URLs resolvable and provides stable endpoints for CLI and tooling consumers.
 | `https://steerspec.dev/rules/v<version>/` | Versioned snapshots |
 
 The publish step runs as a job in the Release workflow (`.github/workflows/release.yml`)
-and pushes to the [strspc-www](https://github.com/SteerSpec/strspc-www) repository.
+and opens a pull request on the [strspc-www](https://github.com/SteerSpec/strspc-www)
+repository (`publish/rules-v<version>`); squash-merging it deploys the files.
 
 ## Versioning
 
