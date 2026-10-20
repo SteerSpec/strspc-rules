@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.31.0",
-    "timestamp": "2026-10-20T10:03:12Z",
-    "hash": "blake3:3043c22176a97130b8049eada85d87f8e1f421391247fae602f8e598dfdba2bf"
+    "version": "0.32.0",
+    "timestamp": "2026-10-20T16:42:27Z",
+    "hash": "blake3:e8d37f7ebd942c08ed66b28f7482169d2a3d263f039dc431d23c796cc3dc4e12"
   },
   "rules": [
     {
@@ -148,9 +148,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.12.0",
-        "timestamp": "2026-10-20T10:03:12Z",
-        "hash": "blake3:be60a2253a34c6c086358149b3398d17342293b2df6a437fb816b65f0e26b092"
+        "version": "0.13.0",
+        "timestamp": "2026-10-20T16:42:06Z",
+        "hash": "blake3:82bdbd170851f455d852bdd072fba2e623b91e24563b5e0bb963ba85ff8df345"
       },
       "rules": [
         {
@@ -192,7 +192,7 @@
         {
           "id": "RLMMNFST-005",
           "revision": 0,
-          "state": "P",
+          "state": "I",
           "body": "MAY declare a `sub_realms` field, which MUST be either null or an array of unique strings matching the realm-id segment grammar (`[a-z][a-z0-9]*`), where each string is the name of a subdirectory that MUST contain a valid `realm.json`.",
           "added_by": "@pleberre",
           "added_at": "2026-03-25",
