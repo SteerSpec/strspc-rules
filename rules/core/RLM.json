@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.31.0",
-    "timestamp": "2026-10-20T09:28:44Z",
-    "hash": "blake3:757a109cc35f80d8c061fd4509dc84d4ef964f3fd290fc493e5d6984ad9000ab"
+    "timestamp": "2026-10-20T10:03:12Z",
+    "hash": "blake3:3043c22176a97130b8049eada85d87f8e1f421391247fae602f8e598dfdba2bf"
   },
   "rules": [
     {
@@ -149,8 +149,8 @@
       },
       "rule_set": {
         "version": "0.12.0",
-        "timestamp": "2026-10-20T09:28:44Z",
-        "hash": "blake3:1143eaf434123d1a9ec312353244100e3c527cf48bde3ff627f83fbc8d64c4c7"
+        "timestamp": "2026-10-20T10:03:12Z",
+        "hash": "blake3:be60a2253a34c6c086358149b3398d17342293b2df6a437fb816b65f0e26b092"
       },
       "rules": [
         {
@@ -192,7 +192,7 @@
         {
           "id": "RLMMNFST-005",
           "revision": 0,
-          "state": "I",
+          "state": "P",
           "body": "MAY declare a `sub_realms` field, which MUST be either null or an array of unique strings matching the realm-id segment grammar (`[a-z][a-z0-9]*`), where each string is the name of a subdirectory that MUST contain a valid `realm.json`.",
           "added_by": "@pleberre",
           "added_at": "2026-03-25",
