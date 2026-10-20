@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.30.0",
-    "timestamp": "2026-10-19T15:13:55Z",
-    "hash": "blake3:a3652c0426467be436a0b7b4f59614025d6c69dca76a412b4f5e75506ea35fdb"
+    "version": "0.31.0",
+    "timestamp": "2026-10-20T10:03:12Z",
+    "hash": "blake3:3043c22176a97130b8049eada85d87f8e1f421391247fae602f8e598dfdba2bf"
   },
   "rules": [
     {
@@ -32,7 +32,7 @@
     {
       "id": "RLM-003",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "MUST contain a `_schema/` directory with schema files used to validate its entities.",
       "added_by": "@pleberre",
       "added_at": "2026-03-22",
@@ -148,9 +148,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.11.0",
-        "timestamp": "2026-10-19T12:00:34Z",
-        "hash": "blake3:9673170ffdb4a14a2adf4b030e37511cfcd59b9cb6bb34f61a018371fbfa1b29"
+        "version": "0.12.0",
+        "timestamp": "2026-10-20T10:03:12Z",
+        "hash": "blake3:be60a2253a34c6c086358149b3398d17342293b2df6a437fb816b65f0e26b092"
       },
       "rules": [
         {
@@ -165,7 +165,7 @@
         {
           "id": "RLMMNFST-002",
           "revision": 0,
-          "state": "P",
+          "state": "I",
           "body": "MUST declare the Realm's identifier, title, and version.",
           "added_by": "@pleberre",
           "added_at": "2026-03-22",
