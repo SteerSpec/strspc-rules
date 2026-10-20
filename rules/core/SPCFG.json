@@ -6,9 +6,9 @@
     "description": "The consumer-side configuration that declares which rules a project subscribes to and how they are enforced."
   },
   "rule_set": {
-    "version": "0.11.0",
-    "timestamp": "2026-10-20T09:28:44Z",
-    "hash": "blake3:8147da88b9d4940f63c3d24052041615c7c0343d141381657c2e56296866df6d"
+    "version": "0.12.0",
+    "timestamp": "2026-10-20T12:57:34Z",
+    "hash": "blake3:e4606b6fe796f87d21a6f6213eb8de0e10317a9caaedc8f8888b80bf45385679"
   },
   "rules": [
     {
@@ -68,7 +68,7 @@
     {
       "id": "SPCFG-007",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "MAY declare fail conditions referencing rule lifecycle states.",
       "added_by": "@pleberre",
       "added_at": "2026-03-23",
@@ -291,9 +291,9 @@
         "parent": "SPCFG"
       },
       "rule_set": {
-        "version": "0.3.0",
-        "timestamp": "2026-10-18T16:34:32Z",
-        "hash": "blake3:b6551c85f4e4a0de530d9fd8855cbb3ddfb0d0e3dc9328cc6710599ada991d56"
+        "version": "0.4.0",
+        "timestamp": "2026-10-20T12:57:34Z",
+        "hash": "blake3:6b743f4eb01bf4a24594ba3d7c3bb330676dc54d8ef8d9b901a891785ac5e624"
       },
       "rules": [
         {
@@ -308,7 +308,7 @@
         {
           "id": "SPCFGFAIL-002",
           "revision": 0,
-          "state": "P",
+          "state": "I",
           "body": "Each item MUST be a valid rule lifecycle state code: Draft (D), Abandoned (A), Published (P), Implemented (I), Retired (R), Terminated (T).",
           "added_by": "@pleberre",
           "added_at": "2026-03-23",
