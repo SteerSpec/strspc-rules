@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.31.0",
-    "timestamp": "2026-10-20T16:42:06Z",
-    "hash": "blake3:afa1c2428658bac755b8dcb79e07f47cad6167257e9edbcd752048a5c19378e4"
+    "version": "0.32.0",
+    "timestamp": "2026-10-20T16:42:27Z",
+    "hash": "blake3:e8d37f7ebd942c08ed66b28f7482169d2a3d263f039dc431d23c796cc3dc4e12"
   },
   "rules": [
     {
