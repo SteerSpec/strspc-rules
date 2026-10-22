@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.16.8",
-    "timestamp": "2026-10-18T16:34:32Z",
-    "hash": "blake3:e3efa6cf63acb56a4816b664e04980978b6503b7be421b76b0766d903665a79d"
+    "version": "0.17.0",
+    "timestamp": "2026-10-22T10:01:49Z",
+    "hash": "blake3:244551bc0b6c0a419a73e9fc90a0ab24f8fc65fa8c7753220b8db3780bc7d3aa"
   },
   "rules": [
     {
@@ -94,9 +94,9 @@
         "parent": "RUL"
       },
       "rule_set": {
-        "version": "0.17.0",
-        "timestamp": "2026-10-18T16:34:32Z",
-        "hash": "blake3:6f3ecb360fe1b7bdfd01eb95aaad9a75f3febb9a3996bf377a032bdb4e51d946"
+        "version": "0.18.0",
+        "timestamp": "2026-10-22T10:01:49Z",
+        "hash": "blake3:5526a6f636cb4b97f723ac652cdf486c5ecb5c31f8d4bc1a3a619449722626ac"
       },
       "rules": [
         {
@@ -170,9 +170,37 @@
           "added_by": "@pleberre",
           "added_at": "2026-03-07",
           "supersedes": null
+        },
+        {
+          "id": "RULST-009",
+          "revision": 0,
+          "state": "D",
+          "body": "A Rule MUST NOT enter Implemented while the governed code is known to violate it.",
+          "added_by": "@pleberre",
+          "added_at": "2026-10-22",
+          "supersedes": null
         }
       ],
-      "notes": []
+      "notes": [
+        {
+          "id": "RULST-009/01",
+          "rule_ref": "RULST-009",
+          "type": "rationale",
+          "content": "Published is the standard's position and may sit on violating code; Implemented means the rule is in force and the code complies with it.",
+          "added_by": "@pleberre",
+          "added_at": "2026-10-22",
+          "revision": 0
+        },
+        {
+          "id": "RULST-009/02",
+          "rule_ref": "RULST-009",
+          "type": "clarification",
+          "content": "Promote Draft to Published as soon as the wording is final, and Published to Implemented only once compliance and enforcement exist.",
+          "added_by": "@pleberre",
+          "added_at": "2026-10-22",
+          "revision": 0
+        }
+      ]
     }
   ],
   "notes": []

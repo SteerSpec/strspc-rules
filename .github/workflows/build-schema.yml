@@ -23,10 +23,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: ./.github/actions/setup-strspc
+      - uses: SteerSpec/strspc-CLI/.github/actions/setup-strspc@1ce43e4484d9451083c0774a9926178889d684f2  # CLI #92
+        with:
+          version: "1.15.0"
 
       - name: Validate realm and entity files
-        run: strspc-manager realm-lint rules/core/
+        run: strspc realm validate rules/core/ --recursive --strict
 
       - name: Set up Python
         uses: actions/setup-python@v5

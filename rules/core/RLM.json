@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.29.4",
-    "timestamp": "2026-10-19T12:00:34Z",
-    "hash": "blake3:98b23ea5da2f728039757e013f389eb74b13260923b3bb050ef7a3d871c84e83"
+    "version": "0.32.0",
+    "timestamp": "2026-10-20T16:42:27Z",
+    "hash": "blake3:e8d37f7ebd942c08ed66b28f7482169d2a3d263f039dc431d23c796cc3dc4e12"
   },
   "rules": [
     {
@@ -32,7 +32,7 @@
     {
       "id": "RLM-003",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "MUST contain a `_schema/` directory with schema files used to validate its entities.",
       "added_by": "@pleberre",
       "added_at": "2026-03-22",
@@ -59,7 +59,7 @@
     {
       "id": "RLM-006",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "MUST NOT define Entity Unique Identifiers that collide with any Realm it depends on.",
       "added_by": "@pleberre",
       "added_at": "2026-03-22",
@@ -148,9 +148,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.11.0",
-        "timestamp": "2026-10-19T12:00:34Z",
-        "hash": "blake3:9673170ffdb4a14a2adf4b030e37511cfcd59b9cb6bb34f61a018371fbfa1b29"
+        "version": "0.13.0",
+        "timestamp": "2026-10-20T16:42:06Z",
+        "hash": "blake3:82bdbd170851f455d852bdd072fba2e623b91e24563b5e0bb963ba85ff8df345"
       },
       "rules": [
         {
@@ -165,7 +165,7 @@
         {
           "id": "RLMMNFST-002",
           "revision": 0,
-          "state": "P",
+          "state": "I",
           "body": "MUST declare the Realm's identifier, title, and version.",
           "added_by": "@pleberre",
           "added_at": "2026-03-22",
@@ -192,7 +192,7 @@
         {
           "id": "RLMMNFST-005",
           "revision": 0,
-          "state": "P",
+          "state": "I",
           "body": "MAY declare a `sub_realms` field, which MUST be either null or an array of unique strings matching the realm-id segment grammar (`[a-z][a-z0-9]*`), where each string is the name of a subdirectory that MUST contain a valid `realm.json`.",
           "added_by": "@pleberre",
           "added_at": "2026-03-25",
