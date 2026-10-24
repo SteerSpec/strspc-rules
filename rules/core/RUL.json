@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.17.0",
-    "timestamp": "2026-10-22T10:01:49Z",
-    "hash": "blake3:244551bc0b6c0a419a73e9fc90a0ab24f8fc65fa8c7753220b8db3780bc7d3aa"
+    "version": "0.17.1",
+    "timestamp": "2026-10-24T08:52:27Z",
+    "hash": "blake3:b4ddcedcf1b9934a47648f9c910675aa5b5230659b8778dd714865ff34365687"
   },
   "rules": [
     {
@@ -94,9 +94,9 @@
         "parent": "RUL"
       },
       "rule_set": {
-        "version": "0.18.0",
-        "timestamp": "2026-10-22T10:01:49Z",
-        "hash": "blake3:5526a6f636cb4b97f723ac652cdf486c5ecb5c31f8d4bc1a3a619449722626ac"
+        "version": "0.19.0",
+        "timestamp": "2026-10-24T08:52:27Z",
+        "hash": "blake3:2d06b5f1d3990e9465197fe4e2cad78f664928bb2def37ea97dffab7faf2d54d"
       },
       "rules": [
         {
@@ -174,7 +174,7 @@
         {
           "id": "RULST-009",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "A Rule MUST NOT enter Implemented while the governed code is known to violate it.",
           "added_by": "@pleberre",
           "added_at": "2026-10-22",
