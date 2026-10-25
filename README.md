@@ -122,7 +122,7 @@ URLs resolvable and provides stable endpoints for CLI and tooling consumers.
 The publish step runs as a job in the Release workflow (`.github/workflows/release.yml`)
 and opens a pull request on the [strspc-www](https://github.com/SteerSpec/strspc-www)
 repository (`publish/rules-v<version>`); merging it deploys the files. The commit is signed when the
-SteerSpec GitHub App credentials (`STEERSPEC_APP_ID`, `STEERSPEC_APP_PRIVATE_KEY`) are configured.
+SteerSpec GitHub App credentials (`STEERSPEC_APP_ID`, `STEERSPEC_PRIVATE_KEY`) are configured.
 
 Release PRs (`develop` → `main`) skip the `strspc diff` lifecycle check: they aggregate transitions
 that were validated one PR at a time on the way into `develop`.
