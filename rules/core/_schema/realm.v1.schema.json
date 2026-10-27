@@ -23,7 +23,8 @@
           "minLength": 1
         },
         "version": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
         }
       },
       "additionalProperties": false
@@ -35,7 +36,10 @@
         "required": ["realm_id", "version"],
         "properties": {
           "realm_id": { "type": "string" },
-          "version": { "type": "string" },
+          "version": {
+            "type": "string",
+            "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(-[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?(\\+[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?$"
+          },
           "source": {
             "type": "string",
             "description": "Fetch location for this dependency (e.g. github://owner/repo@version/path)"
