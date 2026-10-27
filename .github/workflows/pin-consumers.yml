@@ -158,6 +158,10 @@ jobs:
           path: consumer
           token: ${{ steps.app.outputs.token }}
           sign-commits: true
+          # Signed API commits are authored by the token's App regardless; set
+          # it anyway so the foreign-commit guard above and this agree on paper.
+          author: steerspec-sync[bot] <272234622+steerspec-sync[bot]@users.noreply.github.com>
+          committer: steerspec-sync[bot] <272234622+steerspec-sync[bot]@users.noreply.github.com>
           branch: chore/core-${{ steps.tag.outputs.version }}
           commit-message: "chore(rules): pin dev.steerspec.core to ${{ steps.tag.outputs.version }}"
           title: "chore(rules): pin dev.steerspec.core to ${{ steps.tag.outputs.version }}"
