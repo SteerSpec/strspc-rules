@@ -117,7 +117,10 @@ jobs:
           close="$(printf '%s\n' "$prs" | python3 tools/pin_core.py superseded --new "$VERSION")"
 
           # create-pull-request force-pushes the pin branch; refuse if anyone
-          # but the App has committed to it.
+          # but the App has committed to it. With sign-commits and an App token
+          # its own commits are authored by steerspec-sync[bot] (the author
+          # input is ignored; see the strspc-www publish PRs), so a rerun
+          # passes.
           branch="chore/core-${VERSION}"
           if gh api "repos/${REPO}/git/ref/heads/${branch}" >/dev/null 2>&1; then
             base="$(gh api "repos/${REPO}" --jq '.default_branch')"

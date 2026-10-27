@@ -106,11 +106,15 @@ def find_leftovers(repo_dir: Path, old: str) -> list[str]:
 
 
 def apply(repo_dir: Path, files: list[str], new: str) -> tuple[str, bool]:
-    old = read_core_version((repo_dir / REALM_JSON).read_text(encoding="utf-8"))
+    realm_text = (repo_dir / REALM_JSON).read_text(encoding="utf-8")
+    old = read_core_version(realm_text)
     if parse_version(old) == parse_version(new):
-        # Already pinned only if every listed file says so: a hand bump that
-        # missed a file must not read as done.
+        # Already pinned only if the core source and every listed file say so:
+        # a hand bump that missed one must not read as done.
         current = pin_regex(new)
+        source = _core_deps(json.loads(realm_text))[0]["source"]
+        if not current.search(source):
+            raise PinError(f"{REALM_JSON} core version is {new} but its source {source!r} is not")
         for path in files:
             target = repo_dir / path
             if not target.is_file() or not current.search(target.read_text(encoding="utf-8")):

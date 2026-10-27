@@ -158,6 +158,20 @@ class ApplyTests(unittest.TestCase):
         self.assertEqual(pin_core.apply(repo.root, self.FILES, "1.8.0"), ("1.8.0", False))
         self.assertEqual(repo.snapshot(), before)
 
+    def test_apply_already_pinned_with_stale_core_source_fails(self):
+        platform_source = NEW_SOURCE.replace("core", "platform")
+        deps = [
+            {"realm_id": "dev.steerspec.core", "version": "1.8.1", "source": OLD_SOURCE},
+            {"realm_id": "dev.steerspec.platform", "version": "0.1.0", "source": platform_source},
+        ]
+        new_pins = {
+            ".strspc/config.yaml": f"rules:\n  - source: {NEW_SOURCE}\n",
+            "README.md": f"  - source: {NEW_SOURCE}\n",
+        }
+        repo = self.make_repo({"rules/realm.json": realm_json(deps=deps), **new_pins})
+        with self.assertRaisesRegex(PinError, "source"):
+            pin_core.apply(repo.root, self.FILES, "1.8.1")
+
     def test_apply_already_pinned_with_unlisted_pin_fails(self):
         repo = self.make_repo({"docs/x.md": "see strspc-rules@v1.8.0\n"})
         with self.assertRaisesRegex(PinError, "docs/x.md"):
