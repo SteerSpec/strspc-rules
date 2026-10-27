@@ -111,6 +111,17 @@ class RealmJsonTests(unittest.TestCase):
         with self.assertRaises(PinError):
             pin_core.rewrite_realm_json(text, "1.8.0", "1.8.1")
 
+    def test_realm_json_source_drift_fails(self):
+        drifted = [
+            {
+                "realm_id": "dev.steerspec.core",
+                "version": "1.8.0",
+                "source": "github://SteerSpec/strspc-rules@v1.7.0/rules/core",
+            }
+        ]
+        with self.assertRaisesRegex(PinError, "source"):
+            pin_core.rewrite_realm_json(realm_json(deps=drifted), "1.8.0", "1.8.1")
+
     def test_read_core_version_requires_exactly_one(self):
         self.assertEqual(pin_core.read_core_version(realm_json()), "1.8.0")
         core = {"realm_id": "dev.steerspec.core", "version": "1.8.0", "source": OLD_SOURCE}
@@ -146,6 +157,13 @@ class ApplyTests(unittest.TestCase):
         before = repo.snapshot()
         self.assertEqual(pin_core.apply(repo.root, self.FILES, "1.8.0"), ("1.8.0", False))
         self.assertEqual(repo.snapshot(), before)
+
+    def test_apply_already_pinned_with_stale_file_fails(self):
+        stale = "  - source: github://SteerSpec/strspc-rules@v1.7.0/rules/core\n"
+        repo = self.make_repo({"README.md": stale})
+        with self.assertRaisesRegex(PinError, "README.md"):
+            pin_core.apply(repo.root, self.FILES, "1.8.0")
+        self.assertEqual(repo.read("README.md"), stale)
 
     def test_apply_refuses_downgrade(self):
         repo = self.make_repo()

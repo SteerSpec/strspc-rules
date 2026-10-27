@@ -106,7 +106,8 @@ jobs:
           VERSION: ${{ steps.tag.outputs.version }}
         run: |
           set -euo pipefail
-          branches="$(gh pr list --repo "$REPO" --state open --app steerspec-sync \
+          # gh returns 30 PRs by default; the guard must see every open one.
+          branches="$(gh pr list --repo "$REPO" --state open --app steerspec-sync --limit 1000 \
             --json headRefName --jq '.[].headRefName')"
           close="$(printf '%s\n' "$branches" | python3 tools/pin_core.py superseded --new "$VERSION")"
           if [ -n "$close" ]; then
