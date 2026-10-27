@@ -1,0 +1,167 @@
+name: Pin consumers
+
+# Opens "chore(rules): pin dev.steerspec.core to X.Y.Z" in every repository
+# that depends on the core realm. Pins stay literal in the consumers (RR004
+# exact match, reproducible resolution outside Actions), so each release means
+# a file change there; tools/pin_core.py makes it and refuses layout drift.
+#
+# Called by release.yml after a fresh tag. Dispatch it from main with an
+# existing tag to (re)open the PRs for a release that shipped without them.
+#
+# It authenticates as the SteerSpec GitHub App: GITHUB_TOKEN cannot write to
+# another repository, and a PAT commit is unsigned (the org ruleset requires
+# verified signatures). App commits made through the API are signed, the PR is
+# authored by steerspec-sync[bot] (not the approving bot, cnslr-bt), and the
+# consumers' CI starts on it.
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        description: Release tag to pin (e.g. v1.8.1)
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to pin (e.g. v1.8.1)
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  # Serialize, so two releases in quick succession can't race on a consumer.
+  group: pin-consumers
+  cancel-in-progress: false
+
+jobs:
+  pin:
+    # A dispatch from any other branch would run unreviewed workflow code with
+    # write tokens on four repositories.
+    if: github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - repo: strspc-manager
+            files: rules/realm.json .strspc/config.yaml docs/SPEC.md
+          - repo: strspc-CLI
+            files: rules/realm.json .strspc/config.yaml README.md src/cmd/init.go src/cmd/init_test.go
+          - repo: strspc-sync
+            files: rules/realm.json .strspc/config.yaml
+          - repo: strspc-spec
+            files: rules/realm.json README.md
+    steps:
+      - name: Validate tag
+        id: tag
+        env:
+          TAG: ${{ inputs.tag }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Tag '${TAG}' is not vMAJOR.MINOR.PATCH" >&2
+            exit 1
+          fi
+          gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}" --jq '.object.sha' >/dev/null
+          echo "version=${TAG#v}" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Mint GitHub App token for ${{ matrix.repo }}
+        id: app
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510  # v3.3.0
+        with:
+          app-id: ${{ secrets.STEERSPEC_APP_ID }}
+          private-key: ${{ secrets.STEERSPEC_PRIVATE_KEY }}
+          owner: SteerSpec
+          repositories: ${{ matrix.repo }}
+          # Only what the pin PR needs: a branch with one commit, the PR, and
+          # closing superseded pin PRs.
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Checkout ${{ matrix.repo }}
+        uses: actions/checkout@v4
+        with:
+          repository: SteerSpec/${{ matrix.repo }}
+          token: ${{ steps.app.outputs.token }}
+          path: consumer
+
+      # Before touching files: an open App pin PR for a newer release means
+      # this is a dispatch of an older tag, which fails here.
+      - name: Find superseded pin PRs
+        id: superseded
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+          REPO: SteerSpec/${{ matrix.repo }}
+          VERSION: ${{ steps.tag.outputs.version }}
+        run: |
+          set -euo pipefail
+          branches="$(gh pr list --repo "$REPO" --state open --app steerspec-sync \
+            --json headRefName --jq '.[].headRefName')"
+          close="$(printf '%s\n' "$branches" | python3 tools/pin_core.py superseded --new "$VERSION")"
+          if [ -n "$close" ]; then
+            {
+              echo "close<<EOF"
+              echo "$close"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Rewrite core pins
+        id: rewrite
+        env:
+          VERSION: ${{ steps.tag.outputs.version }}
+          FILES: ${{ matrix.files }}
+        run: |
+          set -euo pipefail
+          # FILES unquoted on purpose: one argument per path.
+          # shellcheck disable=SC2086
+          python3 tools/pin_core.py apply --repo-dir consumer --new "$VERSION" $FILES >> "$GITHUB_OUTPUT"
+
+      - name: Open pin pull request
+        id: cpr
+        if: steps.rewrite.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1  # v8.1.1
+        with:
+          path: consumer
+          token: ${{ steps.app.outputs.token }}
+          sign-commits: true
+          branch: chore/core-${{ steps.tag.outputs.version }}
+          commit-message: "chore(rules): pin dev.steerspec.core to ${{ steps.tag.outputs.version }}"
+          title: "chore(rules): pin dev.steerspec.core to ${{ steps.tag.outputs.version }}"
+          body: |
+            Opened by the release workflow of SteerSpec/strspc-rules for
+            [${{ inputs.tag }}](https://github.com/SteerSpec/strspc-rules/releases/tag/${{ inputs.tag }}).
+
+            Moves every `dev.steerspec.core` pin from `${{ steps.rewrite.outputs.old }}` to
+            `${{ steps.tag.outputs.version }}` (`rules/realm.json` dependency version and source, and the
+            literal pins in: `${{ matrix.files }}`).
+
+            Pins stay literal on purpose (RR004 exact match, reproducible resolution outside Actions).
+
+      - name: Close superseded pin PRs
+        if: steps.superseded.outputs.close != ''
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+          REPO: SteerSpec/${{ matrix.repo }}
+          VERSION: ${{ steps.tag.outputs.version }}
+          CLOSE: ${{ steps.superseded.outputs.close }}
+          PR_URL: ${{ steps.cpr.outputs.pull-request-url }}
+        run: |
+          set -euo pipefail
+          by="${PR_URL:-the ${VERSION} pin already on the default branch}"
+          while IFS= read -r branch; do
+            [ -n "$branch" ] || continue
+            gh pr close "$branch" --repo "$REPO" --delete-branch \
+              --comment "Superseded by dev.steerspec.core ${VERSION}: ${by}."
+          done <<< "$CLOSE"
