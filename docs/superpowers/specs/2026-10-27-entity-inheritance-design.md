@@ -77,7 +77,10 @@ Three of the issue's open questions are already answered by existing rules:
 { "id": "SAVACCT-003", "overrides": "dev.globalbank.core:ACCT-005", ... }
 ```
 
-- Names exactly one rule that the child inherits (directly or via chain). Same qualified /
+- Names exactly one rule present in the child's inherited effective set: the parent's
+  effective rule set after every ancestor's overrides have been applied. A rule that an
+  ancestor already replaced is not a valid target; to override it again, name the
+  ancestor's overriding rule instead. Same qualified /
   short form as NTE-007. *My call on the name:* `overrides`, not `supersedes`, because the
   lifecycle differs (no Retired obligation, parent untouched).
 - Semantics: in the child's effective set, the overriding rule replaces the target. Outside
@@ -149,7 +152,7 @@ scanned files; `realm-resolve` / `rule-resolve`, which load dependencies, raise 
 | RL017 | rule-lint | Error | `inherits` chain within the scanned files is cyclic or longer than 3 hops. |
 | RR013 | realm-resolve | Error | `inherits` target cannot be resolved: unknown EUID, realm not in the effective dependency set, or cross-realm reference not in qualified form. |
 | RR014 | realm-resolve | Error | `inherits` chain across realms is cyclic or longer than 3 hops. |
-| RR015 | realm-resolve | Error | `overrides` names a rule that exists nowhere in the entity's resolved inheritance chain. |
+| RR015 | realm-resolve | Error | `overrides` names a rule that is not in the entity's inherited effective set: unknown anywhere in the chain, or already replaced by an ancestor's override. |
 | RR016 | realm-resolve | Warning | `overrides` target exists in the chain but is not in state P/I in the pinned parent (parent superseded or retired it; the override is dead). |
 | RD013 | rule-diff | Error | `inherits` changed from one value to another, or removed, on an entity with rules beyond Draft. Adding `inherits` where there was none is allowed (it only adds rules). *My call:* re-parenting is a breaking change; do it by a new entity. |
 
