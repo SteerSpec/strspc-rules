@@ -186,8 +186,22 @@ jobs:
         run: |
           set -euo pipefail
           by="${PR_URL:-the ${VERSION} pin already on the default branch}"
+          base="$(gh api "repos/${REPO}" --jq '.default_branch')"
           while IFS= read -r branch; do
             [ -n "$branch" ] || continue
-            gh pr close "$branch" --repo "$REPO" --delete-branch \
-              --comment "Superseded by dev.steerspec.core ${VERSION}: ${by}."
+            # By number, looked up as owner:branch, so a fork PR with the same
+            # head name can never be the one closed.
+            number="$(gh api "repos/${REPO}/pulls?state=open&head=${REPO%%/*}:${branch}" --jq '.[0].number // empty')"
+            [ -n "$number" ] || continue
+            comment="Superseded by dev.steerspec.core ${VERSION}: ${by}."
+            # Delete the branch only if every commit on it is the App's;
+            # someone else's work stays on the branch.
+            foreign="$(gh api "repos/${REPO}/compare/${base}...${branch}" \
+              --jq '[.commits[] | select(.author.login != "steerspec-sync[bot]")] | length')"
+            if [ "$foreign" -eq 0 ]; then
+              gh pr close "$number" --repo "$REPO" --delete-branch --comment "$comment"
+            else
+              gh pr close "$number" --repo "$REPO" \
+                --comment "${comment} Branch kept: it has ${foreign} commit(s) not made by steerspec-sync."
+            fi
           done <<< "$CLOSE"

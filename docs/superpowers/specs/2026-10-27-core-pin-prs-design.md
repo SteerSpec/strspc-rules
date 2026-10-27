@@ -179,7 +179,7 @@ literal pin on purpose).
 | Release run re-run / resumed | same as above |
 | Dispatch for an older tag than the consumer has | red, no PR |
 | Dispatch for an older tag than an open bot pin PR | red, no PR |
-| Older bot pin PR still open when a newer release lands | new PR opened, older one closed with a comment, its branch deleted |
+| Older bot pin PR still open when a newer release lands | new PR opened, older one closed with a comment, its branch deleted (kept if it has commits not made by the App) |
 | Someone else's PR open on `chore/core-X.Y.Z` | red, branch untouched |
 | Human commits pushed onto the bot's `chore/core-X.Y.Z` | red, branch untouched (create-pull-request would force-push over them) |
 | Already at NEW, but a listed file lacks the pin or a pin sits outside the list | red (drift reported now, not at the next release) |
