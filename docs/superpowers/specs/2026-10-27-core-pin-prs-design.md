@@ -156,6 +156,19 @@ literal pin on purpose).
 
    The action reuses an existing branch and updates an open PR rather than
    opening another, which with step 4 makes reruns idempotent.
+8. **Close superseded pin PRs** (decided: close them, following the
+   steerspec-sync precedent, e.g. manager#119 closed when 1.0.1 opened). List
+   open PRs in the consumer whose head branch is `chore/core-*`, whose author
+   is `app/steerspec-sync`, and whose branch version is lower than NEW. Close
+   each with a comment linking the new PR and delete its branch. Hand-made PRs
+   (any other author) are never touched. This step also runs on the
+   already-pinned path of step 4, so leftovers from earlier releases are
+   cleaned up.
+
+   Before step 5, if an open App-authored `chore/core-*` PR has a version
+   **higher** than NEW, fail: it is a dispatch of an older tag, and the
+   downgrade guard of step 4 must cover open PRs, not only the default
+   branch.
 
 ### Idempotency summary
 
@@ -165,6 +178,8 @@ literal pin on purpose).
 | Pin PR already open from an earlier run | branch updated in place, no new PR |
 | Release run re-run / resumed | same as above |
 | Dispatch for an older tag than the consumer has | red, no PR |
+| Dispatch for an older tag than an open bot pin PR | red, no PR |
+| Older bot pin PR still open when a newer release lands | new PR opened, older one closed with a comment, its branch deleted |
 | Layout drift (file missing, unlisted pin left) | red for that repo, others continue |
 | Consumer already at NEW via another PR while the bot PR is still open | no-op; the stale bot PR is left for a human to close (*my call*) |
 
