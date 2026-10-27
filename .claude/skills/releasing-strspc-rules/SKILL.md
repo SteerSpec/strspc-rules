@@ -39,7 +39,8 @@ Work from a clean tree (a separate worktree if the current one is dirty).
 2. Change only `realm.version` in `rules/core/realm.json`. It is the realm manifest,
    not an entity file: a hand edit is the norm (see #69), no hash, no approval.
 3. `strspc realm validate rules/core/ --recursive --strict` and `python3 tools/build-schema.py --check`
-4. Commit `chore(release): bump realm.version to X.Y.Z`; open the PR without prompts:
+4. Commit `chore(release): bump realm.version to X.Y.Z`, `git push -u origin chore/release-X.Y.Z`
+   (an unpushed head makes `gh pr create` prompt), then
    `gh pr create --base develop --title "chore(release): bump realm.version to X.Y.Z" --body-file <file>`,
    the file listing what ships.
 
@@ -66,8 +67,9 @@ makes `main` and `develop` diverge.
 - **Site:** `gh pr list -R SteerSpec/strspc-www --head publish/rules-vX.Y.Z` shows one PR.
   After the user merges it, `curl -s https://steerspec.dev/rules/latest/index.json | jq -r .version`
   prints `X.Y.Z`.
-- **Consumers:** for each repo in the `pin-consumers.yml` matrix, either a PR by
-  `app/steerspec-sync` with CI running, or no PR because the repo already pins
+- **Consumers:** for each repo in the `pin-consumers.yml` matrix, either a PR by the
+  App with CI running (`gh` prints it as `app/steerspec-sync`; the REST API and
+  commits show `steerspec-sync[bot]`), or no PR because the repo already pins
   `X.Y.Z` (the job's log says `changed=false`). Both are success:
 
   ```bash
