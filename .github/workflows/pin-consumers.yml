@@ -28,6 +28,15 @@ on:
         required: true
         type: string
 
+env:
+  # Counts commits on a compare that the App did not make through the API.
+  # author.login alone comes from the commit email and can be faked; API
+  # commits are also committed by web-flow with a verified GitHub signature.
+  FOREIGN_COMMITS: >-
+    [.commits[] | select((.author.login == "steerspec-sync[bot]"
+    and .committer.login == "web-flow"
+    and .commit.verification.verified) | not)] | length
+
 permissions:
   contents: read
 
@@ -125,7 +134,7 @@ jobs:
           if gh api "repos/${REPO}/git/ref/heads/${branch}" >/dev/null 2>&1; then
             base="$(gh api "repos/${REPO}" --jq '.default_branch')"
             foreign="$(gh api "repos/${REPO}/compare/${base}...${branch}" \
-              --jq '[.commits[] | select(.author.login != "steerspec-sync[bot]")] | length')"
+              --jq "$FOREIGN_COMMITS")"
             if [ "$foreign" -ne 0 ]; then
               echo "::error::${branch} in ${REPO} has ${foreign} commit(s) not by steerspec-sync; not overwriting" >&2
               exit 1
@@ -197,7 +206,7 @@ jobs:
             # Delete the branch only if every commit on it is the App's;
             # someone else's work stays on the branch.
             foreign="$(gh api "repos/${REPO}/compare/${base}...${branch}" \
-              --jq '[.commits[] | select(.author.login != "steerspec-sync[bot]")] | length')"
+              --jq "$FOREIGN_COMMITS")"
             if [ "$foreign" -eq 0 ]; then
               gh pr close "$number" --repo "$REPO" --delete-branch --comment "$comment"
             else
