@@ -82,14 +82,14 @@ def rewrite_realm_json(text: str, old: str, new: str) -> str:
 def find_leftovers(repo_dir: Path, old: str) -> list[str]:
     regex = pin_regex(old)
     tracked = subprocess.run(
-        ["git", "-C", str(repo_dir), "ls-files", "-z"], check=True, capture_output=True, text=True
+        ["git", "-C", str(repo_dir), "ls-files", "-z"], check=True, capture_output=True, text=True, encoding="utf-8"
     ).stdout.split("\0")
     hits = []
     for path in filter(None, tracked):
         if Path(path).name == "CHANGELOG.md":
             continue
         try:
-            text = (repo_dir / path).read_text()
+            text = (repo_dir / path).read_text(encoding="utf-8")
         except (UnicodeDecodeError, FileNotFoundError, IsADirectoryError):
             continue
         hits += [f"{path}:{n}" for n, line in enumerate(text.splitlines(), 1) if regex.search(line)]
@@ -97,7 +97,7 @@ def find_leftovers(repo_dir: Path, old: str) -> list[str]:
 
 
 def apply(repo_dir: Path, files: list[str], new: str) -> tuple[str, bool]:
-    old = read_core_version((repo_dir / REALM_JSON).read_text())
+    old = read_core_version((repo_dir / REALM_JSON).read_text(encoding="utf-8"))
     if parse_version(old) == parse_version(new):
         return old, False
     if parse_version(old) > parse_version(new):
@@ -108,7 +108,7 @@ def apply(repo_dir: Path, files: list[str], new: str) -> tuple[str, bool]:
         target = repo_dir / path
         if not target.is_file():
             raise PinError(f"{path} does not exist; update the file list for this repository")
-        text = target.read_text()
+        text = target.read_text(encoding="utf-8")
         result = rewrite_realm_json(text, old, new) if path == REALM_JSON else rewrite_text(text, old, new)
         if result == text:
             raise PinError(f"{path} holds no {old} pin; update the file list for this repository")
@@ -120,7 +120,7 @@ def apply(repo_dir: Path, files: list[str], new: str) -> tuple[str, bool]:
         raise PinError(f"{old} pins outside the file list: {', '.join(remaining)}")
 
     for path, text in updated.items():
-        (repo_dir / path).write_text(text)
+        (repo_dir / path).write_text(text, encoding="utf-8")
     return old, True
 
 

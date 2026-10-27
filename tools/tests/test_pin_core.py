@@ -2,6 +2,7 @@
 
 import json
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -34,12 +35,12 @@ class Repo:
         for path, text in files.items():
             target = self.root / path
             target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_text(text)
+            target.write_text(text, encoding="utf-8")
         subprocess.run(["git", "init", "-q", str(self.root)], check=True)
         subprocess.run(["git", "-C", str(self.root), "add", "-A"], check=True)
 
     def read(self, path: str) -> str:
-        return (self.root / path).read_text()
+        return (self.root / path).read_text(encoding="utf-8")
 
     def snapshot(self) -> dict[str, str]:
         return {
@@ -183,6 +184,42 @@ class ApplyTests(unittest.TestCase):
         pin_core.apply(repo.root, self.FILES, "1.8.1")
         self.assertEqual(pin_core.find_leftovers(repo.root, "1.8.0"), [])
         self.assertIn("1.8.0", repo.read("CHANGELOG.md"))
+
+
+class EncodingTests(unittest.TestCase):
+    def test_cli_reads_and_writes_utf8_explicitly(self):
+        # A locale-dependent read could skip a UTF-8 file (docs/SPEC.md has
+        # em-dashes) in the leftover check. Fail on any default-encoding use.
+        repo = Repo(
+            {
+                "rules/realm.json": realm_json(),
+                "docs/SPEC.md": f"Source — `{OLD_SOURCE}`\n",
+            }
+        )
+        self.addCleanup(repo.close)
+        script = Path(pin_core.__file__)
+        result = subprocess.run(
+            [
+                sys.executable,
+                "-X",
+                "warn_default_encoding",
+                "-W",
+                "error::EncodingWarning",
+                str(script),
+                "apply",
+                "--repo-dir",
+                str(repo.root),
+                "--new",
+                "1.8.1",
+                "rules/realm.json",
+                "docs/SPEC.md",
+            ],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("Source — `" + NEW_SOURCE + "`", repo.read("docs/SPEC.md"))
 
 
 class OpenPinTests(unittest.TestCase):
