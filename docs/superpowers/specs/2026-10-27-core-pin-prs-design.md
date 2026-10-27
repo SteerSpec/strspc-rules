@@ -127,15 +127,20 @@ literal pin on purpose).
    - OLD == NEW: notice "already pinned", exit 0, no PR.
    - OLD > NEW (`sort -V`): fail, refuse to downgrade.
 5. **Rewrite**, for every listed file:
-   - `strspc-rules@vOLD/` → `strspc-rules@vNEW/`
+   - `strspc-rules@vOLD` → `strspc-rules@vNEW`
    - `dev.steerspec.core@OLD` → `dev.steerspec.core@NEW`
+
+   Both match only when OLD is not followed by a digit, `-`, or `.`+digit,
+   so `1.8.0` never matches inside `1.8.01` or `1.8.0-rc1`. A trailing `/`
+   is deliberately not required: the CLI README also writes the bare
+   ``pins `strspc-rules@v1.8.0`.`` (README.md:115), and CLI#109 changed it.
    - in `rules/realm.json`, the core dependency's `version` → `NEW` (and its
      `source` via the rule above).
    Each listed file must exist and must change; a file that does not contain
    OLD means the layout drifted, so that repo fails with a message naming the
    file.
-6. **Leftover check**: `git grep` (tracked files) for `strspc-rules@vOLD/`
-   and `dev.steerspec.core@OLD`, excluding `CHANGELOG.md` at any depth. Any
+6. **Leftover check**: `git grep` (tracked files) for `strspc-rules@vOLD`
+   and `dev.steerspec.core@OLD` (same boundary as step 5), excluding `CHANGELOG.md` at any depth. Any
    hit fails the repo (before a PR is opened), naming the file so it can be
    added to the matrix. It matches only the consumer's *current* pin, so
    historical mentions of older versions (test fixtures at v1.6.0, docs) never
