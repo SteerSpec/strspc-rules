@@ -37,8 +37,9 @@ Three of the issue's open questions are already answered by existing rules:
 - Q3 namespacing: rule IDs carry the EUID and RLM-006 forbids EUID collisions across
   dependencies, so `SAVACCT-001` overriding `ACCT-005` is unambiguous.
 - Q5 hash: RST-001 ties a rule set to one entity. The child's hash covers its own rules.
-  The parent is frozen by the dependency `version` pin in `realm.json`; parent changes
-  arrive only on a dependency bump.
+  A cross-realm parent is frozen by the dependency `version` pin in `realm.json`; its
+  changes arrive only on a dependency bump. A same-realm parent is not pinned: child and
+  parent evolve together and ship in the same realm version.
 - Q2 sub-entities: `parent` is containment, `inherits` is specialisation. Orthogonal;
   both allowed on the same object.
 
@@ -89,7 +90,8 @@ Three of the issue's open questions are already answered by existing rules:
 - Lifecycle: the overriding rule follows the normal D→P→I path. The override is in effect
   whenever the overriding rule itself is in the evaluation set (it survives `evaluate_on`,
   default D/P/I). Retired/Terminated rules never survive, so the inherited rule reappears
-  naturally. The P/I filter applies to what is *inherited*, not to overrides.
+  naturally, provided the resolver filters before applying overrides (see the effective
+  rule set below). The P/I filter applies to what is *inherited*, not to overrides.
 
 ### Effective rule set (contract for the manager)
 
@@ -97,7 +99,10 @@ For entity E with chain E → P1 → … → Pn (n ≤ 3):
 
 1. Start with Pn's own rules in P/I, then Pn-1's, …, then P1's. At each step apply that
    entity's `overrides`: remove the target from the set, add the overriding rule.
-2. Add E's own rules (all states, filtered later by `evaluate_on`), applying E's `overrides`.
+2. Add E's own rules that survive the consumer's `evaluate_on` filter (default D/P/I),
+   then apply the `overrides` of those surviving rules only. Filtering before applying
+   overrides is what lets an inherited target reappear when its overriding rule is
+   Retired or Terminated; applying overrides first would drop both.
 3. Each entry carries `owner` (the entity whose `rules` array holds it) and `inherited_by`
    (E, when owner ≠ E) and, for an overriding rule, `overrides` (the replaced ID).
 

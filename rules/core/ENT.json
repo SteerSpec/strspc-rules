@@ -6,9 +6,9 @@
     "description": "An object with a unique identity and lifecycle. The unit of organization in the SteerSpec rule system."
   },
   "rule_set": {
-    "version": "0.12.9",
-    "timestamp": "2026-10-27T15:17:32Z",
-    "hash": "blake3:5e415b83bd8a37adef943d20c233aed90a0f0a8b08a59965153999aa71ede285"
+    "version": "0.12.10",
+    "timestamp": "2026-10-27T15:29:45Z",
+    "hash": "blake3:d59663863c37b897635fc2f7b3f6e6d6b7abf2fd87b31f17ca82377f627a8573"
   },
   "rules": [
     {
@@ -87,7 +87,7 @@
       "id": "ENT-009",
       "revision": 0,
       "state": "D",
-      "body": "An inheriting Entity acquires the parent's Published and Implemented Rules as read-only references that remain owned by the parent.",
+      "body": "An inheriting Entity acquires the parent's effective rule set, its own Published and Implemented Rules together with those the parent inherits, as read-only references that remain owned by their original Entity.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
       "supersedes": null
@@ -153,7 +153,7 @@
       "id": "ENT-006/01",
       "rule_ref": "ENT-006",
       "type": "rationale",
-      "content": "Inheritance is specialisation, not containment: parent (sub-entities) nests an Entity inside another, inherits lets an Entity reuse another Entity's rule set without copying it, in the same Realm or across a declared dependency. Inherited Rules stay owned by the parent and are frozen at the dependency version pinned in realm.json, so parent changes arrive only on a dependency bump. Only Published and Implemented parent Rules are inherited; Draft text may still change and Abandoned, Retired or Terminated Rules are not in force. A parent's sub-entities are not inherited.",
+      "content": "Inheritance is specialisation, not containment: parent (sub-entities) nests an Entity inside another, inherits lets an Entity reuse another Entity's rule set without copying it, in the same Realm or across a declared dependency. Inherited Rules stay owned by the parent (ENT-009). A cross-realm parent is frozen at the dependency version pinned in realm.json, so its changes arrive only on a dependency bump; a same-realm parent is not pinned, and child and parent evolve together within their Realm's version. Only Published and Implemented parent Rules are inherited; Draft text may still change and Abandoned, Retired or Terminated Rules are not in force. A parent's sub-entities are not inherited.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
       "revision": 0

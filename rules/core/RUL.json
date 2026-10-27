@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.17.5",
-    "timestamp": "2026-10-27T15:17:26Z",
-    "hash": "blake3:1ac614a659f7cecc850e72f97a71440f8693aae41ab76e47a8013275aaf68284"
+    "timestamp": "2026-10-27T15:29:16Z",
+    "hash": "blake3:60cdf71189f5c096c0ab5c3baedc8e53012864fe8f73288d3fa85e6f0d1478bc"
   },
   "rules": [
     {
@@ -235,7 +235,7 @@
       "id": "RUL-009/01",
       "rule_ref": "RUL-009",
       "type": "rationale",
-      "content": "An override is distinct from supersession. Supersession replaces a Rule within the same Entity and obliges the superseded Rule to retire once the new one is Implemented; a child can never retire a parent Rule because dependency Rules are read-only (RLM-005). An override therefore leaves the parent Rule untouched: it is replaced only inside the inheriting Entity's effective rule set and keeps applying to the parent's own subject and to every other child. supersedes and overrides are orthogonal and may coexist on one Rule.",
+      "content": "An override is distinct from supersession. Supersession replaces a Rule within the same Entity and obliges the superseded Rule to retire once the new one is Implemented; a child can never retire a parent Rule because inherited Rules are read-only references owned by the parent (ENT-009), and across Realms they are dependency imports (RLM-005). An override therefore leaves the parent Rule untouched: it is replaced only inside the inheriting Entity's effective rule set and keeps applying to the parent's own subject and to every other child. The supersedes and overrides fields are orthogonal and may coexist on one Rule.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
       "revision": 0
