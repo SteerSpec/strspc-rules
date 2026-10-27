@@ -106,11 +106,25 @@ jobs:
           VERSION: ${{ steps.tag.outputs.version }}
         run: |
           set -euo pipefail
-          # The REST list, paginated: the guard must see every open App PR, and
-          # `gh pr list --app` goes through the search index, which lags.
-          branches="$(gh api "repos/${REPO}/pulls?state=open&per_page=100" --paginate \
-            --jq '.[] | select(.user.login == "steerspec-sync[bot]") | .head.ref')"
-          close="$(printf '%s\n' "$branches" | python3 tools/pin_core.py superseded --new "$VERSION")"
+          # The REST list, paginated: the guard must see every open PR, and
+          # `gh pr list` with an author filter goes through the search index,
+          # which lags.
+          prs="$(gh api "repos/${REPO}/pulls?state=open&per_page=100" --paginate \
+            --jq '.[] | "\(.head.ref)\t\(.user.login)"')"
+          close="$(printf '%s\n' "$prs" | python3 tools/pin_core.py superseded --new "$VERSION")"
+
+          # create-pull-request force-pushes the pin branch; refuse if anyone
+          # but the App has committed to it.
+          branch="chore/core-${VERSION}"
+          if gh api "repos/${REPO}/git/ref/heads/${branch}" >/dev/null 2>&1; then
+            base="$(gh api "repos/${REPO}" --jq '.default_branch')"
+            foreign="$(gh api "repos/${REPO}/compare/${base}...${branch}" \
+              --jq '[.commits[] | select(.author.login != "steerspec-sync[bot]")] | length')"
+            if [ "$foreign" -ne 0 ]; then
+              echo "::error::${branch} in ${REPO} has ${foreign} commit(s) not by steerspec-sync; not overwriting" >&2
+              exit 1
+            fi
+          fi
           if [ -n "$close" ]; then
             {
               echo "close<<EOF"

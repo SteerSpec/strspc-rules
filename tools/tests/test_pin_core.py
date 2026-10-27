@@ -158,6 +158,11 @@ class ApplyTests(unittest.TestCase):
         self.assertEqual(pin_core.apply(repo.root, self.FILES, "1.8.0"), ("1.8.0", False))
         self.assertEqual(repo.snapshot(), before)
 
+    def test_apply_already_pinned_with_unlisted_pin_fails(self):
+        repo = self.make_repo({"docs/x.md": "see strspc-rules@v1.8.0\n"})
+        with self.assertRaisesRegex(PinError, "docs/x.md"):
+            pin_core.apply(repo.root, self.FILES, "1.8.0")
+
     def test_apply_already_pinned_with_stale_file_fails(self):
         stale = "  - source: github://SteerSpec/strspc-rules@v1.7.0/rules/core\n"
         repo = self.make_repo({"README.md": stale})
@@ -253,14 +258,39 @@ class EncodingTests(unittest.TestCase):
         self.assertIn("Source — `" + NEW_SOURCE + "`", repo.read("docs/SPEC.md"))
 
 
+APP = "steerspec-sync[bot]"
+
+
 class OpenPinTests(unittest.TestCase):
     def test_newer_open_pin_refused(self):
-        with self.assertRaises(PinError):
-            pin_core.check_open_pins(["chore/core-1.9.0"], "1.8.1")
+        for author in (APP, "pleberre"):
+            with self.assertRaises(PinError, msg=author):
+                pin_core.check_open_pins([("chore/core-1.9.0", author)], "1.8.1")
+
+    def test_hand_made_pr_on_target_branch_refused(self):
+        with self.assertRaisesRegex(PinError, "chore/core-1.8.1"):
+            pin_core.check_open_pins([("chore/core-1.8.1", "pleberre")], "1.8.1")
 
     def test_superseded_selection(self):
-        branches = ["chore/core-1.8.0", "chore/core-1.8.1", "chore/core-x", "feat/y"]
-        self.assertEqual(pin_core.check_open_pins(branches, "1.8.1"), ["chore/core-1.8.0"])
+        prs = [
+            ("chore/core-1.8.0", APP),
+            ("chore/core-1.7.0", "pleberre"),
+            ("chore/core-1.8.1", APP),
+            ("chore/core-x", APP),
+            ("feat/y", APP),
+        ]
+        self.assertEqual(pin_core.check_open_pins(prs, "1.8.1"), ["chore/core-1.8.0"])
+
+    def test_cli_superseded_reads_branch_and_author(self):
+        result = subprocess.run(
+            [sys.executable, str(Path(pin_core.__file__)), "superseded", "--new", "1.8.1"],
+            input=f"chore/core-1.8.0\t{APP}\nchore/core-1.7.0\tpleberre\n",
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(result.stdout, "chore/core-1.8.0\n")
 
 
 if __name__ == "__main__":

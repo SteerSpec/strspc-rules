@@ -11,10 +11,13 @@ The release workflow runs this in each consumer checkout:
         changed=true|false. Fails, writing nothing, on a downgrade, on a
         listed file that is missing or holds no pin, or on a pin left in
         any other tracked file (a layout drift the file list must follow).
+        When already at X.Y.Z, still fails on a listed file without the pin
+        or a pin outside the list.
 
-    python3 tools/pin_core.py superseded --new X.Y.Z < branches
-        Reads open pin PR head branches, prints those for older versions
-        (to close). Fails if one is for a newer version.
+    python3 tools/pin_core.py superseded --new X.Y.Z < prs
+        Reads open PRs as 'branch<TAB>author' lines and prints the App's pin
+        branches for older versions (to close). Fails if any pin PR is for a
+        newer version, or if someone else's PR sits on chore/core-X.Y.Z.
 """
 
 import argparse
@@ -27,6 +30,7 @@ from pathlib import Path
 CORE_REALM_ID = "dev.steerspec.core"
 REALM_JSON = "rules/realm.json"
 PIN_BRANCH = re.compile(r"^chore/core-(\d+\.\d+\.\d+)$")
+APP_LOGIN = "steerspec-sync[bot]"
 
 
 class PinError(Exception):
@@ -111,6 +115,10 @@ def apply(repo_dir: Path, files: list[str], new: str) -> tuple[str, bool]:
             target = repo_dir / path
             if not target.is_file() or not current.search(target.read_text(encoding="utf-8")):
                 raise PinError(f"{REALM_JSON} pins {new} but {path} does not; fix that file by hand")
+        # Surface layout drift now rather than at the next release.
+        remaining = [hit for hit in find_leftovers(repo_dir, new) if hit.split(":", 1)[0] not in files]
+        if remaining:
+            raise PinError(f"{new} pins outside the file list: {', '.join(remaining)}")
         return old, False
     if parse_version(old) > parse_version(new):
         raise PinError(f"consumer pins {CORE_REALM_ID} {old}; refusing to downgrade to {new}")
@@ -140,15 +148,20 @@ def apply(repo_dir: Path, files: list[str], new: str) -> tuple[str, bool]:
     return old, True
 
 
-def check_open_pins(branches: list[str], new: str) -> list[str]:
+def check_open_pins(prs: list[tuple[str, str]], new: str) -> list[str]:
+    """Takes open PRs as (head branch, author login); returns the App's older pin branches to close."""
     superseded = []
-    for branch in branches:
+    for branch, author in prs:
         m = PIN_BRANCH.match(branch)
         if not m:
             continue
-        if parse_version(m[1]) > parse_version(new):
+        version = parse_version(m[1])
+        if version > parse_version(new):
             raise PinError(f"open pin PR {branch} is newer than {new}; refusing to pin an older release")
-        if parse_version(m[1]) < parse_version(new):
+        if version == parse_version(new) and author != APP_LOGIN:
+            # create-pull-request would force-push over someone else's PR.
+            raise PinError(f"{author} has a pin PR open on {branch}; not overwriting it")
+        if version < parse_version(new) and author == APP_LOGIN:
             superseded.append(branch)
     return superseded
 
@@ -171,8 +184,10 @@ def main() -> int:
             print(f"old={old}")
             print(f"changed={'true' if changed else 'false'}")
         else:
-            branches = [line.strip() for line in sys.stdin if line.strip()]
-            for branch in check_open_pins(branches, args.new):
+            prs = [tuple(line.rstrip("\n").split("\t", 1)) for line in sys.stdin if line.strip()]
+            if any(len(pr) != 2 for pr in prs):
+                raise PinError("superseded expects 'branch<TAB>author' lines")
+            for branch in check_open_pins(prs, args.new):
                 print(branch)
     except PinError as e:
         print(f"::error::{e}", file=sys.stderr)

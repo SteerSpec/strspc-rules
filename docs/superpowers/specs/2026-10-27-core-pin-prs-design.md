@@ -180,6 +180,9 @@ literal pin on purpose).
 | Dispatch for an older tag than the consumer has | red, no PR |
 | Dispatch for an older tag than an open bot pin PR | red, no PR |
 | Older bot pin PR still open when a newer release lands | new PR opened, older one closed with a comment, its branch deleted |
+| Someone else's PR open on `chore/core-X.Y.Z` | red, branch untouched |
+| Human commits pushed onto the bot's `chore/core-X.Y.Z` | red, branch untouched (create-pull-request would force-push over them) |
+| Already at NEW, but a listed file lacks the pin or a pin sits outside the list | red (drift reported now, not at the next release) |
 | Layout drift (file missing, unlisted pin left) | red for that repo, others continue |
 | Consumer already at NEW via another PR while the bot PR is still open | no-op; the stale bot PR is left for a human to close (*my call*) |
 
