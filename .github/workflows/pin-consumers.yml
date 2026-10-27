@@ -106,9 +106,10 @@ jobs:
           VERSION: ${{ steps.tag.outputs.version }}
         run: |
           set -euo pipefail
-          # gh returns 30 PRs by default; the guard must see every open one.
-          branches="$(gh pr list --repo "$REPO" --state open --app steerspec-sync --limit 1000 \
-            --json headRefName --jq '.[].headRefName')"
+          # The REST list, paginated: the guard must see every open App PR, and
+          # `gh pr list --app` goes through the search index, which lags.
+          branches="$(gh api "repos/${REPO}/pulls?state=open&per_page=100" --paginate \
+            --jq '.[] | select(.user.login == "steerspec-sync[bot]") | .head.ref')"
           close="$(printf '%s\n' "$branches" | python3 tools/pin_core.py superseded --new "$VERSION")"
           if [ -n "$close" ]; then
             {

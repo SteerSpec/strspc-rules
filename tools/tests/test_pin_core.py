@@ -165,6 +165,19 @@ class ApplyTests(unittest.TestCase):
             pin_core.apply(repo.root, self.FILES, "1.8.0")
         self.assertEqual(repo.read("README.md"), stale)
 
+    def test_apply_second_pin_in_realm_json_fails(self):
+        platform = {
+            "realm_id": "dev.steerspec.platform",
+            "version": "0.1.0",
+            "source": "github://SteerSpec/strspc-rules@v1.8.0/rules/platform",
+        }
+        core = {"realm_id": "dev.steerspec.core", "version": "1.8.0", "source": OLD_SOURCE}
+        repo = self.make_repo({"rules/realm.json": realm_json(deps=[core, platform])})
+        before = repo.snapshot()
+        with self.assertRaisesRegex(PinError, "rules/realm.json"):
+            pin_core.apply(repo.root, self.FILES, "1.8.1")
+        self.assertEqual(repo.snapshot(), before)
+
     def test_apply_refuses_downgrade(self):
         repo = self.make_repo()
         with self.assertRaisesRegex(PinError, "downgrade"):

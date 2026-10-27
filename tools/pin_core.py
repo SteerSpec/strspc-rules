@@ -124,6 +124,10 @@ def apply(repo_dir: Path, files: list[str], new: str) -> tuple[str, bool]:
         result = rewrite_realm_json(text, old, new) if path == REALM_JSON else rewrite_text(text, old, new)
         if result == text:
             raise PinError(f"{path} holds no {old} pin; update the file list for this repository")
+        # realm.json rewrites only the core dependency; any other {old} pin
+        # left in a listed file would ship stale.
+        if pin_regex(old).search(result):
+            raise PinError(f"{path} still holds a {old} pin after the rewrite; fix it by hand")
         updated[path] = result
 
     # Check what would be left behind before writing anything.
