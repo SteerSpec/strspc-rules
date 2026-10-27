@@ -108,9 +108,12 @@ jobs:
           set -euo pipefail
           # The REST list, paginated: the guard must see every open PR, and
           # `gh pr list` with an author filter goes through the search index,
-          # which lags.
+          # which lags. Same-repository heads only: anyone can open a fork PR
+          # named chore/core-9.9.9, and it must not be able to block pinning;
+          # only same-repo branches (write access) are ones we could overwrite.
           prs="$(gh api "repos/${REPO}/pulls?state=open&per_page=100" --paginate \
-            --jq '.[] | "\(.head.ref)\t\(.user.login)"')"
+            --jq '.[] | select(.head.repo.full_name == .base.repo.full_name)
+                  | "\(.head.ref)\t\(.user.login)"')"
           close="$(printf '%s\n' "$prs" | python3 tools/pin_core.py superseded --new "$VERSION")"
 
           # create-pull-request force-pushes the pin branch; refuse if anyone
