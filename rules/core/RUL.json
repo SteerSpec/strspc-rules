@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.17.5",
-    "timestamp": "2026-10-27T15:29:16Z",
-    "hash": "blake3:60cdf71189f5c096c0ab5c3baedc8e53012864fe8f73288d3fa85e6f0d1478bc"
+    "version": "0.17.6",
+    "timestamp": "2026-10-27T15:57:10Z",
+    "hash": "blake3:2a6fb4ce28b29d9143cb3d18d495d02e1ab659f2109634df283f5aa52a88f311"
   },
   "rules": [
     {
@@ -96,7 +96,7 @@
       "id": "RUL-010",
       "revision": 0,
       "state": "D",
-      "body": "At most one Rule per Entity MAY override a given inherited Rule.",
+      "body": "Within an Entity, at most one Rule that is not itself superseded MAY override a given inherited Rule.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
       "supersedes": null

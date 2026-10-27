@@ -6,9 +6,9 @@
     "description": "An object with a unique identity and lifecycle. The unit of organization in the SteerSpec rule system."
   },
   "rule_set": {
-    "version": "0.12.10",
-    "timestamp": "2026-10-27T15:29:45Z",
-    "hash": "blake3:d59663863c37b897635fc2f7b3f6e6d6b7abf2fd87b31f17ca82377f627a8573"
+    "version": "0.12.11",
+    "timestamp": "2026-10-27T15:57:09Z",
+    "hash": "blake3:3102b9424565803a5e5bff2f212d7fe5ba1cdbd5cbcc92fa760c92809af5e4d5"
   },
   "rules": [
     {
@@ -87,7 +87,7 @@
       "id": "ENT-009",
       "revision": 0,
       "state": "D",
-      "body": "An inheriting Entity acquires the parent's effective rule set, its own Published and Implemented Rules together with those the parent inherits, as read-only references that remain owned by their original Entity.",
+      "body": "An inheriting Entity acquires the parent's effective rule set, the parent's own Published and Implemented Rules together with those the parent inherits, as read-only references that remain owned by their original Entity.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
       "supersedes": null

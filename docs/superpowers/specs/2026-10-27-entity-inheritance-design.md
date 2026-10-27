@@ -16,8 +16,9 @@ things the issue misses:
 
 1. **`supersedes` cannot express an override.** RD006 (manager) requires the superseded
    rule to move to Retired when the superseding one reaches Implemented. A child can never
-   retire a parent's rule: dependency rules are read-only (RLM-005), and the `supersedes`
-   schema pattern is same-realm only. Decision (PLB): a **new rule field, parent untouched**.
+   retire a parent's rule: inherited rules are read-only references owned by the parent
+   (ENT-009), cross-realm ones are dependency imports as well (RLM-005), and the
+   `supersedes` schema pattern is same-realm only. Decision (PLB): a **new rule field, parent untouched**.
 2. **Rule-resolve ignores realm dependencies.** The manager evaluates "every rule in every
    configured source" (`config.yaml`); `realm.json` dependencies are only used by
    realm-resolve for EUID collision checks. Decision (PLB): inheritance is **structure in
@@ -81,8 +82,9 @@ Three of the issue's open questions are already answered by existing rules:
   lifecycle differs (no Retired obligation, parent untouched).
 - Semantics: in the child's effective set, the overriding rule replaces the target. Outside
   the child (the parent's own context, any other child), the target is unaffected.
-- One override per target per child. Two child rules overriding the same target is a lint
-  error.
+- One override per target per child, counting only rules that are not themselves
+  superseded, so a supersession chain that restates the override (RUL-011) is not a
+  conflict. Two live child rules overriding the same target is a lint error.
 - `supersedes` and `overrides` are orthogonal and may coexist: when `SAVACCT-009 supersedes
   SAVACCT-003`, it restates `overrides: ACCT-005` to keep the override alive after
   SAVACCT-003 retires. *My call:* a rule that forbade both would make overrides
@@ -175,13 +177,13 @@ ENT (next ID ENT-006):
 - ENT-006: MAY inherit the rule set of exactly one other Entity, declared in an `inherits` field holding the parent's Entity Unique Identifier.
 - ENT-007: An `inherits` reference to an Entity in another Realm MUST use the qualified form `<realm-id>:<EUID>`, and that Realm MUST be a declared dependency.
 - ENT-008: An inheritance chain MUST NOT contain cycles and MUST NOT exceed three hops.
-- ENT-009: An inheriting Entity acquires the parent's Published and Implemented Rules as read-only references that remain owned by the parent.
+- ENT-009: An inheriting Entity acquires the parent's effective rule set, the parent's own Published and Implemented Rules together with those the parent inherits, as read-only references that remain owned by their original Entity.
 - ENT-010: An inheriting Entity's Rule Set covers only the Rules it owns.
 
 RUL (next ID RUL-009):
 
 - RUL-009: MAY declare `overrides` naming one inherited Rule, which the declaring Rule replaces within the inheriting Entity's effective rule set only.
-- RUL-010: At most one Rule per Entity MAY override a given inherited Rule.
+- RUL-010: Within an Entity, at most one Rule that is not itself superseded MAY override a given inherited Rule.
 - RUL-011: A Rule that supersedes an overriding Rule MUST restate the `overrides` it takes over, or the override lapses.
 
 ENT-007 and ENT-008 are compound; RLM-010/011 set precedent for that. *My call:* keep
