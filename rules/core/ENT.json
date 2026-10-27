@@ -6,9 +6,9 @@
     "description": "An object with a unique identity and lifecycle. The unit of organization in the SteerSpec rule system."
   },
   "rule_set": {
-    "version": "0.12.3",
-    "timestamp": "2026-10-18T16:34:31Z",
-    "hash": "blake3:bced7a49a5ddc7b2e8f6ed6455af3d43bf118286108ded5f15bc838ec64e1787"
+    "version": "0.12.9",
+    "timestamp": "2026-10-27T15:17:32Z",
+    "hash": "blake3:5e415b83bd8a37adef943d20c233aed90a0f0a8b08a59965153999aa71ede285"
   },
   "rules": [
     {
@@ -54,6 +54,51 @@
       "body": "HAS an Entity Unique Identifier.",
       "added_by": "@pleberre",
       "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-006",
+      "revision": 0,
+      "state": "D",
+      "body": "MAY inherit the rule set of exactly one other Entity, declared in an `inherits` field holding the parent's Entity Unique Identifier.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-27",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-007",
+      "revision": 0,
+      "state": "D",
+      "body": "An `inherits` reference to an Entity in another Realm MUST use the qualified form `<realm-id>:<EUID>`, and that Realm MUST be a declared dependency.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-27",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-008",
+      "revision": 0,
+      "state": "D",
+      "body": "An inheritance chain MUST NOT contain cycles and MUST NOT exceed three hops.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-27",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-009",
+      "revision": 0,
+      "state": "D",
+      "body": "An inheriting Entity acquires the parent's Published and Implemented Rules as read-only references that remain owned by the parent.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-27",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-010",
+      "revision": 0,
+      "state": "D",
+      "body": "An inheriting Entity's Rule Set covers only the Rules it owns.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-27",
       "supersedes": null
     }
   ],
@@ -103,5 +148,15 @@
       "notes": []
     }
   ],
-  "notes": []
+  "notes": [
+    {
+      "id": "ENT-006/01",
+      "rule_ref": "ENT-006",
+      "type": "rationale",
+      "content": "Inheritance is specialisation, not containment: parent (sub-entities) nests an Entity inside another, inherits lets an Entity reuse another Entity's rule set without copying it, in the same Realm or across a declared dependency. Inherited Rules stay owned by the parent and are frozen at the dependency version pinned in realm.json, so parent changes arrive only on a dependency bump. Only Published and Implemented parent Rules are inherited; Draft text may still change and Abandoned, Retired or Terminated Rules are not in force. A parent's sub-entities are not inherited.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-27",
+      "revision": 0
+    }
+  ]
 }
