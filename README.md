@@ -147,6 +147,8 @@ Each release includes:
 - `LICENSE` and `NOTICE` files
 - Archives: `strspc-rules-<version>.tar.gz` and `strspc-rules-<version>.zip`
 - Auto-publish to steerspec.dev (schemas, rules, manifest)
+- Pin PRs (`chore(rules): pin dev.steerspec.core to X.Y.Z`) in strspc-manager, strspc-CLI,
+  strspc-sync and strspc-spec, opened by `.github/workflows/pin-consumers.yml`
 
 ## Referencing a Specific Version
 
