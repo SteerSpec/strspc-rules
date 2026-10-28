@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.11.6",
-    "timestamp": "2026-10-28T07:48:43Z",
-    "hash": "blake3:90853c606e1360424ad1e767bbb87341d63b2502a86d1447ee616237d9565dbe"
+    "timestamp": "2026-10-28T08:39:27Z",
+    "hash": "blake3:1543a0a7987b9cdc4e9628d9589d44ba1c09ae6bb265db22046d5074db711825"
   },
   "rules": [
     {
@@ -116,7 +116,7 @@
       "id": "NTE-005/01",
       "rule_ref": "NTE-005",
       "type": "clarification",
-      "content": "Versioned means two things. First, a Note is part of the hashed Rule Set of the Entity that holds it (RSTHSH-001), so adding or changing a Note bumps that Entity's rule_set version (patch), timestamp and hash, and the change is reviewed through strspc diff like any Rule change. Second, each Note carries its own revision (NTE-008) that counts changes to its content. Notes are revised in place and never removed (NTE-009), except the append-only types that never change at all (NTE-010), and their identifiers under a Rule stay sequential and are never reused (NTE-011).",
+      "content": "Versioned means two things. First, a Note is part of the hashed Rule Set of the Entity that holds it (RSTHSH-001), so adding or changing a Note bumps that Entity's rule_set version (patch), timestamp and hash, and the change is reviewed through strspc diff like any Rule change. Second, each Note carries its own revision (NTE-008) that counts changes to its content. Notes are never removed (NTE-009): a Note that no longer applies is revised in place, except that Notes of the append-only types never change at all (NTE-010). Note identifiers under a Rule stay sequential and are never reused (NTE-011).",
       "added_by": "@pleberre",
       "added_at": "2026-10-28",
       "revision": 0
