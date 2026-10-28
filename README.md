@@ -59,6 +59,10 @@ Each Realm is a directory containing entity JSON files, a `_schema/` directory, 
 The `RLM.json` entity formalizes these rules (RLM-001 through RLM-009), and
 `realm.v1.schema.json` validates the manifest format. Both are hand-maintained axioms.
 
+The schema requires `realm.version` to be `MAJOR.MINOR.PATCH` (it becomes the release tag)
+and `dependencies[].version` to be a SemVer version, so ranges and values like `latest` are
+rejected.
+
 ## Development
 
 Prerequisites: Python 3.12+, [pre-commit](https://pre-commit.com/).
@@ -130,11 +134,11 @@ that were validated one PR at a time on the way into `develop`.
 ## Versioning
 
 Releases follow [semantic versioning](https://semver.org/) and are published as Git tags
-in the format `v<MAJOR>.<MINOR>.<PATCH>` (e.g., `v1.6.0`).
+in the format `v<MAJOR>.<MINOR>.<PATCH>` (e.g., `v1.8.1`).
 
 **The realm version is the release tag.** `realm.version` in `rules/core/realm.json`
-(e.g. `1.6.0`) is what the release workflow tags (`v1.6.0`) when `develop` merges into
-`main`; dependent realms pin it as `dev.steerspec.core@1.6.0`. If the tag already exists
+(e.g. `1.8.1`) is what the release workflow tags (`v1.8.1`) when `develop` merges into
+`main`; dependent realms pin it as `dev.steerspec.core@1.8.1`. If the tag already exists
 the release is skipped, so bump `realm.version` in the PR that should trigger a release.
 
 Each release includes:
@@ -143,19 +147,21 @@ Each release includes:
 - `LICENSE` and `NOTICE` files
 - Archives: `strspc-rules-<version>.tar.gz` and `strspc-rules-<version>.zip`
 - Auto-publish to steerspec.dev (schemas, rules, manifest)
+- Pin PRs (`chore(rules): pin dev.steerspec.core to X.Y.Z`) in strspc-manager, strspc-CLI,
+  strspc-sync and strspc-spec, opened by `.github/workflows/pin-consumers.yml`
 
 ## Referencing a Specific Version
 
 Use steerspec.dev for stable, versioned access:
 
 ```text
-https://steerspec.dev/rules/v1.6.0/RUL.json
+https://steerspec.dev/rules/v1.8.1/RUL.json
 ```
 
 Or download the archive for offline use:
 
 ```text
-https://github.com/SteerSpec/strspc-rules/releases/download/v1.6.0/strspc-rules-1.6.0.tar.gz
+https://github.com/SteerSpec/strspc-rules/releases/download/v1.8.1/strspc-rules-1.8.1.tar.gz
 ```
 
 ## License

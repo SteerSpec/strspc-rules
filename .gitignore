@@ -10,3 +10,7 @@ __pycache__/
 .beads-credential-key
 .beads/proxieddb/
 *.gate.lock*
+
+# Claude Code local state (skills under .claude/skills/ are shared)
+.claude/settings.local.json
+.claude/worktrees/
