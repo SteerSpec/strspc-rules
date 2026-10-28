@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.11.0",
-    "timestamp": "2026-10-18T16:34:32Z",
-    "hash": "blake3:2ad0fe85bec8d7d6ab76c82622db3501e1e31b29a47e31e727fffba664a8303f"
+    "version": "0.11.6",
+    "timestamp": "2026-10-28T07:48:43Z",
+    "hash": "blake3:90853c606e1360424ad1e767bbb87341d63b2502a86d1447ee616237d9565dbe"
   },
   "rules": [
     {
@@ -73,7 +73,62 @@
       "added_by": "@pleberre",
       "added_at": "2026-10-18",
       "supersedes": null
+    },
+    {
+      "id": "NTE-008",
+      "revision": 0,
+      "state": "D",
+      "body": "HAS a revision that is 0 when the Note is added and increments by one on each change to its content.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-28",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-009",
+      "revision": 0,
+      "state": "D",
+      "body": "MUST NOT be removed once added; a Note that no longer applies is revised in place.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-28",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-010",
+      "revision": 0,
+      "state": "D",
+      "body": "Notes of type changelog, supersedes, extends or related MUST NOT change once added.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-28",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-011",
+      "revision": 0,
+      "state": "D",
+      "body": "Note identifiers under a Rule are sequential from 01 and are never reused.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-28",
+      "supersedes": null
     }
   ],
-  "notes": []
+  "notes": [
+    {
+      "id": "NTE-005/01",
+      "rule_ref": "NTE-005",
+      "type": "clarification",
+      "content": "Versioned means two things. First, a Note is part of the hashed Rule Set of the Entity that holds it (RSTHSH-001), so adding or changing a Note bumps that Entity's rule_set version (patch), timestamp and hash, and the change is reviewed through strspc diff like any Rule change. Second, each Note carries its own revision (NTE-008) that counts changes to its content. Notes are revised in place and never removed (NTE-009), except the append-only types that never change at all (NTE-010), and their identifiers under a Rule stay sequential and are never reused (NTE-011).",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-28",
+      "revision": 0
+    },
+    {
+      "id": "NTE-008/01",
+      "rule_ref": "NTE-008",
+      "type": "rationale",
+      "content": "Before this rule, a Note's revision recorded the revision of the referenced Rule at the time the Note was added. Nothing read or checked that value, it was 0 on almost every Note because Rule revisions rarely move, and it gave no way to tell that a Note's content had changed. Redefining it as the Note's own edit counter mirrors a Rule's revision: a content change without a revision increment is a diff error, so every edit is visible in review. Notes are revised rather than removed so that identifiers stay sequential and no history is needed to prevent reuse, the same guarantee RUL-003 gives Rules.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-28",
+      "revision": 0
+    }
+  ]
 }
