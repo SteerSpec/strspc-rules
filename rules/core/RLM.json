@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.32.3",
-    "timestamp": "2026-10-28T16:11:24Z",
-    "hash": "blake3:082f312adbf924a4ef8a43659e9fb332f0e1e8ca7473056890744fff460efc75"
+    "version": "0.32.4",
+    "timestamp": "2026-10-28T16:18:03Z",
+    "hash": "blake3:d93c5f874cf3eb87fe8522b06795f4f8d956c890b6d21169a8a5e8a4c4c93953"
   },
   "rules": [
     {
@@ -157,9 +157,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.13.1",
-        "timestamp": "2026-10-28T16:11:24Z",
-        "hash": "blake3:e515fa3be6f76aedfe19cf967b0d9a3241c4ac17c808be1edd2086117cf4a248"
+        "version": "0.13.2",
+        "timestamp": "2026-10-28T16:18:03Z",
+        "hash": "blake3:c23b5916c9fe82566b39f8174a9dbcae0a6a11783886a87618e9896f800b2165"
       },
       "rules": [
         {
@@ -213,7 +213,7 @@
           "id": "RLMMNFST-004/01",
           "rule_ref": "RLMMNFST-004",
           "type": "clarification",
-          "content": "The override is the rule_identifier_format field of realm.json, typed by realm.v1.schema.json as an object or null. Each field is optional and falls back to its default: brackets (RLIFRMT-002, \"[,]\"), euid_position (RLIFRMT-003, \"opening\"), id_splitter (RLIFRMT-005, \"-\"), revision_splitter (RLIFRMT-006, \".\"), state_splitter (RLIFRMT-007, \"/\"). RLIFRMT-004 has no field because the Rule Set Unique Number always takes the opposing position. Null keeps every default. The format changes rendering only (RLIFRMT-008).",
+          "content": "The override is the rule_identifier_format field of realm.json, typed by realm.v1.schema.json as an object or null. Each field is optional and falls back to its default: brackets (RLIFRMT-002, \"[,]\"), euid_position (RLIFRMT-003, \"opening\"), id_splitter (RLIFRMT-005, \"-\"), revision_splitter (RLIFRMT-006, \".\"), state_splitter (RLIFRMT-007, \"/\"). RLIFRMT-004 has no field because the Rule Set Unique Number always takes the opposing position. For a top-level Realm, null keeps every default; for a sub-realm, null means the parent's format applies (RLM-015). The format changes rendering only (RLIFRMT-008).",
           "added_by": "@pleberre",
           "added_at": "2026-10-28",
           "revision": 0

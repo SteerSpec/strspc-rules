@@ -64,7 +64,7 @@
       "description": "Subdirectory names of child Realms (RLM-010). Null or absent if none."
     },
     "rule_identifier_format": {
-      "description": "Overrides of the RLIFRMT defaults (RLMMNFST-004). Every field is optional and falls back to its default; null keeps all defaults. Affects rendering only (RLIFRMT-008).",
+      "description": "Overrides of the RLIFRMT defaults (RLMMNFST-004). Every field is optional and falls back to its default. For a top-level Realm, null keeps all defaults; for a sub-realm, null means the parent's format applies (RLM-015). Affects rendering only (RLIFRMT-008).",
       "oneOf": [
         {
           "type": "object",
