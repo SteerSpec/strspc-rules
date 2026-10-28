@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.11.6",
-    "timestamp": "2026-10-28T08:39:27Z",
-    "hash": "blake3:1543a0a7987b9cdc4e9628d9589d44ba1c09ae6bb265db22046d5074db711825"
+    "version": "0.11.7",
+    "timestamp": "2026-10-28T08:54:50Z",
+    "hash": "blake3:f0cfe3e7976988a023000de7d4ebeed02a871ec006a025323026907f21811a7f"
   },
   "rules": [
     {
@@ -87,7 +87,7 @@
       "id": "NTE-009",
       "revision": 0,
       "state": "D",
-      "body": "MUST NOT be removed once added; a Note that no longer applies is revised in place.",
+      "body": "MUST NOT be removed once added.",
       "added_by": "@pleberre",
       "added_at": "2026-10-28",
       "supersedes": null
@@ -125,7 +125,7 @@
       "id": "NTE-008/01",
       "rule_ref": "NTE-008",
       "type": "rationale",
-      "content": "Before this rule, a Note's revision recorded the revision of the referenced Rule at the time the Note was added. Nothing read or checked that value, it was 0 on almost every Note because Rule revisions rarely move, and it gave no way to tell that a Note's content had changed. Redefining it as the Note's own edit counter mirrors a Rule's revision: a content change without a revision increment is a diff error, so every edit is visible in review. Notes are revised rather than removed so that identifiers stay sequential and no history is needed to prevent reuse, the same guarantee RUL-003 gives Rules.",
+      "content": "Before this rule, a Note's revision recorded the revision of the referenced Rule at the time the Note was added. Nothing read or checked that value, it was 0 on almost every Note because Rule revisions rarely move, and it gave no way to tell that a Note's content had changed. Redefining it as the Note's own edit counter mirrors a Rule's revision: a content change without a revision increment is a diff error, so every edit is visible in review. Notes are never removed (NTE-009), so identifiers under a Rule stay sequential and no history is needed to prevent their reuse (NTE-011); a stale Note is revised in place unless it is of an append-only type (NTE-010).",
       "added_by": "@pleberre",
       "added_at": "2026-10-28",
       "revision": 0
