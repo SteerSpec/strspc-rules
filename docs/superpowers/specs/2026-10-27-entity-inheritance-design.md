@@ -173,7 +173,7 @@ scanned files; `realm-resolve` / `rule-resolve`, which load dependencies, raise 
 *My call.*
 
 | Code (proposed) | Module | Severity | Condition |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | RL016 | rule-lint | Warning | `inherits` target not found in the scanned files (same-realm short form), or `overrides` target not found and unqualified. Presence only: qualified cross-realm targets are skipped here, and reference-form errors (an unqualified target that names an entity in a dependency) are RR013's. |
 | RL017 | rule-lint | Error | Two live rules in one entity override the same target. A rule is live unless another rule supersedes it or it is Abandoned or Terminated, so inactive historical rules never trigger it. |
 | RL018 | rule-lint | Error | `inherits` chain within the scanned files is cyclic or longer than 3 hops. |
