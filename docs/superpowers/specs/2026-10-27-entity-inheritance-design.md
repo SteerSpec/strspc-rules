@@ -161,9 +161,11 @@ evaluate states as an input and filters E's own rules itself before applying ove
 
 ### Lint / diff codes (contract; numbers assigned by the manager)
 
-Numbers corrected against strspc-manager v1.22.0: RL015 (note sequence) and RD013 (note
-revision) were already taken, so the rule-lint codes shift to RL016–RL018 and the diff code
-is RD017. RR013–RR016 were free. The realm-resolve prefix is RR; RSV is rule-resolve.
+Numbers corrected against strspc-manager v1.22.0, where RL015 (note sequence) and RD013
+(note revision) were already taken: the rule-lint codes shift to RL016–RL018 and the diff
+codes are RD017–RD018. These codes are introduced by SteerSpec/strspc-manager#139 (M1) and
+are not in any released version yet. RR013–RR016 were free and are reserved for M2. The
+realm-resolve prefix is RR; RSV is rule-resolve.
 
 `rule-lint` has no dependency loading (RL014 skips qualified references for that reason,
 RL012 is a Warning). Follow that precedent: `rule-lint` warns on what it cannot see in the
@@ -172,14 +174,14 @@ scanned files; `realm-resolve` / `rule-resolve`, which load dependencies, raise 
 
 | Code (proposed) | Module | Severity | Condition |
 |---|---|---|---|
-| RL016 | rule-lint | Warning | `inherits` target not found in the scanned files (same-realm short form), or `overrides` target not found and unqualified. Qualified cross-realm targets are skipped here. |
-| RL017 | rule-lint | Error | Two rules in one entity override the same target. |
+| RL016 | rule-lint | Warning | `inherits` target not found in the scanned files (same-realm short form), or `overrides` target not found and unqualified. Presence only: qualified cross-realm targets are skipped here, and reference-form errors (an unqualified target that names an entity in a dependency) are RR013's. |
+| RL017 | rule-lint | Error | Two live rules in one entity override the same target. A rule is live unless another rule supersedes it or it is Abandoned or Terminated, so inactive historical rules never trigger it. |
 | RL018 | rule-lint | Error | `inherits` chain within the scanned files is cyclic or longer than 3 hops. |
 | RR013 | realm-resolve | Error | `inherits` target cannot be resolved: unknown EUID, realm not in the effective dependency set, or cross-realm reference not in qualified form. |
 | RR014 | realm-resolve | Error | `inherits` chain across realms is cyclic or longer than 3 hops. |
 | RR015 | realm-resolve | Error | `overrides` names a rule that is not in the entity's inherited effective set: unknown anywhere in the chain, or already replaced by an ancestor's override. |
 | RR016 | realm-resolve | Warning | `overrides` target exists in the chain but is not in state P/I in the pinned parent (parent superseded or retired it; the override is dead). |
-| RD017 | rule-diff | Error | `inherits` changed from one value to another, or removed, on an entity with rules beyond Draft. Adding `inherits` where there was none is allowed (it only adds rules). *My call:* re-parenting is a breaking change; do it by a new entity. |
+| RD017 | rule-diff | Error | `inherits` changed from one value to another, or removed, on an entity whose **base** version has a rule beyond Draft, so promoting the first rule and re-parenting in the same change passes. Adding `inherits` where there was none is allowed (it only adds rules). *My call:* re-parenting is a breaking change; do it by a new entity. |
 | RD018 | rule-diff | Error | `overrides` added, removed or retargeted on a rule that has left Draft (RUL-007); supersede the rule instead. |
 
 Migration for entities that copied a parent's rules by hand (the issue's motivation):
