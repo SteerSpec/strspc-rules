@@ -111,9 +111,18 @@ For entity E with chain E → P1 → … → Pn (n ≤ 3):
 3. Each entry carries `owner` (the entity whose `rules` array holds it) and `inherited_by`
    (E, when owner ≠ E) and, for an overriding rule, `overrides` (the replaced ID).
 
+The consumer's `evaluate_on` filter is applied today in `ruleeval.Evaluator.plan`, after
+`RuleInput`s are built, so step 2 cannot rely on it. The effective-set builder takes the
+evaluate states as an input and filters E's own rules itself before applying overrides.
+
 ### Evaluator prompt (contract for `ruleeval/prompt`)
 
-- `RuleInput` gains `InheritedBy string`, `Overrides string` and `OverriddenBy []string`.
+- `RuleInput` (and `EvalRequest`, which mirrors it) gains `Owner string`,
+  `InheritedBy string`, `Overrides string` and `OverriddenBy []string`.
+- Batch grouping: `EntityID` is the batch grouping key and verdicts are keyed by rule ID
+  within a group. An inherited entry keeps the **inheriting** entity's `EntityID`, so it is
+  evaluated alongside the child's own rules, and `Owner` carries the owning entity for the
+  `entity:` line. Single inheritance means one rule ID appears at most once per group.
 - `writeRule` emits `inherited by: <EUID>`, `overrides: <qualified rule id>` and
   `overridden by: <rule id> (<child entity title>)` lines.
 - The parent rule's own-context entry (when the parent realm is also a configured source)
@@ -133,12 +142,28 @@ For entity E with chain E → P1 → … → Pn (n ≤ 3):
 
 ### Resolution (contract for `rule-resolve` / `realm-resolve`)
 
-- `rule-resolve` reads the `realm.json` of each source it walks and resolves `inherits`
-  targets through realm-resolve's dependency loading. A parent realm that is both a
-  dependency and a configured source is loaded once (reuse existing RSV005 dedupe by EUID).
+- `rule-resolve` never reads `realm.json`; the consumer (today `strspc check`) loads each
+  source's `realm.json` and calls realm-resolve, whose output is currently discarded. The
+  effective-set builder takes realm-resolve's output, so `ResolvedRealm` must retain the
+  parsed entity files (today it keeps only an EUID → path map).
+- A parent realm that is both a dependency and a configured source raises no conflict:
+  RSV005 is a collision **error** between configured sources (rule-resolve), not a dedupe,
+  and dependency loading (realm-resolve) is a separate path. The parent's own-context
+  entries come from the configured source; its inherited copies come from the dependency.
+- **Transitive, per-hop resolution (decision, PLB).** Each hop's `inherits` target resolves
+  against the effective dependency list (RLM-014) of the realm that owns *that hop's*
+  entity, with that realm's own version pins. A chain X:A → Y:B → Z:C where Z is a
+  dependency of Y only therefore resolves, and ENT-007 holds per hop. Dependencies of
+  dependencies are loaded lazily, only when a chain reaches them, and cached by
+  `(realm_id, version)`; diamond pins never need reconciling because each hop uses its own
+  realm's pin. The three-hop cap bounds the extra loads.
 - Chain walk with cycle detection and depth cap.
 
 ### Lint / diff codes (contract; numbers assigned by the manager)
+
+Numbers corrected against strspc-manager v1.22.0: RL015 (note sequence) and RD013 (note
+revision) were already taken, so the rule-lint codes shift to RL016–RL018 and the diff code
+is RD017. RR013–RR016 were free. The realm-resolve prefix is RR; RSV is rule-resolve.
 
 `rule-lint` has no dependency loading (RL014 skips qualified references for that reason,
 RL012 is a Warning). Follow that precedent: `rule-lint` warns on what it cannot see in the
@@ -147,14 +172,15 @@ scanned files; `realm-resolve` / `rule-resolve`, which load dependencies, raise 
 
 | Code (proposed) | Module | Severity | Condition |
 |---|---|---|---|
-| RL015 | rule-lint | Warning | `inherits` target not found in the scanned files (same-realm short form), or `overrides` target not found and unqualified. Qualified cross-realm targets are skipped here. |
-| RL016 | rule-lint | Error | Two rules in one entity override the same target. |
-| RL017 | rule-lint | Error | `inherits` chain within the scanned files is cyclic or longer than 3 hops. |
+| RL016 | rule-lint | Warning | `inherits` target not found in the scanned files (same-realm short form), or `overrides` target not found and unqualified. Qualified cross-realm targets are skipped here. |
+| RL017 | rule-lint | Error | Two rules in one entity override the same target. |
+| RL018 | rule-lint | Error | `inherits` chain within the scanned files is cyclic or longer than 3 hops. |
 | RR013 | realm-resolve | Error | `inherits` target cannot be resolved: unknown EUID, realm not in the effective dependency set, or cross-realm reference not in qualified form. |
 | RR014 | realm-resolve | Error | `inherits` chain across realms is cyclic or longer than 3 hops. |
 | RR015 | realm-resolve | Error | `overrides` names a rule that is not in the entity's inherited effective set: unknown anywhere in the chain, or already replaced by an ancestor's override. |
 | RR016 | realm-resolve | Warning | `overrides` target exists in the chain but is not in state P/I in the pinned parent (parent superseded or retired it; the override is dead). |
-| RD013 | rule-diff | Error | `inherits` changed from one value to another, or removed, on an entity with rules beyond Draft. Adding `inherits` where there was none is allowed (it only adds rules). *My call:* re-parenting is a breaking change; do it by a new entity. |
+| RD017 | rule-diff | Error | `inherits` changed from one value to another, or removed, on an entity with rules beyond Draft. Adding `inherits` where there was none is allowed (it only adds rules). *My call:* re-parenting is a breaking change; do it by a new entity. |
+| RD018 | rule-diff | Error | `overrides` added, removed or retargeted on a rule that has left Draft (RUL-007); supersede the rule instead. |
 
 Migration for entities that copied a parent's rules by hand (the issue's motivation):
 add `inherits`, then `strspc rule retire` each copy that duplicates a parent rule, and
@@ -202,7 +228,7 @@ Schema (`tools/build-schema.py`, then regenerate `rules/core/_schema/entity.v1.s
 - `entity.properties.inherits`: `{"type":"string"}` next to `parent` (line ~349), following
   the `parent` precedent. *My call:* no pattern, because the EUID length/charset already
   live in the extracted `euid_constraints` and a literal copy would drift; resolution and
-  form are checked by the manager (RL015).
+  form are checked by the manager (RL016).
 - `rule_schema.properties.overrides`: `oneOf` string with pattern
   `^([a-z][a-z0-9]*(\\.[a-z][a-z0-9]*)*:)?[A-Z0-9]+-\\d{3}$` or null, next to `supersedes`
   (line ~295). The rule-id part mirrors the existing hardcoded `supersedes` pattern; the
@@ -219,6 +245,13 @@ Schema (`tools/build-schema.py`, then regenerate `rules/core/_schema/entity.v1.s
 strspc-manager release whose `entity.Entity` / `entity.Rule` structs carry the fields.
 Publishing the schema earlier would license consumer realms to write fields that the
 current CLI (1.15.0 pinned in CI) silently strips on the next `strspc rule …` command.
+The struct fields MUST use `omitempty` (`Inherits string json:"inherits,omitempty"`,
+`Overrides *string json:"overrides,omitempty"`), unlike `supersedes` which always writes
+`null`: until this repo's schema PR lands, the live `entity.v1` schema has
+`additionalProperties: false`, so an emitted `"overrides": null` would fail schema
+validation and change the hash of every file the new CLI rewrites. The manager therefore
+ships in two releases: M1 (struct fields plus the rule-lint and rule-diff codes), which
+unblocks PR B and the CLI flags, then M2 (resolution, effective set, prompt, render).
 So this repo ships two PRs:
 
 - **PR A (now):** design doc + Draft rules ENT-006..010, RUL-009..011 + rationale notes.
@@ -276,5 +309,5 @@ PR B:
 Settled as my calls above and worth a glance: `overrides` as the field name; P/I only
 inherited; three-hop cap; sub-entities of the parent not inherited; `supersedes` and
 `overrides` may coexist (RUL-011); override in effect whenever the overriding rule is
-evaluated; re-parenting is a breaking change but first adoption is not (RD013); `inherits`
+evaluated; re-parenting is a breaking change but first adoption is not (RD017); `inherits`
 has no schema pattern (resolution is the manager's job).
