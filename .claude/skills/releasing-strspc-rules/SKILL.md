@@ -71,7 +71,8 @@ makes `main` and `develop` diverge.
 - **Consumers:** for each repo in the `pin-consumers.yml` matrix, either a PR by the
   App with CI running (`gh` prints it as `app/steerspec-sync`; the REST API and
   commits show `steerspec-sync[bot]`), or no PR because the repo already pins
-  `X.Y.Z` (the job's log says `changed=false`). Both are success:
+  `X.Y.Z` and its `rules/_schema/` matches (the job's log says `changed=false`).
+  Both are success:
 
   ```bash
   for r in strspc-manager strspc-CLI strspc-sync strspc-spec; do

@@ -5,14 +5,16 @@ Consumers pin core literally (RR004 exact match, reproducible resolution
 outside Actions), so a core release means editing files in every consumer.
 The release workflow runs this in each consumer checkout:
 
-    python3 tools/pin_core.py apply --repo-dir DIR --new X.Y.Z FILE...
+    python3 tools/pin_core.py apply --repo-dir DIR --new X.Y.Z --schema-dir CORE FILE...
         Rewrites every pin in FILE... from the consumer's current version
-        (read from DIR/rules/realm.json) to X.Y.Z. Prints old=… and
-        changed=true|false. Fails, writing nothing, on a downgrade, on a
-        listed file that is missing or holds no pin, or on a pin left in
-        any other tracked file (a layout drift the file list must follow).
-        When already at X.Y.Z, still fails on a listed file without the pin
-        or a pin outside the list.
+        (read from DIR/rules/realm.json) to X.Y.Z, and copies the schemas
+        DIR/rules/_schema shares with CORE, core's _schema at that release
+        (RM015 compares the two). Prints old=… and changed=true|false. Fails,
+        writing nothing, on a downgrade, on a listed file that is missing or
+        holds no pin, on a pin left in any other tracked file (a layout drift
+        the file list must follow), or if no schema is shared. When already
+        at X.Y.Z, still fails on a listed file without the pin or a pin
+        outside the list, and still copies a schema that differs.
 
     python3 tools/pin_core.py superseded --new X.Y.Z < prs
         Reads open PRs as 'branch<TAB>author' lines and prints the App's pin
@@ -29,6 +31,7 @@ from pathlib import Path
 
 CORE_REALM_ID = "dev.steerspec.core"
 REALM_JSON = "rules/realm.json"
+SCHEMA_DIR = "rules/_schema"
 PIN_BRANCH = re.compile(r"^chore/core-(\d+\.\d+\.\d+)$")
 APP_LOGIN = "steerspec-sync[bot]"
 
@@ -105,7 +108,22 @@ def find_leftovers(repo_dir: Path, old: str) -> list[str]:
     return hits
 
 
-def apply(repo_dir: Path, files: list[str], new: str) -> tuple[str, bool]:
+def schema_updates(repo_dir: Path, schema_dir: Path) -> dict[str, str]:
+    """Returns the vendored schemas that differ from core's, as consumer path to core's text."""
+    # Only files both sides hold, as RM015 compares: a consumer need not
+    # vendor every core schema, and its own schemas are its own.
+    shared = [p for p in sorted((repo_dir / SCHEMA_DIR).glob("*.json")) if (schema_dir / p.name).is_file()]
+    if not shared:
+        raise PinError(f"{SCHEMA_DIR} shares no schema with {schema_dir}")
+    updates = {}
+    for path in shared:
+        text = (schema_dir / path.name).read_text(encoding="utf-8")
+        if path.read_text(encoding="utf-8") != text:
+            updates[f"{SCHEMA_DIR}/{path.name}"] = text
+    return updates
+
+
+def apply(repo_dir: Path, files: list[str], new: str, schema_dir: Path) -> tuple[str, bool]:
     realm_text = (repo_dir / REALM_JSON).read_text(encoding="utf-8")
     old = read_core_version(realm_text)
     if parse_version(old) == parse_version(new):
@@ -123,7 +141,11 @@ def apply(repo_dir: Path, files: list[str], new: str) -> tuple[str, bool]:
         remaining = [hit for hit in find_leftovers(repo_dir, new) if hit.split(":", 1)[0] not in files]
         if remaining:
             raise PinError(f"{new} pins outside the file list: {', '.join(remaining)}")
-        return old, False
+        # A hand bump can miss a schema, and that fails RM015 on the next lint.
+        schemas = schema_updates(repo_dir, schema_dir)
+        for path, text in schemas.items():
+            (repo_dir / path).write_text(text, encoding="utf-8")
+        return old, bool(schemas)
     if parse_version(old) > parse_version(new):
         raise PinError(f"consumer pins {CORE_REALM_ID} {old}; refusing to downgrade to {new}")
 
@@ -147,6 +169,7 @@ def apply(repo_dir: Path, files: list[str], new: str) -> tuple[str, bool]:
     if remaining:
         raise PinError(f"{old} pins outside the file list: {', '.join(remaining)}")
 
+    updated |= schema_updates(repo_dir, schema_dir)
     for path, text in updated.items():
         (repo_dir / path).write_text(text, encoding="utf-8")
     return old, True
@@ -176,6 +199,7 @@ def main() -> int:
     p_apply = sub.add_parser("apply")
     p_apply.add_argument("--repo-dir", type=Path, required=True)
     p_apply.add_argument("--new", required=True)
+    p_apply.add_argument("--schema-dir", type=Path, required=True)
     p_apply.add_argument("files", nargs="+")
     p_sup = sub.add_parser("superseded")
     p_sup.add_argument("--new", required=True)
@@ -184,7 +208,7 @@ def main() -> int:
     try:
         parse_version(args.new)
         if args.command == "apply":
-            old, changed = apply(args.repo_dir, args.files, args.new)
+            old, changed = apply(args.repo_dir, args.files, args.new, args.schema_dir)
             print(f"old={old}")
             print(f"changed={'true' if changed else 'false'}")
         else:
