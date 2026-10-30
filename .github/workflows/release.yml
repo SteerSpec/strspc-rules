@@ -28,7 +28,7 @@ jobs:
           version: ${{ vars.STRSPC_CLI_VERSION || 'latest' }}
 
       - name: Validate realm and entity files
-        run: strspc realm validate rules/core/ --recursive --strict
+        run: strspc realm validate rules/core/ --recursive --strict --core
 
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -198,9 +198,10 @@ jobs:
             its release workflow.
 
   # Opens the core pin PRs in the consumer repositories. It needs only the
-  # tag: consumers resolve core from the GitHub tag tarball and none of their
-  # CI reads steerspec.dev, so it does not wait for publish. As its own job it
-  # cannot hold back release or publish; a failure shows as a red job.
+  # tag: consumers resolve core from the GitHub tag tarball, so it does not
+  # wait for publish. Their CI reads the pinned schemas from steerspec.dev, and
+  # falls back to the latest ones until the publish PR merges. As its own job
+  # it cannot hold back release or publish; a failure shows as a red job.
   pin-consumers:
     needs: release
     if: needs.release.outputs.exists != 'true'
