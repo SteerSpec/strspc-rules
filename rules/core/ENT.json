@@ -6,9 +6,9 @@
     "description": "An object with a unique identity and lifecycle. The unit of organization in the SteerSpec rule system."
   },
   "rule_set": {
-    "version": "0.12.13",
-    "timestamp": "2026-10-30T10:48:36Z",
-    "hash": "blake3:b581a3b4b10f8c15e1752d0486f154b17359e40ae34aa89d65d0448a360be5e0"
+    "version": "0.12.15",
+    "timestamp": "2026-10-30T16:49:05Z",
+    "hash": "blake3:01127981f4f5acf4c7db638ae4799d5ffe605be465922bf45d05080ec57a3f45"
   },
   "rules": [
     {
@@ -67,18 +67,18 @@
     },
     {
       "id": "ENT-007",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "An `inherits` reference to an Entity in another Realm MUST use the qualified form `<realm-id>:<EUID>`, and that Realm MUST be a declared dependency.",
+      "body": "An `inherits` reference to an Entity outside the referencing Entity's Realm tree MUST use the qualified form `<realm-id>:<EUID>`, naming a declared dependency or one of its sub-realms.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
       "supersedes": null
     },
     {
       "id": "ENT-008",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "An inheritance chain MUST NOT contain cycles and MUST NOT exceed three hops.",
+      "body": "An inheritance chain MUST NOT contain cycles or exceed three hops.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
       "supersedes": null

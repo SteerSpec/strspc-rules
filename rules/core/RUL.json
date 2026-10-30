@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.17.6",
-    "timestamp": "2026-10-27T15:57:10Z",
-    "hash": "blake3:2a6fb4ce28b29d9143cb3d18d495d02e1ab659f2109634df283f5aa52a88f311"
+    "version": "0.17.8",
+    "timestamp": "2026-10-30T16:49:05Z",
+    "hash": "blake3:2b0e140564474acc2f50aed989769292b0b2962600644f6ea9298e302523c9c6"
   },
   "rules": [
     {
@@ -94,18 +94,18 @@
     },
     {
       "id": "RUL-010",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "Within an Entity, at most one Rule that is not itself superseded MAY override a given inherited Rule.",
+      "body": "Within an Entity, at most one Rule that is not Abandoned, Terminated or superseded MAY override a given inherited Rule.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
       "supersedes": null
     },
     {
       "id": "RUL-011",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "A Rule that supersedes an overriding Rule MUST restate the `overrides` it takes over, or the override lapses.",
+      "body": "A Rule that supersedes an overriding Rule MAY restate the `overrides` it takes over, otherwise the override lapses.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
       "supersedes": null

@@ -62,8 +62,8 @@ Three of the issue's open questions are already answered by existing rules:
 
 - Scalar. Short EUID in-realm, `<realm-id>:<EUID>` cross-realm (RLM-009 form).
 - Target may be any entity, top-level or sub-entity (EUIDs are realm-unique, RLM-001).
-- Cross-realm target's realm MUST be a declared dependency of the child's realm (RLM-005,
-  effective list per RLM-014 for sub-realms).
+- Cross-realm target's realm MUST be a declared dependency of the child's realm or one of
+  that dependency's sub-realms (RLM-005, effective list per RLM-014 for sub-realms).
 - Chains allowed; cycles rejected; **max 3 hops** (A→B→C→D). *My call.*
 - Inherited: the parent's own `rules` in state **P or I**, transitively through the chain.
   *My call:* not D (text may change), not A/R/T (not in force). Parent `sub_entities` are
@@ -206,19 +206,18 @@ confirm with `strspc` at add time):
 ENT (next ID ENT-006):
 
 - ENT-006: MAY inherit the rule set of exactly one other Entity, declared in an `inherits` field holding the parent's Entity Unique Identifier.
-- ENT-007: An `inherits` reference to an Entity in another Realm MUST use the qualified form `<realm-id>:<EUID>`, and that Realm MUST be a declared dependency.
-- ENT-008: An inheritance chain MUST NOT contain cycles and MUST NOT exceed three hops.
-- ENT-009: An inheriting Entity acquires the parent's effective rule set, the parent's own Published and Implemented Rules together with those the parent inherits, as read-only references that remain owned by their original Entity.
-- ENT-010: An inheriting Entity's Rule Set covers only the Rules it owns.
+- ENT-007: An `inherits` reference to an Entity outside the referencing Entity's Realm tree MUST use the qualified form `<realm-id>:<EUID>`, naming a declared dependency or one of its sub-realms.
+- ENT-008: An inheritance chain MUST NOT contain cycles or exceed three hops.
+- ENT-009: An inheriting Entity MUST acquire the parent's effective rule set, the parent's own Published and Implemented Rules together with those the parent inherits, as read-only references that remain owned by their original Entity.
+- ENT-010: An inheriting Entity's Rule Set MUST cover only the Rules it owns.
 
 RUL (next ID RUL-009):
 
 - RUL-009: MAY declare `overrides` naming one inherited Rule, which the declaring Rule replaces within the inheriting Entity's effective rule set only.
-- RUL-010: Within an Entity, at most one Rule that is not itself superseded MAY override a given inherited Rule.
-- RUL-011: A Rule that supersedes an overriding Rule MUST restate the `overrides` it takes over, or the override lapses.
+- RUL-010: Within an Entity, at most one Rule that is not Abandoned, Terminated or superseded MAY override a given inherited Rule.
+- RUL-011: A Rule that supersedes an overriding Rule MAY restate the `overrides` it takes over, otherwise the override lapses.
 
-ENT-007 and ENT-008 are compound; RLM-010/011 set precedent for that. *My call:* keep
-them compound rather than split into four rules.
+ENT-007 and ENT-008 each state one constraint, in one phrase (RUL-004).
 
 Notes (rationale) on ENT-006 and RUL-009 explaining why `overrides` is distinct from
 `supersedes` and why parent rules keep applying elsewhere, added with
