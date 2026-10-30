@@ -25,7 +25,7 @@ jobs:
 
       - uses: SteerSpec/strspc-CLI/.github/actions/setup-strspc@1ce43e4484d9451083c0774a9926178889d684f2  # CLI #92
         with:
-          version: "1.15.0"
+          version: ${{ vars.STRSPC_CLI_VERSION || 'latest' }}
 
       - name: Validate realm and entity files
         run: strspc realm validate rules/core/ --recursive --strict
