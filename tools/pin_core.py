@@ -108,6 +108,13 @@ def find_leftovers(repo_dir: Path, old: str) -> list[str]:
     return hits
 
 
+def same_json(a: str, b: str) -> bool:
+    try:
+        return json.loads(a) == json.loads(b)
+    except json.JSONDecodeError:
+        return False
+
+
 def schema_updates(repo_dir: Path, schema_dir: Path) -> dict[str, str]:
     """Returns the vendored schemas that differ from core's, as consumer path to core's text."""
     # Only files both sides hold, as RM015 compares: a consumer need not
@@ -118,7 +125,7 @@ def schema_updates(repo_dir: Path, schema_dir: Path) -> dict[str, str]:
     updates = {}
     for path in shared:
         text = (schema_dir / path.name).read_text(encoding="utf-8")
-        if path.read_text(encoding="utf-8") != text:
+        if not same_json(path.read_text(encoding="utf-8"), text):
             updates[f"{SCHEMA_DIR}/{path.name}"] = text
     return updates
 

@@ -269,6 +269,17 @@ class ApplyTests(unittest.TestCase):
         self.assertEqual(self.apply(repo, self.FILES, "1.8.0"), ("1.8.0", True))
         self.assertEqual(repo.read(ENTITY_SCHEMA), NEW_SCHEMA)
 
+    def test_apply_ignores_formatting_only_schema_difference(self):
+        reformatted = '{\n  "title": "new"\n}\n'
+        repo = self.make_repo({ENTITY_SCHEMA: reformatted})
+        self.assertEqual(self.apply(repo, self.FILES, "1.8.0"), ("1.8.0", False))
+        self.assertEqual(repo.read(ENTITY_SCHEMA), reformatted)
+
+    def test_apply_replaces_invalid_schema(self):
+        repo = self.make_repo({ENTITY_SCHEMA: "{not json\n"})
+        self.assertEqual(self.apply(repo, self.FILES, "1.8.0"), ("1.8.0", True))
+        self.assertEqual(repo.read(ENTITY_SCHEMA), NEW_SCHEMA)
+
     def test_apply_no_shared_schema_fails(self):
         repo = self.make_repo({ENTITY_SCHEMA: OLD_SCHEMA})
         before = repo.snapshot()
