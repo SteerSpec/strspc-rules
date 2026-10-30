@@ -84,7 +84,7 @@ on:
   # the concurrency group. Delete this trigger only if all your gating checks
   # come from third-party apps rather than Actions.
   workflow_run:
-    workflows: ['CI', 'Build Schema']
+    workflows: ['CI', 'Build Schema', 'PR title']
     types: [completed]
 
 jobs:
