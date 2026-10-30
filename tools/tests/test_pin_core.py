@@ -14,6 +14,11 @@ OLD_SOURCE = "github://SteerSpec/strspc-rules@v1.8.0/rules/core"
 NEW_SOURCE = "github://SteerSpec/strspc-rules@v1.8.1/rules/core"
 
 
+OLD_SCHEMA = '{"title": "old"}\n'
+NEW_SCHEMA = '{"title": "new"}\n'
+ENTITY_SCHEMA = "rules/_schema/entity.v1.schema.json"
+
+
 def realm_json(own_version: str = "0.1.0", deps: list[dict] | None = None) -> str:
     if deps is None:
         deps = [{"realm_id": "dev.steerspec.core", "version": "1.8.0", "source": OLD_SOURCE}]
@@ -138,15 +143,28 @@ class ApplyTests(unittest.TestCase):
             "rules/realm.json": realm_json(),
             ".strspc/config.yaml": f"rules:\n  - source: {OLD_SOURCE}\n    scope: global\n",
             "README.md": f"  - source: {OLD_SOURCE}   # bumped\n\nThe generated config pins `strspc-rules@v1.8.0`.\n",
+            ENTITY_SCHEMA: NEW_SCHEMA,
         }
         files.update(extra or {})
         repo = Repo(files)
         self.addCleanup(repo.close)
         return repo
 
+    def make_core(self, schemas: dict[str, str] | None = None) -> Path:
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        core = Path(tmp.name)
+        defaults = {"entity.v1.schema.json": NEW_SCHEMA, "config.v1.schema.json": NEW_SCHEMA}
+        for name, text in (defaults if schemas is None else schemas).items():
+            (core / name).write_text(text, encoding="utf-8")
+        return core
+
+    def apply(self, repo: Repo, files, new: str, core: Path | None = None) -> tuple[str, bool]:
+        return pin_core.apply(repo.root, files, new, self.make_core() if core is None else core)
+
     def test_apply_happy_path(self):
         repo = self.make_repo()
-        self.assertEqual(pin_core.apply(repo.root, self.FILES, "1.8.1"), ("1.8.0", True))
+        self.assertEqual(self.apply(repo, self.FILES, "1.8.1"), ("1.8.0", True))
         for path in self.FILES:
             self.assertNotIn("1.8.0", repo.read(path), path)
             self.assertIn("1.8.1", repo.read(path), path)
@@ -155,7 +173,7 @@ class ApplyTests(unittest.TestCase):
     def test_apply_already_pinned(self):
         repo = self.make_repo()
         before = repo.snapshot()
-        self.assertEqual(pin_core.apply(repo.root, self.FILES, "1.8.0"), ("1.8.0", False))
+        self.assertEqual(self.apply(repo, self.FILES, "1.8.0"), ("1.8.0", False))
         self.assertEqual(repo.snapshot(), before)
 
     def test_apply_already_pinned_with_stale_core_source_fails(self):
@@ -170,18 +188,18 @@ class ApplyTests(unittest.TestCase):
         }
         repo = self.make_repo({"rules/realm.json": realm_json(deps=deps), **new_pins})
         with self.assertRaisesRegex(PinError, "source"):
-            pin_core.apply(repo.root, self.FILES, "1.8.1")
+            self.apply(repo, self.FILES, "1.8.1")
 
     def test_apply_already_pinned_with_unlisted_pin_fails(self):
         repo = self.make_repo({"docs/x.md": "see strspc-rules@v1.8.0\n"})
         with self.assertRaisesRegex(PinError, "docs/x.md"):
-            pin_core.apply(repo.root, self.FILES, "1.8.0")
+            self.apply(repo, self.FILES, "1.8.0")
 
     def test_apply_already_pinned_with_stale_file_fails(self):
         stale = "  - source: github://SteerSpec/strspc-rules@v1.7.0/rules/core\n"
         repo = self.make_repo({"README.md": stale})
         with self.assertRaisesRegex(PinError, "README.md"):
-            pin_core.apply(repo.root, self.FILES, "1.8.0")
+            self.apply(repo, self.FILES, "1.8.0")
         self.assertEqual(repo.read("README.md"), stale)
 
     def test_apply_second_pin_in_realm_json_fails(self):
@@ -194,33 +212,33 @@ class ApplyTests(unittest.TestCase):
         repo = self.make_repo({"rules/realm.json": realm_json(deps=[core, platform])})
         before = repo.snapshot()
         with self.assertRaisesRegex(PinError, "rules/realm.json"):
-            pin_core.apply(repo.root, self.FILES, "1.8.1")
+            self.apply(repo, self.FILES, "1.8.1")
         self.assertEqual(repo.snapshot(), before)
 
     def test_apply_refuses_downgrade(self):
         repo = self.make_repo()
         with self.assertRaisesRegex(PinError, "downgrade"):
-            pin_core.apply(repo.root, self.FILES, "1.7.9")
+            self.apply(repo, self.FILES, "1.7.9")
 
     def test_apply_missing_file_fails(self):
         repo = self.make_repo()
         before = repo.snapshot()
         with self.assertRaisesRegex(PinError, "docs/SPEC.md"):
-            pin_core.apply(repo.root, [*self.FILES, "docs/SPEC.md"], "1.8.1")
+            self.apply(repo, [*self.FILES, "docs/SPEC.md"], "1.8.1")
         self.assertEqual(repo.snapshot(), before)
 
     def test_apply_unchanged_file_fails(self):
         repo = self.make_repo({"docs/SPEC.md": "no pin here\n"})
         before = repo.snapshot()
         with self.assertRaisesRegex(PinError, "docs/SPEC.md"):
-            pin_core.apply(repo.root, [*self.FILES, "docs/SPEC.md"], "1.8.1")
+            self.apply(repo, [*self.FILES, "docs/SPEC.md"], "1.8.1")
         self.assertEqual(repo.snapshot(), before)
 
     def test_apply_leftover_fails(self):
         repo = self.make_repo({"docs/x.md": "see strspc-rules@v1.8.0\n"})
         before = repo.snapshot()
         with self.assertRaisesRegex(PinError, "docs/x.md"):
-            pin_core.apply(repo.root, self.FILES, "1.8.1")
+            self.apply(repo, self.FILES, "1.8.1")
         self.assertEqual(repo.snapshot(), before)
 
     def test_leftover_ignores_changelog_and_old_fixtures(self):
@@ -231,9 +249,58 @@ class ApplyTests(unittest.TestCase):
                 "src/x_test.go": '"github://SteerSpec/strspc-rules@v1.6.0/rules/core"\n',
             }
         )
-        pin_core.apply(repo.root, self.FILES, "1.8.1")
+        self.apply(repo, self.FILES, "1.8.1")
         self.assertEqual(pin_core.find_leftovers(repo.root, "1.8.0"), [])
         self.assertIn("1.8.0", repo.read("CHANGELOG.md"))
+
+    def test_apply_syncs_schemas(self):
+        repo = self.make_repo({ENTITY_SCHEMA: OLD_SCHEMA})
+        self.assertEqual(self.apply(repo, self.FILES, "1.8.1"), ("1.8.0", True))
+        self.assertEqual(repo.read(ENTITY_SCHEMA), NEW_SCHEMA)
+
+    def test_apply_syncs_only_schemas_both_sides_hold(self):
+        repo = self.make_repo({ENTITY_SCHEMA: OLD_SCHEMA, "rules/_schema/own.schema.json": OLD_SCHEMA})
+        self.apply(repo, self.FILES, "1.8.1")
+        self.assertEqual(repo.read("rules/_schema/own.schema.json"), OLD_SCHEMA)
+        self.assertFalse((repo.root / "rules/_schema/config.v1.schema.json").exists())
+
+    def test_apply_already_pinned_with_stale_schema_syncs(self):
+        repo = self.make_repo({ENTITY_SCHEMA: OLD_SCHEMA})
+        self.assertEqual(self.apply(repo, self.FILES, "1.8.0"), ("1.8.0", True))
+        self.assertEqual(repo.read(ENTITY_SCHEMA), NEW_SCHEMA)
+
+    def test_apply_ignores_formatting_only_schema_difference(self):
+        reformatted = '{\n  "title": "new"\n}\n'
+        repo = self.make_repo({ENTITY_SCHEMA: reformatted})
+        self.assertEqual(self.apply(repo, self.FILES, "1.8.0"), ("1.8.0", False))
+        self.assertEqual(repo.read(ENTITY_SCHEMA), reformatted)
+
+    def test_apply_replaces_invalid_schema(self):
+        repo = self.make_repo({ENTITY_SCHEMA: "{not json\n"})
+        self.assertEqual(self.apply(repo, self.FILES, "1.8.0"), ("1.8.0", True))
+        self.assertEqual(repo.read(ENTITY_SCHEMA), NEW_SCHEMA)
+
+    def test_apply_no_shared_schema_fails(self):
+        repo = self.make_repo({ENTITY_SCHEMA: OLD_SCHEMA})
+        before = repo.snapshot()
+        for version in ("1.8.1", "1.8.0"):
+            with self.assertRaisesRegex(PinError, "rules/_schema"):
+                self.apply(repo, self.FILES, version, self.make_core({}))
+            self.assertEqual(repo.snapshot(), before)
+
+    def test_apply_failure_writes_no_schema(self):
+        repo = self.make_repo({ENTITY_SCHEMA: OLD_SCHEMA, "docs/x.md": "see strspc-rules@v1.8.0\n"})
+        before = repo.snapshot()
+        with self.assertRaisesRegex(PinError, "docs/x.md"):
+            self.apply(repo, self.FILES, "1.8.1")
+        self.assertEqual(repo.snapshot(), before)
+
+    def test_apply_refused_downgrade_writes_no_schema(self):
+        repo = self.make_repo({ENTITY_SCHEMA: OLD_SCHEMA})
+        before = repo.snapshot()
+        with self.assertRaisesRegex(PinError, "downgrade"):
+            self.apply(repo, self.FILES, "1.7.9")
+        self.assertEqual(repo.snapshot(), before)
 
 
 class EncodingTests(unittest.TestCase):
@@ -244,9 +311,13 @@ class EncodingTests(unittest.TestCase):
             {
                 "rules/realm.json": realm_json(),
                 "docs/SPEC.md": f"Source — `{OLD_SOURCE}`\n",
+                ENTITY_SCHEMA: '{"title": "ancien"}\n',
             }
         )
         self.addCleanup(repo.close)
+        core = tempfile.TemporaryDirectory()
+        self.addCleanup(core.cleanup)
+        (Path(core.name) / "entity.v1.schema.json").write_text('{"title": "—"}\n', encoding="utf-8")
         script = Path(pin_core.__file__)
         result = subprocess.run(
             [
@@ -261,6 +332,8 @@ class EncodingTests(unittest.TestCase):
                 str(repo.root),
                 "--new",
                 "1.8.1",
+                "--schema-dir",
+                core.name,
                 "rules/realm.json",
                 "docs/SPEC.md",
             ],
@@ -270,6 +343,7 @@ class EncodingTests(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("Source — `" + NEW_SOURCE + "`", repo.read("docs/SPEC.md"))
+        self.assertIn("—", repo.read(ENTITY_SCHEMA))
 
 
 APP = "steerspec-sync[bot]"

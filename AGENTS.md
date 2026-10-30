@@ -144,7 +144,8 @@ pre-commit install  # also install the pre-commit stage hooks
   workflow skips the release, so docs-only and promotion merges stay green.
 - After a new tag, the release workflow calls `pin-consumers.yml`, which opens
   `chore(rules): pin dev.steerspec.core to X.Y.Z` PRs in strspc-manager, strspc-CLI,
-  strspc-sync and strspc-spec and closes their older pin PRs. To (re)open them for an
+  strspc-sync and strspc-spec and closes their older pin PRs. Each PR also syncs the
+  consumer's `rules/_schema/` with the tag. To (re)open them for an
   existing tag: `gh workflow run pin-consumers.yml --ref main -f tag=vX.Y.Z`. When a
   consumer starts pinning core in a new file, add it to the matrix there; the job fails
   on pins outside the list.
