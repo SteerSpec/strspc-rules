@@ -78,10 +78,10 @@ jobs:
           gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}" --jq '.object.sha' >/dev/null
           echo "version=${TAG#v}" >> "$GITHUB_OUTPUT"
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.12'
 
@@ -99,7 +99,7 @@ jobs:
           permission-pull-requests: write
 
       - name: Checkout ${{ matrix.repo }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: SteerSpec/${{ matrix.repo }}
           token: ${{ steps.app.outputs.token }}

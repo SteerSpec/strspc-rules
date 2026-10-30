@@ -298,6 +298,17 @@ def build_schema(
                     {"type": "null"},
                 ]
             },
+            # RUL-009: the inherited rule this rule overrides, short or
+            # realm-qualified (<realm-id>:<EUID>-NNN, realm-id grammar per RLM).
+            "overrides": {
+                "oneOf": [
+                    {
+                        "type": "string",
+                        "pattern": "^([a-z][a-z0-9]*(\\.[a-z][a-z0-9]*)*:)?[A-Z0-9]+-\\d{3}$",
+                    },
+                    {"type": "null"},
+                ]
+            },
         },
         "additionalProperties": False,
     }
@@ -347,6 +358,9 @@ def build_schema(
                     "title": {"type": "string", "minLength": 1},
                     "description": {"type": "string"},
                     "parent": {"type": "string"},
+                    # ENT-006/007: the inherited entity, a short EUID or
+                    # <realm-id>:<EUID>; resolution is checked by the manager.
+                    "inherits": {"type": "string"},
                 },
                 "additionalProperties": False,
             },
