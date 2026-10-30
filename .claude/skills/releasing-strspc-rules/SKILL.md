@@ -33,7 +33,8 @@ Tell the user the version and the reason before opening any PR.
 ## 2. Bump PR into develop
 
 Work from a clean tree (a separate worktree if the current one is dirty).
-`strspc version` must be at least the version `release.yml` pins (1.15.0).
+`release.yml` validates with the latest `strspc`, or the org variable
+`STRSPC_CLI_VERSION` when set, so validate locally with a current CLI.
 
 1. `git switch -c chore/release-X.Y.Z origin/develop`
 2. Change only `realm.version` in `rules/core/realm.json`. It is the realm manifest,
