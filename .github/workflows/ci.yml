@@ -16,7 +16,8 @@ jobs:
   # release (the same-repository develop -> main PR, and the resulting push
   # to main) aggregates those steps, which rulediff reads as skipped states
   # (RD003) and body-edit-plus-promotion (RD001), so exactly those are
-  # exempt from the diff; any other PR into main is checked.
+  # exempt from the diff; any other PR into main is checked. Core defines the
+  # schemas, so it validates against its own _schema/, not the published ones.
   rules:
     uses: SteerSpec/.github/.github/workflows/strspc-lint.yml@main
     permissions:
@@ -24,6 +25,7 @@ jobs:
       pull-requests: read
     with:
       path: rules/core/
+      core: true
       diff: >-
         ${{ !(
           (
