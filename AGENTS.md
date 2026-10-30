@@ -134,7 +134,8 @@ pre-commit install  # also install the pre-commit stage hooks
 
 ## Workflow
 
-- Feature branches → `develop` via PR. `develop` → `main` via PR for releases.
+- Feature branches → `develop` via PR, squashed, so the PR title is the commit.
+  `develop` → `main` via PR for releases, with a merge commit. Rulesets enforce both.
 - Use `bd` (beads) for ALL task tracking — no markdown TODOs.
 - CI gates every PR — the `rules`, `lint-commits`, `lint-python` and `lint` jobs
   (`ci.yml`) and the `build-schema` job (`build-schema.yml`) must all pass.
