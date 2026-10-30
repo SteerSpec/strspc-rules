@@ -35,6 +35,15 @@ jobs:
           || (github.event_name == 'push' && github.ref == 'refs/heads/main')
         ) }}
 
+  # Resolves the realm through .strspc/config.yaml, which the offline steps
+  # above do not: realm-resolve is what verifies cross-realm references such
+  # as inherits and overrides. Provider null, so this is static-only.
+  check:
+    uses: SteerSpec/.github/.github/workflows/strspc-check.yml@main
+    permissions:
+      contents: read
+      pull-requests: read
+
   lint-commits:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
