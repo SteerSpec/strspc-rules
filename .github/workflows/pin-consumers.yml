@@ -3,7 +3,9 @@ name: Pin consumers
 # Opens "chore(rules): pin dev.steerspec.core to X.Y.Z" in every repository
 # that depends on the core realm. Pins stay literal in the consumers (RR004
 # exact match, reproducible resolution outside Actions), so each release means
-# a file change there; tools/pin_core.py makes it and refuses layout drift.
+# a file change there; tools/pin_core.py makes it and refuses layout drift. The
+# schemas a consumer vendors in rules/_schema/ move with the pin: RM015 compares
+# them with the pinned core and the org lint is strict.
 #
 # Called by release.yml after a fresh tag. Dispatch it from main with an
 # existing tag to (re)open the PRs for a release that shipped without them.
@@ -79,6 +81,14 @@ jobs:
           echo "version=${TAG#v}" >> "$GITHUB_OUTPUT"
 
       - uses: actions/checkout@v7
+
+      # The tag, not this checkout: a dispatch of an older tag runs from main.
+      - name: Checkout core schemas at ${{ inputs.tag }}
+        uses: actions/checkout@v7
+        with:
+          ref: refs/tags/${{ inputs.tag }}
+          path: core-release
+          persist-credentials: false
 
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -157,7 +167,8 @@ jobs:
           set -euo pipefail
           # FILES unquoted on purpose: one argument per path.
           # shellcheck disable=SC2086
-          python3 tools/pin_core.py apply --repo-dir consumer --new "$VERSION" $FILES >> "$GITHUB_OUTPUT"
+          python3 tools/pin_core.py apply --repo-dir consumer --new "$VERSION" \
+            --schema-dir core-release/rules/core/_schema $FILES >> "$GITHUB_OUTPUT"
 
       - name: Open pin pull request
         id: cpr
@@ -180,7 +191,7 @@ jobs:
 
             Moves every `dev.steerspec.core` pin from `${{ steps.rewrite.outputs.old }}` to
             `${{ steps.tag.outputs.version }}` (`rules/realm.json` dependency version and source, and the
-            literal pins in: `${{ matrix.files }}`).
+            literal pins in: `${{ matrix.files }}`), and syncs `rules/_schema/` with the release (RM015).
 
             Pins stay literal on purpose (RR004 exact match, reproducible resolution outside Actions).
 

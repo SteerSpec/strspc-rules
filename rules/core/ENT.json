@@ -6,9 +6,9 @@
     "description": "An object with a unique identity and lifecycle. The unit of organization in the SteerSpec rule system."
   },
   "rule_set": {
-    "version": "0.12.11",
-    "timestamp": "2026-10-27T15:57:09Z",
-    "hash": "blake3:3102b9424565803a5e5bff2f212d7fe5ba1cdbd5cbcc92fa760c92809af5e4d5"
+    "version": "0.17.0",
+    "timestamp": "2026-10-30T16:57:21Z",
+    "hash": "blake3:e0dd83f09438016f43cd345afe6f4c139dbff86dad40d1f09eade376dbdef547"
   },
   "rules": [
     {
@@ -59,7 +59,7 @@
     {
       "id": "ENT-006",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MAY inherit the rule set of exactly one other Entity, declared in an `inherits` field holding the parent's Entity Unique Identifier.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
@@ -67,36 +67,36 @@
     },
     {
       "id": "ENT-007",
-      "revision": 0,
-      "state": "D",
-      "body": "An `inherits` reference to an Entity in another Realm MUST use the qualified form `<realm-id>:<EUID>`, and that Realm MUST be a declared dependency.",
+      "revision": 1,
+      "state": "P",
+      "body": "An `inherits` reference to an Entity outside the referencing Entity's Realm tree MUST use the qualified form `<realm-id>:<EUID>`, naming a declared dependency or one of its sub-realms.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
       "supersedes": null
     },
     {
       "id": "ENT-008",
-      "revision": 0,
-      "state": "D",
-      "body": "An inheritance chain MUST NOT contain cycles and MUST NOT exceed three hops.",
+      "revision": 1,
+      "state": "P",
+      "body": "An inheritance chain MUST NOT contain cycles or exceed three hops.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
       "supersedes": null
     },
     {
       "id": "ENT-009",
-      "revision": 0,
-      "state": "D",
-      "body": "An inheriting Entity acquires the parent's effective rule set, the parent's own Published and Implemented Rules together with those the parent inherits, as read-only references that remain owned by their original Entity.",
+      "revision": 1,
+      "state": "P",
+      "body": "An inheriting Entity MUST acquire the parent's effective rule set, the parent's own Published and Implemented Rules together with those the parent inherits, as read-only references that remain owned by their original Entity.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
       "supersedes": null
     },
     {
       "id": "ENT-010",
-      "revision": 0,
-      "state": "D",
-      "body": "An inheriting Entity's Rule Set covers only the Rules it owns.",
+      "revision": 1,
+      "state": "P",
+      "body": "An inheriting Entity's Rule Set MUST cover only the Rules it owns.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
       "supersedes": null

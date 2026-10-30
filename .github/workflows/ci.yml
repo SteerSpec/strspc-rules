@@ -16,14 +16,16 @@ jobs:
   # release (the same-repository develop -> main PR, and the resulting push
   # to main) aggregates those steps, which rulediff reads as skipped states
   # (RD003) and body-edit-plus-promotion (RD001), so exactly those are
-  # exempt from the diff; any other PR into main is checked.
-  validate-rules:
+  # exempt from the diff; any other PR into main is checked. Core defines the
+  # schemas, so it validates against its own _schema/, not the published ones.
+  rules:
     uses: SteerSpec/.github/.github/workflows/strspc-lint.yml@main
     permissions:
       contents: read
       pull-requests: read
     with:
       path: rules/core/
+      core: true
       diff: >-
         ${{ !(
           (
@@ -34,6 +36,15 @@ jobs:
           )
           || (github.event_name == 'push' && github.ref == 'refs/heads/main')
         ) }}
+
+  # Resolves the realm through .strspc/config.yaml, which the offline steps
+  # above do not: realm-resolve is what verifies cross-realm references such
+  # as inherits and overrides. Provider null, so this is static-only.
+  check:
+    uses: SteerSpec/.github/.github/workflows/strspc-check.yml@main
+    permissions:
+      contents: read
+      pull-requests: read
 
   lint-commits:
     runs-on: ubuntu-latest

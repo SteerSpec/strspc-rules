@@ -134,9 +134,10 @@ pre-commit install  # also install the pre-commit stage hooks
 
 ## Workflow
 
-- Feature branches → `develop` via PR. `develop` → `main` via PR for releases.
+- Feature branches → `develop` via PR, squashed, so the PR title is the commit.
+  `develop` → `main` via PR for releases, with a merge commit. Rulesets enforce both.
 - Use `bd` (beads) for ALL task tracking — no markdown TODOs.
-- CI gates every PR — the `validate-rules`, `lint-commits`, `lint-python` and `lint` jobs
+- CI gates every PR — the `rules`, `lint-commits`, `lint-python` and `lint` jobs
   (`ci.yml`) and the `build-schema` job (`build-schema.yml`) must all pass.
 - To release: bump `realm.version` in `rules/core/realm.json`, then open a PR from `develop`
   to `main`. On merge, the release workflow tags `v<realm.version>`, publishes the GitHub
@@ -144,7 +145,8 @@ pre-commit install  # also install the pre-commit stage hooks
   workflow skips the release, so docs-only and promotion merges stay green.
 - After a new tag, the release workflow calls `pin-consumers.yml`, which opens
   `chore(rules): pin dev.steerspec.core to X.Y.Z` PRs in strspc-manager, strspc-CLI,
-  strspc-sync and strspc-spec and closes their older pin PRs. To (re)open them for an
+  strspc-sync and strspc-spec and closes their older pin PRs. Each PR also syncs the
+  consumer's `rules/_schema/` with the tag. To (re)open them for an
   existing tag: `gh workflow run pin-consumers.yml --ref main -f tag=vX.Y.Z`. When a
   consumer starts pinning core in a new file, add it to the matrix there; the job fails
   on pins outside the list.
