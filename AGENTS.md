@@ -136,7 +136,7 @@ pre-commit install  # also install the pre-commit stage hooks
 
 - Feature branches → `develop` via PR. `develop` → `main` via PR for releases.
 - Use `bd` (beads) for ALL task tracking — no markdown TODOs.
-- CI gates every PR — the `validate-rules`, `lint-commits`, `lint-python` and `lint` jobs
+- CI gates every PR — the `rules`, `lint-commits`, `lint-python` and `lint` jobs
   (`ci.yml`) and the `build-schema` job (`build-schema.yml`) must all pass.
 - To release: bump `realm.version` in `rules/core/realm.json`, then open a PR from `develop`
   to `main`. On merge, the release workflow tags `v<realm.version>`, publishes the GitHub

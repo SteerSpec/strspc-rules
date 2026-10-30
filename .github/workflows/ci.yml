@@ -17,7 +17,7 @@ jobs:
   # to main) aggregates those steps, which rulediff reads as skipped states
   # (RD003) and body-edit-plus-promotion (RD001), so exactly those are
   # exempt from the diff; any other PR into main is checked.
-  validate-rules:
+  rules:
     uses: SteerSpec/.github/.github/workflows/strspc-lint.yml@main
     permissions:
       contents: read
