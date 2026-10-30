@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.17.8",
-    "timestamp": "2026-10-30T16:49:05Z",
-    "hash": "blake3:2b0e140564474acc2f50aed989769292b0b2962600644f6ea9298e302523c9c6"
+    "version": "0.20.0",
+    "timestamp": "2026-10-30T16:57:21Z",
+    "hash": "blake3:a9311e8e7737e7fad000c41ec3651c28f7e6991565842c67ecebfe5c326ef5ad"
   },
   "rules": [
     {
@@ -86,7 +86,7 @@
     {
       "id": "RUL-009",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MAY declare `overrides` naming one inherited Rule, which the declaring Rule replaces within the inheriting Entity's effective rule set only.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
@@ -95,7 +95,7 @@
     {
       "id": "RUL-010",
       "revision": 1,
-      "state": "D",
+      "state": "P",
       "body": "Within an Entity, at most one Rule that is not Abandoned, Terminated or superseded MAY override a given inherited Rule.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
@@ -104,7 +104,7 @@
     {
       "id": "RUL-011",
       "revision": 1,
-      "state": "D",
+      "state": "P",
       "body": "A Rule that supersedes an overriding Rule MAY restate the `overrides` it takes over, otherwise the override lapses.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
