@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.32.6",
-    "timestamp": "2026-10-31T19:03:56Z",
-    "hash": "blake3:deaf3dc5d32ea3c8759449f67f01868db45e1d6402e2178dce1a71f65fcfb48a"
+    "version": "0.32.10",
+    "timestamp": "2026-10-31T22:29:06Z",
+    "hash": "blake3:c3cb4b7b7af463748b3a8e5d4cdea5ccb342d5d68306a555184b797f8b412af7"
   },
   "rules": [
     {
@@ -154,6 +154,33 @@
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
+    },
+    {
+      "id": "RLM-017",
+      "revision": 0,
+      "state": "D",
+      "body": "HAS a natural language, identified by a BCP 47 tag, which IS `en` for a top-level Realm whose manifest declares none.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
+      "supersedes": null
+    },
+    {
+      "id": "RLM-018",
+      "revision": 0,
+      "state": "D",
+      "body": "A sub-realm MUST inherit its parent Realm's language and MUST NOT declare one in its manifest.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
+      "supersedes": null
+    },
+    {
+      "id": "RLM-019",
+      "revision": 0,
+      "state": "D",
+      "body": "In a Realm's Entity files, Rule bodies, Notes and Entity titles MUST be written in the Realm's language, except for identifiers, code spans and Key Words.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
+      "supersedes": null
     }
   ],
   "sub_entities": [
@@ -166,9 +193,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.13.2",
-        "timestamp": "2026-10-28T16:18:03Z",
-        "hash": "blake3:c23b5916c9fe82566b39f8174a9dbcae0a6a11783886a87618e9896f800b2165"
+        "version": "0.13.3",
+        "timestamp": "2026-10-31T22:29:06Z",
+        "hash": "blake3:c83751e1c13ee901bc1bd077cdaac01aa7f187158ec03825ff42a64f77c0e0ea"
       },
       "rules": [
         {
@@ -215,6 +242,15 @@
           "added_by": "@pleberre",
           "added_at": "2026-03-25",
           "supersedes": null
+        },
+        {
+          "id": "RLMMNFST-006",
+          "revision": 0,
+          "state": "D",
+          "body": "MAY declare a top-level Realm's language in a `language` field of the `realm` object, whose value MUST be `en`.",
+          "added_by": "@pleberre",
+          "added_at": "2026-10-31",
+          "supersedes": null
         }
       ],
       "notes": [
@@ -225,6 +261,15 @@
           "content": "The override is the rule_identifier_format field of realm.json, typed by realm.v1.schema.json as an object or null. Each field is optional and falls back to its default: brackets (RLIFRMT-002, \"[,]\"), euid_position (RLIFRMT-003, \"opening\"), id_splitter (RLIFRMT-005, \"-\"), revision_splitter (RLIFRMT-006, \".\"), state_splitter (RLIFRMT-007, \"/\"). RLIFRMT-004 has no field because the Rule Set Unique Number always takes the opposing position. For a top-level Realm, null keeps every default; for a sub-realm, null means the parent's format applies (RLM-015). The format changes rendering only (RLIFRMT-008).",
           "added_by": "@pleberre",
           "added_at": "2026-10-28",
+          "revision": 0
+        },
+        {
+          "id": "RLMMNFST-006/01",
+          "rule_ref": "RLMMNFST-006",
+          "type": "rationale",
+          "content": "The value is limited to `en` because the Key Words are defined as English terms (KWRD-002 to KWRD-006). Accepting another language first needs a Rule for how Key Words read in it.",
+          "added_by": "@pleberre",
+          "added_at": "2026-10-31",
           "revision": 0
         }
       ]
@@ -245,6 +290,24 @@
       "rule_ref": "RLM-016",
       "type": "clarification",
       "content": "Realm tree membership compares Realm identifiers: a Realm is the same Realm at any version, and the identifier in its manifest is trusted because it is globally unique (RLM-008). An Entity belongs to the Realm with the nearest manifest above it. Membership is read from the manifest of the top-level Realm, because a sub-realm's identifier does not show that the parent declares it and its manifest does not list its siblings, so a sub-realm resolved on its own cannot see them. A check that depends on the Realm tree is therefore defined from the top-level Realm.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
+      "revision": 0
+    },
+    {
+      "id": "RLM-019/01",
+      "rule_ref": "RLM-019",
+      "type": "clarification",
+      "content": "A Rule an Entity inherits from another Realm, or a Realm imports from a dependency (RLM-005), stays in its owner's file and language, and a dependency can be in another language. A Rule declaring `overrides` follows the language of the declaring Entity's Realm.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
+      "revision": 0
+    },
+    {
+      "id": "RLM-019/02",
+      "rule_ref": "RLM-019",
+      "type": "rationale",
+      "content": "Language detection is unreliable on short text that is mostly domain terms, so this Rule is enforced in review and no automated check detects the text's language.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "revision": 0
