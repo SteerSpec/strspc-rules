@@ -75,7 +75,7 @@ makes `main` and `develop` diverge.
   Both are success:
 
   ```bash
-  for r in strspc-manager strspc-CLI strspc-sync strspc-spec; do
+  for r in strspc-manager strspc-CLI strspc-sync strspc-spec strspc-pr-review strspc-cloud; do
     pr=$(gh pr list -R SteerSpec/$r --head chore/core-X.Y.Z --json number,author \
       --jq '.[] | "#\(.number) \(.author.login)"')
     pin=$(gh api repos/SteerSpec/$r/contents/rules/realm.json --jq .content | base64 -d \
