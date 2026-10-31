@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.32.11",
-    "timestamp": "2026-10-31T22:54:20Z",
-    "hash": "blake3:b4dad587213bbe348988ee3576ba1e8cc5bc5ded12abc2cca1b6b40e86bc9df4"
+    "timestamp": "2026-10-31T23:01:21Z",
+    "hash": "blake3:52c4e855e4aa8b8b2e0ea21f2a5aeb14eb4096be23e553e5c382f7574b942cc6"
   },
   "rules": [
     {
@@ -298,7 +298,7 @@
       "id": "RLM-019/01",
       "rule_ref": "RLM-019",
       "type": "clarification",
-      "content": "A Rule that an Entity inherits from another Realm, or that a Realm imports from a dependency (RLM-005), stays in its owning Realm's file and follows that Realm's language, whatever the importing Realm's language. A Rule declaring `overrides` follows the language of the declaring Entity's Realm.",
+      "content": "A Rule that an Entity inherits from another Realm, or that a Realm imports from a dependency (RLM-005), stays in its owning Entity's file and follows the language of that Entity's Realm, whatever the importing Realm's language. A Rule declaring `overrides` follows the language of the declaring Entity's Realm.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "revision": 1
