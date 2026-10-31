@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.11.9",
-    "timestamp": "2026-10-28T08:58:29Z",
-    "hash": "blake3:36b6a8a54835fe06f16a84c20873c1735ec30079664168417f0199d47476e0b1"
+    "version": "0.11.10",
+    "timestamp": "2026-10-31T09:58:50Z",
+    "hash": "blake3:c191e16d8c578846a9e5542b8afdcdae03c293810a75bcbcdd525f1718335486"
   },
   "rules": [
     {
@@ -67,9 +67,9 @@
     },
     {
       "id": "NTE-007",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "Notes of type `supersedes`, `extends`, or `related` MUST reference rules by identifier `<EUID>-NNN`, or `<realm-id>:<EUID>-NNN` across realms.",
+      "body": "Notes of type `supersedes`, `extends`, or `related` MUST reference rules by identifier `<EUID>-NNN`, or outside the Realm tree by `<realm-id>:<EUID>-NNN` naming a declared dependency or one of its sub-realms.",
       "added_by": "@pleberre",
       "added_at": "2026-10-18",
       "supersedes": null
