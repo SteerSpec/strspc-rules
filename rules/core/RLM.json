@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.32.5",
-    "timestamp": "2026-10-31T17:26:46Z",
-    "hash": "blake3:48d30a50c71831b9532c4c8396cbd24dcd59b6970d0bf7356bb29e9ac5b70755"
+    "version": "0.32.6",
+    "timestamp": "2026-10-31T18:49:47Z",
+    "hash": "blake3:3c2ab49de8e251f90cc4b068d5d1c4b68b7ebb2fd3617858296b4a4f87fbdf4b"
   },
   "rules": [
     {
@@ -150,7 +150,7 @@
       "id": "RLM-016",
       "revision": 0,
       "state": "D",
-      "body": "A Realm tree IS a top-level Realm together with all its declared sub-realms, and is the Realm tree of each of them.",
+      "body": "A Realm tree IS a top-level Realm together with all its declared sub-realms, and IS the Realm tree of each of them.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
@@ -238,6 +238,15 @@
       "content": "A sub-realm shares its parent Realm's identifier namespace (RLM-013), so it also shares the parent's Rule Identifier Format and its manifest leaves rule_identifier_format null (RLMMNFST-004). Dependent Realms are separate namespaces: a Realm never inherits the format of a Realm it depends on, each one has its own configuration (RLM-002).",
       "added_by": "@pleberre",
       "added_at": "2026-10-28",
+      "revision": 0
+    },
+    {
+      "id": "RLM-016/01",
+      "rule_ref": "RLM-016",
+      "type": "clarification",
+      "content": "Realm tree membership compares Realm identifiers: a Realm is the same Realm at any version, and the identifier in its manifest is trusted because it is globally unique (RLM-008). Membership is read from the manifest of the top-level Realm, because the manifest of a sub-realm does not name its parent, so a sub-realm resolved on its own cannot see its siblings. A check that depends on the Realm tree is therefore defined from the top-level Realm.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
       "revision": 0
     }
   ]

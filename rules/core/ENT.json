@@ -6,9 +6,9 @@
     "description": "An object with a unique identity and lifecycle. The unit of organization in the SteerSpec rule system."
   },
   "rule_set": {
-    "version": "0.17.6",
-    "timestamp": "2026-10-31T17:26:46Z",
-    "hash": "blake3:f608dc9e2b039d12854f399f1fbcae0ca8c1bec4b87d9eeb84fc255333b30cfd"
+    "version": "0.17.7",
+    "timestamp": "2026-10-31T18:49:47Z",
+    "hash": "blake3:2989e9bcc9cdc61fda3cac370acd18d6f4d6cf7f274f7fd328a01d0ec035bd32"
   },
   "rules": [
     {
@@ -114,7 +114,7 @@
       "id": "ENT-012",
       "revision": 0,
       "state": "D",
-      "body": "The Rules of a `public` Entity MAY be inherited and overridden from any Realm.",
+      "body": "Visibility `public` IS permission to inherit the Entity and to override its Rules from any Realm.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
@@ -123,7 +123,7 @@
       "id": "ENT-013",
       "revision": 0,
       "state": "D",
-      "body": "The Rules of a `protected` Entity MAY be inherited from any Realm and MUST NOT be overridden from outside its Realm tree.",
+      "body": "Visibility `protected` IS permission to inherit the Entity from any Realm and to override its Rules only from within its Realm tree.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
@@ -132,7 +132,7 @@
       "id": "ENT-014",
       "revision": 0,
       "state": "D",
-      "body": "The Rules of a `private` Entity MUST NOT be inherited from outside its Realm tree or overridden from outside its Realm.",
+      "body": "Visibility `private` IS permission to inherit the Entity only from within its Realm tree and to override its Rules only from the Realm holding it, not from a parent, child or sibling sub-realm of that Realm.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
@@ -150,7 +150,7 @@
       "id": "ENT-016",
       "revision": 0,
       "state": "D",
-      "body": "An inheritance or override MUST be permitted by every Entity in the inheritance chain between the declaring Entity and the owner of the Rule.",
+      "body": "An `inherits` declaration MUST be permitted by the visibility of the inherited Entity, and an `overrides` declaration MUST be permitted by the visibility of every Entity from the parent of the declaring Entity up to and including the owner of the overridden Rule, each measured from the Realm of the declaring Entity and applied as if that Entity owned the Rule.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
@@ -210,6 +210,15 @@
       "content": "Inheritance is specialisation, not containment: parent (sub-entities) nests an Entity inside another, inherits lets an Entity reuse another Entity's rule set without copying it, in the same Realm or across a declared dependency. Inherited Rules stay owned by the parent (ENT-009). A cross-realm parent is frozen at the dependency version pinned in realm.json, so its changes arrive only on a dependency bump; a same-realm parent is not pinned, and child and parent evolve together within their Realm's version. Only Published and Implemented parent Rules are inherited; Draft text may still change and Abandoned, Retired or Terminated Rules are not in force. A parent's sub-entities are not inherited.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
+      "revision": 0
+    },
+    {
+      "id": "ENT-016/01",
+      "rule_ref": "ENT-016",
+      "type": "rationale",
+      "content": "Visibility is applied along the chain because an Entity's own visibility would otherwise be bypassed. Take a `public` Entity A with a Rule R, a `protected` Entity B that inherits A, and an Entity D in an unrelated Realm that inherits B. D may inherit B, but it cannot override R, even though A alone would allow it: B's visibility applies to R as if B owned it, although R remains owned by A (ENT-009). The check stops at the owner, since Entities above it have no say over that Rule. An `inherits` is checked against the inherited Entity alone, because ENT-015 keeps that Entity no wider than those above it. An `overrides` is checked whatever the state of the Rule it names.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
       "revision": 0
     }
   ]
