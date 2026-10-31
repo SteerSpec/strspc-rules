@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.11.11",
-    "timestamp": "2026-10-31T18:49:36Z",
-    "hash": "blake3:e8971b2e91eedacadcad33d56278edf946889088fe7e596e3b4a6456b41f42b5"
+    "timestamp": "2026-10-31T19:03:56Z",
+    "hash": "blake3:1d3a4f670d0ad8bc342e56772fae2450e393397b8a8c3eac80922a8f4d649f07"
   },
   "rules": [
     {
@@ -114,7 +114,7 @@
       "id": "NTE-012",
       "revision": 0,
       "state": "D",
-      "body": "A Note of type `extends` on a Rule that is not Abandoned, Terminated or superseded MUST NOT reference a Rule whose Entity has a visibility that does not permit inheritance from the Realm of the Note or that is narrower than the visibility of the Entity holding the Note.",
+      "body": "A Note of type `extends` on a Rule that is not Abandoned, Retired or Terminated MUST NOT reference a Rule whose Entity has a visibility that does not permit inheritance from the Realm of the Note or that is narrower than the visibility of the Entity holding the Note.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null

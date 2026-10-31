@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.32.6",
-    "timestamp": "2026-10-31T18:49:47Z",
-    "hash": "blake3:3c2ab49de8e251f90cc4b068d5d1c4b68b7ebb2fd3617858296b4a4f87fbdf4b"
+    "timestamp": "2026-10-31T19:03:56Z",
+    "hash": "blake3:deaf3dc5d32ea3c8759449f67f01868db45e1d6402e2178dce1a71f65fcfb48a"
   },
   "rules": [
     {
@@ -244,7 +244,7 @@
       "id": "RLM-016/01",
       "rule_ref": "RLM-016",
       "type": "clarification",
-      "content": "Realm tree membership compares Realm identifiers: a Realm is the same Realm at any version, and the identifier in its manifest is trusted because it is globally unique (RLM-008). Membership is read from the manifest of the top-level Realm, because the manifest of a sub-realm does not name its parent, so a sub-realm resolved on its own cannot see its siblings. A check that depends on the Realm tree is therefore defined from the top-level Realm.",
+      "content": "Realm tree membership compares Realm identifiers: a Realm is the same Realm at any version, and the identifier in its manifest is trusted because it is globally unique (RLM-008). An Entity belongs to the Realm with the nearest manifest above it. Membership is read from the manifest of the top-level Realm, because a sub-realm's identifier does not show that the parent declares it and its manifest does not list its siblings, so a sub-realm resolved on its own cannot see them. A check that depends on the Realm tree is therefore defined from the top-level Realm.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "revision": 0
