@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.32.4",
-    "timestamp": "2026-10-28T16:18:03Z",
-    "hash": "blake3:d93c5f874cf3eb87fe8522b06795f4f8d956c890b6d21169a8a5e8a4c4c93953"
+    "version": "0.32.5",
+    "timestamp": "2026-10-31T17:21:16Z",
+    "hash": "blake3:b9bdd0547ccadd1c60103e772c1d14588809a0b207d0f8a6f6430135c339e401"
   },
   "rules": [
     {
@@ -144,6 +144,15 @@
       "body": "A sub-realm MUST inherit its parent Realm's Rule Identifier Format.",
       "added_by": "@pleberre",
       "added_at": "2026-10-28",
+      "supersedes": null
+    },
+    {
+      "id": "RLM-016",
+      "revision": 0,
+      "state": "D",
+      "body": "A Realm tree IS a parent Realm together with all its declared sub-realms.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
       "supersedes": null
     }
   ],

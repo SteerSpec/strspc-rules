@@ -6,9 +6,9 @@
     "description": "An object with a unique identity and lifecycle. The unit of organization in the SteerSpec rule system."
   },
   "rule_set": {
-    "version": "0.17.0",
-    "timestamp": "2026-10-30T16:57:21Z",
-    "hash": "blake3:e0dd83f09438016f43cd345afe6f4c139dbff86dad40d1f09eade376dbdef547"
+    "version": "0.17.6",
+    "timestamp": "2026-10-31T17:21:16Z",
+    "hash": "blake3:8ba19b71c33085cd9dfd10170c31754f2e79e4e2445af172733a1f1cd3263a55"
   },
   "rules": [
     {
@@ -99,6 +99,60 @@
       "body": "An inheriting Entity's Rule Set MUST cover only the Rules it owns.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-011",
+      "revision": 0,
+      "state": "D",
+      "body": "MAY declare a `visibility` of `private`, `protected` or `public`, which defaults to `public`, or on a sub-entity to the visibility of the Entity containing it.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-012",
+      "revision": 0,
+      "state": "D",
+      "body": "The Rules of a `public` Entity MAY be inherited and overridden from any Realm.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-013",
+      "revision": 0,
+      "state": "D",
+      "body": "The Rules of a `protected` Entity MAY be inherited from any Realm and MUST NOT be overridden from outside its Realm tree.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-014",
+      "revision": 0,
+      "state": "D",
+      "body": "The Rules of a `private` Entity MUST NOT be inherited from outside its Realm tree or overridden from outside its Realm.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-015",
+      "revision": 0,
+      "state": "D",
+      "body": "The visibility of an Entity MUST NOT be wider than that of the Entity it inherits or the Entity containing it, where `private` is narrower than `protected` and `protected` is narrower than `public`.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-016",
+      "revision": 0,
+      "state": "D",
+      "body": "An inheritance or override MUST be permitted by every Entity in the inheritance chain between the declaring Entity and the owner of the Rule.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
       "supersedes": null
     }
   ],
