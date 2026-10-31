@@ -24,6 +24,7 @@ The highest matching row wins:
 | Changes since the last tag | Bump | Precedent |
 | --- | --- | --- |
 | Rule or entity removed or renamed; schema rejects files it accepted | MAJOR | none yet |
+| An entity's `visibility` narrowed (`strspc diff` reports RD020) | MAJOR | none yet |
 | Any `feat`: new rule (Draft included), state promotion, new schema capability | MINOR | 1.7.0, 1.8.0 |
 | Only `fix` to rules, schemas or tools | PATCH | 1.8.1 |
 | Anything else only (ci, docs, chore, refactor, test, perf, style, revert) | No release; ask the user | |

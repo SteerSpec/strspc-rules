@@ -361,6 +361,12 @@ def build_schema(
                     # ENT-006/007: the inherited entity, a short EUID or
                     # <realm-id>:<EUID>; resolution is checked by the manager.
                     "inherits": {"type": "string"},
+                    # ENT-011: who may inherit and override; absent means the
+                    # default of ENT-011, applied by the manager.
+                    "visibility": {
+                        "type": "string",
+                        "enum": ["private", "protected", "public"],
+                    },
                 },
                 "additionalProperties": False,
             },
