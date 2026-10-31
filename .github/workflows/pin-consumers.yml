@@ -50,7 +50,7 @@ concurrency:
 jobs:
   pin:
     # A dispatch from any other branch would run unreviewed workflow code with
-    # write tokens on four repositories.
+    # write tokens on six repositories.
     if: github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     strategy:
@@ -65,6 +65,10 @@ jobs:
             files: rules/realm.json .strspc/config.yaml
           - repo: strspc-spec
             files: rules/realm.json README.md
+          - repo: strspc-pr-review
+            files: rules/realm.json .strspc/config.yaml
+          - repo: strspc-cloud
+            files: rules/realm.json
     steps:
       - name: Validate tag
         id: tag
