@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.32.10",
-    "timestamp": "2026-10-31T22:29:06Z",
-    "hash": "blake3:c3cb4b7b7af463748b3a8e5d4cdea5ccb342d5d68306a555184b797f8b412af7"
+    "version": "0.32.11",
+    "timestamp": "2026-10-31T22:54:20Z",
+    "hash": "blake3:b4dad587213bbe348988ee3576ba1e8cc5bc5ded12abc2cca1b6b40e86bc9df4"
   },
   "rules": [
     {
@@ -298,10 +298,10 @@
       "id": "RLM-019/01",
       "rule_ref": "RLM-019",
       "type": "clarification",
-      "content": "A Rule an Entity inherits from another Realm, or a Realm imports from a dependency (RLM-005), stays in its owner's file and language, and a dependency can be in another language. A Rule declaring `overrides` follows the language of the declaring Entity's Realm.",
+      "content": "A Rule that an Entity inherits from another Realm, or that a Realm imports from a dependency (RLM-005), stays in its owning Realm's file and follows that Realm's language, whatever the importing Realm's language. A Rule declaring `overrides` follows the language of the declaring Entity's Realm.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
-      "revision": 0
+      "revision": 1
     },
     {
       "id": "RLM-019/02",
