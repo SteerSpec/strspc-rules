@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.20.1",
-    "timestamp": "2026-10-31T19:03:56Z",
-    "hash": "blake3:d41fa7d2b54b7222df2c7e743d822a16b037ec2be3b0f7722896506cd552a8d9"
+    "timestamp": "2026-10-31T19:07:34Z",
+    "hash": "blake3:0234a6e104c0e1f2b72bddb687d8d55ee4a52874dcfb644dd0426db51be72fb1"
   },
   "rules": [
     {
@@ -114,7 +114,7 @@
       "id": "RUL-012",
       "revision": 0,
       "state": "D",
-      "body": "The `supersedes` field of a Rule MUST name a Rule of the same Entity.",
+      "body": "When the `supersedes` field of a Rule is not null, it MUST name a Rule of the same Entity.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
