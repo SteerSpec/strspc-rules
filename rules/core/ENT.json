@@ -6,9 +6,9 @@
     "description": "An object with a unique identity and lifecycle. The unit of organization in the SteerSpec rule system."
   },
   "rule_set": {
-    "version": "0.17.0",
-    "timestamp": "2026-10-30T16:57:21Z",
-    "hash": "blake3:e0dd83f09438016f43cd345afe6f4c139dbff86dad40d1f09eade376dbdef547"
+    "version": "0.17.7",
+    "timestamp": "2026-10-31T19:03:56Z",
+    "hash": "blake3:6d6f07bbe7a8b742739a72fc7d0c6ddad21bcabc5c4321cc610abeec00cfa7e2"
   },
   "rules": [
     {
@@ -100,6 +100,60 @@
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
       "supersedes": null
+    },
+    {
+      "id": "ENT-011",
+      "revision": 0,
+      "state": "D",
+      "body": "MAY declare a `visibility` of `private`, `protected` or `public`; when it is absent, a sub-entity takes the visibility of the Entity containing it and any other Entity is `public`.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-012",
+      "revision": 0,
+      "state": "D",
+      "body": "Visibility `public` IS permission to inherit the Entity and to override its Rules from any Realm.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-013",
+      "revision": 0,
+      "state": "D",
+      "body": "Visibility `protected` IS permission to inherit the Entity from any Realm and to override its Rules only from within its Realm tree.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-014",
+      "revision": 0,
+      "state": "D",
+      "body": "Visibility `private` IS permission to inherit the Entity only from within its Realm tree and to override its Rules only from the Realm holding it, not from a parent, child or sibling sub-realm of that Realm.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-015",
+      "revision": 0,
+      "state": "D",
+      "body": "The visibility of an Entity MUST NOT be wider than that of the Entity it inherits and MUST NOT be wider than that of the Entity containing it, where `private` is narrower than `protected` and `protected` is narrower than `public`.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-016",
+      "revision": 0,
+      "state": "D",
+      "body": "An `inherits` declaration MUST be permitted by the visibility of the inherited Entity, and an `overrides` declaration on a Rule that is not Abandoned, Retired or Terminated MUST be permitted by the visibility of every Entity from the inherited Entity up to and including the owner of the overridden Rule, each measured from the Realm of the declaring Entity and applied as if that Entity owned the Rule.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
+      "supersedes": null
     }
   ],
   "sub_entities": [
@@ -156,6 +210,15 @@
       "content": "Inheritance is specialisation, not containment: parent (sub-entities) nests an Entity inside another, inherits lets an Entity reuse another Entity's rule set without copying it, in the same Realm or across a declared dependency. Inherited Rules stay owned by the parent (ENT-009). A cross-realm parent is frozen at the dependency version pinned in realm.json, so its changes arrive only on a dependency bump; a same-realm parent is not pinned, and child and parent evolve together within their Realm's version. Only Published and Implemented parent Rules are inherited; Draft text may still change and Abandoned, Retired or Terminated Rules are not in force. A parent's sub-entities are not inherited.",
       "added_by": "@pleberre",
       "added_at": "2026-10-27",
+      "revision": 0
+    },
+    {
+      "id": "ENT-016/01",
+      "rule_ref": "ENT-016",
+      "type": "rationale",
+      "content": "Visibility is applied along the chain because an Entity's own visibility would otherwise be bypassed. Take a `public` Entity A with a Rule R, a `protected` Entity B that inherits A, and an Entity D in an unrelated Realm that inherits B. D may inherit B, but it cannot override R, even though A alone would allow it: B's visibility applies to R as if B owned it, although R remains owned by A (ENT-009). The check stops at the owner, since Entities above it have no say over that Rule. An `inherits` is checked against the inherited Entity alone, because ENT-015 keeps that Entity no wider than those above it. An `overrides` is checked whatever the state of the Rule it names. A superseded Rule stays in force until it is Retired, so the state exemption here and in NTE-012 does not cover it.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
       "revision": 0
     }
   ]
