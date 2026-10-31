@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.11.9",
-    "timestamp": "2026-10-28T08:58:29Z",
-    "hash": "blake3:36b6a8a54835fe06f16a84c20873c1735ec30079664168417f0199d47476e0b1"
+    "version": "0.11.11",
+    "timestamp": "2026-10-31T19:03:56Z",
+    "hash": "blake3:1d3a4f670d0ad8bc342e56772fae2450e393397b8a8c3eac80922a8f4d649f07"
   },
   "rules": [
     {
@@ -67,9 +67,9 @@
     },
     {
       "id": "NTE-007",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "Notes of type `supersedes`, `extends`, or `related` MUST reference rules by identifier `<EUID>-NNN`, or `<realm-id>:<EUID>-NNN` across realms.",
+      "body": "Notes of type `supersedes`, `extends`, or `related` MUST reference rules by identifier `<EUID>-NNN`, or outside the Realm tree by `<realm-id>:<EUID>-NNN` naming a declared dependency or one of its sub-realms.",
       "added_by": "@pleberre",
       "added_at": "2026-10-18",
       "supersedes": null
@@ -108,6 +108,15 @@
       "body": "Note identifiers under a Rule MUST be sequential from 01.",
       "added_by": "@pleberre",
       "added_at": "2026-10-28",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-012",
+      "revision": 0,
+      "state": "D",
+      "body": "A Note of type `extends` on a Rule that is not Abandoned, Retired or Terminated MUST NOT reference a Rule whose Entity has a visibility that does not permit inheritance from the Realm of the Note or that is narrower than the visibility of the Entity holding the Note.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
       "supersedes": null
     }
   ],

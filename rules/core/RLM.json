@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.32.4",
-    "timestamp": "2026-10-28T16:18:03Z",
-    "hash": "blake3:d93c5f874cf3eb87fe8522b06795f4f8d956c890b6d21169a8a5e8a4c4c93953"
+    "version": "0.32.6",
+    "timestamp": "2026-10-31T19:03:56Z",
+    "hash": "blake3:deaf3dc5d32ea3c8759449f67f01868db45e1d6402e2178dce1a71f65fcfb48a"
   },
   "rules": [
     {
@@ -145,6 +145,15 @@
       "added_by": "@pleberre",
       "added_at": "2026-10-28",
       "supersedes": null
+    },
+    {
+      "id": "RLM-016",
+      "revision": 0,
+      "state": "D",
+      "body": "A Realm tree IS a top-level Realm together with all its declared sub-realms, and IS the Realm tree of each of them.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
+      "supersedes": null
     }
   ],
   "sub_entities": [
@@ -229,6 +238,15 @@
       "content": "A sub-realm shares its parent Realm's identifier namespace (RLM-013), so it also shares the parent's Rule Identifier Format and its manifest leaves rule_identifier_format null (RLMMNFST-004). Dependent Realms are separate namespaces: a Realm never inherits the format of a Realm it depends on, each one has its own configuration (RLM-002).",
       "added_by": "@pleberre",
       "added_at": "2026-10-28",
+      "revision": 0
+    },
+    {
+      "id": "RLM-016/01",
+      "rule_ref": "RLM-016",
+      "type": "clarification",
+      "content": "Realm tree membership compares Realm identifiers: a Realm is the same Realm at any version, and the identifier in its manifest is trusted because it is globally unique (RLM-008). An Entity belongs to the Realm with the nearest manifest above it. Membership is read from the manifest of the top-level Realm, because a sub-realm's identifier does not show that the parent declares it and its manifest does not list its siblings, so a sub-realm resolved on its own cannot see them. A check that depends on the Realm tree is therefore defined from the top-level Realm.",
+      "added_by": "@pleberre",
+      "added_at": "2026-10-31",
       "revision": 0
     }
   ]
