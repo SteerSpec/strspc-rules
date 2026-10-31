@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.32.10",
-    "timestamp": "2026-10-31T22:22:08Z",
-    "hash": "blake3:960a6f30db7896df5e5a2b749c26eb56aa5e6aa24f5943fdd380278a4f16e30d"
+    "timestamp": "2026-10-31T22:29:06Z",
+    "hash": "blake3:c3cb4b7b7af463748b3a8e5d4cdea5ccb342d5d68306a555184b797f8b412af7"
   },
   "rules": [
     {
@@ -168,7 +168,7 @@
       "id": "RLM-018",
       "revision": 0,
       "state": "D",
-      "body": "A sub-realm MUST inherit its parent Realm's language, and its manifest MUST NOT declare one.",
+      "body": "A sub-realm MUST inherit its parent Realm's language and MUST NOT declare one in its manifest.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
@@ -177,7 +177,7 @@
       "id": "RLM-019",
       "revision": 0,
       "state": "D",
-      "body": "Rule bodies, notes and Entity titles held in a Realm's Entity files MUST be written in the Realm's language, except for identifiers, code spans and Key Words.",
+      "body": "In a Realm's Entity files, Rule bodies, Notes and Entity titles MUST be written in the Realm's language, except for identifiers, code spans and Key Words.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
@@ -194,8 +194,8 @@
       },
       "rule_set": {
         "version": "0.13.3",
-        "timestamp": "2026-10-31T22:22:08Z",
-        "hash": "blake3:9702b0a810f26f2d985b2aa920f3f0813a51397f3ddb83f64433243b55e85405"
+        "timestamp": "2026-10-31T22:29:06Z",
+        "hash": "blake3:c83751e1c13ee901bc1bd077cdaac01aa7f187158ec03825ff42a64f77c0e0ea"
       },
       "rules": [
         {
@@ -247,7 +247,7 @@
           "id": "RLMMNFST-006",
           "revision": 0,
           "state": "D",
-          "body": "MAY declare the Realm's language in a `language` field, whose value MUST be `en`.",
+          "body": "MAY declare a top-level Realm's language in a `language` field of the `realm` object, whose value MUST be `en`.",
           "added_by": "@pleberre",
           "added_at": "2026-10-31",
           "supersedes": null
@@ -267,7 +267,7 @@
           "id": "RLMMNFST-006/01",
           "rule_ref": "RLMMNFST-006",
           "type": "rationale",
-          "content": "The value is limited to `en` because the Key Words are defined in English (KWRD-001). Accepting another language first needs a Rule for how Key Words read in it.",
+          "content": "The value is limited to `en` because the Key Words are defined as English terms (KWRD-002 to KWRD-006). Accepting another language first needs a Rule for how Key Words read in it.",
           "added_by": "@pleberre",
           "added_at": "2026-10-31",
           "revision": 0
@@ -298,7 +298,7 @@
       "id": "RLM-019/01",
       "rule_ref": "RLM-019",
       "type": "clarification",
-      "content": "A Rule a Realm inherits or takes from a dependency is not held in its Entity files, so it keeps the language of the Realm that owns it, and a Realm MAY depend on a Realm in another language. A Rule declaring `overrides` is held in the child's Entity files and follows the child's language.",
+      "content": "A Rule an Entity inherits from another Realm, or a Realm imports from a dependency (RLM-005), stays in its owner's file and language, and a dependency can be in another language. A Rule declaring `overrides` follows the language of the declaring Entity's Realm.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "revision": 0
@@ -307,7 +307,7 @@
       "id": "RLM-019/02",
       "rule_ref": "RLM-019",
       "type": "rationale",
-      "content": "Language detection is unreliable on short text that is mostly domain terms, so this Rule is enforced in review and no automated check reads the text.",
+      "content": "Language detection is unreliable on short text that is mostly domain terms, so this Rule is enforced in review and no automated check detects the text's language.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "revision": 0
