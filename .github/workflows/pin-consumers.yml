@@ -64,7 +64,7 @@ jobs:
           - repo: strspc-sync
             files: rules/realm.json .strspc/config.yaml
           - repo: strspc-spec
-            files: rules/realm.json README.md
+            files: rules/realm.json
           - repo: strspc-pr-review
             files: rules/realm.json .strspc/config.yaml
           - repo: strspc-cloud
