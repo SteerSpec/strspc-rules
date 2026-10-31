@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.32.5",
-    "timestamp": "2026-10-31T17:21:16Z",
-    "hash": "blake3:b9bdd0547ccadd1c60103e772c1d14588809a0b207d0f8a6f6430135c339e401"
+    "timestamp": "2026-10-31T17:26:46Z",
+    "hash": "blake3:48d30a50c71831b9532c4c8396cbd24dcd59b6970d0bf7356bb29e9ac5b70755"
   },
   "rules": [
     {
@@ -150,7 +150,7 @@
       "id": "RLM-016",
       "revision": 0,
       "state": "D",
-      "body": "A Realm tree IS a parent Realm together with all its declared sub-realms.",
+      "body": "A Realm tree IS a top-level Realm together with all its declared sub-realms, and is the Realm tree of each of them.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null

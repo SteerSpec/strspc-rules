@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.17.6",
-    "timestamp": "2026-10-31T17:21:16Z",
-    "hash": "blake3:8ba19b71c33085cd9dfd10170c31754f2e79e4e2445af172733a1f1cd3263a55"
+    "timestamp": "2026-10-31T17:26:46Z",
+    "hash": "blake3:f608dc9e2b039d12854f399f1fbcae0ca8c1bec4b87d9eeb84fc255333b30cfd"
   },
   "rules": [
     {
@@ -105,7 +105,7 @@
       "id": "ENT-011",
       "revision": 0,
       "state": "D",
-      "body": "MAY declare a `visibility` of `private`, `protected` or `public`, which defaults to `public`, or on a sub-entity to the visibility of the Entity containing it.",
+      "body": "MAY declare a `visibility` of `private`, `protected` or `public`; when it is absent, a sub-entity takes the visibility of the Entity containing it and any other Entity is `public`.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
@@ -141,7 +141,7 @@
       "id": "ENT-015",
       "revision": 0,
       "state": "D",
-      "body": "The visibility of an Entity MUST NOT be wider than that of the Entity it inherits or the Entity containing it, where `private` is narrower than `protected` and `protected` is narrower than `public`.",
+      "body": "The visibility of an Entity MUST NOT be wider than that of the Entity it inherits and MUST NOT be wider than that of the Entity containing it, where `private` is narrower than `protected` and `protected` is narrower than `public`.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
