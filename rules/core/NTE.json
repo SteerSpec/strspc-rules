@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.11.18",
-    "timestamp": "2026-11-01T08:50:49Z",
-    "hash": "blake3:b1f2e02843bd0e23682260f2d05cebccae2b4702b03f15786f98c8174a03cf7c"
+    "timestamp": "2026-11-01T08:54:08Z",
+    "hash": "blake3:c172dfa6a037386b11f34dcd5b59c5425713524cd3e8c009ea7f83e7f2530e1d"
   },
   "rules": [
     {
@@ -150,7 +150,7 @@
       "id": "NTE-016",
       "revision": 0,
       "state": "D",
-      "body": "A Note of type `standard` MAY be added, revised or retyped to or from that type in any state of its Rule, and doing so leaves the revision of the Rule unchanged.",
+      "body": "A Note of type `standard` MAY be added, revised or retyped between that type and `reference` in any state of its Rule, and doing so leaves the revision of the Rule unchanged.",
       "added_by": "@pleberre",
       "added_at": "2026-11-01",
       "supersedes": null
