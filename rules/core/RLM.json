@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.32.42",
-    "timestamp": "2026-11-01T09:06:18Z",
-    "hash": "blake3:9b4f60c3eb63c90b0bdbcdbc573113336998851284082f755ffb8cf70f60bc89"
+    "version": "0.32.44",
+    "timestamp": "2026-11-01T09:07:31Z",
+    "hash": "blake3:8daf8964b4a769793e46f71b0a9b22427e63df7229aeee4e55dbc1d8c0dc333e"
   },
   "rules": [
     {
@@ -194,8 +194,8 @@
       },
       "rule_set": {
         "version": "0.13.4",
-        "timestamp": "2026-11-01T08:54:08Z",
-        "hash": "blake3:81badaf47f7bdf6dedccba08a8b499d0e66fd98e1e52242db42f969d778b0f99"
+        "timestamp": "2026-11-01T09:07:31Z",
+        "hash": "blake3:b8e3650b2a0fa2aa89dcda48124c961baffa4aa741559f3a5814cf99d484c685"
       },
       "rules": [
         {
@@ -292,16 +292,16 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.29",
-        "timestamp": "2026-11-01T09:06:18Z",
-        "hash": "blake3:4de5fd450c97fb2f0dacbbf71fdd4a8146a50d7b5ac538470412d37e8020fbb2"
+        "version": "0.1.31",
+        "timestamp": "2026-11-01T09:07:31Z",
+        "hash": "blake3:a48eaadb791d92b2b38b3ec78efd6129cb913323214bfcd4c1257febf0b202ea"
       },
       "rules": [
         {
           "id": "STDREF-001",
           "revision": 0,
           "state": "D",
-          "body": "IS a citation of an external standard, held in a `standards` array that a Realm or an Entity declares.",
+          "body": "IS a citation of an external standard held in a `standards` array.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
@@ -310,7 +310,7 @@
           "id": "STDREF-002",
           "revision": 0,
           "state": "D",
-          "body": "HAS an `id` matching `^[a-z0-9]+(-[a-z0-9]+)*(\\.[a-z0-9]+(-[a-z0-9]+)*)+$`, unique within its `standards` array.",
+          "body": "HAS an `id` matching `^[a-z0-9]+(-[a-z0-9]+)*(\\.[a-z0-9]+(-[a-z0-9]+)*)+$`.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
@@ -319,7 +319,7 @@
           "id": "STDREF-003",
           "revision": 0,
           "state": "D",
-          "body": "HAS a `relation` of `implements`, which claims coverage of the standard, or `derived_from`, which cites the standard as a source and claims no coverage.",
+          "body": "The `id` MUST be unique within its `standards` array.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
@@ -328,7 +328,7 @@
           "id": "STDREF-004",
           "revision": 0,
           "state": "D",
-          "body": "MAY have a `version`, a non-empty free string naming the edition of the standard, and a `url`, the absolute URL of the standard.",
+          "body": "HAS a `relation` of `implements` or `derived_from`.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
@@ -337,7 +337,7 @@
           "id": "STDREF-005",
           "revision": 0,
           "state": "D",
-          "body": "An `inherits` declaration MUST NOT make a Standard Reference of the inherited Entity available to the `standard` Notes of the inheriting Entity's own Rules.",
+          "body": "The relation `implements` IS a claim of coverage of the standard.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
@@ -346,7 +346,7 @@
           "id": "STDREF-006",
           "revision": 0,
           "state": "D",
-          "body": "The coverage rule set of an Entity IS its own Rules in state Draft, Published or Implemented with the Rules it acquires under ENT-009, less those that any of them overrides.",
+          "body": "The relation `derived_from` IS a citation of the standard as a source, with no claim of coverage.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
@@ -355,7 +355,7 @@
           "id": "STDREF-007",
           "revision": 0,
           "state": "D",
-          "body": "A clause IS identified by its `<clause>` together with the `id` and `version` of the Standard Reference its `standard` Note resolves to under NTE-015.",
+          "body": "MAY have a `version`, a non-empty free string naming the edition of the standard.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
@@ -364,7 +364,7 @@
           "id": "STDREF-008",
           "revision": 0,
           "state": "D",
-          "body": "A clause IS covered in an Entity if and only if a `standard` Note naming it, whose Standard Reference has relation `implements`, is on a Rule in state Implemented in the coverage rule set of that Entity.",
+          "body": "MAY have a `url`, the absolute URL of the standard.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
@@ -373,7 +373,7 @@
           "id": "STDREF-009",
           "revision": 0,
           "state": "D",
-          "body": "A clause of a Standard Reference with relation `implements`, named by a `standard` Note on a Rule in the coverage rule set of an Entity and not covered in that Entity, IS mapped there.",
+          "body": "An `inherits` declaration MUST NOT make a Standard Reference of the inherited Entity available to the `standard` Notes of the inheriting Entity's own Rules.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
@@ -382,13 +382,58 @@
           "id": "STDREF-010",
           "revision": 0,
           "state": "D",
-          "body": "A clause of a Standard Reference with relation `implements`, neither covered nor mapped in an Entity, IS lapsed there when a `standard` Note names it on a Rule in state Retired or Terminated owned by the Entity or an Entity it inherits from, or on a Rule that an override by either of them replaced.",
+          "body": "The coverage rule set of an Entity IS its own Rules in state Draft, Published or Implemented with the Rules it acquires under ENT-009, less those that any of them overrides.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
         },
         {
           "id": "STDREF-011",
+          "revision": 0,
+          "state": "D",
+          "body": "A clause IS identified by its `<clause>` together with the `id` and `version` of the Standard Reference its `standard` Note resolves to under NTE-016.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "supersedes": null
+        },
+        {
+          "id": "STDREF-012",
+          "revision": 0,
+          "state": "D",
+          "body": "A clause IS covered in an Entity if and only if a `standard` Note naming it, whose Standard Reference has relation `implements`, is on a Rule in state Implemented in the coverage rule set of that Entity.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "supersedes": null
+        },
+        {
+          "id": "STDREF-013",
+          "revision": 0,
+          "state": "D",
+          "body": "A clause not covered in an Entity IS mapped there if and only if a `standard` Note naming it, whose Standard Reference has relation `implements`, is on a Rule in the coverage rule set of that Entity.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "supersedes": null
+        },
+        {
+          "id": "STDREF-014",
+          "revision": 0,
+          "state": "D",
+          "body": "A clause neither covered nor mapped in an Entity IS lapsed there when a `standard` Note naming it, whose Standard Reference has relation `implements`, is on a Rule in state Retired or Terminated owned by the Entity or an Entity it inherits from.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "supersedes": null
+        },
+        {
+          "id": "STDREF-015",
+          "revision": 0,
+          "state": "D",
+          "body": "A clause neither covered nor mapped in an Entity IS lapsed there when a `standard` Note naming it, whose Standard Reference has relation `implements`, is on a Rule that an override by the Entity or an Entity it inherits from replaced.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "supersedes": null
+        },
+        {
+          "id": "STDREF-016",
           "revision": 0,
           "state": "D",
           "body": "A Rule that overrides or supersedes another Rule IS mapped only by its own `standard` Notes.",
@@ -417,6 +462,15 @@
           "revision": 0
         },
         {
+          "id": "STDREF-002/03",
+          "rule_ref": "STDREF-002",
+          "type": "example",
+          "content": "`owasp.asvs` and `ietf.rfc2119` are valid values of `id`.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "revision": 0
+        },
+        {
           "id": "STDREF-003/01",
           "rule_ref": "STDREF-003",
           "type": "applies_to",
@@ -435,8 +489,17 @@
           "revision": 0
         },
         {
-          "id": "STDREF-004/02",
-          "rule_ref": "STDREF-004",
+          "id": "STDREF-007/01",
+          "rule_ref": "STDREF-007",
+          "type": "applies_to",
+          "content": "The `standards` array of a Realm manifest or an Entity file in a rule directory, not any other data of that name.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "revision": 0
+        },
+        {
+          "id": "STDREF-007/02",
+          "rule_ref": "STDREF-007",
           "type": "rationale",
           "content": "Semantic versioning cannot express the edition of every standard, and an RFC has no version. The edition of a standard is separate from the version of the Realm citing it.",
           "added_by": "@pleberre",
@@ -444,28 +507,10 @@
           "revision": 0
         },
         {
-          "id": "STDREF-005/01",
-          "rule_ref": "STDREF-005",
-          "type": "rationale",
-          "content": "A citation describes the declaring Entity, and an inheriting Entity may override Rules so that the citation no longer holds for it. Notes on an inherited Rule resolve from the Entity that owns the Rule.",
-          "added_by": "@pleberre",
-          "added_at": "2026-11-01",
-          "revision": 0
-        },
-        {
-          "id": "STDREF-006/01",
-          "rule_ref": "STDREF-006",
-          "type": "rationale",
-          "content": "An overriding Rule counts from Draft, as it does in default evaluation, so a clause stops being covered in that Entity as soon as its replacement is drafted, not when the replacement is promoted.",
-          "added_by": "@pleberre",
-          "added_at": "2026-11-01",
-          "revision": 0
-        },
-        {
-          "id": "STDREF-007/01",
+          "id": "STDREF-007/03",
           "rule_ref": "STDREF-007",
-          "type": "rationale",
-          "content": "Editions renumber their clauses, so the same `<clause>` under two versions of a standard names two different clauses.",
+          "type": "example",
+          "content": "`ISO 27001:2022` and `ECSS-E-ST-40C Rev.1` are valid values of `version`.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "revision": 0
@@ -473,8 +518,17 @@
         {
           "id": "STDREF-008/01",
           "rule_ref": "STDREF-008",
+          "type": "applies_to",
+          "content": "The `standards` array of a Realm manifest or an Entity file in a rule directory, not any other data of that name.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "revision": 0
+        },
+        {
+          "id": "STDREF-009/01",
+          "rule_ref": "STDREF-009",
           "type": "rationale",
-          "content": "SteerSpec holds no clause lists, because the text of many standards is licensed, so coverage says what is mapped and implemented and cannot name a clause that nothing maps.",
+          "content": "A citation describes the declaring Entity, and an inheriting Entity may override Rules so that the citation no longer holds for it. Notes on an inherited Rule resolve from the Entity that owns the Rule.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "revision": 0
@@ -483,7 +537,7 @@
           "id": "STDREF-010/01",
           "rule_ref": "STDREF-010",
           "type": "rationale",
-          "content": "With no clause lists, a clause that loses its only Rule would otherwise disappear from a report without trace.",
+          "content": "An overriding Rule counts from Draft, as it does in default evaluation, so a clause stops being covered in that Entity as soon as its replacement is drafted, not when the replacement is promoted.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "revision": 0
@@ -492,25 +546,34 @@
           "id": "STDREF-011/01",
           "rule_ref": "STDREF-011",
           "type": "rationale",
+          "content": "Editions renumber their clauses, so the same `<clause>` under two versions of a standard names two different clauses.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "revision": 0
+        },
+        {
+          "id": "STDREF-012/01",
+          "rule_ref": "STDREF-012",
+          "type": "rationale",
+          "content": "SteerSpec holds no clause lists, because the text of many standards is licensed, so coverage says what is mapped and implemented and cannot name a clause that nothing maps.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "revision": 0
+        },
+        {
+          "id": "STDREF-014/01",
+          "rule_ref": "STDREF-014",
+          "type": "rationale",
+          "content": "With no clause lists, a clause that loses its only Rule would otherwise disappear from a report without trace.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "revision": 0
+        },
+        {
+          "id": "STDREF-016/01",
+          "rule_ref": "STDREF-016",
+          "type": "rationale",
           "content": "Without this, an inheriting Entity could weaken a Rule and still claim the clause.",
-          "added_by": "@pleberre",
-          "added_at": "2026-11-01",
-          "revision": 0
-        },
-        {
-          "id": "STDREF-002/03",
-          "rule_ref": "STDREF-002",
-          "type": "example",
-          "content": "`owasp.asvs` and `ietf.rfc2119` are valid values of `id`.",
-          "added_by": "@pleberre",
-          "added_at": "2026-11-01",
-          "revision": 0
-        },
-        {
-          "id": "STDREF-004/03",
-          "rule_ref": "STDREF-004",
-          "type": "example",
-          "content": "`ISO 27001:2022` and `ECSS-E-ST-40C Rev.1` are valid values of `version`.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "revision": 0
