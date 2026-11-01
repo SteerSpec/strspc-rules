@@ -6,9 +6,9 @@
     "description": "An object with a unique identity and lifecycle. The unit of organization in the SteerSpec rule system."
   },
   "rule_set": {
-    "version": "0.17.7",
-    "timestamp": "2026-10-31T19:03:56Z",
-    "hash": "blake3:6d6f07bbe7a8b742739a72fc7d0c6ddad21bcabc5c4321cc610abeec00cfa7e2"
+    "version": "0.17.8",
+    "timestamp": "2026-11-01T08:37:06Z",
+    "hash": "blake3:0d36376f0537415db930b3d84d986b27e0c118e50b78f14416111758c23d23f9"
   },
   "rules": [
     {
@@ -153,6 +153,15 @@
       "body": "An `inherits` declaration MUST be permitted by the visibility of the inherited Entity, and an `overrides` declaration on a Rule that is not Abandoned, Retired or Terminated MUST be permitted by the visibility of every Entity from the inherited Entity up to and including the owner of the overridden Rule, each measured from the Realm of the declaring Entity and applied as if that Entity owned the Rule.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-017",
+      "revision": 0,
+      "state": "D",
+      "body": "MAY declare a `standards` array of Standard References in its `entity` object.",
+      "added_by": "@pleberre",
+      "added_at": "2026-11-01",
       "supersedes": null
     }
   ],

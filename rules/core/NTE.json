@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.11.11",
-    "timestamp": "2026-10-31T19:03:56Z",
-    "hash": "blake3:1d3a4f670d0ad8bc342e56772fae2450e393397b8a8c3eac80922a8f4d649f07"
+    "version": "0.11.17",
+    "timestamp": "2026-11-01T08:37:06Z",
+    "hash": "blake3:5320f55d3c825ae0ff72c76ed45df08f470dd9959978ff77c8a7413b5de89270"
   },
   "rules": [
     {
@@ -118,6 +118,42 @@
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
+    },
+    {
+      "id": "NTE-013",
+      "revision": 0,
+      "state": "D",
+      "body": "A Note of type `standard` IS a mapping of its Rule to one clause of a standard, with content `<id>:<clause>` where `<id>` is the `id` of a Standard Reference and `<clause>` is a non-empty free string.",
+      "added_by": "@pleberre",
+      "added_at": "2026-11-01",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-014",
+      "revision": 0,
+      "state": "D",
+      "body": "The `<id>` of a `standard` Note MUST match a Standard Reference declared by the Entity holding the Rule, an Entity containing it, its Realm or that Realm's parent, the first of these that declares it taking precedence.",
+      "added_by": "@pleberre",
+      "added_at": "2026-11-01",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-015",
+      "revision": 0,
+      "state": "D",
+      "body": "A Note of type `standard` MAY be added, revised or retyped in any state of its Rule, and doing so leaves the revision of the Rule unchanged.",
+      "added_by": "@pleberre",
+      "added_at": "2026-11-01",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-016",
+      "revision": 0,
+      "state": "D",
+      "body": "A mapping IS withdrawn by changing its Note to another type, which keeps the record of the mapping.",
+      "added_by": "@pleberre",
+      "added_at": "2026-11-01",
+      "supersedes": null
     }
   ],
   "notes": [
@@ -137,6 +173,24 @@
       "content": "Before this rule, a Note's revision recorded the revision of the referenced Rule at the time the Note was added. Nothing read or checked that value, it was 0 on almost every Note because Rule revisions rarely move, and it gave no way to tell that a Note's content had changed. Redefining it as the Note's own edit counter mirrors a Rule's revision: a content change without a revision increment is a diff error, so every edit is visible in review. Notes are never removed (NTE-009), so identifiers under a Rule stay sequential (NTE-011) and no history is needed to prevent their reuse; a stale Note is revised in place unless it is of an append-only type (NTE-010).",
       "added_by": "@pleberre",
       "added_at": "2026-10-28",
+      "revision": 0
+    },
+    {
+      "id": "NTE-015/01",
+      "rule_ref": "NTE-015",
+      "type": "rationale",
+      "content": "A mapping is a claim about a Rule and does not change what the Rule requires, so it stays a Note and RUL-007 is not engaged. A Rule field would need superseding every mapped Rule when a standard is renumbered in a new edition.",
+      "added_by": "@pleberre",
+      "added_at": "2026-11-01",
+      "revision": 0
+    },
+    {
+      "id": "NTE-016/01",
+      "rule_ref": "NTE-016",
+      "type": "rationale",
+      "content": "NTE-009 forbids removing a Note, and NTE-011 keeps Note identifiers sequential.",
+      "added_by": "@pleberre",
+      "added_at": "2026-11-01",
       "revision": 0
     }
   ]

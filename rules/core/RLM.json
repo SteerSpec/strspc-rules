@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.32.11",
-    "timestamp": "2026-10-31T23:04:20Z",
-    "hash": "blake3:be5b976c6b22628c456e8d1aadffd3283ce307dbf445cbca84aec9a3f507c1da"
+    "version": "0.32.26",
+    "timestamp": "2026-11-01T08:37:06Z",
+    "hash": "blake3:1e9c31298bc59e45407bfb513163f19f4d68812086c971d3e3add159bac17fc3"
   },
   "rules": [
     {
@@ -193,9 +193,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.13.3",
-        "timestamp": "2026-10-31T22:29:06Z",
-        "hash": "blake3:c83751e1c13ee901bc1bd077cdaac01aa7f187158ec03825ff42a64f77c0e0ea"
+        "version": "0.13.4",
+        "timestamp": "2026-11-01T08:37:06Z",
+        "hash": "blake3:3a72a0c29e464d848fff41f74e4fb53b323c9eec10ae2ec446f99220878102c3"
       },
       "rules": [
         {
@@ -251,6 +251,15 @@
           "added_by": "@pleberre",
           "added_at": "2026-10-31",
           "supersedes": null
+        },
+        {
+          "id": "RLMMNFST-007",
+          "revision": 0,
+          "state": "D",
+          "body": "MAY declare a `standards` array of Standard References in the `realm` object.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "supersedes": null
         }
       ],
       "notes": [
@@ -270,6 +279,141 @@
           "content": "The value is limited to `en` because the Key Words are defined as English terms (KWRD-002 to KWRD-006). Accepting another language first needs a Rule for how Key Words read in it.",
           "added_by": "@pleberre",
           "added_at": "2026-10-31",
+          "revision": 0
+        }
+      ]
+    },
+    {
+      "$schema": "./_schema/entity.v1.schema.json",
+      "entity": {
+        "id": "STDREF",
+        "title": "Standard Reference",
+        "description": "A citation of an external standard, declared by a Realm or an Entity.",
+        "parent": "RLM"
+      },
+      "rule_set": {
+        "version": "0.1.13",
+        "timestamp": "2026-11-01T08:37:06Z",
+        "hash": "blake3:cbb65e400f8a816fa426e0945e0f3458b50b8465eebbd2095a98fae30f397835"
+      },
+      "rules": [
+        {
+          "id": "STDREF-001",
+          "revision": 0,
+          "state": "D",
+          "body": "IS a citation of an external standard, held in a `standards` array that a Realm or an Entity declares.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "supersedes": null
+        },
+        {
+          "id": "STDREF-002",
+          "revision": 0,
+          "state": "D",
+          "body": "HAS an `id` matching `^[a-z][a-z0-9-]*(\\.[a-z0-9][a-z0-9-]*)+$`, unique within its `standards` array.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "supersedes": null
+        },
+        {
+          "id": "STDREF-003",
+          "revision": 0,
+          "state": "D",
+          "body": "HAS a `relation` of `implements`, which claims coverage of the standard, or `derived_from`, which cites the standard as a source and claims no coverage.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "supersedes": null
+        },
+        {
+          "id": "STDREF-004",
+          "revision": 0,
+          "state": "D",
+          "body": "MAY have a `version`, a non-empty free string naming the edition of the standard, and a `url`.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "supersedes": null
+        },
+        {
+          "id": "STDREF-005",
+          "revision": 0,
+          "state": "D",
+          "body": "Declared by an Entity, it MUST NOT apply to an Entity that inherits the declaring Entity.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "supersedes": null
+        },
+        {
+          "id": "STDREF-006",
+          "revision": 0,
+          "state": "D",
+          "body": "A clause of a standard with relation `implements` IS covered by a Realm tree only where a `standard` Note names the clause on a Rule in state Implemented in an effective rule set of that tree.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "supersedes": null
+        },
+        {
+          "id": "STDREF-007",
+          "revision": 0,
+          "state": "D",
+          "body": "A clause named only by `standard` Notes on Rules in state Draft or Published IS mapped and not covered.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "supersedes": null
+        },
+        {
+          "id": "STDREF-008",
+          "revision": 0,
+          "state": "D",
+          "body": "A Rule that overrides an inherited Rule MUST NOT take on the `standard` Notes of that Rule, so a clause the replaced Rule named stays uncovered in the inheriting Entity unless another Rule names it.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "supersedes": null
+        }
+      ],
+      "notes": [
+        {
+          "id": "STDREF-002/01",
+          "rule_ref": "STDREF-002",
+          "type": "rationale",
+          "content": "There is no central registry of standards, so a Realm chooses its own slug. Requiring a dot keeps the form namespaced, such as `owasp.asvs` or `ietf.rfc2119`.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "revision": 0
+        },
+        {
+          "id": "STDREF-004/01",
+          "rule_ref": "STDREF-004",
+          "type": "rationale",
+          "content": "Semantic versioning cannot express editions such as `ISO 27001:2022` or `ECSS-E-ST-40C Rev.1`, and an RFC has no version. The edition of a standard is separate from the version of the Realm citing it.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "revision": 0
+        },
+        {
+          "id": "STDREF-005/01",
+          "rule_ref": "STDREF-005",
+          "type": "rationale",
+          "content": "A citation describes the declaring Entity, and an inheriting Entity may override Rules so that the citation no longer holds for it.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "revision": 0
+        },
+        {
+          "id": "STDREF-006/01",
+          "rule_ref": "STDREF-006",
+          "type": "rationale",
+          "content": "SteerSpec holds no clause lists, because the text of many standards is licensed, so coverage says what is mapped and implemented and cannot name a clause that nothing maps.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "revision": 0
+        },
+        {
+          "id": "STDREF-008/01",
+          "rule_ref": "STDREF-008",
+          "type": "rationale",
+          "content": "Without this, an inheriting Entity could weaken a Rule and still claim the clause.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
           "revision": 0
         }
       ]
