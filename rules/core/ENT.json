@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.17.8",
-    "timestamp": "2026-11-01T08:37:06Z",
-    "hash": "blake3:0d36376f0537415db930b3d84d986b27e0c118e50b78f14416111758c23d23f9"
+    "timestamp": "2026-11-01T08:50:49Z",
+    "hash": "blake3:ef3e198f51c3a7bbbc5141b39294c0d781ef822204400a450a6a67bfe3f3172d"
   },
   "rules": [
     {

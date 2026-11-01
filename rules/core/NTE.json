@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.11.17",
-    "timestamp": "2026-11-01T08:37:06Z",
-    "hash": "blake3:5320f55d3c825ae0ff72c76ed45df08f470dd9959978ff77c8a7413b5de89270"
+    "version": "0.11.18",
+    "timestamp": "2026-11-01T08:50:49Z",
+    "hash": "blake3:b1f2e02843bd0e23682260f2d05cebccae2b4702b03f15786f98c8174a03cf7c"
   },
   "rules": [
     {
@@ -123,7 +123,7 @@
       "id": "NTE-013",
       "revision": 0,
       "state": "D",
-      "body": "A Note of type `standard` IS a mapping of its Rule to one clause of a standard, with content `<id>:<clause>` where `<id>` is the `id` of a Standard Reference and `<clause>` is a non-empty free string.",
+      "body": "A Note of type `standard` IS a mapping of its Rule to one clause of a standard, with content `<id>:<clause>` split at the first colon, where `<id>` is the `id` of a Standard Reference and `<clause>` is not blank.",
       "added_by": "@pleberre",
       "added_at": "2026-11-01",
       "supersedes": null
@@ -132,7 +132,7 @@
       "id": "NTE-014",
       "revision": 0,
       "state": "D",
-      "body": "The `<id>` of a `standard` Note MUST match a Standard Reference declared by the Entity holding the Rule, an Entity containing it, its Realm or that Realm's parent, the first of these that declares it taking precedence.",
+      "body": "A Rule MUST NOT hold two Notes of type `standard` with the same content.",
       "added_by": "@pleberre",
       "added_at": "2026-11-01",
       "supersedes": null
@@ -141,7 +141,7 @@
       "id": "NTE-015",
       "revision": 0,
       "state": "D",
-      "body": "A Note of type `standard` MAY be added, revised or retyped in any state of its Rule, and doing so leaves the revision of the Rule unchanged.",
+      "body": "The `<id>` of a `standard` Note MUST match a Standard Reference declared by the Entity owning the Rule, its containing Entities nearest first, its Realm or that Realm's parent, the first of these that declares it taking precedence.",
       "added_by": "@pleberre",
       "added_at": "2026-11-01",
       "supersedes": null
@@ -150,7 +150,16 @@
       "id": "NTE-016",
       "revision": 0,
       "state": "D",
-      "body": "A mapping IS withdrawn by changing its Note to another type, which keeps the record of the mapping.",
+      "body": "A Note of type `standard` MAY be added, revised or retyped to or from that type in any state of its Rule, and doing so leaves the revision of the Rule unchanged.",
+      "added_by": "@pleberre",
+      "added_at": "2026-11-01",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-017",
+      "revision": 0,
+      "state": "D",
+      "body": "A mapping IS withdrawn by changing its Note to type `reference` with its content unchanged.",
       "added_by": "@pleberre",
       "added_at": "2026-11-01",
       "supersedes": null
@@ -176,8 +185,8 @@
       "revision": 0
     },
     {
-      "id": "NTE-015/01",
-      "rule_ref": "NTE-015",
+      "id": "NTE-016/01",
+      "rule_ref": "NTE-016",
       "type": "rationale",
       "content": "A mapping is a claim about a Rule and does not change what the Rule requires, so it stays a Note and RUL-007 is not engaged. A Rule field would need superseding every mapped Rule when a standard is renumbered in a new edition.",
       "added_by": "@pleberre",
@@ -185,10 +194,10 @@
       "revision": 0
     },
     {
-      "id": "NTE-016/01",
-      "rule_ref": "NTE-016",
+      "id": "NTE-017/01",
+      "rule_ref": "NTE-017",
       "type": "rationale",
-      "content": "NTE-009 forbids removing a Note, and NTE-011 keeps Note identifiers sequential.",
+      "content": "NTE-009 forbids removing a Note, and NTE-011 keeps Note identifiers sequential. A `reference` Note stays out of the evaluator prompt and out of coverage, and keeps the record of the mapping.",
       "added_by": "@pleberre",
       "added_at": "2026-11-01",
       "revision": 0
