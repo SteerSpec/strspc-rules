@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.11.21",
-    "timestamp": "2026-11-01T09:12:34Z",
-    "hash": "blake3:7a73362c74997435af7763ce5dff03288bbdcde395a3e77af5e45a943c7d5638"
+    "version": "0.11.26",
+    "timestamp": "2026-11-01T09:20:07Z",
+    "hash": "blake3:6a4ffc31f9f526026b501c71b56431142132b98435a73eb106c4e49e24e3587e"
   },
   "rules": [
     {
@@ -181,6 +181,15 @@
       "added_by": "@pleberre",
       "added_at": "2026-11-01",
       "supersedes": null
+    },
+    {
+      "id": "NTE-020",
+      "revision": 0,
+      "state": "D",
+      "body": "Examples on a Rule that is not Abandoned, Retired or Terminated MUST be held in Notes of type `example` or `counter_example`.",
+      "added_by": "@pleberre",
+      "added_at": "2026-11-01",
+      "supersedes": null
     }
   ],
   "notes": [
@@ -216,6 +225,24 @@
       "rule_ref": "NTE-019",
       "type": "rationale",
       "content": "NTE-009 forbids removing a Note, and NTE-011 keeps Note identifiers sequential. A `reference` Note stays out of the evaluator prompt and out of coverage, and keeps the record of the mapping.",
+      "added_by": "@pleberre",
+      "added_at": "2026-11-01",
+      "revision": 0
+    },
+    {
+      "id": "NTE-020/01",
+      "rule_ref": "NTE-020",
+      "type": "clarification",
+      "content": "NTE-001, RLM-008 and the Notes ENT-016/01, SPCFG-001/01 and SPCFG-008/01 predate this Rule and hold examples, so this Rule cannot reach Implemented until those Rules are Retired and those Notes are revised.",
+      "added_by": "@pleberre",
+      "added_at": "2026-11-01",
+      "revision": 0
+    },
+    {
+      "id": "NTE-020/02",
+      "rule_ref": "NTE-020",
+      "type": "clarification",
+      "content": "A grammar or an allowed value is part of what a Rule requires and is not an example.",
       "added_by": "@pleberre",
       "added_at": "2026-11-01",
       "revision": 0
