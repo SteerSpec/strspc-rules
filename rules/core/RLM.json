@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.32.35",
-    "timestamp": "2026-11-01T08:54:08Z",
-    "hash": "blake3:039ed752c6ddcf557e78261c1c5ab2471a356e4352b95a6c9c6a2a44868d52ea"
+    "version": "0.32.36",
+    "timestamp": "2026-11-01T08:55:26Z",
+    "hash": "blake3:145890b152eb8f69d56141ac4f23e1d7fc910373a2e0612e2265f2f23c713f89"
   },
   "rules": [
     {
@@ -292,9 +292,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.22",
-        "timestamp": "2026-11-01T08:54:08Z",
-        "hash": "blake3:3e3bea328070e6547cae5235aaf07e7ca3b91242187dee3166d098bc0ca5084c"
+        "version": "0.1.23",
+        "timestamp": "2026-11-01T08:55:26Z",
+        "hash": "blake3:b4e034229bf8964a4264635979e3e8889a68a5d93418611de308a2f585075425"
       },
       "rules": [
         {
@@ -382,7 +382,7 @@
           "id": "STDREF-010",
           "revision": 0,
           "state": "D",
-          "body": "A clause neither covered nor mapped in an Entity IS lapsed there when a `standard` Note names it on a Rule in state Retired or Terminated owned by the Entity or an Entity in its inheritance chain, or on a Rule that an override in that chain replaced.",
+          "body": "A clause neither covered nor mapped in an Entity IS lapsed there when a `standard` Note names it on a Rule in state Retired or Terminated owned by the Entity or an Entity it inherits from, or on a Rule that an override by either of them replaced.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "supersedes": null

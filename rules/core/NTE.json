@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.11.18",
-    "timestamp": "2026-11-01T08:54:08Z",
-    "hash": "blake3:c172dfa6a037386b11f34dcd5b59c5425713524cd3e8c009ea7f83e7f2530e1d"
+    "version": "0.11.19",
+    "timestamp": "2026-11-01T08:55:26Z",
+    "hash": "blake3:cbf25fb82465f6270c25c28c3dc9888d6b61f732b83f0bb1546357757d37a896"
   },
   "rules": [
     {
@@ -159,7 +159,7 @@
       "id": "NTE-017",
       "revision": 0,
       "state": "D",
-      "body": "A mapping IS withdrawn by changing its Note to type `reference` with its content unchanged.",
+      "body": "A mapping MUST be withdrawn only by changing its Note to type `reference` with its content unchanged.",
       "added_by": "@pleberre",
       "added_at": "2026-11-01",
       "supersedes": null
