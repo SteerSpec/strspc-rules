@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.32.36",
-    "timestamp": "2026-11-01T08:55:26Z",
-    "hash": "blake3:145890b152eb8f69d56141ac4f23e1d7fc910373a2e0612e2265f2f23c713f89"
+    "version": "0.32.38",
+    "timestamp": "2026-11-01T08:59:24Z",
+    "hash": "blake3:8b54362978bb51d27f480fdcb60d90be8a2764cb688b875a048ac23db2fa2234"
   },
   "rules": [
     {
@@ -292,9 +292,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.23",
-        "timestamp": "2026-11-01T08:55:26Z",
-        "hash": "blake3:b4e034229bf8964a4264635979e3e8889a68a5d93418611de308a2f585075425"
+        "version": "0.1.25",
+        "timestamp": "2026-11-01T08:59:24Z",
+        "hash": "blake3:04ac6cdb2773def654dbd68a46720b3112d196de6ff63a42dee10b5809a9e35b"
       },
       "rules": [
         {
@@ -373,7 +373,7 @@
           "id": "STDREF-009",
           "revision": 0,
           "state": "D",
-          "body": "A clause named by a `standard` Note on a Rule in the coverage rule set of an Entity and not covered in that Entity IS mapped there.",
+          "body": "A clause of a Standard Reference with relation `implements`, named by a `standard` Note on a Rule in the coverage rule set of an Entity and not covered in that Entity, IS mapped there.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
@@ -382,7 +382,7 @@
           "id": "STDREF-010",
           "revision": 0,
           "state": "D",
-          "body": "A clause neither covered nor mapped in an Entity IS lapsed there when a `standard` Note names it on a Rule in state Retired or Terminated owned by the Entity or an Entity it inherits from, or on a Rule that an override by either of them replaced.",
+          "body": "A clause of a Standard Reference with relation `implements`, neither covered nor mapped in an Entity, IS lapsed there when a `standard` Note names it on a Rule in state Retired or Terminated owned by the Entity or an Entity it inherits from, or on a Rule that an override by either of them replaced.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
