@@ -40,7 +40,7 @@ Work from a clean tree (a separate worktree if the current one is dirty).
 1. `git switch -c chore/release-X.Y.Z origin/develop`
 2. Change only `realm.version` in `rules/core/realm.json`. It is the realm manifest,
    not an entity file: a hand edit is the norm (see #69), no hash, no approval.
-3. `strspc realm validate rules/core/ --recursive --strict` and `python3 tools/build-schema.py --check`
+3. `strspc realm validate rules/core/ --recursive --strict --core` and `python3 tools/build-schema.py --check`
 4. Commit `chore(release): bump realm.version to X.Y.Z`, `git push -u origin chore/release-X.Y.Z`
    (an unpushed head makes `gh pr create` prompt), then
    `gh pr create --base develop --title "chore(release): bump realm.version to X.Y.Z" --body-file <file>`,

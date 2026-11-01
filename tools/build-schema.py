@@ -213,6 +213,7 @@ def build_note_type_enum(
         "supersedes",
         "extends",
         "related",
+        "standard",
     ]
 
 
@@ -366,6 +367,28 @@ def build_schema(
                     "visibility": {
                         "type": "string",
                         "enum": ["private", "protected", "public"],
+                    },
+                    # STDREF-001: external standards the entity cites. The
+                    # uniqueness of each id is checked by lint (STDREF-003).
+                    "standards": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                            "type": "object",
+                            "required": ["id", "relation"],
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "pattern": ("^[a-z0-9]+(-[a-z0-9]+)*(\\.[a-z0-9]+(-[a-z0-9]+)*)+$"),
+                                },
+                                "relation": {
+                                    "enum": ["implements", "derived_from"],
+                                },
+                                "version": {"type": "string", "minLength": 1},
+                                "url": {"type": "string", "minLength": 1},
+                            },
+                            "additionalProperties": False,
+                        },
                     },
                 },
                 "additionalProperties": False,

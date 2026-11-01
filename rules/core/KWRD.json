@@ -3,12 +3,19 @@
   "entity": {
     "id": "KWRD",
     "title": "Key Word",
-    "description": "RFC-2119-derived keyword semantics governing the interpretation of rule statements."
+    "description": "RFC-2119-derived keyword semantics governing the interpretation of rule statements.",
+    "standards": [
+      {
+        "id": "ietf.rfc2119",
+        "relation": "derived_from",
+        "url": "https://www.rfc-editor.org/rfc/rfc2119"
+      }
+    ]
   },
   "rule_set": {
-    "version": "0.7.0",
-    "timestamp": "2026-10-18T11:12:58Z",
-    "hash": "blake3:02378b0f7583cb043d50994f614c9dd9439621a74dc6b042b4d6d337019ce146"
+    "version": "0.7.5",
+    "timestamp": "2026-11-01T12:57:15Z",
+    "hash": "blake3:e4cf3678eaa88308ddbfc7601be3e0f51b45d8a48ac722c32a929d4967b3a46b"
   },
   "rules": [
     {
@@ -66,5 +73,51 @@
       "supersedes": null
     }
   ],
-  "notes": []
+  "notes": [
+    {
+      "id": "KWRD-002/01",
+      "rule_ref": "KWRD-002",
+      "type": "standard",
+      "content": "ietf.rfc2119:1",
+      "added_by": "@pleberre",
+      "added_at": "2026-11-01",
+      "revision": 0
+    },
+    {
+      "id": "KWRD-003/01",
+      "rule_ref": "KWRD-003",
+      "type": "standard",
+      "content": "ietf.rfc2119:2",
+      "added_by": "@pleberre",
+      "added_at": "2026-11-01",
+      "revision": 0
+    },
+    {
+      "id": "KWRD-004/01",
+      "rule_ref": "KWRD-004",
+      "type": "standard",
+      "content": "ietf.rfc2119:3",
+      "added_by": "@pleberre",
+      "added_at": "2026-11-01",
+      "revision": 0
+    },
+    {
+      "id": "KWRD-005/01",
+      "rule_ref": "KWRD-005",
+      "type": "standard",
+      "content": "ietf.rfc2119:4",
+      "added_by": "@pleberre",
+      "added_at": "2026-11-01",
+      "revision": 0
+    },
+    {
+      "id": "KWRD-006/01",
+      "rule_ref": "KWRD-006",
+      "type": "standard",
+      "content": "ietf.rfc2119:5",
+      "added_by": "@pleberre",
+      "added_at": "2026-11-01",
+      "revision": 0
+    }
+  ]
 }
