@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.32.38",
-    "timestamp": "2026-11-01T08:59:24Z",
-    "hash": "blake3:8b54362978bb51d27f480fdcb60d90be8a2764cb688b875a048ac23db2fa2234"
+    "version": "0.32.42",
+    "timestamp": "2026-11-01T09:06:18Z",
+    "hash": "blake3:9b4f60c3eb63c90b0bdbcdbc573113336998851284082f755ffb8cf70f60bc89"
   },
   "rules": [
     {
@@ -292,9 +292,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.25",
-        "timestamp": "2026-11-01T08:59:24Z",
-        "hash": "blake3:04ac6cdb2773def654dbd68a46720b3112d196de6ff63a42dee10b5809a9e35b"
+        "version": "0.1.29",
+        "timestamp": "2026-11-01T09:06:18Z",
+        "hash": "blake3:4de5fd450c97fb2f0dacbbf71fdd4a8146a50d7b5ac538470412d37e8020fbb2"
       },
       "rules": [
         {
@@ -411,7 +411,7 @@
           "id": "STDREF-002/02",
           "rule_ref": "STDREF-002",
           "type": "rationale",
-          "content": "There is no central registry of standards, so a Realm chooses its own slug. Requiring a dot keeps the form namespaced, such as `owasp.asvs` or `ietf.rfc2119`.",
+          "content": "There is no central registry of standards, so a Realm chooses its own slug, and requiring a dot keeps the form namespaced.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "revision": 0
@@ -438,7 +438,7 @@
           "id": "STDREF-004/02",
           "rule_ref": "STDREF-004",
           "type": "rationale",
-          "content": "Semantic versioning cannot express editions such as `ISO 27001:2022` or `ECSS-E-ST-40C Rev.1`, and an RFC has no version. The edition of a standard is separate from the version of the Realm citing it.",
+          "content": "Semantic versioning cannot express the edition of every standard, and an RFC has no version. The edition of a standard is separate from the version of the Realm citing it.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "revision": 0
@@ -493,6 +493,24 @@
           "rule_ref": "STDREF-011",
           "type": "rationale",
           "content": "Without this, an inheriting Entity could weaken a Rule and still claim the clause.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "revision": 0
+        },
+        {
+          "id": "STDREF-002/03",
+          "rule_ref": "STDREF-002",
+          "type": "example",
+          "content": "`owasp.asvs` and `ietf.rfc2119` are valid values of `id`.",
+          "added_by": "@pleberre",
+          "added_at": "2026-11-01",
+          "revision": 0
+        },
+        {
+          "id": "STDREF-004/03",
+          "rule_ref": "STDREF-004",
+          "type": "example",
+          "content": "`ISO 27001:2022` and `ECSS-E-ST-40C Rev.1` are valid values of `version`.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "revision": 0
