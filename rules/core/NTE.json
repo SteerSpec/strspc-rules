@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.11.21",
-    "timestamp": "2026-11-01T09:12:34Z",
-    "hash": "blake3:7a73362c74997435af7763ce5dff03288bbdcde395a3e77af5e45a943c7d5638"
+    "version": "0.11.23",
+    "timestamp": "2026-11-01T09:17:51Z",
+    "hash": "blake3:bc670342d539873aa845a219fd062c3550780c451f8829f0fb7d1e79318bf900"
   },
   "rules": [
     {
@@ -181,6 +181,15 @@
       "added_by": "@pleberre",
       "added_at": "2026-11-01",
       "supersedes": null
+    },
+    {
+      "id": "NTE-020",
+      "revision": 0,
+      "state": "D",
+      "body": "Examples MUST be held in Notes of type `example` or `counter_example`.",
+      "added_by": "@pleberre",
+      "added_at": "2026-11-01",
+      "supersedes": null
     }
   ],
   "notes": [
@@ -216,6 +225,15 @@
       "rule_ref": "NTE-019",
       "type": "rationale",
       "content": "NTE-009 forbids removing a Note, and NTE-011 keeps Note identifiers sequential. A `reference` Note stays out of the evaluator prompt and out of coverage, and keeps the record of the mapping.",
+      "added_by": "@pleberre",
+      "added_at": "2026-11-01",
+      "revision": 0
+    },
+    {
+      "id": "NTE-020/01",
+      "rule_ref": "NTE-020",
+      "type": "clarification",
+      "content": "NTE-001 and RLM-008 predate this Rule and hold inline examples, so this Rule cannot reach Implemented until they are superseded.",
       "added_by": "@pleberre",
       "added_at": "2026-11-01",
       "revision": 0
