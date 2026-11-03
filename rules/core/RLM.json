@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.32.44",
-    "timestamp": "2026-11-01T09:07:31Z",
-    "hash": "blake3:8daf8964b4a769793e46f71b0a9b22427e63df7229aeee4e55dbc1d8c0dc333e"
+    "version": "0.32.53",
+    "timestamp": "2026-11-03T13:27:15Z",
+    "hash": "blake3:505ecd1f4631246aad9ba2ab1fa2531ac12fde5b1fbc66e7b785c82740b670a8"
   },
   "rules": [
     {
@@ -148,27 +148,27 @@
     },
     {
       "id": "RLM-016",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "A Realm tree IS a top-level Realm together with all its declared sub-realms, and IS the Realm tree of each of them.",
+      "body": "A Realm tree IS a top-level Realm together with all its declared sub-realms.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
     },
     {
       "id": "RLM-017",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "HAS a natural language, identified by a BCP 47 tag, which IS `en` for a top-level Realm whose manifest declares none.",
+      "body": "HAS a natural language, identified by a BCP 47 tag.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
     },
     {
       "id": "RLM-018",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "A sub-realm MUST inherit its parent Realm's language and MUST NOT declare one in its manifest.",
+      "body": "A sub-realm MUST inherit its parent Realm's language.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
@@ -181,6 +181,42 @@
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
+    },
+    {
+      "id": "RLM-020",
+      "revision": 0,
+      "state": "D",
+      "body": "The Realm tree of a sub-realm IS the Realm tree of its top-level Realm.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-03",
+      "supersedes": null
+    },
+    {
+      "id": "RLM-021",
+      "revision": 0,
+      "state": "D",
+      "body": "The language of a top-level Realm whose manifest declares none IS `en`.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-03",
+      "supersedes": null
+    },
+    {
+      "id": "RLM-022",
+      "revision": 0,
+      "state": "D",
+      "body": "The manifest of a sub-realm MUST NOT declare a language.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-03",
+      "supersedes": null
+    },
+    {
+      "id": "RLM-023",
+      "revision": 0,
+      "state": "D",
+      "body": "MUST have an identifier that follows reverse domain notation.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-03",
+      "supersedes": "RLM-008"
     }
   ],
   "sub_entities": [
@@ -616,6 +652,24 @@
       "content": "Language detection is unreliable on short text that is mostly domain terms, so this Rule is enforced in review and no automated check detects the text's language.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
+      "revision": 0
+    },
+    {
+      "id": "RLM-023/01",
+      "rule_ref": "RLM-023",
+      "type": "example",
+      "content": "`com.example.realm`",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-03",
+      "revision": 0
+    },
+    {
+      "id": "RLM-023/02",
+      "rule_ref": "RLM-023",
+      "type": "rationale",
+      "content": "Reverse domain notation keeps Realm identifiers unique across organizations.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-03",
       "revision": 0
     }
   ]

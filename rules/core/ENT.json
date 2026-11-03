@@ -6,9 +6,9 @@
     "description": "An object with a unique identity and lifecycle. The unit of organization in the SteerSpec rule system."
   },
   "rule_set": {
-    "version": "0.17.8",
-    "timestamp": "2026-11-01T09:07:31Z",
-    "hash": "blake3:35bf3298985e359d1d252ee83842d062e4ff69f717726a3a847f5ae5c8c5c454"
+    "version": "0.17.15",
+    "timestamp": "2026-11-03T13:26:58Z",
+    "hash": "blake3:558c6479ea48ad93873095d2e0a5b572595b16d2114609344e7e7e5895bd9672"
   },
   "rules": [
     {
@@ -139,18 +139,18 @@
     },
     {
       "id": "ENT-015",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "The visibility of an Entity MUST NOT be wider than that of the Entity it inherits and MUST NOT be wider than that of the Entity containing it, where `private` is narrower than `protected` and `protected` is narrower than `public`.",
+      "body": "The visibility of an Entity MUST NOT be wider than that of the Entity it inherits, where `private` is narrower than `protected` and `protected` is narrower than `public`.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
     },
     {
       "id": "ENT-016",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "An `inherits` declaration MUST be permitted by the visibility of the inherited Entity, and an `overrides` declaration on a Rule that is not Abandoned, Retired or Terminated MUST be permitted by the visibility of every Entity from the inherited Entity up to and including the owner of the overridden Rule, each measured from the Realm of the declaring Entity and applied as if that Entity owned the Rule.",
+      "body": "An `inherits` declaration MUST be permitted by the visibility of the inherited Entity.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
@@ -162,6 +162,24 @@
       "body": "MAY declare a `standards` array of Standard References in its `entity` object.",
       "added_by": "@pleberre",
       "added_at": "2026-11-01",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-018",
+      "revision": 0,
+      "state": "D",
+      "body": "The visibility of an Entity MUST NOT be wider than that of the Entity containing it, in the order of ENT-015.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-03",
+      "supersedes": null
+    },
+    {
+      "id": "ENT-019",
+      "revision": 0,
+      "state": "D",
+      "body": "An `overrides` declaration on a Rule that is not Abandoned, Retired or Terminated MUST be permitted by the visibility of every Entity from the inherited Entity up to and including the owner of the overridden Rule, each measured from the Realm of the declaring Entity and applied as if that Entity owned the Rule.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-03",
       "supersedes": null
     }
   ],
@@ -225,9 +243,27 @@
       "id": "ENT-016/01",
       "rule_ref": "ENT-016",
       "type": "rationale",
-      "content": "Visibility is applied along the chain because an Entity's own visibility would otherwise be bypassed. Take a `public` Entity A with a Rule R, a `protected` Entity B that inherits A, and an Entity D in an unrelated Realm that inherits B. D may inherit B, but it cannot override R, even though A alone would allow it: B's visibility applies to R as if B owned it, although R remains owned by A (ENT-009). The check stops at the owner, since Entities above it have no say over that Rule. An `inherits` is checked against the inherited Entity alone, because ENT-015 keeps that Entity no wider than those above it. An `overrides` is checked whatever the state of the Rule it names. A superseded Rule stays in force until it is Retired, so the state exemption here and in NTE-012 does not cover it.",
+      "content": "An `inherits` is checked against the inherited Entity alone, because ENT-015 keeps that Entity no wider than those above it.",
       "added_by": "@pleberre",
       "added_at": "2026-10-31",
+      "revision": 1
+    },
+    {
+      "id": "ENT-019/01",
+      "rule_ref": "ENT-019",
+      "type": "rationale",
+      "content": "Visibility is applied along the chain because an Entity's own visibility would otherwise be bypassed. The check stops at the owner, since Entities above it have no say over that Rule. An `overrides` is checked whatever the state of the Rule it names. A superseded Rule stays in force until it is Retired, so the state exemption here and in NTE-012 does not cover it.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-03",
+      "revision": 0
+    },
+    {
+      "id": "ENT-019/02",
+      "rule_ref": "ENT-019",
+      "type": "example",
+      "content": "Take a `public` Entity A with a Rule R, a `protected` Entity B that inherits A, and an Entity D in an unrelated Realm that inherits B. D may inherit B, but it cannot override R, even though A alone would allow it: B's visibility applies to R as if B owned it, although R remains owned by A (ENT-009).",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-03",
       "revision": 0
     }
   ]
