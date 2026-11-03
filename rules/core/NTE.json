@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.11.26",
-    "timestamp": "2026-11-01T09:20:07Z",
-    "hash": "blake3:6a4ffc31f9f526026b501c71b56431142132b98435a73eb106c4e49e24e3587e"
+    "version": "0.13.0",
+    "timestamp": "2026-11-03T14:42:20Z",
+    "hash": "blake3:b81ea86652323bc9109b83a304b8fb362fc7e5f371f3f2d6e8e6ba9132e36299"
   },
   "rules": [
     {
@@ -190,6 +190,24 @@
       "added_by": "@pleberre",
       "added_at": "2026-11-01",
       "supersedes": null
+    },
+    {
+      "id": "NTE-021",
+      "revision": 0,
+      "state": "P",
+      "body": "IS associated with a single Rule.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-03",
+      "supersedes": "NTE-001"
+    },
+    {
+      "id": "NTE-022",
+      "revision": 0,
+      "state": "P",
+      "body": "MUST reference the identifier of its Rule explicitly.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-03",
+      "supersedes": "NTE-001"
     }
   ],
   "notes": [
@@ -233,10 +251,10 @@
       "id": "NTE-020/01",
       "rule_ref": "NTE-020",
       "type": "clarification",
-      "content": "NTE-001, RLM-008 and the Notes ENT-016/01, SPCFG-001/01 and SPCFG-008/01 predate this Rule and hold examples, so this Rule cannot reach Implemented until those Rules are Retired and those Notes are revised.",
+      "content": "NTE-001 and RLM-008 predate this Rule and hold examples. NTE-021 and NTE-022 supersede NTE-001, and RLM-023 supersedes RLM-008, with the examples in `example` Notes, so this Rule cannot reach Implemented until NTE-001 and RLM-008 are Retired.",
       "added_by": "@pleberre",
       "added_at": "2026-11-01",
-      "revision": 0
+      "revision": 1
     },
     {
       "id": "NTE-020/02",
@@ -245,6 +263,15 @@
       "content": "A grammar or an allowed value is part of what a Rule requires and is not an example.",
       "added_by": "@pleberre",
       "added_at": "2026-11-01",
+      "revision": 0
+    },
+    {
+      "id": "NTE-022/01",
+      "rule_ref": "NTE-022",
+      "type": "example",
+      "content": "Note `KWRD-002/01` references Rule KWRD-002 in its identifier and in its `rule_ref`.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-03",
       "revision": 0
     }
   ]

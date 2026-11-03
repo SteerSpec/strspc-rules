@@ -6,9 +6,9 @@
     "description": "The consumer-side configuration that declares which rules a project subscribes to and how they are enforced."
   },
   "rule_set": {
-    "version": "0.12.1",
-    "timestamp": "2026-10-28T07:49:01Z",
-    "hash": "blake3:b438835fc369a75bc5832e73bb674a5b4e0d2e5048412db41985cee495b862f4"
+    "version": "0.12.5",
+    "timestamp": "2026-11-03T13:27:15Z",
+    "hash": "blake3:bf4fa8818e50da1a1e73602a7d3203cf0d94ef9e36d46b68b1f023bc4229afbe"
   },
   "rules": [
     {
@@ -333,10 +333,10 @@
       "id": "SPCFG-001/01",
       "rule_ref": "SPCFG-001",
       "type": "rationale",
-      "content": "The `.strspc/` prefix follows the dotfile convention for tool configuration (cf. `.git/`, `.vscode/`). The name derives from the SteerSpec project abbreviation.",
+      "content": "The `.strspc/` prefix follows the dotfile convention for tool configuration. The name derives from the SteerSpec project abbreviation.",
       "added_by": "@pleberre",
       "added_at": "2026-03-23",
-      "revision": 0
+      "revision": 1
     },
     {
       "id": "SPCFG-004/01",
@@ -360,10 +360,10 @@
       "id": "SPCFG-008/01",
       "rule_ref": "SPCFG-008",
       "type": "rationale",
-      "content": "A rule defines what must be true. How critical a violation is depends on the consuming project's context. The same rule might be a hard failure for a fintech API and a warning for an internal tool. This separation prevents rule authors from imposing enforcement policy on consumers (Rule Manager Spec §1.1).",
+      "content": "A rule defines what must be true. How critical a violation is depends on the consuming project's context. This separation prevents rule authors from imposing enforcement policy on consumers (Rule Manager Spec §1.1).",
       "added_by": "@pleberre",
       "added_at": "2026-03-23",
-      "revision": 0
+      "revision": 1
     },
     {
       "id": "SPCFG-009/01",
@@ -372,6 +372,24 @@
       "content": "When absent, the evaluator receives rules in states Draft (D), Published (P) and Implemented (I). `evaluate_on` narrows which rules are evaluated; `fail_on` (SPCFGFAIL) decides which violations fail the run.",
       "added_by": "@pleberre",
       "added_at": "2026-10-18",
+      "revision": 0
+    },
+    {
+      "id": "SPCFG-001/02",
+      "rule_ref": "SPCFG-001",
+      "type": "example",
+      "content": "`.git/` and `.vscode/` follow the same dotfile convention.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-03",
+      "revision": 0
+    },
+    {
+      "id": "SPCFG-008/02",
+      "rule_ref": "SPCFG-008",
+      "type": "example",
+      "content": "The same rule might be a hard failure for a fintech API and a warning for an internal tool.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-03",
       "revision": 0
     }
   ]
