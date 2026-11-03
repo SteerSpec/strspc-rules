@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.32.53",
-    "timestamp": "2026-11-03T13:27:15Z",
-    "hash": "blake3:505ecd1f4631246aad9ba2ab1fa2531ac12fde5b1fbc66e7b785c82740b670a8"
+    "version": "0.32.54",
+    "timestamp": "2026-11-03T14:29:04Z",
+    "hash": "blake3:4b8c0bc22a8c3947b5e583c3368a973d5fe162f934cfaed18c7d8873989bcbad"
   },
   "rules": [
     {
@@ -328,9 +328,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.31",
-        "timestamp": "2026-11-01T09:07:31Z",
-        "hash": "blake3:a48eaadb791d92b2b38b3ec78efd6129cb913323214bfcd4c1257febf0b202ea"
+        "version": "0.1.32",
+        "timestamp": "2026-11-03T14:29:04Z",
+        "hash": "blake3:908ae9ffc2d5d87d3952d29d259e5bb20bc29a504013ab8904fcb00101716a4a"
       },
       "rules": [
         {
@@ -398,9 +398,9 @@
         },
         {
           "id": "STDREF-008",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "MAY have a `url`, the absolute URL of the standard.",
+          "body": "MAY have a `url`, the absolute `http` or `https` URL of the standard.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
