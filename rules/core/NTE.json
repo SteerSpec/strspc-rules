@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.11.31",
-    "timestamp": "2026-11-03T13:54:58Z",
-    "hash": "blake3:4f04a4af493ea576129f0bb44a8b782d14e9bf2cd301f040bbeb3ae281296c30"
+    "version": "0.13.0",
+    "timestamp": "2026-11-03T14:29:44Z",
+    "hash": "blake3:2238a4205416f99b54668dcaf185971fd159e3814a00a36492762e31da97c3f4"
   },
   "rules": [
     {
@@ -194,7 +194,7 @@
     {
       "id": "NTE-021",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "IS associated with a single Rule.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-03",
@@ -203,7 +203,7 @@
     {
       "id": "NTE-022",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MUST reference the identifier of its Rule explicitly.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-03",
