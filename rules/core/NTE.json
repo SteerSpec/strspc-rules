@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.11.30",
-    "timestamp": "2026-11-03T13:27:21Z",
-    "hash": "blake3:6ffb7b42f65ffe26e9406ba388ab8a9fd9f4eb861a0ae772e38a696cfe7b4255"
+    "version": "0.11.31",
+    "timestamp": "2026-11-03T13:54:58Z",
+    "hash": "blake3:4f04a4af493ea576129f0bb44a8b782d14e9bf2cd301f040bbeb3ae281296c30"
   },
   "rules": [
     {
@@ -207,7 +207,7 @@
       "body": "MUST reference the identifier of its Rule explicitly.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-03",
-      "supersedes": null
+      "supersedes": "NTE-001"
     }
   ],
   "notes": [
