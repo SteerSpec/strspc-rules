@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.32.54",
-    "timestamp": "2026-11-03T14:29:04Z",
-    "hash": "blake3:4b8c0bc22a8c3947b5e583c3368a973d5fe162f934cfaed18c7d8873989bcbad"
+    "version": "0.33.0",
+    "timestamp": "2026-11-03T14:42:20Z",
+    "hash": "blake3:85db4e5f916e3e98af9b167d2c23fce68a459aed83f3693cc944797e4356e397"
   },
   "rules": [
     {
@@ -212,7 +212,7 @@
     {
       "id": "RLM-023",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MUST have an identifier that follows reverse domain notation.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-03",
