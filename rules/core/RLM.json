@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.33.0",
-    "timestamp": "2026-11-03T14:29:44Z",
-    "hash": "blake3:2aa2987c4174d6f2c06af18add22eca00ab13aa36d14ea94810354c02a610791"
+    "timestamp": "2026-11-03T14:42:20Z",
+    "hash": "blake3:85db4e5f916e3e98af9b167d2c23fce68a459aed83f3693cc944797e4356e397"
   },
   "rules": [
     {
@@ -328,9 +328,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.31",
-        "timestamp": "2026-11-01T09:07:31Z",
-        "hash": "blake3:a48eaadb791d92b2b38b3ec78efd6129cb913323214bfcd4c1257febf0b202ea"
+        "version": "0.1.32",
+        "timestamp": "2026-11-03T14:29:04Z",
+        "hash": "blake3:908ae9ffc2d5d87d3952d29d259e5bb20bc29a504013ab8904fcb00101716a4a"
       },
       "rules": [
         {
@@ -398,9 +398,9 @@
         },
         {
           "id": "STDREF-008",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "MAY have a `url`, the absolute URL of the standard.",
+          "body": "MAY have a `url`, the absolute `http` or `https` URL of the standard.",
           "added_by": "@pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
