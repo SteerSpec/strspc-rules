@@ -41,7 +41,7 @@ What already works:
 - **Levels are cumulative:**
 
   | Level | Requirements |
-  |---|---|
+  | --- | --- |
   | L1 | 70 |
   | L2 | 253 |
   | L3 | 345 |
@@ -52,7 +52,7 @@ What already works:
   deleted, modified, moved:
 
   | Kind | Entries |
-  |---|---|
+  | --- | --- |
   | moved | 95 |
   | deleted (out of scope or insufficient impact) | 51 |
   | modified | 48 |
@@ -63,7 +63,7 @@ What already works:
 ### Constraints from existing rules
 
 | Rule | Consequence |
-|---|---|
+| --- | --- |
 | Rule ID pattern `^[A-Z0-9]+-\d{3}$`; RLIFRMT-008, rendering only | `V1.1.1` can't be a rule ID, so the standard's own number needs a field |
 | RUL-003: identifiers are never reused | ASVS 5 reuses `V1.1.1` with a new meaning, so editions can't share one realm's ID space |
 | RUL-012 (Draft): `supersedes` stays within one entity | Editions move requirements across chapters, so a crosswalk is needed rather than supersession |
