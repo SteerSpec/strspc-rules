@@ -69,6 +69,7 @@ What already works:
 | RUL-012 (Draft): `supersedes` stays within one entity | Editions move requirements across chapters, so a crosswalk is needed rather than supersession |
 | RUL-004 (Published): a rule is a single phrase | Conflicts with verbatim transcription of 130 requirements |
 | RULST-009: no Implemented while the governed code violates it | A standard realm governs no code, so its rules stay Published |
+| RD006: a superseded rule retires when its replacement reaches Implemented | A standard rule never reaches Implemented, so a transcription fix needs its own transition |
 | `realm` sets `additionalProperties: false` | Licence and attribution fields need a schema change |
 | STDREF-009: no Standard Reference reaches an inheriting entity | Unchanged. A consumer links the standard itself |
 
@@ -89,17 +90,26 @@ What already works:
 - One entity per chapter (`V1`) and one sub-entity per section (`V1S1`). Each requirement is a rule:
   `V1.1.1` → `V1S1-001`, numbered in the standard's order.
 - **Rule field `clause`** (optional string): the standard's own number, `V1.1.1`. It's set while the
-  rule is Draft and never changes (RUL-007), and it's unique within the realm.
+  rule is Draft and never changes (RUL-007). It's unique among the realm's **live** rules: those not
+  superseded, Retired, Terminated or Abandoned. A rule that supersedes another must keep its
+  `clause`, so a transcription fix never changes which clause a project's notes resolve to.
 - **Rule field `profiles`** (optional list of strings): the levels the clause belongs to, for example
   `["L2", "L3"]` for a requirement whose minimum level is 2.
 - **Realm field `profiles`**: the allowed names, in order. A rule's `profiles` must be drawn from it.
 - **Realm fields `license`** (SPDX ID) and **`attribution`** (`{text, url}`). CC BY-SA requires both,
   and the transcription keeps the same licence.
+- **Realm field `edition`** (string): the edition the realm transcribes, `5.0.0`. The realm `version`
+  is the transcription's own release version, and it moves with fixes.
 - Rule bodies are the standard's text, verbatim.
 - The rules are Published once the transcription is checked. They're never Implemented.
 - **Generated.** A script reads the publisher's machine-readable release and runs
   `strspc entity add` and `strspc rule add`, so hashes stay valid and no rule JSON is written by hand.
-  A new transcription fix supersedes the rule, within its section entity.
+- **Transcription fixes.** A fix supersedes the rule within its section entity (RUL-008, RUL-012) and
+  keeps its `clause`. The code-realm path doesn't apply: RD006 retires the superseded rule when its
+  replacement reaches Implemented, and a standard rule never does. In a standard realm, the
+  superseded rule moves to **Terminated** (no longer in force, RULST-008) when its replacement
+  reaches Published, in the same change. This needs a transition rule specific to standard
+  realms, so it depends on the realm kind (open question 3).
 
 ### Linking a Standard Reference to the realm
 
@@ -113,6 +123,9 @@ The Standard Reference gains two optional fields:
 ```
 
 - `realm` must name an entry of the realm's `dependencies`.
+- `version` is required when `realm` is set, and must equal the linked realm's `edition`. That keeps
+  STDREF-011's clause identity (id, version, clause) unambiguous. The dependency's own `version`
+  pins the transcription release, not the edition.
 - `profile` must name one of that realm's `profiles`, and is allowed only with `realm`.
 - When `realm` is set, a `standard` note's clause (`owasp.asvs:V1.1.1`) must equal the `clause` of a
   rule in that realm, at the pinned version. Matching is exact and case-sensitive.
@@ -120,7 +133,7 @@ The Standard Reference gains two optional fields:
 
 ### Coverage (contract for strspc-manager `coverage`)
 
-For a linked Standard Reference, the clause list is the linked realm's rules that aren't superseded,
+For a linked Standard Reference, the clause list is the `clause` labels of the linked realm's live rules,
 filtered by `profile` when it's set.
 
 - **Statuses:** `covered`, `mapped` and `lapsed` as in STDREF-012 to STDREF-015, plus **`unmapped`**:
@@ -164,10 +177,13 @@ filtered by `profile` when it's set.
 
 ### Lint and validation codes (contract; the manager assigns numbers)
 
-- A `clause` is duplicated within a realm.
+- A `clause` is duplicated among a realm's live rules.
+- A rule that supersedes another has a different `clause`.
+- A Standard Reference with `realm` has no `version`, or a `version` other than the linked realm's
+  `edition`.
 - A rule's `profiles` entry isn't declared on the realm.
 - A Standard Reference's `realm` isn't a dependency, or its `profile` isn't declared on that realm.
-- A `standard` note names a clause that the linked realm doesn't have, or has only as superseded.
+- A `standard` note names a clause that the linked realm doesn't have, or has only on rules that aren't live.
 - A crosswalk entry's `clause` isn't in the previous edition, or a target isn't in this one.
 
 ## What this repo ships
@@ -176,8 +192,13 @@ filtered by `profile` when it's set.
 - RUL rules for `clause` and `profiles`.
 - RLMMNFST rules for `license`, `attribution` and `profiles`.
 - A crosswalk rule set.
-- `entity.v1` and `realm.v1` schema changes, through `tools/build-schema.py`. `realm.v1` needs
-  explicit approval, as in #114. New fields use `omitempty`, so existing hashes don't move.
+- Schema changes:
+  - `entity.v1` (`clause`, `profiles`, the Standard Reference fields): through
+    `tools/build-schema.py`, which generates `entity.v1` and `config.v1`.
+  - `realm.v1` (`license`, `attribution`, `edition`, `profiles`, the Standard Reference fields):
+    hand-maintained, and it needs explicit approval, as in #114.
+- Every new field is optional and absent when unused, so existing files keep their bytes and their
+  hashes. In strspc-manager's Go structs, that means `omitempty` on each new field.
 - No transcription. The pilot realm lives in its own repo (open question 6).
 
 ## Steps
@@ -195,7 +216,7 @@ filtered by `profile` when it's set.
 - `strspc realm validate --strict` and `strspc lint --strict` pass on the pilot realm.
 - `strspc standards coverage` in strspc-CLI shows `covered`, `mapped` and `unmapped` against the
   70-clause total.
-- A note naming a clause that doesn't exist fails lint, and one naming a superseded clause fails too.
+- A note naming a clause that doesn't exist fails lint, and so does one naming a clause whose rules are all Terminated. After a transcription fix, a note keeps resolving to the superseding rule.
 - Excluding a clause lowers the total, and the report lists the justification.
 - With the crosswalk, a 4.0.3 mapping of a `moved` clause is proposed as the 5.0.0 clause.
 
@@ -206,7 +227,9 @@ filtered by `profile` when it's set.
 2. **`clause` as a field.** #114 used a note for mappings because of RUL-007. A clause label is set
    while the rule is Draft and never changes, so a field fits. Confirm.
 3. **Realm kind.** Does a standard realm declare `"kind": "standard"`, so tools never evaluate its rules
-   and lint skips checks meant for code realms? Or do `license` and `clause` imply it?
+   and lint skips checks meant for code realms? Or do `license` and `clause` imply it? The
+   transcription-fix transition (superseded → Terminated when the replacement is Published) needs one
+   or the other, since it must not apply to code realms.
 4. **Exclusions:** a realm-level list, which is easy to audit in one place, or a note type, which
    carries author, date and revision but sits on no rule of the project's?
 5. **ShareAlike reach.** Mapping by ID isn't a derivative. Inheriting the text (the adopt model) may be.
