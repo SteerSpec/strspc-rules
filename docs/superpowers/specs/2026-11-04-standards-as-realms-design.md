@@ -89,7 +89,10 @@ What already works:
 
 - One entity per chapter (`V1`) and one sub-entity per section (`V1S1`). Each requirement is a rule:
   `V1.1.1` → `V1S1-001`, numbered in the standard's order.
-- **Rule field `clause`** (optional string): the standard's own number, `V1.1.1`. It's set while the
+- **Rule field `clause`** (string): the standard's own number, `V1.1.1`. **Required on every live
+  rule of a standard realm**, since the clause list and the coverage total are built from these
+  labels: a rule without one would drop out of both unnoticed. Optional, and normally absent, in
+  other realms. Telling the two kinds apart is open question 3. It's set while the
   rule is Draft and never changes (RUL-007). It's unique among the realm's **live** rules: those not
   superseded, Retired, Terminated or Abandoned. A rule that supersedes another must keep its
   `clause`, so a transcription fix never changes which clause a project's notes resolve to.
@@ -178,6 +181,7 @@ filtered by `profile` when it's set.
 ### Lint and validation codes (contract; the manager assigns numbers)
 
 - A `clause` is duplicated among a realm's live rules.
+- A live rule of a standard realm has no `clause`.
 - A rule that supersedes another has a different `clause`.
 - A Standard Reference with `realm` has no `version`, or a `version` other than the linked realm's
   `edition`.
