@@ -13,9 +13,9 @@
     ]
   },
   "rule_set": {
-    "version": "0.7.7",
-    "timestamp": "2026-11-05T07:17:26Z",
-    "hash": "blake3:2fe1a302c4a1f889cca4b6eee9c771232fc7f36b9c6196d4c293002411de837c"
+    "version": "0.8.0",
+    "timestamp": "2026-11-05T07:30:12Z",
+    "hash": "blake3:47fe221dacce4f0a5f3562a9ba456408e62d21c657e822a8be87457a8e893459"
   },
   "rules": [
     {
@@ -75,7 +75,7 @@
     {
       "id": "KWRD-007",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "A Key Word HAS the meaning given by KWRD-002 to KWRD-006 only when written in upper case.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-05",

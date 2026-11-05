@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.20.5",
-    "timestamp": "2026-11-05T07:17:57Z",
-    "hash": "blake3:050e36bb81a5cabdd60ac5ea96b2ba09e25a76a50e26db5d712ddda9ac0c3317"
+    "version": "0.22.1",
+    "timestamp": "2026-11-05T07:30:12Z",
+    "hash": "blake3:57ab1b098eff6ae113ee8a0f98b98b66c703c30125ac8beeced73f62c9c26b3f"
   },
   "rules": [
     {
@@ -122,7 +122,7 @@
     {
       "id": "RUL-013",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "DEFINE a single property of an Entity or the behavior of that property.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-05",
@@ -131,7 +131,7 @@
     {
       "id": "RUL-014",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "A change to an immutable Rule MUST be made by a new Rule that supersedes it.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-05",
@@ -148,9 +148,9 @@
         "parent": "RUL"
       },
       "rule_set": {
-        "version": "0.19.2",
-        "timestamp": "2026-11-05T07:17:57Z",
-        "hash": "blake3:e9d74b8449d08599fa4e92c8c4d9bd92f0e92da1f26f5f1cbffe12f2e2cccd24"
+        "version": "0.20.0",
+        "timestamp": "2026-11-05T07:30:12Z",
+        "hash": "blake3:f42febadb9d991a0cbb4d8ea4868e2e56bb01a4b3f439b35b9b0d8d74cb1b1f6"
       },
       "rules": [
         {
@@ -237,7 +237,7 @@
         {
           "id": "RULST-010",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "Retired IS the State of a Rule that is still in force or present but is due to be removed.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-05",
