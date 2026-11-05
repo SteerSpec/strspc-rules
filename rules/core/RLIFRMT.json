@@ -6,9 +6,9 @@
     "description": "Defines the display format for Rule Identifiers within a Realm."
   },
   "rule_set": {
-    "version": "0.13.2",
-    "timestamp": "2026-10-28T16:11:24Z",
-    "hash": "blake3:1a9fdc12ce8172db30a7d4e9fff801529c4a98c0fa677ee5e2278ab4594f8e00"
+    "version": "0.14.0",
+    "timestamp": "2026-11-05T07:30:12Z",
+    "hash": "blake3:c8ffd0edfae75ebd0bf33599ce516d99f24abd7c1be0fafbd5ec12413ad21cb4"
   },
   "rules": [
     {
@@ -16,7 +16,7 @@
       "revision": 0,
       "state": "I",
       "body": "DEFINES the format that Rule Identifier must comply with within a Realm.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -25,7 +25,7 @@
       "revision": 0,
       "state": "I",
       "body": "MUST define the starting and closing character pair, allowed values: \"(,)\", \"{,}\",\"[,]\", default is \"[,]\".",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -34,7 +34,7 @@
       "revision": 0,
       "state": "P",
       "body": "MUST define the position of the Entity Unique Identifier as either the opening part of the Rule Unique Identifier or as the closing part, default is opening part.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -43,7 +43,7 @@
       "revision": 0,
       "state": "I",
       "body": "MUST define the position of the Rule Set Unique Number as taking the opposing position of the Entity Unique Identifier.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -52,7 +52,7 @@
       "revision": 0,
       "state": "P",
       "body": "MUST define a unique Rule Identifier split character which will separate the Entity Unique Identifier and Rule Set Unique Number, allowed values are: \"-\", \"_\", default is \"-\".",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -61,7 +61,7 @@
       "revision": 0,
       "state": "I",
       "body": "MUST define a Rule Revision splitter which can be either \".\" or \"#\", default is \".\".",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -70,7 +70,7 @@
       "revision": 0,
       "state": "I",
       "body": "MUST define a Rule State splitter which can be either \"/\", \"\\\" or \"|\", default is \"/\".",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -79,9 +79,18 @@
       "revision": 0,
       "state": "D",
       "body": "MUST affect only the rendered form of a Rule Identifier, never the stored \"<EUID>-<NNN>\" form.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-28",
       "supersedes": null
+    },
+    {
+      "id": "RLIFRMT-009",
+      "revision": 0,
+      "state": "P",
+      "body": "DEFINE the format of the Rule Identifiers of a Realm.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-05",
+      "supersedes": "RLIFRMT-001"
     }
   ],
   "notes": [
@@ -90,7 +99,7 @@
       "rule_ref": "RLIFRMT-008",
       "type": "rationale",
       "content": "Entity files, Note references (NTE-007) and cross-realm references (RLM-009) all carry the stored form <EUID>-NNN, and every rule_set hash covers it. Letting euid_position or id_splitter change the stored form would break those references and every consumer that parses them, so the Rule Identifier Format is applied by the rendering layer when it displays an identifier.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-28",
       "revision": 0
     }
