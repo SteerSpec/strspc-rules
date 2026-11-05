@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.33.1",
-    "timestamp": "2026-11-05T06:40:58Z",
-    "hash": "blake3:eb2687adb020edf58234f86cc2e4aefbcc463fd0df0285debb6cc04716b2a25c"
+    "version": "0.33.3",
+    "timestamp": "2026-11-05T07:17:14Z",
+    "hash": "blake3:829926e764d2e94dbff7c4a0331c5d59860952ee5f4b9bc5243f4232eb824a10"
   },
   "rules": [
     {
@@ -217,6 +217,24 @@
       "added_by": "github:pleberre",
       "added_at": "2026-11-03",
       "supersedes": "RLM-008"
+    },
+    {
+      "id": "RLM-024",
+      "revision": 0,
+      "state": "D",
+      "body": "Cross-realm Entity references MUST use the qualified form `<realm-id>:<EUID>`.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-05",
+      "supersedes": "RLM-009"
+    },
+    {
+      "id": "RLM-025",
+      "revision": 0,
+      "state": "D",
+      "body": "An Entity reference within the same Realm MAY use the short form, the EUID alone.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-05",
+      "supersedes": "RLM-009"
     }
   ],
   "sub_entities": [

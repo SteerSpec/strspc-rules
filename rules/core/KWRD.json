@@ -13,9 +13,9 @@
     ]
   },
   "rule_set": {
-    "version": "0.7.6",
-    "timestamp": "2026-11-05T06:40:58Z",
-    "hash": "blake3:1a9fde27df48796b4e4dde713043302cb6c8ba781e28d39763a3e112fe1640a6"
+    "version": "0.7.7",
+    "timestamp": "2026-11-05T07:17:26Z",
+    "hash": "blake3:2fe1a302c4a1f889cca4b6eee9c771232fc7f36b9c6196d4c293002411de837c"
   },
   "rules": [
     {
@@ -70,6 +70,15 @@
       "body": "MAY, or the adjective \"OPTIONAL\", mean that an item is truly optional.",
       "added_by": "github:pleberre",
       "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "KWRD-007",
+      "revision": 0,
+      "state": "D",
+      "body": "A Key Word HAS the meaning given by KWRD-002 to KWRD-006 only when written in upper case.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-05",
       "supersedes": null
     }
   ],

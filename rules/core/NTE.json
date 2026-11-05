@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.13.1",
-    "timestamp": "2026-11-05T06:40:58Z",
-    "hash": "blake3:2c895a1c12c5c2f5fa3852a00fcb1f703d7a9fc0ea05b7108aeee14d3e88be0d"
+    "version": "0.13.4",
+    "timestamp": "2026-11-05T07:17:25Z",
+    "hash": "blake3:a8381eee4eb8f52c09a5cdea66a38da6eb453a3300acb50c4319cf388ecb9b39"
   },
   "rules": [
     {
@@ -208,6 +208,33 @@
       "added_by": "github:pleberre",
       "added_at": "2026-11-03",
       "supersedes": "NTE-001"
+    },
+    {
+      "id": "NTE-023",
+      "revision": 0,
+      "state": "D",
+      "body": "MUST NOT modify the Rule it supplements.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-05",
+      "supersedes": "NTE-002"
+    },
+    {
+      "id": "NTE-024",
+      "revision": 0,
+      "state": "D",
+      "body": "MUST be concise.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-05",
+      "supersedes": "NTE-006"
+    },
+    {
+      "id": "NTE-025",
+      "revision": 0,
+      "state": "D",
+      "body": "MAY span multiple paragraphs when needed for clarity.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-05",
+      "supersedes": "NTE-006"
     }
   ],
   "notes": [
