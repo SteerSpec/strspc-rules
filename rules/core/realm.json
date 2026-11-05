@@ -3,7 +3,7 @@
   "realm": {
     "id": "dev.steerspec.core",
     "title": "SteerSpec Core Rules",
-    "version": "1.17.1"
+    "version": "1.18.0"
   },
   "dependencies": [],
   "rule_identifier_format": null
