@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.13.0",
-    "timestamp": "2026-11-03T14:42:20Z",
-    "hash": "blake3:b81ea86652323bc9109b83a304b8fb362fc7e5f371f3f2d6e8e6ba9132e36299"
+    "version": "0.13.1",
+    "timestamp": "2026-11-05T06:40:58Z",
+    "hash": "blake3:2c895a1c12c5c2f5fa3852a00fcb1f703d7a9fc0ea05b7108aeee14d3e88be0d"
   },
   "rules": [
     {
@@ -16,7 +16,7 @@
       "revision": 0,
       "state": "I",
       "body": "IS associated with a single rule and must reference the rule's identifier explicitly (e.g., [<rule id>/<incremental note id (OOn)]).",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -25,7 +25,7 @@
       "revision": 0,
       "state": "P",
       "body": "A Note provides clarification, context, or elaboration and must not modify the rule it supplements.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -34,7 +34,7 @@
       "revision": 0,
       "state": "I",
       "body": "MUST be stored in the same directory as the entity and rule it references.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -43,7 +43,7 @@
       "revision": 0,
       "state": "I",
       "body": "MAY include: Business rationale, Examples or use cases, Historical context, Clarifications of terminology.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -52,7 +52,7 @@
       "revision": 0,
       "state": "I",
       "body": "MUST be versioned and maintained alongside the rules they support.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -61,7 +61,7 @@
       "revision": 0,
       "state": "P",
       "body": "MUST be concise but may span multiple paragraphs if needed for clarity.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -70,7 +70,7 @@
       "revision": 1,
       "state": "D",
       "body": "Notes of type `supersedes`, `extends`, or `related` MUST reference rules by identifier `<EUID>-NNN`, or outside the Realm tree by `<realm-id>:<EUID>-NNN` naming a declared dependency or one of its sub-realms.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-18",
       "supersedes": null
     },
@@ -79,7 +79,7 @@
       "revision": 0,
       "state": "D",
       "body": "HAS a revision that is 0 when the Note is added and increments by one on each change to its content or type.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-28",
       "supersedes": null
     },
@@ -88,7 +88,7 @@
       "revision": 0,
       "state": "D",
       "body": "MUST NOT be removed once added.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-28",
       "supersedes": null
     },
@@ -97,7 +97,7 @@
       "revision": 0,
       "state": "D",
       "body": "Notes of type changelog, supersedes, extends or related MUST NOT change once added.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-28",
       "supersedes": null
     },
@@ -106,7 +106,7 @@
       "revision": 0,
       "state": "D",
       "body": "Note identifiers under a Rule MUST be sequential from 01.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-28",
       "supersedes": null
     },
@@ -115,7 +115,7 @@
       "revision": 0,
       "state": "D",
       "body": "A Note of type `extends` on a Rule that is not Abandoned, Retired or Terminated MUST NOT reference a Rule whose Entity has a visibility that does not permit inheritance from the Realm of the Note or that is narrower than the visibility of the Entity holding the Note.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
     },
@@ -124,7 +124,7 @@
       "revision": 0,
       "state": "D",
       "body": "A Note of type `standard` IS a mapping of its Rule to one clause of a standard.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-11-01",
       "supersedes": null
     },
@@ -133,7 +133,7 @@
       "revision": 0,
       "state": "D",
       "body": "The content of a `standard` Note MUST be `<id>:<clause>` split at the first colon, where `<id>` is the `id` of a Standard Reference and `<clause>` is not blank.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-11-01",
       "supersedes": null
     },
@@ -142,7 +142,7 @@
       "revision": 0,
       "state": "D",
       "body": "A Rule MUST NOT hold two Notes of type `standard` with the same content.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-11-01",
       "supersedes": null
     },
@@ -151,7 +151,7 @@
       "revision": 0,
       "state": "D",
       "body": "The `<id>` of a `standard` Note MUST resolve to the first declaration of that `id` found in the Entity owning the Rule, its containing Entities nearest first, its Realm, then that Realm's parent.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-11-01",
       "supersedes": null
     },
@@ -160,7 +160,7 @@
       "revision": 0,
       "state": "D",
       "body": "A Note of type `standard` MAY be added, revised or retyped between that type and `reference` in any state of its Rule.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-11-01",
       "supersedes": null
     },
@@ -169,7 +169,7 @@
       "revision": 0,
       "state": "D",
       "body": "Adding, revising or retyping a Note under NTE-017 MUST leave the revision of its Rule unchanged.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-11-01",
       "supersedes": null
     },
@@ -178,7 +178,7 @@
       "revision": 0,
       "state": "D",
       "body": "A mapping MUST be withdrawn only by changing its Note to type `reference` with its content unchanged.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-11-01",
       "supersedes": null
     },
@@ -187,7 +187,7 @@
       "revision": 0,
       "state": "D",
       "body": "Examples on a Rule that is not Abandoned, Retired or Terminated MUST be held in Notes of type `example` or `counter_example`.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-11-01",
       "supersedes": null
     },
@@ -216,7 +216,7 @@
       "rule_ref": "NTE-005",
       "type": "clarification",
       "content": "Versioned means two things. First, a Note is part of the hashed Rule Set of the Entity that holds it (RSTHSH-001), so adding or changing a Note bumps that Entity's rule_set version (patch), timestamp and hash, and the change is reviewed through strspc diff like any Rule change. Second, each Note carries its own revision (NTE-008) that counts changes to its content or type. Notes are never removed (NTE-009): a Note that no longer applies is revised in place, except that Notes of the append-only types never change at all (NTE-010). Note identifiers under a Rule stay sequential (NTE-011), and because a Note is never removed an identifier is never reused.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-28",
       "revision": 0
     },
@@ -225,7 +225,7 @@
       "rule_ref": "NTE-008",
       "type": "rationale",
       "content": "Before this rule, a Note's revision recorded the revision of the referenced Rule at the time the Note was added. Nothing read or checked that value, it was 0 on almost every Note because Rule revisions rarely move, and it gave no way to tell that a Note's content had changed. Redefining it as the Note's own edit counter mirrors a Rule's revision: a content change without a revision increment is a diff error, so every edit is visible in review. Notes are never removed (NTE-009), so identifiers under a Rule stay sequential (NTE-011) and no history is needed to prevent their reuse; a stale Note is revised in place unless it is of an append-only type (NTE-010).",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-28",
       "revision": 0
     },
@@ -234,7 +234,7 @@
       "rule_ref": "NTE-017",
       "type": "rationale",
       "content": "A mapping is a claim about a Rule and does not change what the Rule requires, so it stays a Note and RUL-007 is not engaged. A Rule field would need superseding every mapped Rule when a standard is renumbered in a new edition.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-11-01",
       "revision": 0
     },
@@ -243,7 +243,7 @@
       "rule_ref": "NTE-019",
       "type": "rationale",
       "content": "NTE-009 forbids removing a Note, and NTE-011 keeps Note identifiers sequential. A `reference` Note stays out of the evaluator prompt and out of coverage, and keeps the record of the mapping.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-11-01",
       "revision": 0
     },
@@ -252,7 +252,7 @@
       "rule_ref": "NTE-020",
       "type": "clarification",
       "content": "NTE-001 and RLM-008 predate this Rule and hold examples. NTE-021 and NTE-022 supersede NTE-001, and RLM-023 supersedes RLM-008, with the examples in `example` Notes, so this Rule cannot reach Implemented until NTE-001 and RLM-008 are Retired.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-11-01",
       "revision": 1
     },
@@ -261,7 +261,7 @@
       "rule_ref": "NTE-020",
       "type": "clarification",
       "content": "A grammar or an allowed value is part of what a Rule requires and is not an example.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-11-01",
       "revision": 0
     },

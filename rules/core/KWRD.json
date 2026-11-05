@@ -13,9 +13,9 @@
     ]
   },
   "rule_set": {
-    "version": "0.7.5",
-    "timestamp": "2026-11-01T12:57:15Z",
-    "hash": "blake3:e4cf3678eaa88308ddbfc7601be3e0f51b45d8a48ac722c32a929d4967b3a46b"
+    "version": "0.7.6",
+    "timestamp": "2026-11-05T06:40:58Z",
+    "hash": "blake3:1a9fde27df48796b4e4dde713043302cb6c8ba781e28d39763a3e112fe1640a6"
   },
   "rules": [
     {
@@ -23,7 +23,7 @@
       "revision": 0,
       "state": "P",
       "body": "Key Words are derived from RFC-2119.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -32,7 +32,7 @@
       "revision": 0,
       "state": "P",
       "body": "MUST, or the terms \"REQUIRED\" or \"SHALL\" or \"HAS\" or \"IS\" or \"DEFINE\", mean that the rule is an absolute requirement of the specification.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -41,7 +41,7 @@
       "revision": 0,
       "state": "P",
       "body": "MUST NOT, or the phrase \"SHALL NOT\", mean that the definition is an absolute prohibition of the specification.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -50,7 +50,7 @@
       "revision": 0,
       "state": "P",
       "body": "SHOULD, or the adjective \"RECOMMENDED\", mean that there may exist valid reasons in particular circumstances to ignore a particular item, but the full implications must be understood and carefully weighed before choosing a different course.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -59,7 +59,7 @@
       "revision": 0,
       "state": "P",
       "body": "SHOULD NOT, or the phrase \"NOT RECOMMENDED\" mean that there may exist valid reasons in particular circumstances when the particular behavior is acceptable or even useful, but the full implications should be understood and the case carefully weighed before implementing any behavior described with this label.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -68,7 +68,7 @@
       "revision": 0,
       "state": "P",
       "body": "MAY, or the adjective \"OPTIONAL\", mean that an item is truly optional.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     }
@@ -79,7 +79,7 @@
       "rule_ref": "KWRD-002",
       "type": "standard",
       "content": "ietf.rfc2119:1",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-11-01",
       "revision": 0
     },
@@ -88,7 +88,7 @@
       "rule_ref": "KWRD-003",
       "type": "standard",
       "content": "ietf.rfc2119:2",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-11-01",
       "revision": 0
     },
@@ -97,7 +97,7 @@
       "rule_ref": "KWRD-004",
       "type": "standard",
       "content": "ietf.rfc2119:3",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-11-01",
       "revision": 0
     },
@@ -106,7 +106,7 @@
       "rule_ref": "KWRD-005",
       "type": "standard",
       "content": "ietf.rfc2119:4",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-11-01",
       "revision": 0
     },
@@ -115,7 +115,7 @@
       "rule_ref": "KWRD-006",
       "type": "standard",
       "content": "ietf.rfc2119:5",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-11-01",
       "revision": 0
     }

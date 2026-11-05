@@ -6,9 +6,9 @@
     "description": "The consumer-side configuration that declares which rules a project subscribes to and how they are enforced."
   },
   "rule_set": {
-    "version": "0.12.5",
-    "timestamp": "2026-11-03T13:27:15Z",
-    "hash": "blake3:bf4fa8818e50da1a1e73602a7d3203cf0d94ef9e36d46b68b1f023bc4229afbe"
+    "version": "0.12.6",
+    "timestamp": "2026-11-05T06:40:58Z",
+    "hash": "blake3:113b233dfe8eb04a19292557343568188ecdc20bc980ab05524bd60b859a70aa"
   },
   "rules": [
     {
@@ -16,7 +16,7 @@
       "revision": 0,
       "state": "I",
       "body": "IS a directory named `.strspc/` at the root of a project that consumes SteerSpec rules.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-23",
       "supersedes": null
     },
@@ -25,7 +25,7 @@
       "revision": 0,
       "state": "I",
       "body": "MUST contain a `config.yaml` manifest file.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-23",
       "supersedes": null
     },
@@ -34,7 +34,7 @@
       "revision": 0,
       "state": "I",
       "body": "MAY contain a local cache for resolved rules and evaluation results.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-23",
       "supersedes": null
     },
@@ -43,7 +43,7 @@
       "revision": 0,
       "state": "P",
       "body": "MUST declare at least one rule source.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-23",
       "supersedes": null
     },
@@ -52,7 +52,7 @@
       "revision": 0,
       "state": "I",
       "body": "MAY reference a local Realm as a rule source, enabling a project to both author and consume rules.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-23",
       "supersedes": null
     },
@@ -61,7 +61,7 @@
       "revision": 0,
       "state": "I",
       "body": "MAY configure an evaluator for rule enforcement.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-23",
       "supersedes": null
     },
@@ -70,7 +70,7 @@
       "revision": 0,
       "state": "I",
       "body": "MAY declare fail conditions referencing rule lifecycle states.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-23",
       "supersedes": null
     },
@@ -79,7 +79,7 @@
       "revision": 0,
       "state": "I",
       "body": "Severity of a rule violation IS determined by the consumer configuration, not by the rule itself.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-23",
       "supersedes": null
     },
@@ -88,7 +88,7 @@
       "revision": 0,
       "state": "D",
       "body": "MAY declare an `evaluate_on` array of rule lifecycle state codes restricting which rules are sent to the evaluator.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-18",
       "supersedes": null
     }
@@ -103,9 +103,9 @@
         "parent": "SPCFG"
       },
       "rule_set": {
-        "version": "0.5.0",
-        "timestamp": "2026-10-20T09:28:44Z",
-        "hash": "blake3:e6be07fffdd64248233f5118c75af904d698ac7eaf3607c915a95ddfd848f29d"
+        "version": "0.5.1",
+        "timestamp": "2026-11-05T06:40:58Z",
+        "hash": "blake3:5eda82c40b529d8e2c9bf1dc324866db2d84d484ba0664abea1bbca86f6ddad5"
       },
       "rules": [
         {
@@ -113,7 +113,7 @@
           "revision": 0,
           "state": "P",
           "body": "IS an entry in the `rules` array of config.yaml.",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-03-23",
           "supersedes": null
         },
@@ -122,7 +122,7 @@
           "revision": 0,
           "state": "P",
           "body": "MUST have a `source` property of type string.",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-03-23",
           "supersedes": null
         },
@@ -131,7 +131,7 @@
           "revision": 0,
           "state": "I",
           "body": "MUST have a `scope` property with allowed values: global, local.",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-03-23",
           "supersedes": null
         }
@@ -142,7 +142,7 @@
           "rule_ref": "SPCFGSRC-002",
           "type": "example",
           "content": "Valid source formats: `github://SteerSpec/strspc-rules@v1/rules/core` (remote, version-pinned), `./rules/` (local Realm directory).",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-03-23",
           "revision": 0
         },
@@ -151,7 +151,7 @@
           "rule_ref": "SPCFGSRC-003",
           "type": "clarification",
           "content": "`global` means the source's rules apply to all files in the project. `local` means the rules apply only within the source's own directory tree. Scope is a hint for the evaluator, not a hard filter.",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-03-23",
           "revision": 0
         }
@@ -166,9 +166,9 @@
         "parent": "SPCFG"
       },
       "rule_set": {
-        "version": "0.4.1",
-        "timestamp": "2026-10-28T07:49:01Z",
-        "hash": "blake3:dd38a2288bbac4768031a5fe7b02e7f62258e2f661e5a1ded78a1e0a933e9988"
+        "version": "0.4.2",
+        "timestamp": "2026-11-05T06:40:58Z",
+        "hash": "blake3:9e4e7b8a6b046ee1e210a68884ab686e2d43d315840521f34efe37b2b7d989c8"
       },
       "rules": [
         {
@@ -176,7 +176,7 @@
           "revision": 0,
           "state": "P",
           "body": "IS the `evaluator` object in config.yaml.",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-03-23",
           "supersedes": null
         },
@@ -185,7 +185,7 @@
           "revision": 1,
           "state": "P",
           "body": "MUST have a `provider` property of type string or null.",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-03-23",
           "supersedes": null
         },
@@ -194,7 +194,7 @@
           "revision": 0,
           "state": "P",
           "body": "MAY have an `endpoint` property of type string or null.",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-03-23",
           "supersedes": null
         },
@@ -203,7 +203,7 @@
           "revision": 0,
           "state": "D",
           "body": "MAY have a `model` property of type string.",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-10-18",
           "supersedes": null
         },
@@ -212,7 +212,7 @@
           "revision": 0,
           "state": "D",
           "body": "MAY have an `effort` property with allowed values: low, medium, high.",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-10-18",
           "supersedes": null
         }
@@ -223,7 +223,7 @@
           "rule_ref": "SPCFGEVAL-002",
           "type": "example",
           "content": "Known providers: `claude` (Anthropic API), `openai` (OpenAI API), `ollama` (local model), `static-only` (no AI evaluation, structural checks only).",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-03-23",
           "revision": 0
         },
@@ -232,7 +232,7 @@
           "rule_ref": "SPCFGEVAL-003",
           "type": "clarification",
           "content": "When null or absent, the evaluator uses the default endpoint for the chosen provider. Custom endpoints enable private deployments or proxy configurations.",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-03-23",
           "revision": 0
         },
@@ -241,7 +241,7 @@
           "rule_ref": "SPCFGEVAL-002",
           "type": "clarification",
           "content": "`null` (or an absent evaluator block) disables AI evaluation: only structural checks run. `strspc init --provider null` writes this value; the default is `claude`.",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-10-18",
           "revision": 0
         }
@@ -256,9 +256,9 @@
         "parent": "SPCFG"
       },
       "rule_set": {
-        "version": "0.3.0",
-        "timestamp": "2026-10-18T16:34:32Z",
-        "hash": "blake3:f72458ec091d5b14833e161825f8f8ef66b90bf3eef33670a76c909c46c82175"
+        "version": "0.3.1",
+        "timestamp": "2026-11-05T06:40:58Z",
+        "hash": "blake3:6071d907cc3e8f78e67ef0458e926af708c7589d4fd2c25db03dbbcfcae0e738"
       },
       "rules": [
         {
@@ -266,7 +266,7 @@
           "revision": 0,
           "state": "P",
           "body": "IS the `cache` object in config.yaml.",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-03-23",
           "supersedes": null
         },
@@ -275,7 +275,7 @@
           "revision": 0,
           "state": "P",
           "body": "MAY have a `ttl` property of type string.",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-03-23",
           "supersedes": null
         }
@@ -291,9 +291,9 @@
         "parent": "SPCFG"
       },
       "rule_set": {
-        "version": "0.4.0",
-        "timestamp": "2026-10-20T12:57:34Z",
-        "hash": "blake3:6b743f4eb01bf4a24594ba3d7c3bb330676dc54d8ef8d9b901a891785ac5e624"
+        "version": "0.4.1",
+        "timestamp": "2026-11-05T06:40:58Z",
+        "hash": "blake3:494199fdbb5af6c88b5b883bc669194d95eb834d5d022324ace9e6dbe87024c6"
       },
       "rules": [
         {
@@ -301,7 +301,7 @@
           "revision": 0,
           "state": "P",
           "body": "IS the `fail_on` array in config.yaml.",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-03-23",
           "supersedes": null
         },
@@ -310,7 +310,7 @@
           "revision": 0,
           "state": "I",
           "body": "Each item MUST be a valid rule lifecycle state code: Draft (D), Abandoned (A), Published (P), Implemented (I), Retired (R), Terminated (T).",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-03-23",
           "supersedes": null
         }
@@ -321,7 +321,7 @@
           "rule_ref": "SPCFGFAIL-002",
           "type": "example",
           "content": "Typical configuration: `fail_on: [I]` fails only on Implemented rule violations. Stricter: `fail_on: [P, I]` also fails on Published rules. The array references rule lifecycle states defined by RULST.",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-03-23",
           "revision": 0
         }
@@ -334,7 +334,7 @@
       "rule_ref": "SPCFG-001",
       "type": "rationale",
       "content": "The `.strspc/` prefix follows the dotfile convention for tool configuration. The name derives from the SteerSpec project abbreviation.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-23",
       "revision": 1
     },
@@ -343,7 +343,7 @@
       "rule_ref": "SPCFG-004",
       "type": "example",
       "content": "A source can reference a remote Realm (`github://SteerSpec/strspc-rules@v1/rules/core`) or a local directory (`./rules/`). At least one must be declared for the configuration to be meaningful.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-23",
       "revision": 0
     },
@@ -352,7 +352,7 @@
       "rule_ref": "SPCFG-005",
       "type": "example",
       "content": "A project with both `.strspc/config.yaml` and `rules/realm.json` is simultaneously a rule consumer and a rule author. The config references the local Realm via `source: ./rules/`.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-23",
       "revision": 0
     },
@@ -361,7 +361,7 @@
       "rule_ref": "SPCFG-008",
       "type": "rationale",
       "content": "A rule defines what must be true. How critical a violation is depends on the consuming project's context. This separation prevents rule authors from imposing enforcement policy on consumers (Rule Manager Spec §1.1).",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-23",
       "revision": 1
     },
@@ -370,7 +370,7 @@
       "rule_ref": "SPCFG-009",
       "type": "clarification",
       "content": "When absent, the evaluator receives rules in states Draft (D), Published (P) and Implemented (I). `evaluate_on` narrows which rules are evaluated; `fail_on` (SPCFGFAIL) decides which violations fail the run.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-18",
       "revision": 0
     },
