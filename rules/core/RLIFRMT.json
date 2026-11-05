@@ -6,15 +6,15 @@
     "description": "Defines the display format for Rule Identifiers within a Realm."
   },
   "rule_set": {
-    "version": "0.14.0",
-    "timestamp": "2026-11-05T07:30:12Z",
-    "hash": "blake3:c8ffd0edfae75ebd0bf33599ce516d99f24abd7c1be0fafbd5ec12413ad21cb4"
+    "version": "0.16.0",
+    "timestamp": "2026-11-05T20:01:39Z",
+    "hash": "blake3:9d7a65da81fc9c67b403450a7b1e9c40c102223df90a41756a3f2453eb5064c5"
   },
   "rules": [
     {
       "id": "RLIFRMT-001",
       "revision": 0,
-      "state": "I",
+      "state": "R",
       "body": "DEFINES the format that Rule Identifier must comply with within a Realm.",
       "added_by": "github:pleberre",
       "added_at": "2026-03-07",
@@ -86,7 +86,7 @@
     {
       "id": "RLIFRMT-009",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "DEFINE the format of the Rule Identifiers of a Realm.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-05",
@@ -98,10 +98,10 @@
       "id": "RLIFRMT-008/01",
       "rule_ref": "RLIFRMT-008",
       "type": "rationale",
-      "content": "Entity files, Note references (NTE-007) and cross-realm references (RLM-009) all carry the stored form <EUID>-NNN, and every rule_set hash covers it. Letting euid_position or id_splitter change the stored form would break those references and every consumer that parses them, so the Rule Identifier Format is applied by the rendering layer when it displays an identifier.",
+      "content": "Entity files, Note references (NTE-007) and cross-realm references (RLM-024) all carry the stored form <EUID>-NNN, and every rule_set hash covers it. Letting euid_position or id_splitter change the stored form would break those references and every consumer that parses them, so the Rule Identifier Format is applied by the rendering layer when it displays an identifier.",
       "added_by": "github:pleberre",
       "added_at": "2026-10-28",
-      "revision": 0
+      "revision": 1
     }
   ]
 }

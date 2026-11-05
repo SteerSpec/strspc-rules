@@ -29,7 +29,7 @@ What already works:
 - **Hosting.** A dependency `source` can be any GitHub repo
   (`github://<owner>/<repo>@<tag>/<path>`), fetched and cached like core.
 - **Qualified rule references.** The `overrides` pattern accepts `<realm-id>:<EUID>-<NNN>`.
-- **Immutable text.** A Published rule can't change (RUL-007), and fixes go through `supersedes` (RUL-008).
+- **Immutable text.** A Published rule can't change (RUL-007), and fixes go through `supersedes` (RUL-014).
 
 ### Pilot data: OWASP ASVS 5.0.0
 
@@ -107,7 +107,7 @@ What already works:
 - The rules are Published once the transcription is checked. They're never Implemented.
 - **Generated.** A script reads the publisher's machine-readable release and runs
   `strspc entity add` and `strspc rule add`, so hashes stay valid and no rule JSON is written by hand.
-- **Transcription fixes.** A fix supersedes the rule within its section entity (RUL-008, RUL-012) and
+- **Transcription fixes.** A fix supersedes the rule within its section entity (RUL-014, RUL-012) and
   keeps its `clause`. The code-realm path doesn't apply: RD006 retires the superseded rule when its
   replacement reaches Implemented, and a standard rule never does. In a standard realm, the
   superseded rule moves to **Terminated** (no longer in force, RULST-008) when its replacement
