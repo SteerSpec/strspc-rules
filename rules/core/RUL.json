@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.20.2",
-    "timestamp": "2026-11-05T06:40:58Z",
-    "hash": "blake3:fb24ddac7b963be48255dbf1102973345d1107e7601040e90e37d774d725d6c6"
+    "version": "0.20.5",
+    "timestamp": "2026-11-05T07:17:57Z",
+    "hash": "blake3:050e36bb81a5cabdd60ac5ea96b2ba09e25a76a50e26db5d712ddda9ac0c3317"
   },
   "rules": [
     {
@@ -118,6 +118,24 @@
       "added_by": "github:pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
+    },
+    {
+      "id": "RUL-013",
+      "revision": 0,
+      "state": "D",
+      "body": "DEFINE a single property of an Entity or the behavior of that property.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-05",
+      "supersedes": "RUL-001"
+    },
+    {
+      "id": "RUL-014",
+      "revision": 0,
+      "state": "D",
+      "body": "A change to an immutable Rule MUST be made by a new Rule that supersedes it.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-05",
+      "supersedes": "RUL-008"
     }
   ],
   "sub_entities": [
@@ -130,9 +148,9 @@
         "parent": "RUL"
       },
       "rule_set": {
-        "version": "0.19.1",
-        "timestamp": "2026-11-05T06:40:58Z",
-        "hash": "blake3:2d7265e09e8123f2987cbc0fbae1f929bf5b9ac7dc9dab6d138475f3fd175c7e"
+        "version": "0.19.2",
+        "timestamp": "2026-11-05T07:17:57Z",
+        "hash": "blake3:e9d74b8449d08599fa4e92c8c4d9bd92f0e92da1f26f5f1cbffe12f2e2cccd24"
       },
       "rules": [
         {
@@ -215,6 +233,15 @@
           "added_by": "github:pleberre",
           "added_at": "2026-10-22",
           "supersedes": null
+        },
+        {
+          "id": "RULST-010",
+          "revision": 0,
+          "state": "D",
+          "body": "Retired IS the State of a Rule that is still in force or present but is due to be removed.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-05",
+          "supersedes": "RULST-007"
         }
       ],
       "notes": [

@@ -6,9 +6,9 @@
     "description": "The consumer-side configuration that declares which rules a project subscribes to and how they are enforced."
   },
   "rule_set": {
-    "version": "0.12.6",
-    "timestamp": "2026-11-05T06:40:58Z",
-    "hash": "blake3:113b233dfe8eb04a19292557343568188ecdc20bc980ab05524bd60b859a70aa"
+    "version": "0.12.7",
+    "timestamp": "2026-11-05T07:17:36Z",
+    "hash": "blake3:fe1eea00140df057a75788056d6bb3c6c39980a10c05dc3b285585699a79a894"
   },
   "rules": [
     {
@@ -166,9 +166,9 @@
         "parent": "SPCFG"
       },
       "rule_set": {
-        "version": "0.4.2",
-        "timestamp": "2026-11-05T06:40:58Z",
-        "hash": "blake3:9e4e7b8a6b046ee1e210a68884ab686e2d43d315840521f34efe37b2b7d989c8"
+        "version": "0.4.3",
+        "timestamp": "2026-11-05T07:17:36Z",
+        "hash": "blake3:2af997014429f2ed190f1aa84a49f5bf8b480f8c9e63bad947bba257a5be1d7b"
       },
       "rules": [
         {
@@ -221,11 +221,11 @@
         {
           "id": "SPCFGEVAL-002/01",
           "rule_ref": "SPCFGEVAL-002",
-          "type": "example",
-          "content": "Known providers: `claude` (Anthropic API), `openai` (OpenAI API), `ollama` (local model), `static-only` (no AI evaluation, structural checks only).",
+          "type": "clarification",
+          "content": "Implemented providers: `claude` (Anthropic API), and `static-only` or `null` (no AI evaluation, structural checks only). `openai` and `ollama` are reserved names: strspc-manager rejects them as not implemented.",
           "added_by": "github:pleberre",
           "added_at": "2026-03-23",
-          "revision": 0
+          "revision": 1
         },
         {
           "id": "SPCFGEVAL-003/01",
