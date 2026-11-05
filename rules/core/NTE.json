@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.18.0",
-    "timestamp": "2026-11-05T20:01:39Z",
-    "hash": "blake3:f60fd407bc15ef31a4c3580e28b47b8ec928a3308f9523c885583fbbbc3a5035"
+    "version": "0.23.0",
+    "timestamp": "2026-11-05T20:05:39Z",
+    "hash": "blake3:77f9fe0f54d89d259ee285f43c68b5c64aab770e9a58c56bda8d95393697c78f"
   },
   "rules": [
     {
@@ -23,7 +23,7 @@
     {
       "id": "NTE-002",
       "revision": 0,
-      "state": "I",
+      "state": "R",
       "body": "A Note provides clarification, context, or elaboration and must not modify the rule it supplements.",
       "added_by": "github:pleberre",
       "added_at": "2026-03-07",
@@ -59,7 +59,7 @@
     {
       "id": "NTE-006",
       "revision": 0,
-      "state": "I",
+      "state": "R",
       "body": "MUST be concise but may span multiple paragraphs if needed for clarity.",
       "added_by": "github:pleberre",
       "added_at": "2026-03-07",
@@ -212,7 +212,7 @@
     {
       "id": "NTE-023",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "MUST NOT modify the Rule it supplements.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-05",
@@ -221,7 +221,7 @@
     {
       "id": "NTE-024",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "MUST be concise.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-05",
@@ -230,7 +230,7 @@
     {
       "id": "NTE-025",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "MAY span multiple paragraphs when needed for clarity.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-05",

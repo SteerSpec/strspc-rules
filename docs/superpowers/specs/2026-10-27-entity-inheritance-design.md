@@ -60,7 +60,7 @@ Three of the issue's open questions are already answered by existing rules:
 { "entity": { "id": "SAVACCT", "title": "Savings Account", "inherits": "dev.globalbank.core:ACCT" } }
 ```
 
-- Scalar. Short EUID in-realm, `<realm-id>:<EUID>` cross-realm (RLM-009 form).
+- Scalar. Short EUID in-realm, `<realm-id>:<EUID>` cross-realm (RLM-024, RLM-025).
 - Target may be any entity, top-level or sub-entity (EUIDs are realm-unique, RLM-001).
 - Cross-realm target's realm MUST be a declared dependency of the child's realm or one of
   that dependency's sub-realms (RLM-005, effective list per RLM-014 for sub-realms).
