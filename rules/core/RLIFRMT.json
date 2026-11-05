@@ -6,9 +6,9 @@
     "description": "Defines the display format for Rule Identifiers within a Realm."
   },
   "rule_set": {
-    "version": "0.13.4",
-    "timestamp": "2026-11-05T07:17:25Z",
-    "hash": "blake3:f689134a4d3fe0186ce83089325679d7fef7ef9e55f91c4ed33eab7e8be6a323"
+    "version": "0.14.0",
+    "timestamp": "2026-11-05T07:30:12Z",
+    "hash": "blake3:c8ffd0edfae75ebd0bf33599ce516d99f24abd7c1be0fafbd5ec12413ad21cb4"
   },
   "rules": [
     {
@@ -86,7 +86,7 @@
     {
       "id": "RLIFRMT-009",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "DEFINE the format of the Rule Identifiers of a Realm.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-05",
