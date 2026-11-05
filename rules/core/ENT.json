@@ -6,9 +6,9 @@
     "description": "An object with a unique identity and lifecycle. The unit of organization in the SteerSpec rule system."
   },
   "rule_set": {
-    "version": "0.17.15",
-    "timestamp": "2026-11-03T13:26:58Z",
-    "hash": "blake3:558c6479ea48ad93873095d2e0a5b572595b16d2114609344e7e7e5895bd9672"
+    "version": "0.17.16",
+    "timestamp": "2026-11-05T06:40:58Z",
+    "hash": "blake3:8c79cc3f6405b600a1fdd9b224851a0b2c6b0f27c678ee7bf992b8b3cb85bd60"
   },
   "rules": [
     {
@@ -16,7 +16,7 @@
       "revision": 0,
       "state": "I",
       "body": "IS an object that has a unique identity that persists over time.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -25,7 +25,7 @@
       "revision": 0,
       "state": "I",
       "body": "MAY transition through multiple states during its lifecycle.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -34,7 +34,7 @@
       "revision": 0,
       "state": "I",
       "body": "MAY possess one or more properties.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -43,7 +43,7 @@
       "revision": 0,
       "state": "I",
       "body": "The behavior of an entity IS defined entirely by the Rules applicable to its identity, properties, and states.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -52,7 +52,7 @@
       "revision": 0,
       "state": "I",
       "body": "HAS an Entity Unique Identifier.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-03-07",
       "supersedes": null
     },
@@ -61,7 +61,7 @@
       "revision": 0,
       "state": "P",
       "body": "MAY inherit the rule set of exactly one other Entity, declared in an `inherits` field holding the parent's Entity Unique Identifier.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-27",
       "supersedes": null
     },
@@ -70,7 +70,7 @@
       "revision": 1,
       "state": "P",
       "body": "An `inherits` reference to an Entity outside the referencing Entity's Realm tree MUST use the qualified form `<realm-id>:<EUID>`, naming a declared dependency or one of its sub-realms.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-27",
       "supersedes": null
     },
@@ -79,7 +79,7 @@
       "revision": 1,
       "state": "P",
       "body": "An inheritance chain MUST NOT contain cycles or exceed three hops.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-27",
       "supersedes": null
     },
@@ -88,7 +88,7 @@
       "revision": 1,
       "state": "P",
       "body": "An inheriting Entity MUST acquire the parent's effective rule set, the parent's own Published and Implemented Rules together with those the parent inherits, as read-only references that remain owned by their original Entity.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-27",
       "supersedes": null
     },
@@ -97,7 +97,7 @@
       "revision": 1,
       "state": "P",
       "body": "An inheriting Entity's Rule Set MUST cover only the Rules it owns.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-27",
       "supersedes": null
     },
@@ -106,7 +106,7 @@
       "revision": 0,
       "state": "D",
       "body": "MAY declare a `visibility` of `private`, `protected` or `public`; when it is absent, a sub-entity takes the visibility of the Entity containing it and any other Entity is `public`.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
     },
@@ -115,7 +115,7 @@
       "revision": 0,
       "state": "D",
       "body": "Visibility `public` IS permission to inherit the Entity and to override its Rules from any Realm.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
     },
@@ -124,7 +124,7 @@
       "revision": 0,
       "state": "D",
       "body": "Visibility `protected` IS permission to inherit the Entity from any Realm and to override its Rules only from within its Realm tree.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
     },
@@ -133,7 +133,7 @@
       "revision": 0,
       "state": "D",
       "body": "Visibility `private` IS permission to inherit the Entity only from within its Realm tree and to override its Rules only from the Realm holding it, not from a parent, child or sibling sub-realm of that Realm.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
     },
@@ -142,7 +142,7 @@
       "revision": 1,
       "state": "D",
       "body": "The visibility of an Entity MUST NOT be wider than that of the Entity it inherits, where `private` is narrower than `protected` and `protected` is narrower than `public`.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
     },
@@ -151,7 +151,7 @@
       "revision": 1,
       "state": "D",
       "body": "An `inherits` declaration MUST be permitted by the visibility of the inherited Entity.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
     },
@@ -160,7 +160,7 @@
       "revision": 0,
       "state": "D",
       "body": "MAY declare a `standards` array of Standard References in its `entity` object.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-11-01",
       "supersedes": null
     },
@@ -193,9 +193,9 @@
         "parent": "ENT"
       },
       "rule_set": {
-        "version": "0.7.0",
-        "timestamp": "2026-10-18T16:34:31Z",
-        "hash": "blake3:5d965a89cd7df645c871491a4f8a2705f84fd76d0285f9d49e42dba7651f734a"
+        "version": "0.7.1",
+        "timestamp": "2026-11-05T06:40:58Z",
+        "hash": "blake3:93da5c3b24e40551d53678c8a532ed82107cc4a2de0004ca57e6b5606d8096e4"
       },
       "rules": [
         {
@@ -203,7 +203,7 @@
           "revision": 0,
           "state": "I",
           "body": "MUST have a length of at least 3 and at most 18 characters.",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-03-07",
           "supersedes": null
         },
@@ -212,7 +212,7 @@
           "revision": 0,
           "state": "I",
           "body": "IS a string of letters or numbers only.",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-03-07",
           "supersedes": null
         },
@@ -221,7 +221,7 @@
           "revision": 0,
           "state": "I",
           "body": "IS unique within the Realm.",
-          "added_by": "@pleberre",
+          "added_by": "github:pleberre",
           "added_at": "2026-03-07",
           "supersedes": null
         }
@@ -235,7 +235,7 @@
       "rule_ref": "ENT-006",
       "type": "rationale",
       "content": "Inheritance is specialisation, not containment: parent (sub-entities) nests an Entity inside another, inherits lets an Entity reuse another Entity's rule set without copying it, in the same Realm or across a declared dependency. Inherited Rules stay owned by the parent (ENT-009). A cross-realm parent is frozen at the dependency version pinned in realm.json, so its changes arrive only on a dependency bump; a same-realm parent is not pinned, and child and parent evolve together within their Realm's version. Only Published and Implemented parent Rules are inherited; Draft text may still change and Abandoned, Retired or Terminated Rules are not in force. A parent's sub-entities are not inherited.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-27",
       "revision": 0
     },
@@ -244,7 +244,7 @@
       "rule_ref": "ENT-016",
       "type": "rationale",
       "content": "An `inherits` is checked against the inherited Entity alone, because ENT-015 keeps that Entity no wider than those above it.",
-      "added_by": "@pleberre",
+      "added_by": "github:pleberre",
       "added_at": "2026-10-31",
       "revision": 1
     },
