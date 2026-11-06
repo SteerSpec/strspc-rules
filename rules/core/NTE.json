@@ -6,15 +6,15 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.23.0",
-    "timestamp": "2026-11-05T20:05:39Z",
-    "hash": "blake3:77f9fe0f54d89d259ee285f43c68b5c64aab770e9a58c56bda8d95393697c78f"
+    "version": "0.27.1",
+    "timestamp": "2026-11-06T18:11:40Z",
+    "hash": "blake3:a4d16e7acc950c7115c1269e8800bfbfa0deeb85dd8210814d05816767da3654"
   },
   "rules": [
     {
       "id": "NTE-001",
       "revision": 0,
-      "state": "I",
+      "state": "R",
       "body": "IS associated with a single rule and must reference the rule's identifier explicitly (e.g., [<rule id>/<incremental note id (OOn)]).",
       "added_by": "github:pleberre",
       "added_at": "2026-03-07",
@@ -185,7 +185,7 @@
     {
       "id": "NTE-020",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "Examples on a Rule that is not Abandoned, Retired or Terminated MUST be held in Notes of type `example` or `counter_example`.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-01",
@@ -194,7 +194,7 @@
     {
       "id": "NTE-021",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "IS associated with a single Rule.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-03",
@@ -203,7 +203,7 @@
     {
       "id": "NTE-022",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "MUST reference the identifier of its Rule explicitly.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-03",
@@ -278,10 +278,10 @@
       "id": "NTE-020/01",
       "rule_ref": "NTE-020",
       "type": "clarification",
-      "content": "NTE-001 and RLM-008 predate this Rule and hold examples. NTE-021 and NTE-022 supersede NTE-001, and RLM-023 supersedes RLM-008, with the examples in `example` Notes, so this Rule cannot reach Implemented until NTE-001 and RLM-008 are Retired.",
+      "content": "NTE-001 and RLM-008 predate this Rule and held examples in their bodies. They are Retired: NTE-021 and NTE-022 supersede NTE-001, and RLM-023 supersedes RLM-008, with the examples in `example` Notes.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-01",
-      "revision": 1
+      "revision": 2
     },
     {
       "id": "NTE-020/02",
