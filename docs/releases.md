@@ -40,7 +40,7 @@ Each release includes:
 
 ## Published at steerspec.dev
 
-Each release's schemas and rules are served from [steerspec.dev](https://steerspec.dev) (GitHub Pages), which makes
+Each release's schemas and rules are served from [steerspec.dev](https://steerspec.dev), which makes
 the schema `$id` URLs resolvable and gives the CLI and other tools fixed URLs for each release.
 
 | URL | Description |
