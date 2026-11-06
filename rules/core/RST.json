@@ -6,9 +6,9 @@
     "description": "A collection of all rules applicable to a specific entity, versioned as a unit."
   },
   "rule_set": {
-    "version": "0.5.6",
-    "timestamp": "2026-11-05T06:40:58Z",
-    "hash": "blake3:b3427f5933bdeb3d692a4ab8b478dfd1d418e54329e791ae071228b6eb0cc6c9"
+    "version": "0.5.8",
+    "timestamp": "2026-11-06T15:48:31Z",
+    "hash": "blake3:86d08682c0722f3a89ea2e91ee07a5771957c96c2f35c1f5b18dc7d6c94c2ca3"
   },
   "rules": [
     {
@@ -27,6 +27,24 @@
       "body": "HAS a Rule Set Version which uniquely defines a specific set of changes applied to it.",
       "added_by": "github:pleberre",
       "added_at": "2026-03-07",
+      "supersedes": null
+    },
+    {
+      "id": "RST-003",
+      "revision": 0,
+      "state": "D",
+      "body": "A Rule Set's change history IS derived from the version-control history of its entity file.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-06",
+      "supersedes": null
+    },
+    {
+      "id": "RST-004",
+      "revision": 0,
+      "state": "D",
+      "body": "An entity file MUST NOT be required to store its Rule Set's change history.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-06",
       "supersedes": null
     }
   ],
