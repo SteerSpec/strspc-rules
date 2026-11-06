@@ -11,9 +11,9 @@ Validation phases:
   4. The config schema is generated from SPCFG rules (validates consumer config files)
 
 Every schema in rules/core/_schema/ also carries the release stamp of
-tools/schema_stamp.py, a top-level "$comment": "dev.steerspec.core vX.Y.Z"
+tools/schema_stamp.py, a top-level "x-steerspec-core-version": "X.Y.Z"
 taken from realm.version. The bootstrap and realm schemas are maintained by
-hand; this script only writes their $comment line.
+hand; this script only writes their stamp line.
 
 Usage:
   python3 tools/build-schema.py [--check]
@@ -28,7 +28,7 @@ import sys
 from pathlib import Path
 
 from jsonschema import Draft202012Validator
-from schema_stamp import release_stamp, stamp_schema_text
+from schema_stamp import STAMP_KEY, stamp_schema_text
 
 ROOT = Path(__file__).parent.parent
 CORE_DIR = ROOT / "rules" / "core"
@@ -624,7 +624,7 @@ def core_version() -> str:
 
 def main() -> int:
     check_mode = "--check" in sys.argv
-    stamp = release_stamp(core_version())
+    stamp = core_version()
 
     print("Phase 1: Loading and bootstrap validation")
     bootstrap_schema = load_bootstrap_schema()
@@ -659,10 +659,10 @@ def main() -> int:
 
         for path, stamped in stamped_hand.items():
             if path.read_text(encoding="utf-8") == stamped:
-                print(f"\n{path.name} carries the release stamp '{stamp}'.")
+                print(f"\n{path.name} carries {STAMP_KEY} {stamp}.")
             else:
                 print(
-                    f"\nERROR: {path.name} lacks the release stamp '{stamp}'."
+                    f"\nERROR: {path.name} lacks {STAMP_KEY} {stamp}."
                     " Run 'python3 tools/build-schema.py' and commit the result.",
                     file=sys.stderr,
                 )

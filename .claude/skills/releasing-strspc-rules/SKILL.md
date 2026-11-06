@@ -40,7 +40,7 @@ Work from a clean tree (a separate worktree if the current one is dirty).
 1. `git switch -c chore/release-X.Y.Z origin/develop`
 2. Change `realm.version` in `rules/core/realm.json`. It is the realm manifest,
    not an entity file: a hand edit is the norm (see #69), no hash, no approval.
-   Then run `python3 tools/build-schema.py`: it rewrites the `"$comment": "dev.steerspec.core vX.Y.Z"`
+   Then run `python3 tools/build-schema.py`: it rewrites the `"x-steerspec-core-version": "X.Y.Z"`
    release stamp in all four `rules/core/_schema/*.json`. The bump PR carries those five files
    and nothing else.
 3. `strspc realm validate rules/core/ --recursive --strict --core` and `python3 tools/build-schema.py --check`
