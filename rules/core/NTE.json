@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.27.1",
-    "timestamp": "2026-11-06T18:11:40Z",
-    "hash": "blake3:a4d16e7acc950c7115c1269e8800bfbfa0deeb85dd8210814d05816767da3654"
+    "version": "0.28.0",
+    "timestamp": "2026-11-06T18:20:00Z",
+    "hash": "blake3:9c24134725ab72b218fc2923dbda50c99b392f0adaa69e05551a4b1385b3660d"
   },
   "rules": [
     {
@@ -185,7 +185,7 @@
     {
       "id": "NTE-020",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "Examples on a Rule that is not Abandoned, Retired or Terminated MUST be held in Notes of type `example` or `counter_example`.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-01",
