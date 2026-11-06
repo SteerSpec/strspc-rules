@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.39.0",
-    "timestamp": "2026-11-05T20:05:39Z",
-    "hash": "blake3:69264b223c540295198a27ad42d96aee74e33ed61973391c9513fe6ac49f4786"
+    "version": "0.41.1",
+    "timestamp": "2026-11-06T18:11:40Z",
+    "hash": "blake3:9c6b3c69f6cd219b3fff22b17dabcc7ca47038404a201a716759d16cdfac094e"
   },
   "rules": [
     {
@@ -77,7 +77,7 @@
     {
       "id": "RLM-008",
       "revision": 0,
-      "state": "I",
+      "state": "R",
       "body": "MUST have an identifier that follows reverse domain notation (e.g., `com.example.realm`) to ensure global uniqueness across organizations.",
       "added_by": "github:pleberre",
       "added_at": "2026-03-22",
@@ -212,7 +212,7 @@
     {
       "id": "RLM-023",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "MUST have an identifier that follows reverse domain notation.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-03",
@@ -649,10 +649,10 @@
       "id": "RLM-016/01",
       "rule_ref": "RLM-016",
       "type": "clarification",
-      "content": "Realm tree membership compares Realm identifiers: a Realm is the same Realm at any version, and the identifier in its manifest is trusted because it is globally unique (RLM-008). An Entity belongs to the Realm with the nearest manifest above it. Membership is read from the manifest of the top-level Realm, because a sub-realm's identifier does not show that the parent declares it and its manifest does not list its siblings, so a sub-realm resolved on its own cannot see them. A check that depends on the Realm tree is therefore defined from the top-level Realm.",
+      "content": "Realm tree membership compares Realm identifiers: a Realm is the same Realm at any version, and the identifier in its manifest is trusted because it is globally unique (RLM-023). An Entity belongs to the Realm with the nearest manifest above it. Membership is read from the manifest of the top-level Realm, because a sub-realm's identifier does not show that the parent declares it and its manifest does not list its siblings, so a sub-realm resolved on its own cannot see them. A check that depends on the Realm tree is therefore defined from the top-level Realm.",
       "added_by": "github:pleberre",
       "added_at": "2026-10-31",
-      "revision": 0
+      "revision": 1
     },
     {
       "id": "RLM-019/01",
