@@ -62,7 +62,8 @@ Copyright is held by Consulare and contributors, see [NOTICE](NOTICE). Licensed 
 [LICENSE](LICENSE).
 
 - Changes go through pull requests: feature branch to `develop`, squash-merged, then `develop` to `main` for a release.
-  Prefer the [`strspc` CLI](https://github.com/SteerSpec/strspc-CLI) to editing rule JSON by hand. See [AGENTS.md](AGENTS.md).
+  Prefer the [`strspc` CLI](https://github.com/SteerSpec/strspc-CLI) to editing rule JSON by hand.
+  See [AGENTS.md](AGENTS.md).
 - Commits follow [Conventional Commits](https://www.conventionalcommits.org/).
 - Rule identifiers are never reused, and a rule outside Draft is immutable.
 - Contribution guide for all SteerSpec repositories:

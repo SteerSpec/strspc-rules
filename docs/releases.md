@@ -53,4 +53,5 @@ the schema `$id` URLs resolvable and gives the CLI and other tools fixed URLs fo
 | `https://steerspec.dev/rules/latest/<ENTITY>.json` | Latest rule files |
 | `https://steerspec.dev/rules/v<version>/` | Versioned snapshots |
 
-The `publish` job of [`release.yml`](../.github/workflows/release.yml) opens a pull request against `strspc-www`; the files are served from steerspec.dev only after that pull request is merged.
+The `publish` job of [`release.yml`](../.github/workflows/release.yml) opens a pull request against `strspc-www`;
+the files are served from steerspec.dev only after that pull request is merged.
