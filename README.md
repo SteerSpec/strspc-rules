@@ -24,17 +24,17 @@ lists the jobs, and the Release badge above shows the current release.
 
 ## Use the rules
 
-Each release is served from [steerspec.dev](https://steerspec.dev). Replace `<version>` with the latest release tag
-(shown by the Release badge), for example `v1.2.3`, to pin a version:
+Each release is served from [steerspec.dev](https://steerspec.dev). Replace `<version>` with the number of the latest
+release (shown by the Release badge, without the leading `v`), in the form `MAJOR.MINOR.PATCH`, to pin a version:
 
 ```text
-https://steerspec.dev/rules/<version>/RUL.json
+https://steerspec.dev/rules/v<version>/RUL.json
 ```
 
-Or download the archive for offline use, with `<version>` as the tag and `<number>` as the tag without the `v`:
+Or download the archive for offline use:
 
 ```text
-https://github.com/SteerSpec/strspc-rules/releases/download/<version>/strspc-rules-<number>.tar.gz
+https://github.com/SteerSpec/strspc-rules/releases/download/v<version>/strspc-rules-<version>.tar.gz
 ```
 
 Other endpoints are listed under [Published at steerspec.dev](docs/releases.md#published-at-steerspecdev).

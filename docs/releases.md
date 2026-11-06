@@ -1,5 +1,7 @@
 # Releases and published files
 
+In this page `<version>` is a release number in the form `MAJOR.MINOR.PATCH`, without the leading `v`.
+
 ## Releases
 
 Releases follow [semantic versioning](https://semver.org/) and are tagged `v<MAJOR>.<MINOR>.<PATCH>`.
@@ -41,7 +43,7 @@ Each release includes:
 ## Published at steerspec.dev
 
 Each release's schemas and rules are served from [steerspec.dev](https://steerspec.dev) (GitHub Pages), which makes
-the schema `$id` URLs resolvable and gives the CLI and other tools stable endpoints.
+the schema `$id` URLs resolvable and gives the CLI and other tools fixed URLs for each release.
 
 | URL | Description |
 | --- | ----------- |
