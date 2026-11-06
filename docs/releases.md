@@ -32,7 +32,7 @@ Each release includes:
 
 - The full `rules/` directory, with the `LICENSE` and `NOTICE` files
 - Archives: `strspc-rules-<version>.tar.gz` and `strspc-rules-<version>.zip`
-- The schemas, rules and manifest, published to steerspec.dev by the release
+- The schemas, rules and manifest, prepared for steerspec.dev by the release
 - Pin PRs (`chore(rules): pin dev.steerspec.core to X.Y.Z`) in strspc-manager, strspc-CLI, strspc-sync,
   strspc-spec, strspc-pr-review and other SteerSpec consumer repositories, opened by
   [`pin-consumers.yml`](../.github/workflows/pin-consumers.yml); each PR also syncs the
@@ -49,7 +49,7 @@ the schema `$id` URLs resolvable and gives the CLI and other tools fixed URLs fo
 | `https://steerspec.dev/schemas/entity/bootstrap.json` | Bootstrap schema (matches `$id`) |
 | `https://steerspec.dev/schemas/realm/v1.json` | Realm manifest schema (matches `$id`) |
 | `https://steerspec.dev/schemas/config/v1.json` | Config schema (matches `$id`) |
-| `https://steerspec.dev/rules/latest/index.json` | Manifest with filenames, versions, blake3 hashes |
+| `https://steerspec.dev/rules/latest/index.json` | Manifest with the release version, file names, entity ids and blake3 hashes |
 | `https://steerspec.dev/rules/latest/<ENTITY>.json` | Latest rule files |
 | `https://steerspec.dev/rules/v<version>/` | Versioned snapshots |
 
