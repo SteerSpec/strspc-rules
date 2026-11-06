@@ -10,11 +10,16 @@ Validation phases:
   3. The entity schema validates the core files (self-check)
   4. The config schema is generated from SPCFG rules (validates consumer config files)
 
+Every schema in rules/core/_schema/ also carries the release stamp of
+tools/schema_stamp.py, a top-level "x-steerspec-core-version": "X.Y.Z"
+taken from realm.version. The bootstrap and realm schemas are maintained by
+hand; this script only writes their stamp line.
+
 Usage:
   python3 tools/build-schema.py [--check]
 
-  --check  Verify the committed schemas match what would be generated.
-           Exit 1 if stale. Used by CI.
+  --check  Verify the committed schemas match what would be generated,
+           release stamps included. Exit 1 if stale. Used by CI.
 """
 
 import json
@@ -23,6 +28,7 @@ import sys
 from pathlib import Path
 
 from jsonschema import Draft202012Validator
+from schema_stamp import STAMP_KEY, stamp_schema_text
 
 ROOT = Path(__file__).parent.parent
 CORE_DIR = ROOT / "rules" / "core"
@@ -30,6 +36,9 @@ SCHEMA_DIR = CORE_DIR / "_schema"
 BOOTSTRAP_SCHEMA = SCHEMA_DIR / "bootstrap.schema.json"
 OUTPUT_SCHEMA = SCHEMA_DIR / "entity.v1.schema.json"
 OUTPUT_CONFIG_SCHEMA = SCHEMA_DIR / "config.v1.schema.json"
+REALM_MANIFEST = CORE_DIR / "realm.json"
+# Hand-maintained schemas: only their release stamp is written here.
+HAND_SCHEMAS = [BOOTSTRAP_SCHEMA, SCHEMA_DIR / "realm.v1.schema.json"]
 
 # --- Entity → Schema path mapping ---
 # Maps (entity_id, sub_entity_id_or_None) to the schema path they constrain.
@@ -609,8 +618,13 @@ def validate_full(files: list[tuple[Path, dict]], schema: dict) -> bool:
     return all_ok
 
 
+def core_version() -> str:
+    return json.loads(REALM_MANIFEST.read_text(encoding="utf-8"))["realm"]["version"]
+
+
 def main() -> int:
     check_mode = "--check" in sys.argv
+    stamp = core_version()
 
     print("Phase 1: Loading and bootstrap validation")
     bootstrap_schema = load_bootstrap_schema()
@@ -632,11 +646,27 @@ def main() -> int:
     print("\nPhase 4: Building config schema from SPCFG rules")
     config_schema = build_config_schema(rules_by_entity)
 
-    generated_json = json.dumps(schema, indent=2, ensure_ascii=False) + "\n"
-    generated_config_json = json.dumps(config_schema, indent=2, ensure_ascii=False) + "\n" if config_schema else None
+    generated_json = stamp_schema_text(json.dumps(schema, indent=2, ensure_ascii=False) + "\n", stamp)
+    generated_config_json = (
+        stamp_schema_text(json.dumps(config_schema, indent=2, ensure_ascii=False) + "\n", stamp)
+        if config_schema
+        else None
+    )
+    stamped_hand = {path: stamp_schema_text(path.read_text(encoding="utf-8"), stamp) for path in HAND_SCHEMAS}
 
     if check_mode:
         all_ok = True
+
+        for path, stamped in stamped_hand.items():
+            if path.read_text(encoding="utf-8") == stamped:
+                print(f"\n{path.name} carries {STAMP_KEY} {stamp}.")
+            else:
+                print(
+                    f"\nERROR: {path.name} lacks {STAMP_KEY} {stamp}."
+                    " Run 'python3 tools/build-schema.py' and commit the result.",
+                    file=sys.stderr,
+                )
+                all_ok = False
 
         # Check entity schema
         if OUTPUT_SCHEMA.exists():
@@ -685,6 +715,11 @@ def main() -> int:
     if generated_config_json:
         OUTPUT_CONFIG_SCHEMA.write_text(generated_config_json, encoding="utf-8")
         print(f"Config schema written to {OUTPUT_CONFIG_SCHEMA.relative_to(ROOT)}")
+
+    for path, stamped in stamped_hand.items():
+        if path.read_text(encoding="utf-8") != stamped:
+            path.write_text(stamped, encoding="utf-8")
+            print(f"Release stamp written to {path.relative_to(ROOT)}")
 
     return 0
 

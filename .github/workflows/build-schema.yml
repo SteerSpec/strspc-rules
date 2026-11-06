@@ -7,12 +7,14 @@ on:
       - 'rules/core/*.json'
       - 'rules/core/_schema/**'
       - 'tools/build-schema.py'
+      - 'tools/schema_stamp.py'
   pull_request:
     branches: [main, develop]
     paths:
       - 'rules/core/*.json'
       - 'rules/core/_schema/**'
       - 'tools/build-schema.py'
+      - 'tools/schema_stamp.py'
 
 permissions:
   contents: read
