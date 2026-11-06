@@ -4,7 +4,8 @@
 
 # SteerSpec Core Rules
 
-**The canonical rule format of the SteerSpec ecosystem, written in the format it defines.**
+**The `dev.steerspec.core` realm: the rules that define how [SteerSpec](https://steerspec.dev) specifications are
+structured, versioned and interpreted, for engineers who author or consume realms.**
 
 [![CI](https://github.com/SteerSpec/strspc-rules/actions/workflows/ci.yml/badge.svg)](https://github.com/SteerSpec/strspc-rules/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/SteerSpec/strspc-rules)](https://github.com/SteerSpec/strspc-rules/releases)
@@ -15,8 +16,44 @@
 
 </div>
 
-This repository holds the `dev.steerspec.core` realm: the foundational rule definitions that govern how
-every [SteerSpec](https://steerspec.dev) specification is structured, versioned and interpreted.
+## Status
+
+The rules are written in the format they define: CI validates the realm, lints the entities and checks rule
+lifecycle transitions on every pull request, except that the release pull request from `develop` to `main` skips
+the lifecycle check
+([`ci.yml` at v1.17.1](https://github.com/SteerSpec/strspc-rules/blob/v1.17.1/.github/workflows/ci.yml)).
+The current release is [v1.17.1](https://github.com/SteerSpec/strspc-rules/releases/tag/v1.17.1).
+
+## Use the rules
+
+Each release is served from [steerspec.dev](https://steerspec.dev). Pin a version for stable access:
+
+```text
+https://steerspec.dev/rules/v1.17.1/RUL.json
+```
+
+Or download the archive for offline use:
+
+```text
+https://github.com/SteerSpec/strspc-rules/releases/download/v1.17.1/strspc-rules-1.17.1.tar.gz
+```
+
+Other endpoints are listed under [Published at steerspec.dev](#published-at-steerspecdev).
+
+## Where to go
+
+| Goal | Page |
+| ---- | ---- |
+| See which entities the realm defines | [The rules](#the-rules) |
+| Understand how a rule changes state | [Rule lifecycle](#rule-lifecycle) |
+| Understand how the schemas are generated | [Schema system](#schema-system) |
+| Understand realms and cross-realm references | [Realms](#realms) |
+| Fetch schemas or rules by URL | [Published at steerspec.dev](#published-at-steerspecdev) |
+| Run the checks locally | [Development](#development) |
+| See what CI enforces | [CI](#ci) |
+| Understand how a release is cut | [Releases](#releases) |
+| Follow the contribution rules | [Governance](#governance) |
+| Report a vulnerability | [Security](#security) |
 
 ## The rules
 
@@ -25,6 +62,7 @@ every [SteerSpec](https://steerspec.dev) specification is structured, versioned 
 
 | Entity | Covers |
 | ------ | ------ |
+| [`CTRB`](rules/core/CTRB.json) | Contributors: who adds rules and notes |
 | [`ENT`](rules/core/ENT.json) | Entities |
 | [`KWRD`](rules/core/KWRD.json) | Keywords derived from RFC 2119: MUST, SHOULD, MAY, … |
 | [`NTE`](rules/core/NTE.json) | Notes |
@@ -69,10 +107,10 @@ flowchart LR
     D --> P --> I --> R --> T
     D --> A
 
-    classDef draft fill:#6e7781,stroke:#6e7781,color:#ffffff
-    classDef published fill:#1f6feb,stroke:#1f6feb,color:#ffffff
-    classDef implemented fill:#1a7f37,stroke:#1a7f37,color:#ffffff
-    classDef ended fill:#57606a,stroke:#57606a,color:#ffffff
+    classDef draft fill:#161B22,stroke:#6E7681,color:#E6EDF3
+    classDef published fill:#161B22,stroke:#238636,color:#E6EDF3
+    classDef implemented fill:#161B22,stroke:#3FB950,stroke-width:3px,color:#E6EDF3
+    classDef ended fill:#161B22,stroke:#6E7681,color:#E6EDF3
     class D draft
     class P published
     class I implemented
@@ -96,8 +134,8 @@ flowchart LR
     B -->|generates| S
     S -->|validates| R
 
-    classDef file fill:#1f6feb,stroke:#1f6feb,color:#ffffff
-    classDef tool fill:#6e7781,stroke:#6e7781,color:#ffffff
+    classDef file fill:#161B22,stroke:#3FB950,color:#E6EDF3
+    classDef tool fill:#161B22,stroke:#6E7681,color:#E6EDF3
     class R,S file
     class B tool
 ```
@@ -106,13 +144,13 @@ A minimal `bootstrap.schema.json` is checked in, so CI can validate without runn
 
 ## Realms
 
-A **Realm** is a namespace in which Entity Unique Identifiers (EUIDs) are unique. Each Realm is a directory
-holding entity JSON files, a `_schema/` directory and a `realm.json` manifest that declares the Realm's identity,
+A **realm** is a namespace in which Entity Unique Identifiers (EUIDs) are unique. Each realm is a directory
+holding entity JSON files, a `_schema/` directory and a `realm.json` manifest that declares the realm's identity,
 version and dependencies.
 
 - Realm IDs use **reverse domain notation** (e.g. `dev.steerspec.core`) for global uniqueness.
 - Cross-realm entity references use the qualified form `<realm-id>:<EUID>`.
-- The core Realm (`dev.steerspec.core`) defines the foundational rules in this repository.
+- The core realm (`dev.steerspec.core`) defines the foundational rules in this repository.
 
 [`RLM.json`](rules/core/RLM.json) formalizes these rules, and `realm.v1.schema.json`, a hand-maintained axiom,
 validates the manifest format.
@@ -153,7 +191,7 @@ python3 -m unittest discover -s tools/tests -t tools   # Unit tests
 
 ## CI
 
-Every pull request runs these jobs from [`ci.yml`](.github/workflows/ci.yml):
+Every pull request, release pull requests included, runs these jobs from [`ci.yml`](.github/workflows/ci.yml):
 
 | Job | Description |
 | --- | ----------- |
@@ -183,7 +221,7 @@ flowchart LR
     D["<b>develop</b>"]
     M["<b>main</b>"]
     G["<b>GitHub release</b><br/>tag and archives"]
-    W["<b>strspc-www PR</b><br/>steerspec.dev"]
+    W["<b>website PR</b><br/>steerspec.dev"]
     C["<b>consumer pin PRs</b>"]
 
     D -->|merge commit| M
@@ -191,8 +229,8 @@ flowchart LR
     M --> W
     M --> C
 
-    classDef branch fill:#6e7781,stroke:#6e7781,color:#ffffff
-    classDef output fill:#1f6feb,stroke:#1f6feb,color:#ffffff
+    classDef branch fill:#161B22,stroke:#6E7681,color:#E6EDF3
+    classDef output fill:#161B22,stroke:#3FB950,color:#E6EDF3
     class D,M branch
     class G,W,C output
 ```
@@ -201,9 +239,9 @@ Each release includes:
 
 - The full `rules/` directory, with the `LICENSE` and `NOTICE` files
 - Archives: `strspc-rules-<version>.tar.gz` and `strspc-rules-<version>.zip`
-- A publish PR on strspc-www (schemas, rules, manifest), which deploys to steerspec.dev once merged
+- A publish PR on the SteerSpec website repository (schemas, rules, manifest), which deploys to steerspec.dev once merged
 - Pin PRs (`chore(rules): pin dev.steerspec.core to X.Y.Z`) in strspc-manager, strspc-CLI, strspc-sync,
-  strspc-spec, strspc-pr-review, strspc-cloud and strspc-marketing, opened by
+  strspc-spec, strspc-pr-review and other SteerSpec consumer repositories, opened by
   [`pin-consumers.yml`](.github/workflows/pin-consumers.yml); each PR also syncs the
   consumer's `rules/_schema/`
 
@@ -222,25 +260,28 @@ the schema `$id` URLs resolvable and gives the CLI and other tools stable endpoi
 | `https://steerspec.dev/rules/latest/<ENTITY>.json` | Latest rule files |
 | `https://steerspec.dev/rules/v<version>/` | Versioned snapshots |
 
-The publish step is a job in [`release.yml`](.github/workflows/release.yml). It opens a pull request on
-[strspc-www](https://github.com/SteerSpec/strspc-www) (`publish/rules-v<version>`), and merging that deploys the
-files. The commit is signed when the SteerSpec GitHub App credentials (`STEERSPEC_APP_ID`,
-`STEERSPEC_PRIVATE_KEY`) are configured.
+The publish step is a job in [`release.yml`](.github/workflows/release.yml). It opens a pull request on the
+SteerSpec website repository (`publish/rules-v<version>`), and merging that deploys the files. The commit is
+signed when the SteerSpec GitHub App is configured.
 
-### Referencing a specific version
+## Governance
 
-Use steerspec.dev for stable, versioned access:
+Licensed under Apache 2.0, see [LICENSE](LICENSE) and [NOTICE](NOTICE).
 
-```text
-https://steerspec.dev/rules/v1.11.0/RUL.json
-```
+- Changes go through pull requests: feature branch to `develop`, squash-merged, then `develop` to `main` for a release.
+  Prefer the [`strspc` CLI](https://github.com/SteerSpec/strspc-CLI) to editing rule JSON by hand. See [AGENTS.md](AGENTS.md).
+- Commits follow [Conventional Commits](https://www.conventionalcommits.org/).
+- Rule identifiers are never reused, and a rule outside Draft is immutable.
+- Contribution guide for all SteerSpec repositories:
+  [CONTRIBUTING.md](https://github.com/SteerSpec/.github/blob/main/CONTRIBUTING.md).
 
-Or download the archive for offline use:
+## Security
 
-```text
-https://github.com/SteerSpec/strspc-rules/releases/download/v1.11.0/strspc-rules-1.11.0.tar.gz
-```
+Do not open a public issue for a vulnerability. Report it privately through GitHub: on this repository, go to
+**Security** then **Report a vulnerability**. The
+[organisation security policy](https://github.com/SteerSpec/.github/blob/main/SECURITY.md) applies.
 
-## License
+## Community
 
-Apache 2.0, see [LICENSE](LICENSE) and [NOTICE](NOTICE).
+Open an issue to discuss a change before sending a pull request. All SteerSpec repositories follow the
+[code of conduct](https://github.com/SteerSpec/.github/blob/main/CODE_OF_CONDUCT.md).
