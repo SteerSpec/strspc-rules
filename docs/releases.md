@@ -16,25 +16,23 @@ flowchart LR
     D["<b>develop</b>"]
     M["<b>main</b>"]
     G["<b>GitHub release</b><br/>tag and archives"]
-    W["<b>website PR</b><br/>steerspec.dev"]
     C["<b>consumer pin PRs</b>"]
 
     D -->|merge commit| M
     M --> G
-    M --> W
     M --> C
 
     classDef branch fill:#161B22,stroke:#6E7681,color:#E6EDF3
     classDef output fill:#161B22,stroke:#3FB950,color:#E6EDF3
     class D,M branch
-    class G,W,C output
+    class G,C output
 ```
 
 Each release includes:
 
 - The full `rules/` directory, with the `LICENSE` and `NOTICE` files
 - Archives: `strspc-rules-<version>.tar.gz` and `strspc-rules-<version>.zip`
-- A publish PR on the SteerSpec website repository (schemas, rules, manifest), which deploys to steerspec.dev once merged
+- The schemas, rules and manifest, published to steerspec.dev by the release
 - Pin PRs (`chore(rules): pin dev.steerspec.core to X.Y.Z`) in strspc-manager, strspc-CLI, strspc-sync,
   strspc-spec, strspc-pr-review and other SteerSpec consumer repositories, opened by
   [`pin-consumers.yml`](../.github/workflows/pin-consumers.yml); each PR also syncs the
@@ -55,6 +53,4 @@ the schema `$id` URLs resolvable and gives the CLI and other tools fixed URLs fo
 | `https://steerspec.dev/rules/latest/<ENTITY>.json` | Latest rule files |
 | `https://steerspec.dev/rules/v<version>/` | Versioned snapshots |
 
-The publish step is a job in [`release.yml`](../.github/workflows/release.yml). It opens a pull request on the
-SteerSpec website repository (`publish/rules-v<version>`), and merging that deploys the files. The commit is
-signed when the SteerSpec GitHub App is configured.
+The release publishes these files to steerspec.dev in a job of [`release.yml`](../.github/workflows/release.yml).
