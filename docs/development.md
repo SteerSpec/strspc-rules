@@ -37,7 +37,7 @@ Every pull request, release pull requests included, runs these jobs from [`ci.ym
 
 | Job | Description |
 | --- | ----------- |
-| `rules` | Org `strspc-lint` workflow: realm validate, lint, lifecycle diff against the base |
+| `rules` | Org `strspc-lint` workflow: realm validate, lint, lifecycle diff against the base (skipped on the `develop` to `main` release PR and the resulting `main` push) |
 | `check` | Org `strspc-check` workflow, static only: resolves the realm, verifying cross-realm references |
 | `lint-commits` | Conventional Commits enforcement (pull requests only) |
 | `lint-python` | Ruff lint and format check, unit tests |
