@@ -8,263 +8,55 @@
 structured, versioned and interpreted, for engineers who author or consume realms.**
 
 [![CI](https://github.com/SteerSpec/strspc-rules/actions/workflows/ci.yml/badge.svg)](https://github.com/SteerSpec/strspc-rules/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/SteerSpec/strspc-rules)](https://github.com/SteerSpec/strspc-rules/releases)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/SteerSpec/strspc-rules?labelColor=161B22&color=161B22)](https://github.com/SteerSpec/strspc-rules/releases)
+[![License](https://img.shields.io/badge/License-Apache%202.0-161B22.svg?labelColor=161B22)](LICENSE)
 
-[Rules](#the-rules) · [Lifecycle](#rule-lifecycle) · [Schemas](#schema-system) · [Realms](#realms) ·
-[Development](#development) · [CI](#ci) · [Releases](#releases) · [Published files](#published-at-steerspecdev)
+[Rules](docs/rules.md) · [Schemas and realms](docs/schemas.md) · [Development and CI](docs/development.md) ·
+[Releases](docs/releases.md)
 
 </div>
 
 ## Status
 
-The rules are written in the format they define: CI validates the realm, lints the entities and checks rule
-lifecycle transitions on every pull request, except that the release pull request from `develop` to `main` skips
-the lifecycle check
-([`ci.yml` at v1.17.1](https://github.com/SteerSpec/strspc-rules/blob/v1.17.1/.github/workflows/ci.yml)).
-The current release is [v1.17.1](https://github.com/SteerSpec/strspc-rules/releases/tag/v1.17.1).
+CI validates the realm, lints the entities and checks rule lifecycle transitions on every pull request, except that
+the release pull request from `develop` to `main` skips the lifecycle check. The [CI page](docs/development.md#ci)
+lists the jobs, and the Release badge above shows the current release.
 
 ## Use the rules
 
-Each release is served from [steerspec.dev](https://steerspec.dev). Pin a version for stable access:
+Each release is served from [steerspec.dev](https://steerspec.dev). Replace `<version>` with the latest release tag
+(shown by the Release badge), for example `v1.2.3`, to pin a version:
 
 ```text
-https://steerspec.dev/rules/v1.17.1/RUL.json
+https://steerspec.dev/rules/<version>/RUL.json
 ```
 
-Or download the archive for offline use:
+Or download the archive for offline use, with `<version>` as the tag and `<number>` as the tag without the `v`:
 
 ```text
-https://github.com/SteerSpec/strspc-rules/releases/download/v1.17.1/strspc-rules-1.17.1.tar.gz
+https://github.com/SteerSpec/strspc-rules/releases/download/<version>/strspc-rules-<number>.tar.gz
 ```
 
-Other endpoints are listed under [Published at steerspec.dev](#published-at-steerspecdev).
+Other endpoints are listed under [Published at steerspec.dev](docs/releases.md#published-at-steerspecdev).
 
 ## Where to go
 
 | Goal | Page |
 | ---- | ---- |
-| See which entities the realm defines | [The rules](#the-rules) |
-| Understand how a rule changes state | [Rule lifecycle](#rule-lifecycle) |
-| Understand how the schemas are generated | [Schema system](#schema-system) |
-| Understand realms and cross-realm references | [Realms](#realms) |
-| Fetch schemas or rules by URL | [Published at steerspec.dev](#published-at-steerspecdev) |
-| Run the checks locally | [Development](#development) |
-| See what CI enforces | [CI](#ci) |
-| Understand how a release is cut | [Releases](#releases) |
+| See which entities the realm defines | [The rules](docs/rules.md#the-rules) |
+| Understand how a rule changes state | [Rule lifecycle](docs/rules.md#rule-lifecycle) |
+| Understand how the schemas are generated | [Schema system](docs/schemas.md#schema-system) |
+| Understand realms and cross-realm references | [Realms](docs/schemas.md#realms) |
+| Fetch schemas or rules by URL | [Published at steerspec.dev](docs/releases.md#published-at-steerspecdev) |
+| Run the checks locally | [Development](docs/development.md#development) |
+| See what CI enforces | [CI](docs/development.md#ci) |
+| Understand how a release is cut | [Releases](docs/releases.md#releases) |
 | Follow the contribution rules | [Governance](#governance) |
 | Report a vulnerability | [Security](#security) |
 
-## The rules
-
-**JSON is the source of truth.** There is no Markdown in `rules/core/`; the
-[`strspc` CLI](https://github.com/SteerSpec/strspc-CLI) renders it as a view.
-
-| Entity | Covers |
-| ------ | ------ |
-| [`CTRB`](rules/core/CTRB.json) | Contributors: who adds rules and notes |
-| [`ENT`](rules/core/ENT.json) | Entities |
-| [`KWRD`](rules/core/KWRD.json) | Keywords derived from RFC 2119: MUST, SHOULD, MAY, … |
-| [`NTE`](rules/core/NTE.json) | Notes |
-| [`RLIFRMT`](rules/core/RLIFRMT.json) | The rule identifier format |
-| [`RLM`](rules/core/RLM.json) | Realms: namespace definition, cross-realm references |
-| [`RST`](rules/core/RST.json) | Rule sets |
-| [`RUL`](rules/core/RUL.json) | Rules and rule states |
-| [`SPCFG`](rules/core/SPCFG.json) | SteerSpec configuration: a consumer's `.strspc/` directory |
-
-```text
-rules/core/
-├── realm.json                     Realm manifest (namespace metadata, not an entity)
-├── <ENTITY>.json                  The entities above
-└── _schema/
-    ├── bootstrap.schema.json      Minimal schema for CI validation (hand-maintained axiom)
-    ├── config.v1.schema.json      Config schema (generated from the SPCFG rules)
-    ├── entity.v1.schema.json      Full entity schema (generated by build-schema.py)
-    └── realm.v1.schema.json       Realm manifest schema (hand-maintained axiom)
-
-tools/
-├── build-manifest.py              Generates the index.json manifest for published rules
-├── build-schema.py                Generates entity.v1 and config.v1 from the rules themselves
-├── compute-hash.py                Computes Blake3 content hashes for rule-set integrity
-├── hash_util.py                   Shared Blake3 canonicalization and hashing utilities
-├── pin_core.py                    Rewrites the core pins in consumer repositories
-└── tests/                         Unit tests
-```
-
-## Rule lifecycle
-
-A rule moves forward only, and takes each state at most once. [`RUL.json`](rules/core/RUL.json) defines the states.
-
-```mermaid
-flowchart LR
-    D["<b>Draft</b><br/>initial state"]
-    A["<b>Abandoned</b><br/>dropped from Draft"]
-    P["<b>Published</b><br/>validated, not yet implemented"]
-    I["<b>Implemented</b><br/>in force"]
-    R["<b>Retired</b><br/>in force or present, must be removed"]
-    T["<b>Terminated</b><br/>no longer in force"]
-
-    D --> P --> I --> R --> T
-    D --> A
-
-    classDef draft fill:#161B22,stroke:#6E7681,color:#E6EDF3
-    classDef published fill:#161B22,stroke:#238636,color:#E6EDF3
-    classDef implemented fill:#161B22,stroke:#3FB950,stroke-width:3px,color:#E6EDF3
-    classDef ended fill:#161B22,stroke:#6E7681,color:#E6EDF3
-    class D draft
-    class P published
-    class I implemented
-    class A,R,T ended
-```
-
-Rule text is immutable once a rule leaves Draft. CI fails only on Implemented rules (`fail_on: [I]`).
-
-## Schema system
-
-The schema is **self-recursive**: `tools/build-schema.py` reads the rules to generate
-`entity.v1.schema.json`, which then validates those same rule files.
-
-```mermaid
-flowchart LR
-    R["<b>rules/core/*.json</b>"]
-    B["<b>build-schema.py</b>"]
-    S["<b>entity.v1.schema.json</b>"]
-
-    R -->|read by| B
-    B -->|generates| S
-    S -->|validates| R
-
-    classDef file fill:#161B22,stroke:#3FB950,color:#E6EDF3
-    classDef tool fill:#161B22,stroke:#6E7681,color:#E6EDF3
-    class R,S file
-    class B tool
-```
-
-A minimal `bootstrap.schema.json` is checked in, so CI can validate without running the generator.
-
-## Realms
-
-A **realm** is a namespace in which Entity Unique Identifiers (EUIDs) are unique. Each realm is a directory
-holding entity JSON files, a `_schema/` directory and a `realm.json` manifest that declares the realm's identity,
-version and dependencies.
-
-- Realm IDs use **reverse domain notation** (e.g. `dev.steerspec.core`) for global uniqueness.
-- Cross-realm entity references use the qualified form `<realm-id>:<EUID>`.
-- The core realm (`dev.steerspec.core`) defines the foundational rules in this repository.
-
-[`RLM.json`](rules/core/RLM.json) formalizes these rules, and `realm.v1.schema.json`, a hand-maintained axiom,
-validates the manifest format.
-
-The schema requires `realm.version` to be `MAJOR.MINOR.PATCH` (it becomes the release tag) and
-`dependencies[].version` to be a SemVer version, so ranges and values like `latest` are rejected.
-
-## Development
-
-Prerequisites: Python 3.12+ and [pre-commit](https://pre-commit.com/).
-
-```bash
-pip install -r requirements.txt
-pip install pre-commit
-pre-commit install
-pre-commit install --hook-type commit-msg
-```
-
-Hooks run on each commit:
-
-| Hook | Checks |
-| ---- | ------ |
-| actionlint | GitHub Actions workflow syntax |
-| yamllint | YAML formatting |
-| markdownlint | Markdown style |
-| editorconfig-checker | EditorConfig compliance |
-| ruff | Python lint (pycodestyle, pyflakes, isort, bugbear, …) |
-| ruff-format | Python formatting |
-| commitlint | Conventional Commits message format |
-
-To run the validation by hand:
-
-```bash
-python3 tools/build-schema.py --check                  # JSON schema
-ruff check . && ruff format --check .                  # Python lint and format
-python3 -m unittest discover -s tools/tests -t tools   # Unit tests
-```
-
-## CI
-
-Every pull request, release pull requests included, runs these jobs from [`ci.yml`](.github/workflows/ci.yml):
-
-| Job | Description |
-| --- | ----------- |
-| `rules` | Org `strspc-lint` workflow: realm validate, lint, lifecycle diff against the base |
-| `check` | Org `strspc-check` workflow, static only: resolves the realm, verifying cross-realm references |
-| `lint-commits` | Conventional Commits enforcement (pull requests only) |
-| `lint-python` | Ruff lint and format check, unit tests |
-| `lint` | actionlint, yamllint, markdownlint, editorconfig-checker |
-
-[`build-schema.yml`](.github/workflows/build-schema.yml) also runs `python3 tools/build-schema.py --check`
-whenever the rules, the schemas or the generator change.
-
-Release pull requests (`develop` → `main`) skip the `strspc diff` lifecycle check: they aggregate transitions that
-were validated one pull request at a time on the way into `develop`.
-
-## Releases
-
-Releases follow [semantic versioning](https://semver.org/) and are tagged `v<MAJOR>.<MINOR>.<PATCH>`.
-
-**The realm version is the release tag.** Merging `develop` into `main` tags `realm.version` from
-[`rules/core/realm.json`](rules/core/realm.json), and dependent realms pin it as `dev.steerspec.core@<version>`.
-If the tag already exists on another commit the release is skipped, so bump `realm.version` in the pull request that
-should trigger a release. If it exists on the same commit, the run resumes the release.
-
-```mermaid
-flowchart LR
-    D["<b>develop</b>"]
-    M["<b>main</b>"]
-    G["<b>GitHub release</b><br/>tag and archives"]
-    W["<b>website PR</b><br/>steerspec.dev"]
-    C["<b>consumer pin PRs</b>"]
-
-    D -->|merge commit| M
-    M --> G
-    M --> W
-    M --> C
-
-    classDef branch fill:#161B22,stroke:#6E7681,color:#E6EDF3
-    classDef output fill:#161B22,stroke:#3FB950,color:#E6EDF3
-    class D,M branch
-    class G,W,C output
-```
-
-Each release includes:
-
-- The full `rules/` directory, with the `LICENSE` and `NOTICE` files
-- Archives: `strspc-rules-<version>.tar.gz` and `strspc-rules-<version>.zip`
-- A publish PR on the SteerSpec website repository (schemas, rules, manifest), which deploys to steerspec.dev once merged
-- Pin PRs (`chore(rules): pin dev.steerspec.core to X.Y.Z`) in strspc-manager, strspc-CLI, strspc-sync,
-  strspc-spec, strspc-pr-review and other SteerSpec consumer repositories, opened by
-  [`pin-consumers.yml`](.github/workflows/pin-consumers.yml); each PR also syncs the
-  consumer's `rules/_schema/`
-
-## Published at steerspec.dev
-
-Each release's schemas and rules are served from [steerspec.dev](https://steerspec.dev) (GitHub Pages), which makes
-the schema `$id` URLs resolvable and gives the CLI and other tools stable endpoints.
-
-| URL | Description |
-| --- | ----------- |
-| `https://steerspec.dev/schemas/entity/v1.json` | Full entity schema (matches `$id`) |
-| `https://steerspec.dev/schemas/entity/bootstrap.json` | Bootstrap schema (matches `$id`) |
-| `https://steerspec.dev/schemas/realm/v1.json` | Realm manifest schema (matches `$id`) |
-| `https://steerspec.dev/schemas/config/v1.json` | Config schema (matches `$id`) |
-| `https://steerspec.dev/rules/latest/index.json` | Manifest with filenames, versions, blake3 hashes |
-| `https://steerspec.dev/rules/latest/<ENTITY>.json` | Latest rule files |
-| `https://steerspec.dev/rules/v<version>/` | Versioned snapshots |
-
-The publish step is a job in [`release.yml`](.github/workflows/release.yml). It opens a pull request on the
-SteerSpec website repository (`publish/rules-v<version>`), and merging that deploys the files. The commit is
-signed when the SteerSpec GitHub App is configured.
-
 ## Governance
+
+Open source software by Consulare.
 
 Licensed under Apache 2.0, see [LICENSE](LICENSE) and [NOTICE](NOTICE).
 
