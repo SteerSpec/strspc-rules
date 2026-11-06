@@ -58,7 +58,8 @@ Other endpoints are listed under [Published at steerspec.dev](docs/releases.md#p
 
 Open source software by Consulare.
 
-Licensed under Apache 2.0, see [LICENSE](LICENSE) and [NOTICE](NOTICE).
+Copyright is held by Consulare and contributors, see [NOTICE](NOTICE). Licensed under Apache 2.0, see
+[LICENSE](LICENSE).
 
 - Changes go through pull requests: feature branch to `develop`, squash-merged, then `develop` to `main` for a release.
   Prefer the [`strspc` CLI](https://github.com/SteerSpec/strspc-CLI) to editing rule JSON by hand. See [AGENTS.md](AGENTS.md).

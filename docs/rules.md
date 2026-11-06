@@ -38,7 +38,7 @@ tools/
 
 ## Rule lifecycle
 
-A rule moves forward only, and takes each state at most once. [`RUL.json`](../rules/core/RUL.json) defines the states.
+A rule has one of six states and takes each state at most once. [`RUL.json`](../rules/core/RUL.json) defines the states.
 
 ```mermaid
 flowchart LR
