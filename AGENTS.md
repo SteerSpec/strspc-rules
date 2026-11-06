@@ -13,7 +13,8 @@ merge to `main` as a production deploy.
    the operation yet), get explicit approval first.
 2. **Never modify hand-maintained axiom schemas** (`bootstrap.schema.json`,
    `realm.v1.schema.json`) without explicit human approval — these are bootstrap
-   trust anchors.
+   trust anchors. The one exception is their top-level `$comment` release stamp,
+   which `tools/build-schema.py` rewrites from `realm.version`.
 3. **Never delete, renumber, or reuse rule IDs.** Immutability is non-negotiable.
 4. **Never commit directly to `main`.** All changes go through feature branch →
    `develop` → `main` PRs.
@@ -93,6 +94,12 @@ The schema lives in `rules/core/_schema/`:
   rules themselves (self-recursive: rules define the schema that validates the rules).
 - `bootstrap.schema.json` — minimal hand-maintained axiom schema used by CI.
 - `realm.v1.schema.json` — hand-maintained axiom schema for realm manifests.
+
+Every schema there carries a top-level `"$comment": "dev.steerspec.core vX.Y.Z"`, the
+`realm.version` of `rules/core/realm.json`, so a copy vendored into another realm shows which
+core release it came from. `$comment` is a JSON Schema keyword that validators ignore.
+`tools/build-schema.py` writes it (`tools/schema_stamp.py`), and `--check` fails when a stamp
+doesn't match, so bumping `realm.version` means running `tools/build-schema.py` too.
 
 ### Python Tooling
 
