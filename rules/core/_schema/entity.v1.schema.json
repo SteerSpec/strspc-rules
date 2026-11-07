@@ -248,7 +248,8 @@
               "supersedes",
               "extends",
               "related",
-              "standard"
+              "standard",
+              "structured"
             ]
           },
           "content": {
