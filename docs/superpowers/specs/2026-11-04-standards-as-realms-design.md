@@ -8,7 +8,7 @@ crosswalks from the manager-facing contract below. The consumers are
 [strspc-manager#269](https://github.com/SteerSpec/strspc-manager/issues/269) (regressions). Status:
 **decided**. PLB recorded the decisions on #144 on 2026-11-07, listed under [Decisions](#decisions).
 The rules are in core as Draft: STDRLM, STDCWK, RUL-015 to RUL-017, RLMMNFST-008 to RLMMNFST-014,
-STDREF-017 to STDREF-027 and NTE-026 to NTE-035.
+STDREF-017 to STDREF-028 and NTE-026 to NTE-035.
 
 ## Context
 
@@ -118,7 +118,10 @@ Recorded on #144.
 - **Anti-goal:** a figure that counts a clause as covered without an Implemented rule of the project.
 - **Anti-goal:** a transcription that presents itself as the standard owner's own publication.
 
-"Live" below means a rule that isn't Abandoned, Retired, Terminated or superseded.
+"Live" below means a rule that isn't Abandoned, Retired or Terminated, and isn't a Draft rule that
+supersedes another (STDRLM-014). While a transcription fix is Draft, the rule it supersedes stays
+live and the fix doesn't count. When the fix is Published, the old rule is Terminated in the same
+change (STDRLM-013), so exactly one of them is live at any time.
 
 ### Standard realm layout (STDRLM)
 
@@ -202,11 +205,13 @@ The Standard Reference gains two optional fields:
 ### Coverage (contract for strspc-manager `coverage`)
 
 - **Statuses:** `covered`, `mapped` and `lapsed` as in STDREF-012 to STDREF-015, plus **excluded**
-  (STDREF-022), a clause named by a live `exclusion` note of the realm, and **`unmapped`**
+  (STDREF-022), a clause named by a Realm Note of type `exclusion` in the realm's manifest, and **`unmapped`**
   (STDREF-023), a clause of the list that is none of the others.
 - **Entity figure** (STDREF-024): covered ÷ (clauses in the list − excluded).
 - **Realm figure** (STDREF-025): the same, with a clause covered when any entity of the realm tree
   covers it.
+- A figure whose divisor is zero, because every clause in the list is excluded, is undefined
+  (STDREF-028). Reports show it as such, and a gate never treats it as 0 % or 100 %.
 - `derived_from` gets no figure (STDREF-026). `cited` is unchanged.
 
 ### Editions and crosswalks (STDCWK)
@@ -260,7 +265,8 @@ The Standard Reference gains two optional fields:
 - A realm note's ID isn't sequential, or its type isn't allowed (NTE-030, NTE-031).
 - An `exclusion` on a rule, without a `ref`, or with a `ref` naming no linked Standard Reference
   (NTE-032, NTE-034).
-- A `ref` on a realm note that isn't an `exclusion` or a `reference`.
+- A `ref` on a realm note that is neither an `exclusion` nor a `reference` withdrawn from one
+  (NTE-035).
 - A crosswalk entry's `clause` isn't in the previous edition, a target isn't in this one, or an old
   clause appears twice (STDCWK-005, STDCWK-007).
 - The manifest `hash` doesn't match (RLMMNFST-013).
