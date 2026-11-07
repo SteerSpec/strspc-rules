@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.26.1",
-    "timestamp": "2026-11-05T20:01:39Z",
-    "hash": "blake3:ec66edd2ff689f9b985d5e1ebf241e553e87c1d5060a8f618f5bd77128d7b5df"
+    "version": "0.26.5",
+    "timestamp": "2026-11-07T09:06:09Z",
+    "hash": "blake3:158266072e17e063c7a75ceb66837dcc3e806c1d5146d7e422190499cf7d51ac"
   },
   "rules": [
     {
@@ -136,6 +136,33 @@
       "added_by": "github:pleberre",
       "added_at": "2026-11-05",
       "supersedes": "RUL-008"
+    },
+    {
+      "id": "RUL-015",
+      "revision": 0,
+      "state": "D",
+      "body": "MAY have a `clause`, a non-empty string naming the clause of an external standard that the Rule transcribes.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-016",
+      "revision": 0,
+      "state": "D",
+      "body": "MAY have a `profiles` array of unique names of the profiles the Rule belongs to.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-017",
+      "revision": 0,
+      "state": "D",
+      "body": "A Rule MUST NOT have a `clause` or `profiles` unless its Realm is a Standard Realm.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": null
     }
   ],
   "sub_entities": [
@@ -274,6 +301,15 @@
       "content": "An override is distinct from supersession. Supersession replaces a Rule within the same Entity and obliges the superseded Rule to retire once the new one is Implemented; a child can never retire a parent Rule because inherited Rules are read-only references owned by the parent (ENT-009), and across Realms they are dependency imports (RLM-005). An override therefore leaves the parent Rule untouched: it is replaced only inside the inheriting Entity's effective rule set and keeps applying to the parent's own subject and to every other child. The supersedes and overrides fields are orthogonal and may coexist on one Rule.",
       "added_by": "github:pleberre",
       "added_at": "2026-10-27",
+      "revision": 0
+    },
+    {
+      "id": "RUL-015/01",
+      "rule_ref": "RUL-015",
+      "type": "clarification",
+      "content": "A `clause` is fixed once its Rule leaves Draft, because RUL-007 makes the whole Rule immutable.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
       "revision": 0
     }
   ]
