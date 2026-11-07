@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.41.48",
-    "timestamp": "2026-11-07T09:28:46Z",
-    "hash": "blake3:5889b99e24f9f619d88f8b64e45264904b1d79885c620dfc130bfee4bd6a6f59"
+    "version": "0.41.49",
+    "timestamp": "2026-11-07T09:34:45Z",
+    "hash": "blake3:5cb394ffae5e5a2ce95dfbce259702cd3b8ccaa851bbcea8aa3b20a731c92d5e"
   },
   "rules": [
     {
@@ -832,9 +832,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.25",
-        "timestamp": "2026-11-07T09:28:46Z",
-        "hash": "blake3:51bfb133ad1a57b47c241ad692a7e76c55b7d724e28af5ebe0ad2f98837fe7e5"
+        "version": "0.1.26",
+        "timestamp": "2026-11-07T09:34:45Z",
+        "hash": "blake3:a0497eb32770e7cede79e713daa71a183aff857a9a145ab3af102517e123ba1a"
       },
       "rules": [
         {
@@ -977,6 +977,15 @@
           "revision": 0,
           "state": "D",
           "body": "At most one Rule that is not Abandoned MAY supersede a given Rule of a Standard Realm.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-07",
+          "supersedes": null
+        },
+        {
+          "id": "STDRLM-017",
+          "revision": 0,
+          "state": "D",
+          "body": "A Rule of a Standard Realm MUST supersede only a live Rule.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "supersedes": null
