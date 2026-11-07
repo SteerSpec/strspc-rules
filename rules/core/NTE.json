@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.28.10",
-    "timestamp": "2026-11-07T09:05:58Z",
-    "hash": "blake3:1358b704587890a97a825754188ad54338674aea831ea8f871ec624929de052e"
+    "version": "0.28.21",
+    "timestamp": "2026-11-07T18:12:49Z",
+    "hash": "blake3:5694d7e96df5cb9f5fcca83ab265b422ab316abf7dd5b400265cde4bb7cf3892"
   },
   "rules": [
     {
@@ -325,6 +325,60 @@
       "added_by": "github:pleberre",
       "added_at": "2026-11-07",
       "supersedes": null
+    },
+    {
+      "id": "NTE-036",
+      "revision": 0,
+      "state": "D",
+      "body": "A Note of type `structured` IS the machine-readable form of its Rule, held beside the prose Body that the Rule states.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-037",
+      "revision": 0,
+      "state": "D",
+      "body": "The content of a `structured` Note MUST be `<format>:<payload>` split at the first colon, where neither `<format>` nor `<payload>` is blank.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-038",
+      "revision": 0,
+      "state": "D",
+      "body": "The `<format>` of a `structured` Note IS an identifier that names the notation of its payload and that SteerSpec does not resolve.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-039",
+      "revision": 0,
+      "state": "D",
+      "body": "SteerSpec MUST treat the `<payload>` of a `structured` Note as opaque and leave its interpretation to the consumer that defines the `<format>`.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-040",
+      "revision": 0,
+      "state": "D",
+      "body": "A Rule MUST NOT hold more than one Note of type `structured`.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-041",
+      "revision": 0,
+      "state": "D",
+      "body": "A Note of type `structured` MUST NOT be added, changed or retyped once its Rule has left Draft.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": null
     }
   ],
   "notes": [
@@ -389,6 +443,51 @@
       "content": "Note `KWRD-002/01` references Rule KWRD-002 in its identifier and in its `rule_ref`.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-03",
+      "revision": 0
+    },
+    {
+      "id": "NTE-036/01",
+      "rule_ref": "NTE-036",
+      "type": "rationale",
+      "content": "A consumer evaluates a rule deterministically from a notation that prose does not carry exactly, and renders the prose Body from it. Holding that notation in a Note keeps the Body and the Rule unchanged for SteerSpec, which still reviews and gates the prose. A `reference` Note carried the same text before this type, but it also meant free text, so a consumer could not tell the two apart.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "revision": 0
+    },
+    {
+      "id": "NTE-039/01",
+      "rule_ref": "NTE-039",
+      "type": "rationale",
+      "content": "Only the consumer that defines a `<format>` can say what a valid payload is. SteerSpec checks the form `<format>:<payload>` and nothing inside the payload, so a new notation needs no change to SteerSpec. A `structured` Note stays out of the evaluator prompt and out of coverage, like a `reference` Note.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "revision": 0
+    },
+    {
+      "id": "NTE-040/01",
+      "rule_ref": "NTE-040",
+      "type": "rationale",
+      "content": "One Rule has one structured form. A second Note would leave a consumer with two sources for one Rule and no way to choose between them.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "revision": 0
+    },
+    {
+      "id": "NTE-041/01",
+      "rule_ref": "NTE-041",
+      "type": "rationale",
+      "content": "The structured form is the source of the Body, so the two must not diverge. Once a Rule leaves Draft its Body is final, and the structured Note freezes with it. A change after that supersedes the Rule instead. A Note typed `reference` and later retyped `structured` follows the same limit.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "revision": 0
+    },
+    {
+      "id": "NTE-037/01",
+      "rule_ref": "NTE-037",
+      "type": "example",
+      "content": "raci/1:{\"enabled\":[\"single-accountable\",\"min-ra\"]} has the format `raci/1` and the payload `{\"enabled\":[\"single-accountable\",\"min-ra\"]}`.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
       "revision": 0
     }
   ]
