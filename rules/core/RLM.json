@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.41.49",
-    "timestamp": "2026-11-07T09:34:45Z",
-    "hash": "blake3:5cb394ffae5e5a2ce95dfbce259702cd3b8ccaa851bbcea8aa3b20a731c92d5e"
+    "version": "0.41.50",
+    "timestamp": "2026-11-07T15:29:45Z",
+    "hash": "blake3:d151aa55661694c8789413d20e369d67299ae4549a2cf94cf6b9839cddae8b0e"
   },
   "rules": [
     {
@@ -247,9 +247,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.13.13",
-        "timestamp": "2026-11-07T09:17:57Z",
-        "hash": "blake3:cfb7a330d1d4b363ce7535b9e793a676bdd87212be6ab309dac6bcd8d4d06ff1"
+        "version": "0.13.14",
+        "timestamp": "2026-11-07T15:29:45Z",
+        "hash": "blake3:783be206fce0d410427aa1d280cad838a5cd5d846e811ae65dd82dbe7b517af5"
       },
       "rules": [
         {
@@ -403,6 +403,15 @@
           "rule_ref": "RLMMNFST-013",
           "type": "clarification",
           "content": "The hash covers the whole manifest, `realm.version` and `dependencies` included. Release bumps and pin changes must therefore recompute it, through the CLI.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-07",
+          "revision": 0
+        },
+        {
+          "id": "RLMMNFST-012/01",
+          "rule_ref": "RLMMNFST-012",
+          "type": "clarification",
+          "content": "A sub-realm's manifest can hold Realm Notes too: no rule limits them to the top-level Realm, as RLM-022 does for language. An exclusion's ref names a Standard Reference of the same manifest (NTE-034), so a sub-realm that declares its own linked Standard Reference keeps that reference's exclusions in its own manifest.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "revision": 0
