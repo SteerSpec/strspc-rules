@@ -253,6 +253,25 @@ class ApplyTests(unittest.TestCase):
         self.assertEqual(pin_core.find_leftovers(repo.root, "1.8.0"), [])
         self.assertIn("1.8.0", repo.read("CHANGELOG.md"))
 
+    def test_leftover_skips_unlisted_test_fixtures(self):
+        # strspc-CLI's realm_init_test.go and realm_rehash_test.go use the
+        # current pin as data (v1.21.0 and v1.22.0 pin runs failed on them).
+        fixture = '"--dependency", "dev.steerspec.core@1.8.0=github://SteerSpec/strspc-rules@v1.8.0/rules/core"\n'
+        repo = self.make_repo({"src/cmd/realm_test.go": fixture, "src/cmd/testdata/realm.json": fixture})
+        self.assertEqual(self.apply(repo, self.FILES, "1.8.1"), ("1.8.0", True))
+        self.assertEqual(repo.read("src/cmd/realm_test.go"), fixture)
+        self.assertEqual(repo.read("src/cmd/testdata/realm.json"), fixture)
+
+    def test_listed_test_file_is_still_rewritten(self):
+        repo = self.make_repo({"src/cmd/init_test.go": f'const want = "{OLD_SOURCE}"\n'})
+        self.apply(repo, [*self.FILES, "src/cmd/init_test.go"], "1.8.1")
+        self.assertNotIn("1.8.0", repo.read("src/cmd/init_test.go"))
+
+    def test_leftover_still_flags_other_code(self):
+        repo = self.make_repo({"src/cmd/init.go": f'const src = "{OLD_SOURCE}"\n'})
+        with self.assertRaisesRegex(PinError, "src/cmd/init.go"):
+            self.apply(repo, self.FILES, "1.8.1")
+
     def test_apply_syncs_schemas(self):
         repo = self.make_repo({ENTITY_SCHEMA: OLD_SCHEMA})
         self.assertEqual(self.apply(repo, self.FILES, "1.8.1"), ("1.8.0", True))
