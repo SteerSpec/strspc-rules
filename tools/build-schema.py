@@ -223,6 +223,7 @@ def build_note_type_enum(
         "extends",
         "related",
         "standard",
+        "structured",
     ]
 
 
