@@ -12,7 +12,9 @@ The release workflow runs this in each consumer checkout:
         (RM015 compares the two). Prints old=… and changed=true|false. Fails,
         writing nothing, on a downgrade, on a listed file that is missing or
         holds no pin, on a pin left in any other tracked file (a layout drift
-        the file list must follow), or if no schema is shared. When already
+        the file list must follow; CHANGELOG.md, Go *_test.go files and
+        testdata/ are skipped, as history and fixtures), or if no schema is
+        shared. When already
         at X.Y.Z, still fails on a listed file without the pin or a pin
         outside the list, and still copies a schema that differs.
 
@@ -91,6 +93,15 @@ def rewrite_realm_json(text: str, old: str, new: str) -> str:
     return _dump(data)
 
 
+def is_fixture(path: str) -> bool:
+    # Go tests and testdata use versions as data: a test that pairs @1.21.0
+    # with v1.21.0 must not be half-rewritten, and one that happens to use the
+    # current pin is not drift. A test file that does track the pin goes in
+    # the file list, and listed files are rewritten as usual.
+    p = Path(path)
+    return p.name.endswith("_test.go") or "testdata" in p.parts
+
+
 def find_leftovers(repo_dir: Path, old: str) -> list[str]:
     regex = pin_regex(old)
     tracked = subprocess.run(
@@ -98,7 +109,7 @@ def find_leftovers(repo_dir: Path, old: str) -> list[str]:
     ).stdout.split("\0")
     hits = []
     for path in filter(None, tracked):
-        if Path(path).name == "CHANGELOG.md":
+        if Path(path).name == "CHANGELOG.md" or is_fixture(path):
             continue
         try:
             text = (repo_dir / path).read_text(encoding="utf-8")
