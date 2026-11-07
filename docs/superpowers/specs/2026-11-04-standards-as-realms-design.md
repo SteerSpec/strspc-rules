@@ -126,7 +126,8 @@ change (STDRLM-013), so exactly one of them is live at any time.
 ### Standard realm layout (STDRLM)
 
 - The manifest declares `"kind": "standard"` (STDRLM-001), an `edition` (STDRLM-002), a `license`
-  (STDRLM-003) and, optionally, the `profiles` its rules may use (STDRLM-004).
+  (STDRLM-003), an `attribution` (STDRLM-015) and, optionally, the `profiles` its rules may use
+  (STDRLM-004).
 - One entity per chapter (`V1`) and one sub-entity per section (`V1S1`). Each requirement is one or
   more rules, numbered in the standard's order: `V1.1.1` → `V1S1-001`, or `V1S1-001` and `V1S1-002`
   when it has two sentences.
@@ -139,7 +140,8 @@ change (STDRLM-013), so exactly one of them is live at any time.
   whose minimum level is 2. Each entry is declared on the realm (STDRLM-008), and the rules of one
   clause declare the same list (STDRLM-009).
 - **Realm fields `license`** (SPDX ID, RLMMNFST-010) and **`attribution`** (`{text, url}`,
-  RLMMNFST-011). CC BY-SA requires both, and the transcription keeps the same licence.
+  RLMMNFST-011). A standard realm must declare both: CC BY-SA requires them, and a transcription
+  credits its source whatever the licence. The transcription keeps the standard's licence.
 - The realm `version` is the transcription's own release version, and it moves with fixes.
 - Rule bodies are the standard's text, verbatim, split at sentence ends where needed.
 - The rules are Published once the transcription is checked. They never enter Implemented
@@ -169,8 +171,10 @@ The Standard Reference gains two optional fields:
 - `profile` is allowed only with `realm` (STDREF-019) and names one of that realm's `profiles`
   (STDREF-027).
 - The clause list of the reference is the realm's, limited to the profile when one is set (STDREF-020).
-- When `realm` is set, a `standard` note's clause (`owasp.asvs:V1.1.1`) must be in that list
-  (STDREF-021). Matching is exact and case-sensitive.
+- When `realm` is set, a `standard` note's clause (`owasp.asvs:V1.1.1`) must be in the linked
+  realm's whole clause list, not the list narrowed by `profile` (STDREF-021). Matching is exact and
+  case-sensitive. A note may map a clause above the claimed profile: the mapping is valid, and the
+  figure simply doesn't count it.
 - When `realm` isn't set, behaviour is #114's, unchanged.
 
 ### Realm Notes and exclusions
@@ -252,7 +256,7 @@ The Standard Reference gains two optional fields:
 - A rule outside a standard realm has a `clause` or `profiles` (RUL-017).
 - A rule's `profiles` entry isn't declared on the realm (STDRLM-008).
 - Live rules sharing a `clause` declare different `profiles` (STDRLM-009).
-- A standard realm has no `edition` or no `license` (STDRLM-002, STDRLM-003).
+- A standard realm has no `edition`, `license` or `attribution` (STDRLM-002, STDRLM-003, STDRLM-015).
 - A rule of a standard realm is Implemented (STDRLM-010).
 - A rule that supersedes another has a different `clause` (STDRLM-012).
 - A superseding rule of a standard realm is Published while the rule it supersedes isn't Terminated

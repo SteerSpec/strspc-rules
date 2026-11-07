@@ -80,7 +80,7 @@
         "attribution": {
           "type": "object",
           "required": ["text", "url"],
-          "description": "Attribution of the Realm's content (RLMMNFST-011).",
+          "description": "Attribution of the Realm's content (RLMMNFST-011). Required in a Standard Realm (STDRLM-015), checked by lint.",
           "properties": {
             "text": {
               "type": "string",

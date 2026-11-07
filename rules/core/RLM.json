@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.41.45",
-    "timestamp": "2026-11-07T09:17:57Z",
-    "hash": "blake3:3302f9de7930435ea5c88348c34b93343760bfc967bc7e63b99d2746b291fcf8"
+    "version": "0.41.47",
+    "timestamp": "2026-11-07T09:24:06Z",
+    "hash": "blake3:89adf879bbdd930f00e7064d945946d24f8b7005b8ecd9b5e882e4b9b828ddd4"
   },
   "rules": [
     {
@@ -418,9 +418,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.45",
-        "timestamp": "2026-11-07T09:17:57Z",
-        "hash": "blake3:0e0217d3aa604a1d234737246970e1fdc1faf60171089ac9a3f0a63fe89b497a"
+        "version": "0.1.46",
+        "timestamp": "2026-11-07T09:24:06Z",
+        "hash": "blake3:4623c23b4772868a4fb23c83489a7e2ecfb31683f12038644177026887345f9f"
       },
       "rules": [
         {
@@ -811,6 +811,15 @@
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
           "revision": 0
+        },
+        {
+          "id": "STDREF-021/01",
+          "rule_ref": "STDREF-021",
+          "type": "clarification",
+          "content": "The check uses the whole clause list of the linked Realm, not the list narrowed by `profile`. A Rule may map a clause above the claimed profile; that mapping is valid, and the figure counts only clauses in the profile (STDREF-020).",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-07",
+          "revision": 0
         }
       ]
     },
@@ -823,9 +832,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.23",
-        "timestamp": "2026-11-07T09:17:57Z",
-        "hash": "blake3:ca0f42a35b9767c1e7aef2b4142f2a9f1748c1ec7f6cd0bd5bfe405b6e0f4215"
+        "version": "0.1.24",
+        "timestamp": "2026-11-07T09:24:02Z",
+        "hash": "blake3:5ebe7dfba25511d0ee37299b53e40e16a52c7c005e87bba45087b75d0b9e2add"
       },
       "rules": [
         {
@@ -950,6 +959,15 @@
           "revision": 0,
           "state": "D",
           "body": "A live Rule of a Standard Realm IS a Rule that is not Abandoned, Retired or Terminated and is not a Draft Rule that supersedes another.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-07",
+          "supersedes": null
+        },
+        {
+          "id": "STDRLM-015",
+          "revision": 0,
+          "state": "D",
+          "body": "MUST declare an `attribution` object in the `realm` object of its manifest.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "supersedes": null
