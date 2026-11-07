@@ -212,11 +212,16 @@ The Standard Reference gains two optional fields:
 ### Coverage (contract for strspc-manager `coverage`)
 
 - **Statuses:** `covered`, `mapped` and `lapsed` as in STDREF-012 to STDREF-015, plus **excluded**
-  (STDREF-022), a clause named by a Realm Note of type `exclusion` in the realm's manifest, and **`unmapped`**
-  (STDREF-023), a clause of the list that is none of the others.
-- **Entity figure** (STDREF-024): covered ÷ (clauses in the list − excluded).
+  (STDREF-022), a clause named by a Realm Note of type `exclusion` in the manifest that declares the
+  reference, and **`unmapped`** (STDREF-023), a clause of the list that is none of the others.
+- **Entity figure** (STDREF-024): (covered and not excluded) ÷ (clauses in the list − excluded). A
+  clause that is both covered and excluded counts in neither, so the figure never exceeds 100 %. The
+  report still shows it as excluded, with its mappings.
 - **Realm figure** (STDREF-025): the same, with a clause covered when any entity of the realm tree
-  covers it.
+  covers it. The exclusions are those of the declaring manifest only (STDREF-025/01). A sub-realm
+  reference with the same id is a separate reference, with its own exclusions and figure.
+- **Profiles**: when a Standard Realm declares `profiles`, every live rule declares `profiles`
+  (STDRLM-018), so each clause belongs to at least one profile's list.
 - A figure whose divisor is zero, because every clause in the list is excluded, is undefined
   (STDREF-028). Reports show it as such, and a gate never treats it as 0 % or 100 %.
 - `derived_from` gets no figure (STDREF-026). `cited` is unchanged.
@@ -259,6 +264,7 @@ The Standard Reference gains two optional fields:
 - A rule outside a standard realm has a `clause` or `profiles` (RUL-017).
 - A rule's `profiles` entry isn't declared on the realm (STDRLM-008).
 - Live rules sharing a `clause` declare different `profiles` (STDRLM-009).
+- A live rule declares no `profiles` in a standard realm that declares them (STDRLM-018).
 - A standard realm has no `edition`, `license` or `attribution` (STDRLM-002, STDRLM-003, STDRLM-015).
 - A rule of a standard realm is Implemented (STDRLM-010).
 - A rule that supersedes another has a different `clause` (STDRLM-012).
