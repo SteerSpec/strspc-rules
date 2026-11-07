@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.41.49",
-    "timestamp": "2026-11-07T09:34:45Z",
-    "hash": "blake3:5cb394ffae5e5a2ce95dfbce259702cd3b8ccaa851bbcea8aa3b20a731c92d5e"
+    "version": "0.41.54",
+    "timestamp": "2026-11-07T16:32:28Z",
+    "hash": "blake3:a8fb0167f437fd108f19446625d9934f004e42cd64484f56cbce647b42ce0c00"
   },
   "rules": [
     {
@@ -247,9 +247,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.13.13",
-        "timestamp": "2026-11-07T09:17:57Z",
-        "hash": "blake3:cfb7a330d1d4b363ce7535b9e793a676bdd87212be6ab309dac6bcd8d4d06ff1"
+        "version": "0.13.14",
+        "timestamp": "2026-11-07T15:29:45Z",
+        "hash": "blake3:783be206fce0d410427aa1d280cad838a5cd5d846e811ae65dd82dbe7b517af5"
       },
       "rules": [
         {
@@ -406,6 +406,15 @@
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "revision": 0
+        },
+        {
+          "id": "RLMMNFST-012/01",
+          "rule_ref": "RLMMNFST-012",
+          "type": "clarification",
+          "content": "A sub-realm's manifest can hold Realm Notes too: no rule limits them to the top-level Realm, as RLM-022 does for language. An exclusion's ref names a Standard Reference of the same manifest (NTE-034), so a sub-realm that declares its own linked Standard Reference keeps that reference's exclusions in its own manifest.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-07",
+          "revision": 0
         }
       ]
     },
@@ -418,9 +427,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.46",
-        "timestamp": "2026-11-07T09:24:06Z",
-        "hash": "blake3:4623c23b4772868a4fb23c83489a7e2ecfb31683f12038644177026887345f9f"
+        "version": "0.1.49",
+        "timestamp": "2026-11-07T16:32:28Z",
+        "hash": "blake3:99d3129e8771f8168168a4bbb328f798892f0fc751358853b36d0424f7adeb38"
       },
       "rules": [
         {
@@ -614,9 +623,9 @@
         },
         {
           "id": "STDREF-022",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "A clause IS excluded in an Entity when its Realm holds a Note of type `exclusion` naming it.",
+          "body": "A clause IS excluded for a Standard Reference when the manifest that declares the reference holds a Note of type `exclusion` naming it.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "supersedes": null
@@ -632,9 +641,9 @@
         },
         {
           "id": "STDREF-024",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "The coverage figure of an Entity for a Standard Reference with a `realm` IS the number of its clauses covered there divided by the number in its clause list less those excluded there.",
+          "body": "The coverage figure of an Entity for a Standard Reference with a `realm` IS the number of its clauses covered and not excluded there divided by the number in its clause list less those excluded there.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "supersedes": null
@@ -820,6 +829,15 @@
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "revision": 0
+        },
+        {
+          "id": "STDREF-025/01",
+          "rule_ref": "STDREF-025",
+          "type": "clarification",
+          "content": "The exclusions are those of the manifest that declares the Standard Reference (STDREF-022), since an exclusion names a reference of its own manifest (NTE-034). A sub-realm that declares a reference with the same id declares a separate reference, with its own exclusions and its own figure.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-07",
+          "revision": 0
         }
       ]
     },
@@ -832,9 +850,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.26",
-        "timestamp": "2026-11-07T09:34:45Z",
-        "hash": "blake3:a0497eb32770e7cede79e713daa71a183aff857a9a145ab3af102517e123ba1a"
+        "version": "0.1.27",
+        "timestamp": "2026-11-07T16:32:28Z",
+        "hash": "blake3:4636ecc4a346935385205084f96f5eece65cf60bf7d55e763af5bb171278aa03"
       },
       "rules": [
         {
@@ -986,6 +1004,15 @@
           "revision": 0,
           "state": "D",
           "body": "A Rule of a Standard Realm MUST supersede only a live Rule.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-07",
+          "supersedes": null
+        },
+        {
+          "id": "STDRLM-018",
+          "revision": 0,
+          "state": "D",
+          "body": "When a Standard Realm declares `profiles`, each of its live Rules MUST declare `profiles`.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "supersedes": null
