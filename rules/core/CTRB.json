@@ -6,15 +6,15 @@
     "description": "A person or account that adds Rules and Notes to a Realm, named by a contributor identifier."
   },
   "rule_set": {
-    "version": "0.9.0",
-    "timestamp": "2026-11-03T09:00:28Z",
-    "hash": "blake3:ff325075a63d4a940eae0b396b2c3f84736a1c6285d02384c9045c962317ad15"
+    "version": "0.17.0",
+    "timestamp": "2026-11-07T09:51:02Z",
+    "hash": "blake3:749c94c695c4b6b3693993001f049790fc0191b4912f98dac7113cc23f97b680"
   },
   "rules": [
     {
       "id": "CTRB-001",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "A contributor identifier IS `<idp>:<subject>`, where `<idp>` names an identity provider and `<subject>` is the contributor's identifier at that provider.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-02",
@@ -23,7 +23,7 @@
     {
       "id": "CTRB-002",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "The `<idp>` of a contributor identifier MUST be one of the identity providers listed by core.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-02",
@@ -32,7 +32,7 @@
     {
       "id": "CTRB-003",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "The `added_by` of every Rule and Note MUST be a contributor identifier.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-02",
@@ -41,7 +41,7 @@
     {
       "id": "CTRB-004",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "A Realm MAY declare its contributors in a `contributors` array of the `realm` object of its manifest.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-02",
@@ -50,7 +50,7 @@
     {
       "id": "CTRB-005",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "When a Realm declares contributors, the `added_by` of every new Rule and Note MUST name one of them.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-02",
@@ -59,7 +59,7 @@
     {
       "id": "CTRB-006",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "A sub-realm MUST use the contributors of its parent Realm.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-02",
@@ -68,7 +68,7 @@
     {
       "id": "CTRB-007",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "A contributor entry MAY hold an email address.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-02",
@@ -77,7 +77,7 @@
     {
       "id": "CTRB-008",
       "revision": 0,
-      "state": "P",
+      "state": "I",
       "body": "A contributor entry with `<idp>` `github` SHOULD hold the account's numeric user ID.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-02",
