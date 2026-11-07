@@ -77,6 +77,14 @@
               "url": {
                 "type": "string",
                 "minLength": 1
+              },
+              "realm": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9]*)*$"
+              },
+              "profile": {
+                "type": "string",
+                "minLength": 1
               }
             },
             "additionalProperties": false
@@ -180,6 +188,19 @@
                 "type": "null"
               }
             ]
+          },
+          "clause": {
+            "type": "string",
+            "minLength": 1
+          },
+          "profiles": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
           }
         },
         "additionalProperties": false
