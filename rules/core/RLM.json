@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.41.50",
-    "timestamp": "2026-11-07T15:29:45Z",
-    "hash": "blake3:d151aa55661694c8789413d20e369d67299ae4549a2cf94cf6b9839cddae8b0e"
+    "version": "0.41.54",
+    "timestamp": "2026-11-07T16:32:28Z",
+    "hash": "blake3:a8fb0167f437fd108f19446625d9934f004e42cd64484f56cbce647b42ce0c00"
   },
   "rules": [
     {
@@ -427,9 +427,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.46",
-        "timestamp": "2026-11-07T09:24:06Z",
-        "hash": "blake3:4623c23b4772868a4fb23c83489a7e2ecfb31683f12038644177026887345f9f"
+        "version": "0.1.49",
+        "timestamp": "2026-11-07T16:32:28Z",
+        "hash": "blake3:99d3129e8771f8168168a4bbb328f798892f0fc751358853b36d0424f7adeb38"
       },
       "rules": [
         {
@@ -623,9 +623,9 @@
         },
         {
           "id": "STDREF-022",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "A clause IS excluded in an Entity when its Realm holds a Note of type `exclusion` naming it.",
+          "body": "A clause IS excluded for a Standard Reference when the manifest that declares the reference holds a Note of type `exclusion` naming it.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "supersedes": null
@@ -641,9 +641,9 @@
         },
         {
           "id": "STDREF-024",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "The coverage figure of an Entity for a Standard Reference with a `realm` IS the number of its clauses covered there divided by the number in its clause list less those excluded there.",
+          "body": "The coverage figure of an Entity for a Standard Reference with a `realm` IS the number of its clauses covered and not excluded there divided by the number in its clause list less those excluded there.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "supersedes": null
@@ -829,6 +829,15 @@
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "revision": 0
+        },
+        {
+          "id": "STDREF-025/01",
+          "rule_ref": "STDREF-025",
+          "type": "clarification",
+          "content": "The exclusions are those of the manifest that declares the Standard Reference (STDREF-022), since an exclusion names a reference of its own manifest (NTE-034). A sub-realm that declares a reference with the same id declares a separate reference, with its own exclusions and its own figure.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-07",
+          "revision": 0
         }
       ]
     },
@@ -841,9 +850,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.26",
-        "timestamp": "2026-11-07T09:34:45Z",
-        "hash": "blake3:a0497eb32770e7cede79e713daa71a183aff857a9a145ab3af102517e123ba1a"
+        "version": "0.1.27",
+        "timestamp": "2026-11-07T16:32:28Z",
+        "hash": "blake3:4636ecc4a346935385205084f96f5eece65cf60bf7d55e763af5bb171278aa03"
       },
       "rules": [
         {
@@ -995,6 +1004,15 @@
           "revision": 0,
           "state": "D",
           "body": "A Rule of a Standard Realm MUST supersede only a live Rule.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-07",
+          "supersedes": null
+        },
+        {
+          "id": "STDRLM-018",
+          "revision": 0,
+          "state": "D",
+          "body": "When a Standard Realm declares `profiles`, each of its live Rules MUST declare `profiles`.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "supersedes": null
