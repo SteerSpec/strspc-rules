@@ -60,7 +60,9 @@ jobs:
           - repo: strspc-manager
             files: rules/realm.json .strspc/config.yaml docs/SPEC.md
           - repo: strspc-CLI
-            files: rules/realm.json .strspc/config.yaml README.md docs/configuration.md src/cmd/init.go src/cmd/init_test.go
+            files: >-
+              rules/realm.json .strspc/config.yaml README.md docs/configuration.md
+              src/cmd/init.go src/cmd/init_test.go
           - repo: strspc-sync
             files: rules/realm.json .strspc/config.yaml
           - repo: strspc-spec
