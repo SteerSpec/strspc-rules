@@ -121,7 +121,9 @@ Recorded on #144.
 "Live" below means a rule that isn't Abandoned, Retired or Terminated, and isn't a Draft rule that
 supersedes another (STDRLM-014). While a transcription fix is Draft, the rule it supersedes stays
 live and the fix doesn't count. When the fix is Published, the old rule is Terminated in the same
-change (STDRLM-013), so exactly one of them is live at any time.
+change (STDRLM-013). A rule has at most one successor that isn't Abandoned (STDRLM-016), so a
+competing fix must be abandoned before another is drafted. Together these keep exactly one
+transcription of each rule live at any time.
 
 ### Standard realm layout (STDRLM)
 
@@ -259,6 +261,7 @@ The Standard Reference gains two optional fields:
 - A standard realm has no `edition`, `license` or `attribution` (STDRLM-002, STDRLM-003, STDRLM-015).
 - A rule of a standard realm is Implemented (STDRLM-010).
 - A rule that supersedes another has a different `clause` (STDRLM-012).
+- Two rules that aren't Abandoned supersede the same rule of a standard realm (STDRLM-016).
 - A superseding rule of a standard realm is Published while the rule it supersedes isn't Terminated
   (STDRLM-013).
 - A Standard Reference's `realm` isn't a standard realm dependency (STDREF-017).
