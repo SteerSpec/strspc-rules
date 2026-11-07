@@ -319,6 +319,16 @@ def build_schema(
                     {"type": "null"},
                 ]
             },
+            # RUL-015/016: the clause a Standard Realm's Rule transcribes and
+            # the profiles it belongs to. RUL-017 (Standard Realms only) and
+            # STDRLM-008/009 are checked by lint.
+            "clause": {"type": "string", "minLength": 1},
+            "profiles": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": True,
+                "items": {"type": "string", "minLength": 1},
+            },
         },
         "additionalProperties": False,
     }
@@ -395,6 +405,14 @@ def build_schema(
                                 },
                                 "version": {"type": "string", "minLength": 1},
                                 "url": {"type": "string", "minLength": 1},
+                                # STDREF-017/019: the linked Standard Realm and
+                                # the claimed profile. Their cross-field checks
+                                # (STDREF-018/019/027) are done by lint.
+                                "realm": {
+                                    "type": "string",
+                                    "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9]*)*$",
+                                },
+                                "profile": {"type": "string", "minLength": 1},
                             },
                             "additionalProperties": False,
                         },

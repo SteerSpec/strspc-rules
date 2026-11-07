@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.28.0",
-    "timestamp": "2026-11-06T18:20:00Z",
-    "hash": "blake3:9c24134725ab72b218fc2923dbda50c99b392f0adaa69e05551a4b1385b3660d"
+    "version": "0.28.10",
+    "timestamp": "2026-11-07T09:05:58Z",
+    "hash": "blake3:1358b704587890a97a825754188ad54338674aea831ea8f871ec624929de052e"
   },
   "rules": [
     {
@@ -235,6 +235,96 @@
       "added_by": "github:pleberre",
       "added_at": "2026-11-05",
       "supersedes": "NTE-006"
+    },
+    {
+      "id": "NTE-026",
+      "revision": 0,
+      "state": "D",
+      "body": "IS associated with a single Rule or a single Realm.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": "NTE-021"
+    },
+    {
+      "id": "NTE-027",
+      "revision": 0,
+      "state": "D",
+      "body": "A Note associated with a Rule MUST reference the identifier of its Rule explicitly.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": "NTE-022"
+    },
+    {
+      "id": "NTE-028",
+      "revision": 0,
+      "state": "D",
+      "body": "A Note associated with a Rule MUST be stored in the same directory as the entity and rule it references.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": "NTE-003"
+    },
+    {
+      "id": "NTE-029",
+      "revision": 0,
+      "state": "D",
+      "body": "A Realm Note IS a Note associated with a Realm and stored in the `notes` array of its manifest.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-030",
+      "revision": 0,
+      "state": "D",
+      "body": "The identifier of a Realm Note MUST be `REALM/NNN`, sequential from 001.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-031",
+      "revision": 0,
+      "state": "D",
+      "body": "A Realm Note MUST be of type `exclusion`, `rationale`, `clarification` or `reference`.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-032",
+      "revision": 0,
+      "state": "D",
+      "body": "A Note of type `exclusion` MUST be a Realm Note.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-033",
+      "revision": 0,
+      "state": "D",
+      "body": "A Note of type `exclusion` IS a declaration that one clause is not applicable to its Realm, its content being the justification.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-034",
+      "revision": 0,
+      "state": "D",
+      "body": "A Note of type `exclusion` MUST have a `ref` `<id>:<clause>` whose `<id>` names a Standard Reference with a `realm` declared in the manifest of its Realm.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-035",
+      "revision": 0,
+      "state": "D",
+      "body": "An exclusion MUST be withdrawn only by changing its Note to type `reference` with its `ref` and content unchanged.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-07",
+      "supersedes": null
     }
   ],
   "notes": [
