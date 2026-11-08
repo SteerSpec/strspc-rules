@@ -103,7 +103,8 @@ Recorded on #144.
 9. **Pilot home: a new repo,** `steerspec-hub/strspc-hb-std-owasp-asvs`, CC BY-SA 4.0 throughout, with
    realm ID `dev.steerspec.std.owasp.asvs.v5`. Standard Realms live in the `steerspec-hub` org, on
    `steerspec-hub.com`, not in the `SteerSpec` org or on steerspec.dev. That keeps the transcriptions'
-   licence and takedown handling apart from the Apache-2.0 tools. The hosting name doesn't set the
+   licence and takedown handling apart from the Apache-2.0 tools. The hub's own specification lives in
+   `steerspec-hub/strspc-hb-specs`. The hosting name doesn't set the
    namespace: SteerSpec's transcriptions keep `dev.steerspec.std.…` wherever they're hosted.
 10. **STDREF-001 to STDREF-016** are published in a separate PR, after these rules settle.
 11. **Note identifiers:** rule notes keep `<EUID>-NNN/NN`. Realm notes are `REALM/NNN`, because they're
