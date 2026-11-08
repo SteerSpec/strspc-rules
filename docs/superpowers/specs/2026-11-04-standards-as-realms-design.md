@@ -100,8 +100,11 @@ Recorded on #144.
    standard text puts the consumer's rendered rules under CC BY-SA, so tools carry the standard's
    `license` and `attribution` into that output. Mapping by clause ID isn't affected. A legal read is
    still needed before adopt ships.
-9. **Pilot home: a new repo,** `SteerSpec/strspc-std-owasp-asvs`, CC BY-SA 4.0 throughout, with realm
-   ID `dev.steerspec.std.owasp.asvs.v5`.
+9. **Pilot home: a new repo,** `steerspec-hub/strspc-hb-std-owasp-asvs`, CC BY-SA 4.0 throughout, with
+   realm ID `dev.steerspec.std.owasp.asvs.v5`. Standard Realms live in the `steerspec-hub` org, on
+   `steerspec-hub.com`, not in the `SteerSpec` org or on steerspec.dev. That keeps the transcriptions'
+   licence and takedown handling apart from the Apache-2.0 tools. The hosting name doesn't set the
+   namespace: SteerSpec's transcriptions keep `dev.steerspec.std.…` wherever they're hosted.
 10. **STDREF-001 to STDREF-016** are published in a separate PR, after these rules settle.
 11. **Note identifiers:** rule notes keep `<EUID>-NNN/NN`. Realm notes are `REALM/NNN`, because they're
     numbered across a realm, and one standard can need more than 99 exclusions.
@@ -253,7 +256,8 @@ The Standard Reference gains two optional fields:
 ### Trust and naming
 
 - A transcription that SteerSpec publishes uses its own namespace:
-  `dev.steerspec.std.<publisher>.<standard>.<edition>`. Realm IDs allow no hyphens.
+  `dev.steerspec.std.<publisher>.<standard>.<edition>`. Realm IDs allow no hyphens, so the hub's
+  domain, `steerspec-hub.com`, is a hosting name only and never a namespace.
 - A publisher's own realm uses its reverse-DNS namespace (`org.owasp.…`).
 - How a publisher proves it owns a namespace relates to #135 (contributor verification and entity
   signing, with no central identity service). It isn't designed here.
@@ -309,7 +313,7 @@ The Standard Reference gains two optional fields:
    #239 gate with `--min-coverage`.
 5. Release flow: once the CLI recomputes the hash, the release skill, `pin-consumers.yml` and
    strspc-sync stop hand-editing `realm.json`.
-6. Pilot: generate ASVS 5.0.0 L1 (70 clauses) in `SteerSpec/strspc-std-owasp-asvs`, and map at least
+6. Pilot: generate ASVS 5.0.0 L1 (70 clauses) in `steerspec-hub/strspc-hb-std-owasp-asvs`, and map at least
    one strspc-CLI rule to it.
 7. Crosswalk: generate 4.0.3 → 5.0.0 from OWASP's YAML, and check it against both pilot editions.
 
