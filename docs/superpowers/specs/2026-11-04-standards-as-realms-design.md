@@ -151,7 +151,10 @@ itself. Together these keep exactly one transcription of each rule live at any t
   RLMMNFST-011). A standard realm must declare both: CC BY-SA requires them, and a transcription
   credits its source whatever the licence. The transcription keeps the standard's licence.
 - The realm `version` is the transcription's own release version, and it moves with fixes.
-- Rule bodies are the standard's text, verbatim, split at sentence ends where needed.
+- Rule bodies are the standard's text, verbatim, split at sentence ends where needed (STDRLM-019).
+  So a body may hold no Key Word (STDRLM-020), and its examples stay in the body as an exception to
+  NTE-020 (STDRLM-021): lint skips RL021 and RL026 in a Standard Realm. The ASVS pilot showed why:
+  all 503 of its rules start "Verify that…", and 138 hold "e.g." or "such as".
 - The rules are Published once the transcription is checked. They never enter Implemented
   (STDRLM-010), and tools never evaluate them against code (STDRLM-011).
 - **Generated.** A script reads the publisher's machine-readable release and runs
