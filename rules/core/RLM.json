@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.41.54",
-    "timestamp": "2026-11-07T16:32:28Z",
-    "hash": "blake3:a8fb0167f437fd108f19446625d9934f004e42cd64484f56cbce647b42ce0c00"
+    "version": "0.41.59",
+    "timestamp": "2026-11-09T11:44:23Z",
+    "hash": "blake3:c3c14225c63dac5066a0c5bacb0d99002941116391f1dcb93f9f7544600fc6fd"
   },
   "rules": [
     {
@@ -850,9 +850,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.27",
-        "timestamp": "2026-11-07T16:32:28Z",
-        "hash": "blake3:4636ecc4a346935385205084f96f5eece65cf60bf7d55e763af5bb171278aa03"
+        "version": "0.1.32",
+        "timestamp": "2026-11-09T11:44:23Z",
+        "hash": "blake3:334ea7240bdc38489a73fc3635eaf555d8d5f6cc9852f60dea9e97f42e74c154"
       },
       "rules": [
         {
@@ -1016,6 +1016,33 @@
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "supersedes": null
+        },
+        {
+          "id": "STDRLM-019",
+          "revision": 0,
+          "state": "D",
+          "body": "The body of a Rule of a Standard Realm MUST be the wording of the standard for its clause, divided only at sentence ends (RUL-004).",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-09",
+          "supersedes": null
+        },
+        {
+          "id": "STDRLM-020",
+          "revision": 0,
+          "state": "D",
+          "body": "The body of a Rule of a Standard Realm MAY hold no Key Word.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-09",
+          "supersedes": null
+        },
+        {
+          "id": "STDRLM-021",
+          "revision": 0,
+          "state": "D",
+          "body": "Examples in the body of a Rule of a Standard Realm MAY stay in the body, as an exception to NTE-020.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-09",
+          "supersedes": null
         }
       ],
       "sub_entities": [
@@ -1108,6 +1135,24 @@
           "content": "A clause with more than one sentence is split into several Rules so that each Rule stays a single phrase (RUL-004). The clause remains the unit that `standard` Notes name and that coverage counts.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
+          "revision": 0
+        },
+        {
+          "id": "STDRLM-019/01",
+          "rule_ref": "STDRLM-019",
+          "type": "rationale",
+          "content": "A Standard Realm transcribes text it doesn't own. Rewording a requirement around a Key Word, or moving its examples to Notes, would change what the standard says and break the match between a clause and its text (STDRLM-007). The checks for Key Words and inline examples are for Rules that SteerSpec users write.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-09",
+          "revision": 0
+        },
+        {
+          "id": "STDRLM-020/01",
+          "rule_ref": "STDRLM-020",
+          "type": "example",
+          "content": "ASVS writes its requirements as \"Verify that …\", with no RFC 2119 Key Word.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-09",
           "revision": 0
         }
       ]
