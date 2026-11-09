@@ -82,7 +82,7 @@ Recorded on #144.
 
 1. **RUL-004: split requirements.** A requirement with more than one sentence becomes several rules,
    so RUL-004 applies to standard realms too. One clause can then be several rules
-   (`V1.1.1` → `V1S1-001`, `V1S1-002`). The **clause is the unit**: a `standard` note names a clause,
+   (`V1.1.1` → `V01S01-001`, `V01S01-002`). The **clause is the unit**: a `standard` note names a clause,
    never a part of one, and coverage counts clauses.
 2. **Clause label: a field on the rule.** `clause`, set while the rule is Draft and then fixed by
    RUL-007. Rules that share a clause share its value.
@@ -135,9 +135,10 @@ itself. Together these keep exactly one transcription of each rule live at any t
 - The manifest declares `"kind": "standard"` (STDRLM-001), an `edition` (STDRLM-002), a `license`
   (STDRLM-003), an `attribution` (STDRLM-015) and, optionally, the `profiles` its rules may use
   (STDRLM-004).
-- One entity per chapter (`V1`) and one sub-entity per section (`V1S1`). Each requirement is one or
-  more rules, numbered in the standard's order: `V1.1.1` → `V1S1-001`, or `V1S1-001` and `V1S1-002`
-  when it has two sentences.
+- One entity per chapter (`V01`) and one sub-entity per section (`V01S01`). Each requirement is one or
+  more rules, numbered in the standard's order: `V1.1.1` → `V01S01-001`, or `V01S01-001` and
+  `V01S01-002` when it has two sentences. The numbers are zero-padded because an EUID has 3 to 18
+  characters, which `V1` is too short for, and so that IDs sort in the standard's order past `V9`.
 - **Rule field `clause`** (RUL-015): the standard's own number, `V1.1.1`. Every live rule of a
   standard realm has one (STDRLM-005), so no rule drops out of the clause list unnoticed. Rules outside
   standard realms have neither `clause` nor `profiles` (RUL-017).
