@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.26.10",
-    "timestamp": "2026-11-09T17:33:24Z",
-    "hash": "blake3:4fb4be84817ed0f5f86cc73ea177b21769528697536a3df54c231eea234897df"
+    "version": "0.26.12",
+    "timestamp": "2026-11-09T21:50:23Z",
+    "hash": "blake3:8c54a3240954f9122019cb6758f625beb5ad95c63356e8889e7cd4b6290435cc"
   },
   "rules": [
     {
@@ -175,9 +175,9 @@
         "parent": "RUL"
       },
       "rule_set": {
-        "version": "0.22.5",
-        "timestamp": "2026-11-09T17:33:24Z",
-        "hash": "blake3:db4ac10bb86679f75d215b2f1a7579b0609b9ff39ef0edf5cd8d3b96965a7663"
+        "version": "0.22.7",
+        "timestamp": "2026-11-09T21:50:23Z",
+        "hash": "blake3:3e3fc319d2a23e71234da07d8e1b06afe15d10a7cb982731609e135b75c5df35"
       },
       "rules": [
         {
@@ -273,7 +273,7 @@
         {
           "id": "RULST-011",
           "revision": 0,
-          "state": "D",
+          "state": "A",
           "body": "A Rule MUST change state only from Draft to Published, Draft to Abandoned, Published to Implemented, Implemented to Retired, or Retired to Terminated, except as RULST-012 allows.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-09",
@@ -281,9 +281,9 @@
         },
         {
           "id": "RULST-012",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "A Published Rule that another Rule supersedes MAY change state to Terminated.",
+          "body": "A Published Rule MUST NOT change state except to Implemented or, when another Rule supersedes it, to Terminated.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-09",
           "supersedes": null
