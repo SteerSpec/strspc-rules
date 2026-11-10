@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.26.5",
-    "timestamp": "2026-11-07T09:06:09Z",
-    "hash": "blake3:158266072e17e063c7a75ceb66837dcc3e806c1d5146d7e422190499cf7d51ac"
+    "version": "0.26.14",
+    "timestamp": "2026-11-10T13:07:01Z",
+    "hash": "blake3:29c869c01724a87e13cf46845629d1dffdbee21350c49028798a064543e3a031"
   },
   "rules": [
     {
@@ -175,9 +175,9 @@
         "parent": "RUL"
       },
       "rule_set": {
-        "version": "0.22.0",
-        "timestamp": "2026-11-05T20:01:39Z",
-        "hash": "blake3:02652e8ce474264f5d79278cc2f386394ab25efcebc78552279afc395966ec57"
+        "version": "0.22.9",
+        "timestamp": "2026-11-10T13:07:01Z",
+        "hash": "blake3:e0cd6b46b3fa16862f2368f10f9ff5cb66f939e2f489c47ecf761989076a0cfd"
       },
       "rules": [
         {
@@ -269,6 +269,24 @@
           "added_by": "github:pleberre",
           "added_at": "2026-11-05",
           "supersedes": "RULST-007"
+        },
+        {
+          "id": "RULST-011",
+          "revision": 0,
+          "state": "A",
+          "body": "A Rule MUST change state only from Draft to Published, Draft to Abandoned, Published to Implemented, Implemented to Retired, or Retired to Terminated, except as RULST-012 allows.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-09",
+          "supersedes": null
+        },
+        {
+          "id": "RULST-012",
+          "revision": 2,
+          "state": "D",
+          "body": "A Published Rule MAY change state to Terminated in or after the change in which a Rule that supersedes it enters Published.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-09",
+          "supersedes": null
         }
       ],
       "notes": [
@@ -288,6 +306,42 @@
           "content": "Promote Draft to Published as soon as the wording is final, and Published to Implemented only once compliance and enforcement exist.",
           "added_by": "github:pleberre",
           "added_at": "2026-10-22",
+          "revision": 0
+        },
+        {
+          "id": "RULST-011/01",
+          "rule_ref": "RULST-011",
+          "type": "clarification",
+          "content": "No other move is allowed: an Implemented Rule reaches Terminated only through Retired, and Abandoned and Terminated are terminal.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-09",
+          "revision": 0
+        },
+        {
+          "id": "RULST-012/01",
+          "rule_ref": "RULST-012",
+          "type": "rationale",
+          "content": "A Published Rule may not be edited, so a wrong text is fixed by a superseding Rule; the old Rule was never in force, so Retired, which is for a Rule still in force, does not fit, and Terminated marks it out of force.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-09",
+          "revision": 0
+        },
+        {
+          "id": "RULST-012/02",
+          "rule_ref": "RULST-012",
+          "type": "example",
+          "content": "SYNCOP-009 supersedes SYNCOP-008 while SYNCOP-008 is Published; SYNCOP-008 goes to Terminated and SYNCOP-009 can reach Implemented.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-09",
+          "revision": 0
+        },
+        {
+          "id": "RULST-012/03",
+          "rule_ref": "RULST-012",
+          "type": "clarification",
+          "content": "The bound is Published because a superseding Rule's text is final only from Published (RUL-007), while a Draft successor may still be abandoned. How late the superseded Rule may stay Published is left to strspc-manager, which owns the transition checks.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-10",
           "revision": 0
         }
       ]
