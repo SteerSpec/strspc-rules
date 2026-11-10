@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.26.14",
-    "timestamp": "2026-11-10T10:12:07Z",
-    "hash": "blake3:31e1fd02ca462ff9d7335cca4e88040f76bac6bd47d076d887071907ec5ba3de"
+    "timestamp": "2026-11-10T13:07:01Z",
+    "hash": "blake3:29c869c01724a87e13cf46845629d1dffdbee21350c49028798a064543e3a031"
   },
   "rules": [
     {
@@ -176,8 +176,8 @@
       },
       "rule_set": {
         "version": "0.22.9",
-        "timestamp": "2026-11-10T10:12:07Z",
-        "hash": "blake3:72980c6d3c762985d4655344e60d8325de7a4ff90e23b34c6be6fde08e58998b"
+        "timestamp": "2026-11-10T13:07:01Z",
+        "hash": "blake3:e0cd6b46b3fa16862f2368f10f9ff5cb66f939e2f489c47ecf761989076a0cfd"
       },
       "rules": [
         {
@@ -283,7 +283,7 @@
           "id": "RULST-012",
           "revision": 2,
           "state": "D",
-          "body": "A Published Rule that another Rule supersedes MAY change state to Terminated.",
+          "body": "A Published Rule MAY change state to Terminated in or after the change in which a Rule that supersedes it enters Published.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-09",
           "supersedes": null
@@ -339,7 +339,7 @@
           "id": "RULST-012/03",
           "rule_ref": "RULST-012",
           "type": "clarification",
-          "content": "The superseded Rule moves to Terminated no earlier than the change in which its successor enters Published, and no later than the change in which its successor enters Implemented.",
+          "content": "The bound is Published because a superseding Rule's text is final only from Published (RUL-007), while a Draft successor may still be abandoned. How late the superseded Rule may stay Published is left to strspc-manager, which owns the transition checks.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-10",
           "revision": 0
