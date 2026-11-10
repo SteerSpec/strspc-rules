@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.26.12",
-    "timestamp": "2026-11-09T21:50:23Z",
-    "hash": "blake3:8c54a3240954f9122019cb6758f625beb5ad95c63356e8889e7cd4b6290435cc"
+    "version": "0.26.14",
+    "timestamp": "2026-11-10T13:07:01Z",
+    "hash": "blake3:29c869c01724a87e13cf46845629d1dffdbee21350c49028798a064543e3a031"
   },
   "rules": [
     {
@@ -175,9 +175,9 @@
         "parent": "RUL"
       },
       "rule_set": {
-        "version": "0.22.7",
-        "timestamp": "2026-11-09T21:50:23Z",
-        "hash": "blake3:3e3fc319d2a23e71234da07d8e1b06afe15d10a7cb982731609e135b75c5df35"
+        "version": "0.22.9",
+        "timestamp": "2026-11-10T13:07:01Z",
+        "hash": "blake3:e0cd6b46b3fa16862f2368f10f9ff5cb66f939e2f489c47ecf761989076a0cfd"
       },
       "rules": [
         {
@@ -281,9 +281,9 @@
         },
         {
           "id": "RULST-012",
-          "revision": 1,
+          "revision": 2,
           "state": "D",
-          "body": "A Published Rule MUST NOT change state except to Implemented or, when another Rule supersedes it, to Terminated.",
+          "body": "A Published Rule MAY change state to Terminated in or after the change in which a Rule that supersedes it enters Published.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-09",
           "supersedes": null
@@ -333,6 +333,15 @@
           "content": "SYNCOP-009 supersedes SYNCOP-008 while SYNCOP-008 is Published; SYNCOP-008 goes to Terminated and SYNCOP-009 can reach Implemented.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-09",
+          "revision": 0
+        },
+        {
+          "id": "RULST-012/03",
+          "rule_ref": "RULST-012",
+          "type": "clarification",
+          "content": "The bound is Published because a superseding Rule's text is final only from Published (RUL-007), while a Draft successor may still be abandoned. How late the superseded Rule may stay Published is left to strspc-manager, which owns the transition checks.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-10",
           "revision": 0
         }
       ]
