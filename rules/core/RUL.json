@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.26.12",
-    "timestamp": "2026-11-09T21:50:23Z",
-    "hash": "blake3:8c54a3240954f9122019cb6758f625beb5ad95c63356e8889e7cd4b6290435cc"
+    "version": "0.26.14",
+    "timestamp": "2026-11-10T10:12:07Z",
+    "hash": "blake3:31e1fd02ca462ff9d7335cca4e88040f76bac6bd47d076d887071907ec5ba3de"
   },
   "rules": [
     {
@@ -175,9 +175,9 @@
         "parent": "RUL"
       },
       "rule_set": {
-        "version": "0.22.7",
-        "timestamp": "2026-11-09T21:50:23Z",
-        "hash": "blake3:3e3fc319d2a23e71234da07d8e1b06afe15d10a7cb982731609e135b75c5df35"
+        "version": "0.22.9",
+        "timestamp": "2026-11-10T10:12:07Z",
+        "hash": "blake3:72980c6d3c762985d4655344e60d8325de7a4ff90e23b34c6be6fde08e58998b"
       },
       "rules": [
         {
@@ -281,9 +281,9 @@
         },
         {
           "id": "RULST-012",
-          "revision": 1,
+          "revision": 2,
           "state": "D",
-          "body": "A Published Rule MUST NOT change state except to Implemented or, when another Rule supersedes it, to Terminated.",
+          "body": "A Published Rule that another Rule supersedes MAY change state to Terminated.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-09",
           "supersedes": null
@@ -333,6 +333,15 @@
           "content": "SYNCOP-009 supersedes SYNCOP-008 while SYNCOP-008 is Published; SYNCOP-008 goes to Terminated and SYNCOP-009 can reach Implemented.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-09",
+          "revision": 0
+        },
+        {
+          "id": "RULST-012/03",
+          "rule_ref": "RULST-012",
+          "type": "clarification",
+          "content": "The superseded Rule moves to Terminated no earlier than the change in which its successor enters Published, and no later than the change in which its successor enters Implemented.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-10",
           "revision": 0
         }
       ]
