@@ -23,7 +23,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: SteerSpec/strspc-CLI/.github/actions/setup-strspc@1ce43e4484d9451083c0774a9926178889d684f2  # CLI #92
+      - uses: SteerSpec/strspc-CLI/.github/actions/setup-strspc@ce10040bd4342ed524f36874a0164dc13cb9ba93  # CLI #92
         with:
           version: ${{ vars.STRSPC_CLI_VERSION || 'latest' }}
 
@@ -178,7 +178,7 @@ jobs:
           cp -r "www/rules/v${VERSION}" www/rules/latest
 
       - name: Open publish pull request on strspc-www
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1  # v8.1.1
+        uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1  # v8.1.3
         with:
           path: www
           token: ${{ steps.app.outputs.token || secrets.WWW_PAT }}
