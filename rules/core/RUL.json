@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.26.14",
-    "timestamp": "2026-11-10T13:07:01Z",
-    "hash": "blake3:29c869c01724a87e13cf46845629d1dffdbee21350c49028798a064543e3a031"
+    "version": "0.26.15",
+    "timestamp": "2026-11-23T12:30:59Z",
+    "hash": "blake3:0cb4b208d09642b5adf8c64d18436d05acd76f571b153188b44aa88e5322d2e8"
   },
   "rules": [
     {
@@ -162,6 +162,15 @@
       "body": "A Rule MUST NOT have a `clause` or `profiles` unless its Realm is a Standard Realm.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-07",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-018",
+      "revision": 0,
+      "state": "D",
+      "body": "An overriding Rule MUST NOT replace the inherited Rule while its State precedes that Rule's State in the order Draft, Published, Implemented, and until then both Rules stay in the inheriting Entity's effective rule set.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-23",
       "supersedes": null
     }
   ],
