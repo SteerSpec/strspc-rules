@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.41.59",
-    "timestamp": "2026-11-09T11:44:23Z",
-    "hash": "blake3:c3c14225c63dac5066a0c5bacb0d99002941116391f1dcb93f9f7544600fc6fd"
+    "version": "0.41.60",
+    "timestamp": "2026-11-23T12:35:53Z",
+    "hash": "blake3:b65b8e943db60b317fa730391a381d2a46bd7dfc3845445fb0d0d9071be7659b"
   },
   "rules": [
     {
@@ -427,9 +427,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.49",
-        "timestamp": "2026-11-07T16:32:28Z",
-        "hash": "blake3:99d3129e8771f8168168a4bbb328f798892f0fc751358853b36d0424f7adeb38"
+        "version": "0.1.50",
+        "timestamp": "2026-11-23T12:35:53Z",
+        "hash": "blake3:92bf6b17867f14dd215e16e16318950543b064206f11ae7458edb1ff43ee11db"
       },
       "rules": [
         {
@@ -515,9 +515,9 @@
         },
         {
           "id": "STDREF-010",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "The coverage rule set of an Entity IS its own Rules in state Draft, Published or Implemented with the Rules it acquires under ENT-009, less those that any of them overrides.",
+          "body": "The coverage rule set of an Entity IS its own Rules in state Draft, Published or Implemented with the Rules it acquires under ENT-009, less those that any of them replaces under RUL-018.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
