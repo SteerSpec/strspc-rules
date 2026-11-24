@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.26.15",
-    "timestamp": "2026-11-23T12:30:59Z",
-    "hash": "blake3:0cb4b208d09642b5adf8c64d18436d05acd76f571b153188b44aa88e5322d2e8"
+    "version": "0.26.20",
+    "timestamp": "2026-11-24T08:38:04Z",
+    "hash": "blake3:ad5c04198fa766947a76ade1a1b1d98de6b0964e03462a0e43df74b2c750b6c4"
   },
   "rules": [
     {
@@ -168,9 +168,54 @@
       "id": "RUL-018",
       "revision": 0,
       "state": "D",
-      "body": "An overriding Rule MUST NOT replace the inherited Rule while its State precedes that Rule's State in the order Draft, Published, Implemented, and until then both Rules stay in the inheriting Entity's effective rule set.",
+      "body": "An overriding Rule in state Draft MUST NOT replace the inherited Rule, which stays in the inheriting Entity's effective rule set.",
       "added_by": "github:pleberre",
-      "added_at": "2026-11-23",
+      "added_at": "2026-11-24",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-019",
+      "revision": 0,
+      "state": "D",
+      "body": "An overriding Rule in state Published or Implemented MUST take precedence over the inherited Rule within the inheriting Entity's effective rule set.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-020",
+      "revision": 0,
+      "state": "D",
+      "body": "An evaluation of an overriding Rule MUST receive the inherited Rule it replaces as context.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-021",
+      "revision": 0,
+      "state": "D",
+      "body": "An overriding Rule in state Published MUST be evaluated and enforced as Implemented when the inherited Rule it replaces is Implemented.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-022",
+      "revision": 0,
+      "state": "D",
+      "body": "A Rule that overrides a Published or Implemented Rule MUST NOT leave Draft without a Note of type `override_ack` whose content is the Rule's current `revision`.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-023",
+      "revision": 0,
+      "state": "D",
+      "body": "An overriding Rule in state Draft SHOULD be reported, without failing, when it conflicts with the inherited Rule it overrides.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
       "supersedes": null
     }
   ],

@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.41.60",
-    "timestamp": "2026-11-23T12:35:53Z",
-    "hash": "blake3:b65b8e943db60b317fa730391a381d2a46bd7dfc3845445fb0d0d9071be7659b"
+    "timestamp": "2026-11-24T08:38:04Z",
+    "hash": "blake3:32f1c364a4faf61e7a4558d196c95995bf09f5adcc176e50ade11c7d856a78e0"
   },
   "rules": [
     {
@@ -428,8 +428,8 @@
       },
       "rule_set": {
         "version": "0.1.50",
-        "timestamp": "2026-11-23T12:35:53Z",
-        "hash": "blake3:92bf6b17867f14dd215e16e16318950543b064206f11ae7458edb1ff43ee11db"
+        "timestamp": "2026-11-24T08:38:04Z",
+        "hash": "blake3:d790471fba9f1642c1f1f86fe4bd3a628c7fbd02c96f4f6ae9eec6a7d116f58c"
       },
       "rules": [
         {
@@ -517,7 +517,7 @@
           "id": "STDREF-010",
           "revision": 1,
           "state": "D",
-          "body": "The coverage rule set of an Entity IS its own Rules in state Draft, Published or Implemented with the Rules it acquires under ENT-009, less those that any of them replaces under RUL-018.",
+          "body": "The coverage rule set of an Entity IS its own Rules in state Draft, Published or Implemented with the Rules it acquires under ENT-009, less those that any of them takes precedence over under RUL-019.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
