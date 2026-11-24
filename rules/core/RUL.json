@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.26.20",
-    "timestamp": "2026-11-24T08:38:04Z",
-    "hash": "blake3:ad5c04198fa766947a76ade1a1b1d98de6b0964e03462a0e43df74b2c750b6c4"
+    "timestamp": "2026-11-24T08:43:25Z",
+    "hash": "blake3:d34448096dd74b3d2e89e484b7db46deabf132ca6eec46970e99640f934ebd50"
   },
   "rules": [
     {
@@ -195,7 +195,7 @@
       "id": "RUL-021",
       "revision": 0,
       "state": "D",
-      "body": "An overriding Rule in state Published MUST be evaluated and enforced as Implemented when the inherited Rule it replaces is Implemented.",
+      "body": "An overriding Rule in state Published MUST be evaluated and enforced as Implemented when the inherited Rule it replaces is Implemented or is itself enforced as Implemented.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-24",
       "supersedes": null
@@ -204,7 +204,7 @@
       "id": "RUL-022",
       "revision": 0,
       "state": "D",
-      "body": "A Rule that overrides a Published or Implemented Rule MUST NOT leave Draft without a Note of type `override_ack` whose content is the Rule's current `revision`.",
+      "body": "A Rule that overrides a Published or Implemented Rule MUST NOT enter state Published without a Note of type `override_ack` whose content is the Rule's current `revision`.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-24",
       "supersedes": null

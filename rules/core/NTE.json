@@ -7,8 +7,8 @@
   },
   "rule_set": {
     "version": "0.28.24",
-    "timestamp": "2026-11-24T08:37:54Z",
-    "hash": "blake3:0f32174f80f8860c3b01e0b3fbf72fec5da0bd69e33729a4b951cee38d416260"
+    "timestamp": "2026-11-24T08:43:25Z",
+    "hash": "blake3:20e4e43cfba8a521c8ad6efa6970aa6c23c9394cf24671e20089c50c0ebe3512"
   },
   "rules": [
     {
@@ -393,7 +393,7 @@
       "id": "NTE-043",
       "revision": 0,
       "state": "D",
-      "body": "A Note of type `override_ack` MUST be held by a Rule that declares `overrides`.",
+      "body": "A Note of type `override_ack` MUST be added only to a Rule that declares `overrides`.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-24",
       "supersedes": null
