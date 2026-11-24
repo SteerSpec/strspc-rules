@@ -8,7 +8,7 @@
   "rule_set": {
     "version": "0.41.60",
     "timestamp": "2026-11-24T08:38:04Z",
-    "hash": "blake3:32f1c364a4faf61e7a4558d196c95995bf09f5adcc176e50ade11c7d856a78e0"
+    "hash": "blake3:9c0f7d53af70b2ab1c76c9d8f3965f6cfe7d184f05cd7e5b518506aa55e584f1"
   },
   "rules": [
     {
@@ -780,10 +780,10 @@
           "id": "STDREF-010/01",
           "rule_ref": "STDREF-010",
           "type": "rationale",
-          "content": "An overriding Rule counts from Draft, as it does in default evaluation, so a clause stops being covered in that Entity as soon as its replacement is drafted, not when the replacement is promoted.",
+          "content": "An overriding Rule takes coverage from the inherited Rule only once it takes precedence under RUL-019, so a clause stays covered in that Entity while its replacement is in Draft.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
-          "revision": 0
+          "revision": 1
         },
         {
           "id": "STDREF-011/01",
