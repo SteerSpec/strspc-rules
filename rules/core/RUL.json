@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.26.14",
-    "timestamp": "2026-11-10T13:07:01Z",
-    "hash": "blake3:29c869c01724a87e13cf46845629d1dffdbee21350c49028798a064543e3a031"
+    "version": "0.26.20",
+    "timestamp": "2026-11-24T08:43:25Z",
+    "hash": "blake3:d34448096dd74b3d2e89e484b7db46deabf132ca6eec46970e99640f934ebd50"
   },
   "rules": [
     {
@@ -162,6 +162,60 @@
       "body": "A Rule MUST NOT have a `clause` or `profiles` unless its Realm is a Standard Realm.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-07",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-018",
+      "revision": 0,
+      "state": "D",
+      "body": "An overriding Rule in state Draft MUST NOT replace the inherited Rule, which stays in the inheriting Entity's effective rule set.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-019",
+      "revision": 0,
+      "state": "D",
+      "body": "An overriding Rule in state Published or Implemented MUST take precedence over the inherited Rule within the inheriting Entity's effective rule set.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-020",
+      "revision": 0,
+      "state": "D",
+      "body": "An evaluation of an overriding Rule MUST receive the inherited Rule it replaces as context.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-021",
+      "revision": 0,
+      "state": "D",
+      "body": "An overriding Rule in state Published MUST be evaluated and enforced as Implemented when the inherited Rule it replaces is Implemented or is itself enforced as Implemented.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-022",
+      "revision": 0,
+      "state": "D",
+      "body": "A Rule that overrides a Published or Implemented Rule MUST NOT enter state Published without a Note of type `override_ack` whose content is the Rule's current `revision`.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-023",
+      "revision": 0,
+      "state": "D",
+      "body": "An overriding Rule in state Draft SHOULD be reported, without failing, when it conflicts with the inherited Rule it overrides.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
       "supersedes": null
     }
   ],

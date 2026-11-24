@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.28.21",
-    "timestamp": "2026-11-07T18:12:49Z",
-    "hash": "blake3:5694d7e96df5cb9f5fcca83ab265b422ab316abf7dd5b400265cde4bb7cf3892"
+    "version": "0.28.24",
+    "timestamp": "2026-11-24T08:43:25Z",
+    "hash": "blake3:20e4e43cfba8a521c8ad6efa6970aa6c23c9394cf24671e20089c50c0ebe3512"
   },
   "rules": [
     {
@@ -378,6 +378,33 @@
       "body": "A Note of type `structured` MUST NOT be added, changed or retyped once its Rule has left Draft.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-07",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-042",
+      "revision": 0,
+      "state": "D",
+      "body": "A Note of type `override_ack` IS the acknowledgement, by a contributor of its Realm, that its Rule replaces the inherited Rule it overrides.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-043",
+      "revision": 0,
+      "state": "D",
+      "body": "A Note of type `override_ack` MUST be added only to a Rule that declares `overrides`.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
+      "supersedes": null
+    },
+    {
+      "id": "NTE-044",
+      "revision": 0,
+      "state": "D",
+      "body": "A Note of type `override_ack` MUST NOT change once added.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
       "supersedes": null
     }
   ],

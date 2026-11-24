@@ -224,6 +224,7 @@ def build_note_type_enum(
         "related",
         "standard",
         "structured",
+        "override_ack",
     ]
 
 
