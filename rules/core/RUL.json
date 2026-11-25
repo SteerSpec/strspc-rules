@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.26.20",
-    "timestamp": "2026-11-24T08:43:25Z",
-    "hash": "blake3:d34448096dd74b3d2e89e484b7db46deabf132ca6eec46970e99640f934ebd50"
+    "version": "0.26.23",
+    "timestamp": "2026-11-25T06:51:17Z",
+    "hash": "blake3:a3f4f002ed7cf12e00bcfdc375771118971356a2b851e3a04c72f00099019e72"
   },
   "rules": [
     {
@@ -217,6 +217,15 @@
       "added_by": "github:pleberre",
       "added_at": "2026-11-24",
       "supersedes": null
+    },
+    {
+      "id": "RUL-024",
+      "revision": 0,
+      "state": "D",
+      "body": "The enforced state of a Rule IS Implemented when RUL-021 requires it to be enforced as Implemented, and its State otherwise.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-25",
+      "supersedes": null
     }
   ],
   "sub_entities": [
@@ -418,6 +427,24 @@
       "content": "A `clause` is fixed once its Rule leaves Draft, because RUL-007 makes the whole Rule immutable.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-07",
+      "revision": 0
+    },
+    {
+      "id": "RUL-021/01",
+      "rule_ref": "RUL-021",
+      "type": "clarification",
+      "content": "A Published Rule that overrides an Implemented Rule has no period in which it is published and not yet enforced: its violations count as those of an Implemented Rule from the change that publishes it, so it stays in Draft until the governed code complies. The same starts with no change to the overriding Rule when a dependency bump brings in the inherited Rule as Implemented.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-25",
+      "revision": 0
+    },
+    {
+      "id": "RUL-024/01",
+      "rule_ref": "RUL-024",
+      "type": "clarification",
+      "content": "The enforced state is derived each time rules are resolved and is never stored: the `state` of the Rule stays Published, and its lifecycle continues from Published.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-25",
       "revision": 0
     }
   ]
