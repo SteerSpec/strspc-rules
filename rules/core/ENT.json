@@ -6,9 +6,9 @@
     "description": "An object with a unique identity and lifecycle. The unit of organization in the SteerSpec rule system."
   },
   "rule_set": {
-    "version": "0.17.20",
-    "timestamp": "2026-11-26T15:50:58Z",
-    "hash": "blake3:3b5ee704d56822f7042f53f9e39a2d2cfd6258e1762dc311fc8ad3c7e62b57a0"
+    "version": "0.17.21",
+    "timestamp": "2026-11-26T16:08:51Z",
+    "hash": "blake3:630bd6c6a8651facea1bda0b47d384ca872a592418df111c63d9cedf78aebd8b"
   },
   "rules": [
     {
@@ -279,7 +279,7 @@
       "id": "ENT-020/01",
       "rule_ref": "ENT-020",
       "type": "clarification",
-      "content": "ENT-009 names where the Rules of the inherited Entity come from. This Rule adds that an inherited Rule which that Entity replaces is not passed down, because RUL-009 already takes it out of the set of that Entity. An inheriting Entity therefore acquires a Published or Implemented override in place of the Rule it replaces, and since RUL-009 lets `overrides` name only an inherited Rule, its own Rules can name that override and not the replaced Rule. A Draft Rule is in no effective rule set, so a Draft override is not passed down and the Rule it overrides is.",
+      "content": "ENT-009 names where the Rules of the inherited Entity come from. This Rule adds that an inherited Rule which that Entity replaces is not passed down, because RUL-009 already takes it out of the set of that Entity. An inheriting Entity therefore acquires a Published or Implemented override in place of the Rule it replaces, and since RUL-009 lets `overrides` name only an inherited Rule, its own Rules can name that override and not the replaced Rule. A Draft Rule is in no effective rule set, so a Draft override is not passed down, and the Rule it overrides is passed down unless another Rule of that Entity already replaces it.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-26",
       "revision": 0
