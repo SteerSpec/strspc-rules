@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.41.62",
-    "timestamp": "2026-11-25T06:51:17Z",
-    "hash": "blake3:e2309c1f6a0784774570d20a3b26252c6eaf6e48b117f1bc9b039d465795bc7f"
+    "version": "0.41.65",
+    "timestamp": "2026-11-26T14:00:21Z",
+    "hash": "blake3:1d31d2f4cab7301ace132246e38796c55bbf404394a5f773c89275375773b2ee"
   },
   "rules": [
     {
@@ -427,9 +427,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.52",
-        "timestamp": "2026-11-25T06:51:17Z",
-        "hash": "blake3:ff61acbf31a94aa88f4165a0d8e3043d80b38bfaeecc1c21b0d7f465d88b2ef2"
+        "version": "0.1.55",
+        "timestamp": "2026-11-26T14:00:21Z",
+        "hash": "blake3:a339358cf59947e1ab8e2173bde8cf2dd84779cd4a70a9e2b46b427b0ab7071e"
       },
       "rules": [
         {
@@ -843,7 +843,7 @@
           "id": "STDREF-012/02",
           "rule_ref": "STDREF-012",
           "type": "clarification",
-          "content": "The enforced state is that of RUL-024, so a Published Rule that overrides an Implemented Rule covers a clause through its own `standard` Notes. An override without such a Note still leaves the clause lapsed (STDREF-015, STDREF-016).",
+          "content": "The enforced state is that of RUL-024, so a Published Rule that overrides an Implemented Rule covers a clause through its own `standard` Notes. An override without such a Note does not cover or map the clause (STDREF-016); the clause is then lapsed only where no other Rule in the coverage rule set covers or maps it (STDREF-015).",
           "added_by": "github:pleberre",
           "added_at": "2026-11-25",
           "revision": 0

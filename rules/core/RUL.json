@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.26.23",
-    "timestamp": "2026-11-25T06:51:17Z",
-    "hash": "blake3:a3f4f002ed7cf12e00bcfdc375771118971356a2b851e3a04c72f00099019e72"
+    "version": "0.26.26",
+    "timestamp": "2026-11-26T14:00:22Z",
+    "hash": "blake3:39ed11c6eb26a12ecb85759bc85379c7666217f60e29d26fcb46ff15dcd5e963"
   },
   "rules": [
     {
@@ -433,7 +433,7 @@
       "id": "RUL-021/01",
       "rule_ref": "RUL-021",
       "type": "clarification",
-      "content": "A Published Rule that overrides an Implemented Rule has no period in which it is published and not yet enforced: its violations count as those of an Implemented Rule from the change that publishes it, so it stays in Draft until the governed code complies. The same starts with no change to the overriding Rule when a dependency bump brings in the inherited Rule as Implemented.",
+      "content": "A Published Rule that overrides an Implemented Rule has no period in which it is published and not yet enforced: its violations count as those of an Implemented Rule from the change that publishes it. Where a consumer fails on Implemented Rules, that change fails as long as the governed code does not comply; keeping the Rule in Draft until it does avoids this. Enforcement as Implemented also starts, with no change to the overriding Rule, when a dependency bump brings in the inherited Rule as Implemented.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-25",
       "revision": 0
