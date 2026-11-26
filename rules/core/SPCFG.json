@@ -6,9 +6,9 @@
     "description": "The consumer-side configuration that declares which rules a project subscribes to and how they are enforced."
   },
   "rule_set": {
-    "version": "0.12.7",
-    "timestamp": "2026-11-05T07:17:36Z",
-    "hash": "blake3:fe1eea00140df057a75788056d6bb3c6c39980a10c05dc3b285585699a79a894"
+    "version": "0.12.9",
+    "timestamp": "2026-11-25T06:51:17Z",
+    "hash": "blake3:b647c60e517fe31c65e3e8be1fa0478f0899f5de4c5b89fb3824177c5b5168e9"
   },
   "rules": [
     {
@@ -90,6 +90,15 @@
       "body": "MAY declare an `evaluate_on` array of rule lifecycle state codes restricting which rules are sent to the evaluator.",
       "added_by": "github:pleberre",
       "added_at": "2026-10-18",
+      "supersedes": null
+    },
+    {
+      "id": "SPCFG-010",
+      "revision": 0,
+      "state": "D",
+      "body": "The state codes of `evaluate_on` and `fail_on` MUST be matched against the enforced state of a Rule.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-25",
       "supersedes": null
     }
   ],
@@ -390,6 +399,15 @@
       "content": "The same rule might be a hard failure for a fintech API and a warning for an internal tool.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-03",
+      "revision": 0
+    },
+    {
+      "id": "SPCFG-010/01",
+      "rule_ref": "SPCFG-010",
+      "type": "rationale",
+      "content": "A consumer that evaluates or fails only on Implemented Rules would otherwise skip a Published override together with the Implemented Rule it overrides, leaving neither enforced. The consumer still decides which states fail (SPCFG-008); the enforced state (RUL-024) only says which state such an override counts as.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-25",
       "revision": 0
     }
   ]

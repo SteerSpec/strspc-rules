@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.41.59",
-    "timestamp": "2026-11-09T11:44:23Z",
-    "hash": "blake3:c3c14225c63dac5066a0c5bacb0d99002941116391f1dcb93f9f7544600fc6fd"
+    "version": "0.41.69",
+    "timestamp": "2026-11-26T16:12:43Z",
+    "hash": "blake3:b13509782eb26ff5b7af182554d9c0b93d9efcd435131e770d7d524b8ab2c0dc"
   },
   "rules": [
     {
@@ -427,9 +427,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.49",
-        "timestamp": "2026-11-07T16:32:28Z",
-        "hash": "blake3:99d3129e8771f8168168a4bbb328f798892f0fc751358853b36d0424f7adeb38"
+        "version": "0.1.59",
+        "timestamp": "2026-11-26T16:12:43Z",
+        "hash": "blake3:82f61ab6d1dbccefc47034234a21209e3088e2f1f0304326975c88f8f7cb6785"
       },
       "rules": [
         {
@@ -515,9 +515,9 @@
         },
         {
           "id": "STDREF-010",
-          "revision": 0,
+          "revision": 2,
           "state": "D",
-          "body": "The coverage rule set of an Entity IS its own Rules in state Draft, Published or Implemented with the Rules it acquires under ENT-009, less those that any of them overrides.",
+          "body": "The coverage rule set of an Entity IS its own Rules in state Draft, Published or Implemented with the Rules it acquires under ENT-009, less those that any of them replaces under RUL-019.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
@@ -533,9 +533,9 @@
         },
         {
           "id": "STDREF-012",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "A clause IS covered in an Entity if and only if a `standard` Note naming it, whose Standard Reference has relation `implements`, is on a Rule in state Implemented in the coverage rule set of that Entity.",
+          "body": "A clause IS covered in an Entity if and only if a `standard` Note naming it, whose Standard Reference has relation `implements`, is on a Rule whose enforced state is Implemented in the coverage rule set of that Entity.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
@@ -560,9 +560,9 @@
         },
         {
           "id": "STDREF-015",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "A clause neither covered nor mapped in an Entity IS lapsed there when a `standard` Note naming it, whose Standard Reference has relation `implements`, is on a Rule that an override by the Entity or an Entity it inherits from replaced.",
+          "body": "A clause neither covered nor mapped in an Entity IS lapsed there when a `standard` Note naming it, whose Standard Reference has relation `implements`, is on a Rule that a Rule of the Entity or of an Entity it inherits from replaces under RUL-019.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
@@ -780,10 +780,10 @@
           "id": "STDREF-010/01",
           "rule_ref": "STDREF-010",
           "type": "rationale",
-          "content": "An overriding Rule counts from Draft, as it does in default evaluation, so a clause stops being covered in that Entity as soon as its replacement is drafted, not when the replacement is promoted.",
+          "content": "An overriding Rule takes coverage from the inherited Rule only once it replaces it under RUL-019, so a Draft override by itself removes no coverage from a clause in that Entity.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
-          "revision": 0
+          "revision": 2
         },
         {
           "id": "STDREF-011/01",
@@ -837,6 +837,15 @@
           "content": "The exclusions are those of the manifest that declares the Standard Reference (STDREF-022), since an exclusion names a reference of its own manifest (NTE-034). A sub-realm that declares a reference with the same id declares a separate reference, with its own exclusions and its own figure.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
+          "revision": 0
+        },
+        {
+          "id": "STDREF-012/02",
+          "rule_ref": "STDREF-012",
+          "type": "clarification",
+          "content": "The enforced state is that of RUL-024, so a Published Rule that overrides an Implemented Rule covers a clause through its own `standard` Notes. An override without such a Note does not cover or map the clause (STDREF-016); the clause is then lapsed only where no other Rule in the coverage rule set covers or maps it (STDREF-015).",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-25",
           "revision": 0
         }
       ]

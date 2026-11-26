@@ -23,7 +23,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: SteerSpec/strspc-CLI/.github/actions/setup-strspc@1ce43e4484d9451083c0774a9926178889d684f2  # CLI #92
+      - uses: SteerSpec/strspc-CLI/.github/actions/setup-strspc@0d91fea9fe6760b2e91a7fe58c99674c00418f2f  # CLI #92
         with:
           version: ${{ vars.STRSPC_CLI_VERSION || 'latest' }}
 
@@ -131,7 +131,7 @@ jobs:
       - name: Mint GitHub App token for strspc-www
         if: steps.app-creds.outputs.present == 'true'
         id: app
-        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510  # v3.3.0
+        uses: actions/create-github-app-token@f418cff399f7aef4c2f0ad47e25ca7a6abbdd6fc  # v3.4.0
         with:
           app-id: ${{ secrets.STEERSPEC_APP_ID }}
           private-key: ${{ secrets.STEERSPEC_PRIVATE_KEY }}
@@ -178,7 +178,7 @@ jobs:
           cp -r "www/rules/v${VERSION}" www/rules/latest
 
       - name: Open publish pull request on strspc-www
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1  # v8.1.1
+        uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1  # v8.1.3
         with:
           path: www
           token: ${{ steps.app.outputs.token || secrets.WWW_PAT }}

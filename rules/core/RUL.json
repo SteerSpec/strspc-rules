@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.26.14",
-    "timestamp": "2026-11-10T13:07:01Z",
-    "hash": "blake3:29c869c01724a87e13cf46845629d1dffdbee21350c49028798a064543e3a031"
+    "version": "0.26.30",
+    "timestamp": "2026-11-26T15:48:58Z",
+    "hash": "blake3:3fefb08a61d0818f49e7d2c3b1ba2e07e00ddbe183ff5e7c6586fec20fbf7c1d"
   },
   "rules": [
     {
@@ -162,6 +162,69 @@
       "body": "A Rule MUST NOT have a `clause` or `profiles` unless its Realm is a Standard Realm.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-07",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-018",
+      "revision": 1,
+      "state": "D",
+      "body": "An overriding Rule in state Draft MUST NOT replace the inherited Rule it overrides.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-019",
+      "revision": 1,
+      "state": "D",
+      "body": "An overriding Rule in state Published or Implemented MUST replace the inherited Rule it overrides within the inheriting Entity's effective rule set.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-020",
+      "revision": 1,
+      "state": "D",
+      "body": "An evaluation of an overriding Rule MUST receive the inherited Rule it overrides as context.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-021",
+      "revision": 0,
+      "state": "D",
+      "body": "An overriding Rule in state Published MUST be evaluated and enforced as Implemented when the inherited Rule it replaces is Implemented or is itself enforced as Implemented.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-022",
+      "revision": 0,
+      "state": "D",
+      "body": "A Rule that overrides a Published or Implemented Rule MUST NOT enter state Published without a Note of type `override_ack` whose content is the Rule's current `revision`.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-023",
+      "revision": 0,
+      "state": "D",
+      "body": "An overriding Rule in state Draft SHOULD be reported, without failing, when it conflicts with the inherited Rule it overrides.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-24",
+      "supersedes": null
+    },
+    {
+      "id": "RUL-024",
+      "revision": 0,
+      "state": "D",
+      "body": "The enforced state of a Rule IS Implemented when RUL-021 requires it to be enforced as Implemented, and its State otherwise.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-25",
       "supersedes": null
     }
   ],
@@ -364,6 +427,33 @@
       "content": "A `clause` is fixed once its Rule leaves Draft, because RUL-007 makes the whole Rule immutable.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-07",
+      "revision": 0
+    },
+    {
+      "id": "RUL-021/01",
+      "rule_ref": "RUL-021",
+      "type": "clarification",
+      "content": "A Published Rule that overrides an Implemented Rule has no period in which it is published and not yet enforced: its violations count as those of an Implemented Rule from the change that publishes it. Where a consumer fails on Implemented Rules, that change fails as long as the governed code does not comply; keeping the Rule in Draft until it does avoids this. Enforcement as Implemented also starts, with no change to the overriding Rule, when a dependency bump brings in the inherited Rule as Implemented.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-25",
+      "revision": 0
+    },
+    {
+      "id": "RUL-024/01",
+      "rule_ref": "RUL-024",
+      "type": "clarification",
+      "content": "The enforced state is derived each time rules are resolved and is never stored: the `state` of the Rule stays Published, and its lifecycle continues from Published.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-25",
+      "revision": 0
+    },
+    {
+      "id": "RUL-018/01",
+      "rule_ref": "RUL-018",
+      "type": "rationale",
+      "content": "An effective rule set holds only Published and Implemented Rules (ENT-020), so the replacement that RUL-009 describes starts when the overriding Rule is Published (RUL-019). The inherited Rule stays in the set in the meantime, unless another Rule of the Entity already replaces it, as a Published override does while its successor is in Draft.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-26",
       "revision": 0
     }
   ]

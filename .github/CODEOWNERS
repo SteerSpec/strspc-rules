@@ -1,0 +1,16 @@
+# Files that decide which rules are enforced and how the gate runs.
+# strspc diff compares rule files only: a change to these could weaken
+# enforcement without a rule changing (strspc-manager SPEC §7.3). With
+# "Require review from Code Owners" on the develop and main rulesets, a
+# pull request that touches them needs cnslr-bt-chef's approval, not the
+# auto-approver's.
+/.strspc/config.yaml    @cnslr-bt-chef
+/rules/core/realm.json  @cnslr-bt-chef
+# Maintained by hand: build-schema.py --check only checks their stamp.
+/rules/core/_schema/bootstrap.schema.json  @cnslr-bt-chef
+/rules/core/_schema/realm.v1.schema.json   @cnslr-bt-chef
+/.github/workflows/     @cnslr-bt-chef
+/tools/                 @cnslr-bt-chef
+# Installed by the schema check and release jobs before they run.
+/requirements.txt       @cnslr-bt-chef
+/.github/CODEOWNERS     @cnslr-bt-chef
