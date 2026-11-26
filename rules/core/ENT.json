@@ -6,9 +6,9 @@
     "description": "An object with a unique identity and lifecycle. The unit of organization in the SteerSpec rule system."
   },
   "rule_set": {
-    "version": "0.17.21",
-    "timestamp": "2026-11-26T16:08:51Z",
-    "hash": "blake3:630bd6c6a8651facea1bda0b47d384ca872a592418df111c63d9cedf78aebd8b"
+    "version": "0.17.24",
+    "timestamp": "2026-11-26T17:23:34Z",
+    "hash": "blake3:02bceb745064115a836ed307eadbf4d3d51dac671060d32a6487809e6ca67e26"
   },
   "rules": [
     {
@@ -103,9 +103,9 @@
     },
     {
       "id": "ENT-011",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "MAY declare a `visibility` of `private`, `protected` or `public`; when it is absent, a sub-entity takes the visibility of the Entity containing it and any other Entity is `public`.",
+      "body": "MAY declare a `visibility` of `private`, `protected` or `public`; when it is absent, the Entity takes the narrower of the visibility of the Entity containing it and that of the Entity it inherits, in the order of ENT-015, and is `public` when it has neither.",
       "added_by": "github:pleberre",
       "added_at": "2026-10-31",
       "supersedes": null
@@ -289,6 +289,24 @@
       "rule_ref": "ENT-020",
       "type": "example",
       "content": "Entity A owns an Implemented Rule R. Entity B inherits A, and Entity C inherits B. B adds a Rule S that overrides R. While S is in Draft, the effective rule sets of B and C both hold R. Once S is Published, both hold S and not R: C can then override S, and R is no longer a Rule that C inherits. The effective rule set of A holds R throughout.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-26",
+      "revision": 0
+    },
+    {
+      "id": "ENT-011/01",
+      "rule_ref": "ENT-011",
+      "type": "rationale",
+      "content": "An Entity that inherits a `protected` or `private` Entity and declares no `visibility` would otherwise be `public`, which ENT-015 does not allow. With this default, such an Entity needs a declaration only to be narrower than the Entity it inherits. A sub-entity that inherits takes the narrower of the two, so that ENT-015 and ENT-018 both hold.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-26",
+      "revision": 0
+    },
+    {
+      "id": "ENT-011/02",
+      "rule_ref": "ENT-011",
+      "type": "clarification",
+      "content": "The Entity containing it, or the Entity it inherits, can itself declare no `visibility`; its own default then applies. The result is the narrowest `visibility` declared by any Entity reached through these two kinds of link, and `public` when none of them declares one.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-26",
       "revision": 0
