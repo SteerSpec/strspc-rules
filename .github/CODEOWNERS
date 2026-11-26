@@ -11,4 +11,6 @@
 /rules/core/_schema/realm.v1.schema.json   @cnslr-bt-chef
 /.github/workflows/     @cnslr-bt-chef
 /tools/                 @cnslr-bt-chef
+# Installed by the schema check and release jobs before they run.
+/requirements.txt       @cnslr-bt-chef
 /.github/CODEOWNERS     @cnslr-bt-chef
