@@ -6,6 +6,9 @@
 # auto-approver's.
 /.strspc/config.yaml    @cnslr-bt-chef
 /rules/core/realm.json  @cnslr-bt-chef
+# Maintained by hand: build-schema.py --check only checks their stamp.
+/rules/core/_schema/bootstrap.schema.json  @cnslr-bt-chef
+/rules/core/_schema/realm.v1.schema.json   @cnslr-bt-chef
 /.github/workflows/     @cnslr-bt-chef
 /tools/                 @cnslr-bt-chef
 /.github/CODEOWNERS     @cnslr-bt-chef
