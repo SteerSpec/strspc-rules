@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.28.24",
-    "timestamp": "2026-11-24T08:43:25Z",
-    "hash": "blake3:20e4e43cfba8a521c8ad6efa6970aa6c23c9394cf24671e20089c50c0ebe3512"
+    "version": "0.28.25",
+    "timestamp": "2026-11-26T15:48:58Z",
+    "hash": "blake3:0fa34da0ab08ef3aad15c1545637acd17c68177d333d6514991403feea35adda"
   },
   "rules": [
     {
@@ -382,9 +382,9 @@
     },
     {
       "id": "NTE-042",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "A Note of type `override_ack` IS the acknowledgement, by a contributor of its Realm, that its Rule replaces the inherited Rule it overrides.",
+      "body": "A Note of type `override_ack` IS the acknowledgement, by a contributor of its Realm, that its Rule is to replace the inherited Rule it overrides.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-24",
       "supersedes": null

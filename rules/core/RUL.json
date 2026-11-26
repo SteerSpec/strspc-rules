@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.26.26",
-    "timestamp": "2026-11-26T14:00:22Z",
-    "hash": "blake3:39ed11c6eb26a12ecb85759bc85379c7666217f60e29d26fcb46ff15dcd5e963"
+    "version": "0.26.30",
+    "timestamp": "2026-11-26T15:48:58Z",
+    "hash": "blake3:3fefb08a61d0818f49e7d2c3b1ba2e07e00ddbe183ff5e7c6586fec20fbf7c1d"
   },
   "rules": [
     {
@@ -166,27 +166,27 @@
     },
     {
       "id": "RUL-018",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "An overriding Rule in state Draft MUST NOT replace the inherited Rule, which stays in the inheriting Entity's effective rule set.",
+      "body": "An overriding Rule in state Draft MUST NOT replace the inherited Rule it overrides.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-24",
       "supersedes": null
     },
     {
       "id": "RUL-019",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "An overriding Rule in state Published or Implemented MUST take precedence over the inherited Rule within the inheriting Entity's effective rule set.",
+      "body": "An overriding Rule in state Published or Implemented MUST replace the inherited Rule it overrides within the inheriting Entity's effective rule set.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-24",
       "supersedes": null
     },
     {
       "id": "RUL-020",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "An evaluation of an overriding Rule MUST receive the inherited Rule it replaces as context.",
+      "body": "An evaluation of an overriding Rule MUST receive the inherited Rule it overrides as context.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-24",
       "supersedes": null
@@ -445,6 +445,15 @@
       "content": "The enforced state is derived each time rules are resolved and is never stored: the `state` of the Rule stays Published, and its lifecycle continues from Published.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-25",
+      "revision": 0
+    },
+    {
+      "id": "RUL-018/01",
+      "rule_ref": "RUL-018",
+      "type": "rationale",
+      "content": "An effective rule set holds only Published and Implemented Rules (ENT-020), so the replacement that RUL-009 describes starts when the overriding Rule is Published (RUL-019). The inherited Rule stays in the set in the meantime, unless another Rule of the Entity already replaces it, as a Published override does while its successor is in Draft.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-26",
       "revision": 0
     }
   ]

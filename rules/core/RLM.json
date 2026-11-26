@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.41.65",
-    "timestamp": "2026-11-26T14:00:21Z",
-    "hash": "blake3:1d31d2f4cab7301ace132246e38796c55bbf404394a5f773c89275375773b2ee"
+    "version": "0.41.68",
+    "timestamp": "2026-11-26T15:48:59Z",
+    "hash": "blake3:c04c63486e6038795b5ba71bd002c6e06cca8082184b916189cec6e39b753e2d"
   },
   "rules": [
     {
@@ -427,9 +427,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.55",
-        "timestamp": "2026-11-26T14:00:21Z",
-        "hash": "blake3:a339358cf59947e1ab8e2173bde8cf2dd84779cd4a70a9e2b46b427b0ab7071e"
+        "version": "0.1.58",
+        "timestamp": "2026-11-26T15:48:59Z",
+        "hash": "blake3:4aa0204e32fc3342bf6ba076bc6f72664b432738523495410ee28ef7fa903293"
       },
       "rules": [
         {
@@ -515,9 +515,9 @@
         },
         {
           "id": "STDREF-010",
-          "revision": 1,
+          "revision": 2,
           "state": "D",
-          "body": "The coverage rule set of an Entity IS its own Rules in state Draft, Published or Implemented with the Rules it acquires under ENT-009, less those that any of them takes precedence over under RUL-019.",
+          "body": "The coverage rule set of an Entity IS its own Rules in state Draft, Published or Implemented with the Rules it acquires under ENT-009, less those that any of them replaces under RUL-019.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
@@ -560,9 +560,9 @@
         },
         {
           "id": "STDREF-015",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "A clause neither covered nor mapped in an Entity IS lapsed there when a `standard` Note naming it, whose Standard Reference has relation `implements`, is on a Rule that an override by the Entity or an Entity it inherits from replaced.",
+          "body": "A clause neither covered nor mapped in an Entity IS lapsed there when a `standard` Note naming it, whose Standard Reference has relation `implements`, is on a Rule that a Rule of the Entity or of an Entity it inherits from replaces under RUL-019.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
@@ -780,10 +780,10 @@
           "id": "STDREF-010/01",
           "rule_ref": "STDREF-010",
           "type": "rationale",
-          "content": "An overriding Rule takes coverage from the inherited Rule only once it takes precedence under RUL-019, so a clause stays covered in that Entity while its replacement is in Draft.",
+          "content": "An overriding Rule takes coverage from the inherited Rule only once it replaces it under RUL-019, so a clause stays covered in that Entity while the overriding Rule is in Draft.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
-          "revision": 1
+          "revision": 2
         },
         {
           "id": "STDREF-011/01",
