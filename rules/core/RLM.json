@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.41.60",
-    "timestamp": "2026-11-24T08:38:04Z",
-    "hash": "blake3:9c0f7d53af70b2ab1c76c9d8f3965f6cfe7d184f05cd7e5b518506aa55e584f1"
+    "version": "0.41.65",
+    "timestamp": "2026-11-26T14:00:21Z",
+    "hash": "blake3:1d31d2f4cab7301ace132246e38796c55bbf404394a5f773c89275375773b2ee"
   },
   "rules": [
     {
@@ -427,9 +427,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.50",
-        "timestamp": "2026-11-24T08:38:04Z",
-        "hash": "blake3:d790471fba9f1642c1f1f86fe4bd3a628c7fbd02c96f4f6ae9eec6a7d116f58c"
+        "version": "0.1.55",
+        "timestamp": "2026-11-26T14:00:21Z",
+        "hash": "blake3:a339358cf59947e1ab8e2173bde8cf2dd84779cd4a70a9e2b46b427b0ab7071e"
       },
       "rules": [
         {
@@ -533,9 +533,9 @@
         },
         {
           "id": "STDREF-012",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "A clause IS covered in an Entity if and only if a `standard` Note naming it, whose Standard Reference has relation `implements`, is on a Rule in state Implemented in the coverage rule set of that Entity.",
+          "body": "A clause IS covered in an Entity if and only if a `standard` Note naming it, whose Standard Reference has relation `implements`, is on a Rule whose enforced state is Implemented in the coverage rule set of that Entity.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
           "supersedes": null
@@ -837,6 +837,15 @@
           "content": "The exclusions are those of the manifest that declares the Standard Reference (STDREF-022), since an exclusion names a reference of its own manifest (NTE-034). A sub-realm that declares a reference with the same id declares a separate reference, with its own exclusions and its own figure.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
+          "revision": 0
+        },
+        {
+          "id": "STDREF-012/02",
+          "rule_ref": "STDREF-012",
+          "type": "clarification",
+          "content": "The enforced state is that of RUL-024, so a Published Rule that overrides an Implemented Rule covers a clause through its own `standard` Notes. An override without such a Note does not cover or map the clause (STDREF-016); the clause is then lapsed only where no other Rule in the coverage rule set covers or maps it (STDREF-015).",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-25",
           "revision": 0
         }
       ]
