@@ -71,6 +71,9 @@ jobs:
         run: ruff check .
       - name: Ruff format check
         run: ruff format --check .
+      # The config schema tests import tools/build-schema.py, which needs jsonschema.
+      - name: Install tool dependencies
+        run: pip install -r requirements.txt
       - name: Unit tests
         run: python3 -m unittest discover -s tools/tests -t tools -v
 
