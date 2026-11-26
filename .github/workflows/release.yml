@@ -23,7 +23,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: SteerSpec/strspc-CLI/.github/actions/setup-strspc@ce10040bd4342ed524f36874a0164dc13cb9ba93  # CLI #92
+      - uses: SteerSpec/strspc-CLI/.github/actions/setup-strspc@0d91fea9fe6760b2e91a7fe58c99674c00418f2f  # CLI #92
         with:
           version: ${{ vars.STRSPC_CLI_VERSION || 'latest' }}
 
@@ -131,7 +131,7 @@ jobs:
       - name: Mint GitHub App token for strspc-www
         if: steps.app-creds.outputs.present == 'true'
         id: app
-        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510  # v3.3.0
+        uses: actions/create-github-app-token@f418cff399f7aef4c2f0ad47e25ca7a6abbdd6fc  # v3.4.0
         with:
           app-id: ${{ secrets.STEERSPEC_APP_ID }}
           private-key: ${{ secrets.STEERSPEC_PRIVATE_KEY }}
