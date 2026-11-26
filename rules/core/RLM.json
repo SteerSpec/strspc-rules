@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.41.68",
-    "timestamp": "2026-11-26T15:48:59Z",
-    "hash": "blake3:c04c63486e6038795b5ba71bd002c6e06cca8082184b916189cec6e39b753e2d"
+    "version": "0.41.69",
+    "timestamp": "2026-11-26T16:12:43Z",
+    "hash": "blake3:b13509782eb26ff5b7af182554d9c0b93d9efcd435131e770d7d524b8ab2c0dc"
   },
   "rules": [
     {
@@ -427,9 +427,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.58",
-        "timestamp": "2026-11-26T15:48:59Z",
-        "hash": "blake3:4aa0204e32fc3342bf6ba076bc6f72664b432738523495410ee28ef7fa903293"
+        "version": "0.1.59",
+        "timestamp": "2026-11-26T16:12:43Z",
+        "hash": "blake3:82f61ab6d1dbccefc47034234a21209e3088e2f1f0304326975c88f8f7cb6785"
       },
       "rules": [
         {
@@ -780,7 +780,7 @@
           "id": "STDREF-010/01",
           "rule_ref": "STDREF-010",
           "type": "rationale",
-          "content": "An overriding Rule takes coverage from the inherited Rule only once it replaces it under RUL-019, so a clause stays covered in that Entity while the overriding Rule is in Draft.",
+          "content": "An overriding Rule takes coverage from the inherited Rule only once it replaces it under RUL-019, so a Draft override by itself removes no coverage from a clause in that Entity.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
           "revision": 2
