@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.41.69",
-    "timestamp": "2026-11-26T16:12:43Z",
-    "hash": "blake3:b13509782eb26ff5b7af182554d9c0b93d9efcd435131e770d7d524b8ab2c0dc"
+    "version": "0.41.78",
+    "timestamp": "2026-11-27T15:06:41Z",
+    "hash": "blake3:492c89d7bb209618fa1b7d720948e1edebb276bfc777eacd127806fa5d3448d7"
   },
   "rules": [
     {
@@ -247,9 +247,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.13.14",
-        "timestamp": "2026-11-07T15:29:45Z",
-        "hash": "blake3:783be206fce0d410427aa1d280cad838a5cd5d846e811ae65dd82dbe7b517af5"
+        "version": "0.13.22",
+        "timestamp": "2026-11-27T15:06:40Z",
+        "hash": "blake3:134883fed84fc4af396bfc7eb56184bad6872906c4fae6397440bf4736b03ea0"
       },
       "rules": [
         {
@@ -299,9 +299,9 @@
         },
         {
           "id": "RLMMNFST-006",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "MAY declare a top-level Realm's language in a `language` field of the `realm` object, whose value MUST be `en`.",
+          "body": "MAY declare a top-level Realm's language in a `language` field of the `realm` object.",
           "added_by": "github:pleberre",
           "added_at": "2026-10-31",
           "supersedes": null
@@ -317,9 +317,9 @@
         },
         {
           "id": "RLMMNFST-008",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "MAY declare a `kind` field in the `realm` object, whose value MUST be `standard`.",
+          "body": "MAY declare a `kind` field in the `realm` object.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "supersedes": null
@@ -335,9 +335,9 @@
         },
         {
           "id": "RLMMNFST-010",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "MAY declare a `license` field in the `realm` object, whose value MUST be an SPDX license identifier.",
+          "body": "MAY declare a `license` field in the `realm` object.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "supersedes": null
@@ -377,6 +377,33 @@
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "supersedes": null
+        },
+        {
+          "id": "RLMMNFST-015",
+          "revision": 0,
+          "state": "D",
+          "body": "The value of `kind` MUST be `standard`.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-27",
+          "supersedes": null
+        },
+        {
+          "id": "RLMMNFST-016",
+          "revision": 0,
+          "state": "D",
+          "body": "The value of `license` MUST be an SPDX license identifier or match `^LicenseRef-[A-Za-z0-9.-]+$`.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-27",
+          "supersedes": null
+        },
+        {
+          "id": "RLMMNFST-017",
+          "revision": 0,
+          "state": "D",
+          "body": "The value of `language` MUST be `en`.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-27",
+          "supersedes": null
         }
       ],
       "notes": [
@@ -414,6 +441,24 @@
           "content": "A sub-realm's manifest can hold Realm Notes too: no rule limits them to the top-level Realm, as RLM-022 does for language. An exclusion's ref names a Standard Reference of the same manifest (NTE-034), so a sub-realm that declares its own linked Standard Reference keeps that reference's exclusions in its own manifest.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
+          "revision": 0
+        },
+        {
+          "id": "RLMMNFST-016/01",
+          "rule_ref": "RLMMNFST-016",
+          "type": "rationale",
+          "content": "Many standards carry terms that are not on the SPDX License List, and `LicenseRef-` is the form SPDX gives for such a licence.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-27",
+          "revision": 0
+        },
+        {
+          "id": "RLMMNFST-016/02",
+          "rule_ref": "RLMMNFST-016",
+          "type": "example",
+          "content": "`CC-BY-SA-4.0` and `LicenseRef-ECSS-Terms` are valid values of `license`.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-27",
           "revision": 0
         }
       ]
@@ -859,9 +904,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.32",
-        "timestamp": "2026-11-09T11:44:23Z",
-        "hash": "blake3:334ea7240bdc38489a73fc3635eaf555d8d5f6cc9852f60dea9e97f42e74c154"
+        "version": "0.1.33",
+        "timestamp": "2026-11-27T15:06:41Z",
+        "hash": "blake3:5435f3b03dfbc2fa2e7b488ae53ec5147cf10e68ac9affc19daf8032fdfb9ad2"
       },
       "rules": [
         {
@@ -1010,9 +1055,9 @@
         },
         {
           "id": "STDRLM-017",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "A Rule of a Standard Realm MUST supersede only a live Rule.",
+          "body": "A Rule of a Standard Realm MUST supersede only a Published Rule.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "supersedes": null
