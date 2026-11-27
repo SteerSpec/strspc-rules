@@ -148,10 +148,11 @@ pre-commit install  # also install the pre-commit stage hooks
 - Use `bd` (beads) for ALL task tracking — no markdown TODOs.
 - CI gates every PR — the `rules`, `lint-commits`, `lint-python` and `lint` jobs
   (`ci.yml`) and the `build-schema` job (`build-schema.yml`) must all pass.
-- To release: bump `realm.version` in `rules/core/realm.json`, then open a PR from `develop`
-  to `main`. On merge, the release workflow tags `v<realm.version>`, publishes the GitHub
-  release and deploys rules to steerspec.dev via strspc-www. If that tag already exists the
-  workflow skips the release, so docs-only and promotion merges stay green.
+- To release: bump `realm.version` in `rules/core/realm.json` in its own PR into `develop`
+  (see Versioning), then open a PR from `develop` to `main`. On merge, the release workflow
+  tags `v<realm.version>`, publishes the GitHub release and deploys rules to steerspec.dev
+  via strspc-www. If that tag already exists the workflow skips the release, so docs-only
+  and promotion merges stay green.
 - After a new tag, the release workflow calls `pin-consumers.yml`, which opens
   `chore(rules): pin dev.steerspec.core to X.Y.Z` PRs in strspc-manager, strspc-CLI,
   strspc-sync, strspc-spec, strspc-pr-review, strspc-cloud and strspc-marketing and closes
@@ -163,8 +164,13 @@ pre-commit install  # also install the pre-commit stage hooks
 ## Versioning
 
 The realm version **is** the release tag: `rules/core/realm.json` `realm.version` `1.6.0`
-is released as `v1.6.0`, and dependent realms pin `dev.steerspec.core@1.6.0`. Bump it
-(semver) in the PR that introduces the change being released; never release without a bump.
+is released as `v1.6.0`, and dependent realms pin `dev.steerspec.core@1.6.0`.
+
+Bump it (semver) in its own PR into `develop`, titled
+`chore(release): bump realm.version to X.Y.Z`, once the changes it releases have merged.
+That PR carries `rules/core/realm.json` and the four schema stamps that
+`tools/build-schema.py` rewrites, and nothing else. A PR that adds a rule or a schema
+capability doesn't bump the version. Never release without a bump.
 
 ## Non-Interactive Shell Commands
 
