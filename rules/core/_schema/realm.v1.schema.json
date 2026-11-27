@@ -70,12 +70,12 @@
         },
         "kind": {
           "enum": ["standard"],
-          "description": "The Realm's kind (RLMMNFST-008). Absent means a code Realm (RLMMNFST-009)."
+          "description": "The Realm's kind (RLMMNFST-008), whose only value is `standard` (RLMMNFST-015). Absent means a code Realm (RLMMNFST-009)."
         },
         "license": {
           "type": "string",
           "minLength": 1,
-          "description": "SPDX license identifier of the Realm's content (RLMMNFST-010). Required in a Standard Realm (STDRLM-003), checked by lint."
+          "description": "License of the Realm's content (RLMMNFST-010): an SPDX license identifier or a custom `LicenseRef-` identifier (RLMMNFST-016). Required in a Standard Realm (STDRLM-003), checked by lint."
         },
         "attribution": {
           "type": "object",
