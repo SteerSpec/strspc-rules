@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.28.29",
-    "timestamp": "2026-11-27T07:10:22Z",
-    "hash": "blake3:b0f9404a957879943e77e2924d980acfd8c83100f0924c63e102f068ffe71fa8"
+    "version": "0.28.31",
+    "timestamp": "2026-11-27T07:14:47Z",
+    "hash": "blake3:dff36396d0c871e1357c8d8a6d396d8e7ca7fa851db2d997820da732015c10db"
   },
   "rules": [
     {
@@ -94,9 +94,9 @@
     },
     {
       "id": "NTE-010",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "Notes of type changelog, supersedes, extends or related MUST NOT change once added.",
+      "body": "Notes of type changelog, supersedes, extends or related MUST NOT change in content or type once added.",
       "added_by": "github:pleberre",
       "added_at": "2026-10-28",
       "supersedes": null
@@ -413,10 +413,10 @@
       "id": "NTE-005/01",
       "rule_ref": "NTE-005",
       "type": "clarification",
-      "content": "Versioned means two things. First, a Note is part of the hashed Rule Set of the Entity that holds it (RSTHSH-001), so adding or changing a Note bumps that Entity's rule_set version (patch), timestamp and hash, and the change is reviewed through strspc diff like any Rule change. Second, each Note carries its own revision (NTE-008) that counts changes to its content or type. Notes are never removed (NTE-009): a Note that no longer applies is revised in place, except that Notes of the append-only types never change at all (NTE-010). Note identifiers under a Rule stay sequential (NTE-011), and because a Note is never removed an identifier is never reused.",
+      "content": "Versioned means two things. First, a Note is part of the hashed Rule Set of the Entity that holds it (RSTHSH-001), so adding or changing a Note bumps that Entity's rule_set version (patch), timestamp and hash, and the change is reviewed through strspc diff like any Rule change. Second, each Note carries its own revision (NTE-008) that counts changes to its content or type. Notes are never removed (NTE-009): a Note that no longer applies is revised in place, except that Notes of the append-only types never change in content or type (NTE-010). Note identifiers under a Rule stay sequential (NTE-011), and because a Note is never removed an identifier is never reused.",
       "added_by": "github:pleberre",
       "added_at": "2026-10-28",
-      "revision": 0
+      "revision": 1
     },
     {
       "id": "NTE-008/01",
