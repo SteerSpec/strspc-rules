@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.41.78",
-    "timestamp": "2026-11-27T15:06:41Z",
-    "hash": "blake3:492c89d7bb209618fa1b7d720948e1edebb276bfc777eacd127806fa5d3448d7"
+    "version": "0.41.79",
+    "timestamp": "2026-11-27T16:24:40Z",
+    "hash": "blake3:1cdbb65d65eade357c5c19f15aedf4e505e31dd4ebadbdbeb044bfbbfed3d597"
   },
   "rules": [
     {
@@ -904,9 +904,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.33",
-        "timestamp": "2026-11-27T15:06:41Z",
-        "hash": "blake3:5435f3b03dfbc2fa2e7b488ae53ec5147cf10e68ac9affc19daf8032fdfb9ad2"
+        "version": "0.1.34",
+        "timestamp": "2026-11-27T16:24:40Z",
+        "hash": "blake3:ef46c153e2e73c2ed0c1310124fad41df9fe49994b19223b3daba5e13d9f71e1"
       },
       "rules": [
         {
@@ -1055,9 +1055,9 @@
         },
         {
           "id": "STDRLM-017",
-          "revision": 1,
+          "revision": 2,
           "state": "D",
-          "body": "A Rule of a Standard Realm MUST supersede only a Published Rule.",
+          "body": "A Draft Rule of a Standard Realm MUST supersede only a Published Rule.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "supersedes": null
