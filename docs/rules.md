@@ -17,7 +17,8 @@
 | [`RUL`](../rules/core/RUL.json) | Rules and rule states |
 | [`SPCFG`](../rules/core/SPCFG.json) | SteerSpec configuration: a consumer's `.strspc/` directory |
 
-A sub-entity is defined in the file of its parent entity and has its own rule set.
+A sub-entity is defined in the file of its top-level entity and has its own rule set. Its parent is an entity or
+another sub-entity.
 
 | Sub-entity | Parent | Covers |
 | ---------- | ------ | ------ |
@@ -25,6 +26,7 @@ A sub-entity is defined in the file of its parent entity and has its own rule se
 | `RLMMNFST` | `RLM` | The realm manifest, `realm.json` |
 | `STDREF` | `RLM` | Standard References: citations of an external standard |
 | `STDRLM` | `RLM` | Standard Realms: realms that transcribe an external standard |
+| `STDCWK` | `STDRLM` | Crosswalks: mappings from the clauses of an earlier edition of a standard |
 | `RSTVRS` | `RST` | Rule set versions |
 | `RSTHSH` | `RST` | Rule set hashes |
 | `RULST` | `RUL` | Rule states |
@@ -34,7 +36,7 @@ A sub-entity is defined in the file of its parent entity and has its own rule se
 | `SPCFGFAIL` | `SPCFG` | `fail_on`: the rule states that fail a check |
 | `SPCFGCOV` | `SPCFG` | Citation coverage: the entities whose rules a set of files has to cite |
 
-The rules of `STDREF`, `STDRLM` and `SPCFGCOV` are all Draft, so their text may still change.
+The rules of `STDREF`, `STDRLM`, `STDCWK` and `SPCFGCOV` are all Draft, so their text may still change.
 
 ```text
 rules/core/

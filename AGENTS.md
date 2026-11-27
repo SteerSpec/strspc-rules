@@ -68,8 +68,8 @@ The CLI covers rules, notes and new sub-entities, so none of these is edited by 
 an entity file by hand only for a change the CLI has no command for, such as an entity's
 `title` or `description`:
 
-1. Edit the JSON. If the content of a rule set changes, bump its `rule_set.version` (semver)
-   and refresh `rule_set.timestamp`
+1. Edit the JSON, bump the file's `rule_set.version` (semver) and refresh its
+   `rule_set.timestamp`: `strspc diff` requires both for any change to an entity file
 2. Run `python3 tools/compute-hash.py rules/core/<FILE>.json` — recompute the file hash
 3. Run `python3 tools/build-schema.py` and commit the regenerated schemas if they changed
 4. Run `strspc diff rules/core --base origin/develop` and `strspc realm validate rules/core/ --recursive --strict --core`
