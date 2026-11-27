@@ -44,23 +44,32 @@ The strspc-CLI is the intended interface for mutating rules and realms. It enfor
 constraints (ID sequencing, state transitions, hash computation) that manual edits can
 violate. **Always prefer CLI commands over direct JSON editing.**
 
-### Available CLI commands (strspc-CLI v1.14+)
+### Available CLI commands
+
+Use a current `strspc`: CI installs the latest release.
 
 - Realm management: `strspc realm init`, `strspc realm add`, `strspc realm validate`,
   `strspc realm dep add/remove`
-- Rule lifecycle: `strspc rule add/update/promote/retire/abandon/supersede --dir rules/core`
-  (bumps `rule_set.version`, refreshes the timestamp and recomputes the hash)
+- Rule lifecycle: `strspc rule add/update/promote/retire/terminate/abandon/supersede --dir rules/core`
+  (bumps `rule_set.version`, refreshes the timestamp and recomputes the hash). The entity
+  may be a sub-entity (`ENTUQID`, `RULST`, `RLMMNFST`, `SPCFG*`, …)
+- Notes: `strspc note add/update`
+- Sub-entities: `strspc entity add <EUID> --parent <ENTITY> --title <title>`
 - Validation: `strspc lint`, `strspc render`
 - PR validation: `strspc diff --base <ref>` (rejects skipped lifecycle states, e.g.
   Draft → Implemented in a single PR; promote D → P and P → I in separate PRs)
 
+After a rule change, run `python3 tools/build-schema.py` and commit the regenerated schemas
+if they changed.
+
 ### Still manual (with human approval)
 
-The CLI operates on top-level entities only. Rules of sub-entities (`ENTUQID`, `RULST`,
-`RSTVRS`, `RSTHSH`, `RLMMNFST`, `SPCFG*`) and notes are edited by hand:
+The CLI covers rules, notes and new sub-entities, so none of these is edited by hand. Edit
+an entity file by hand only for a change the CLI has no command for, such as an entity's
+`title` or `description`:
 
-1. Edit the JSON mirroring what the CLI would do: `rule add` bumps the sub-entity
-   `rule_set.version` patch, `rule promote` bumps minor; refresh `rule_set.timestamp`
+1. Edit the JSON, bump the file's `rule_set.version` (semver) and refresh its
+   `rule_set.timestamp`: `strspc diff` requires both for any change to an entity file
 2. Run `python3 tools/compute-hash.py rules/core/<FILE>.json` — recompute the file hash
 3. Run `python3 tools/build-schema.py` and commit the regenerated schemas if they changed
 4. Run `strspc diff rules/core --base origin/develop` and `strspc realm validate rules/core/ --recursive --strict --core`
@@ -146,8 +155,9 @@ pre-commit install  # also install the pre-commit stage hooks
 - Feature branches → `develop` via PR, squashed, so the PR title is the commit.
   `develop` → `main` via PR for releases, with a merge commit. Rulesets enforce both.
 - Use `bd` (beads) for ALL task tracking — no markdown TODOs.
-- CI gates every PR — the `rules`, `lint-commits`, `lint-python` and `lint` jobs
-  (`ci.yml`) and the `build-schema` job (`build-schema.yml`) must all pass.
+- CI gates every PR — the `rules`, `check`, `lint-commits`, `lint-python` and `lint` jobs
+  (`ci.yml`), the `build-schema` job (`build-schema.yml`) and the `pr-title` job
+  (`pr-title.yml`) must all pass.
 - To release: bump `realm.version` in `rules/core/realm.json` in its own PR into `develop`
   (see Versioning), then open a PR from `develop` to `main`. On merge, the release workflow
   tags `v<realm.version>`, publishes the GitHub release and deploys rules to steerspec.dev
