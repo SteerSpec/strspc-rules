@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.26.34",
-    "timestamp": "2026-11-27T13:45:29Z",
-    "hash": "blake3:80e190885fdf6eac0f5bb67d640f04ac6e65f0c7611d202a01cf921ce669c7ed"
+    "version": "0.26.36",
+    "timestamp": "2026-11-27T16:12:27Z",
+    "hash": "blake3:2cca665dfa5351cb9a39cffcbce51a3fffe6e6276c18173865c4a971c8ad12b8"
   },
   "rules": [
     {
@@ -157,9 +157,9 @@
     },
     {
       "id": "RUL-017",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "A Rule MUST NOT have a `clause` or `profiles` unless its Realm is a Standard Realm.",
+      "body": "A Rule that is not Abandoned, Retired or Terminated MUST NOT have a `clause` or `profiles` unless its Realm is a Standard Realm.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-07",
       "supersedes": null
@@ -481,6 +481,15 @@
       "content": "An effective rule set holds only Published and Implemented Rules (ENT-020), so the replacement that RUL-009 describes starts when the overriding Rule is Published (RUL-019). The inherited Rule stays in the set in the meantime, unless another Rule of the Entity already replaces it, as a Published override does while its successor is in Draft.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-26",
+      "revision": 0
+    },
+    {
+      "id": "RUL-017/01",
+      "rule_ref": "RUL-017",
+      "type": "rationale",
+      "content": "A `clause` or `profiles` is fixed once its Rule leaves Draft (RUL-007), so such a Rule outside a Standard Realm is repaired by superseding it, and the superseded Rule keeps the field as history. A Draft Rule is abandoned and added again.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-27",
       "revision": 0
     }
   ]
