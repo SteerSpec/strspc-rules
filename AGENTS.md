@@ -54,7 +54,7 @@ Use a current `strspc`: CI installs the latest release.
   (bumps `rule_set.version`, refreshes the timestamp and recomputes the hash). The entity
   may be a sub-entity (`ENTUQID`, `RULST`, `RLMMNFST`, `SPCFG*`, …)
 - Notes: `strspc note add/update`
-- Sub-entities: `strspc entity add <EUID> --parent <ENTITY>`
+- Sub-entities: `strspc entity add <EUID> --parent <ENTITY> --title <title>`
 - Validation: `strspc lint`, `strspc render`
 - PR validation: `strspc diff --base <ref>` (rejects skipped lifecycle states, e.g.
   Draft → Implemented in a single PR; promote D → P and P → I in separate PRs)
