@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.26.30",
-    "timestamp": "2026-11-26T15:48:58Z",
-    "hash": "blake3:3fefb08a61d0818f49e7d2c3b1ba2e07e00ddbe183ff5e7c6586fec20fbf7c1d"
+    "version": "0.26.34",
+    "timestamp": "2026-11-27T13:45:29Z",
+    "hash": "blake3:80e190885fdf6eac0f5bb67d640f04ac6e65f0c7611d202a01cf921ce669c7ed"
   },
   "rules": [
     {
@@ -238,9 +238,9 @@
         "parent": "RUL"
       },
       "rule_set": {
-        "version": "0.22.9",
-        "timestamp": "2026-11-10T13:07:01Z",
-        "hash": "blake3:e0cd6b46b3fa16862f2368f10f9ff5cb66f939e2f489c47ecf761989076a0cfd"
+        "version": "0.22.13",
+        "timestamp": "2026-11-27T13:45:29Z",
+        "hash": "blake3:11ae3097e7ad8ff2776ef2d2f4972377540640cb70df4bdb7f51977a51040bf4"
       },
       "rules": [
         {
@@ -350,6 +350,15 @@
           "added_by": "github:pleberre",
           "added_at": "2026-11-09",
           "supersedes": null
+        },
+        {
+          "id": "RULST-013",
+          "revision": 0,
+          "state": "D",
+          "body": "A Rule MUST NOT enter Published while its body cites a Draft Rule of its own Realm tree.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-27",
+          "supersedes": null
         }
       ],
       "notes": [
@@ -405,6 +414,24 @@
           "content": "The bound is Published because a superseding Rule's text is final only from Published (RUL-007), while a Draft successor may still be abandoned. How late the superseded Rule may stay Published is left to strspc-manager, which owns the transition checks.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-10",
+          "revision": 0
+        },
+        {
+          "id": "RULST-013/01",
+          "rule_ref": "RULST-013",
+          "type": "rationale",
+          "content": "Published text is final (RUL-007) and a Draft Rule may still change, so a Published Rule that cites one could change meaning without changing text. A Realm sets the order in which its own Rules are Published.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-27",
+          "revision": 0
+        },
+        {
+          "id": "RULST-013/02",
+          "rule_ref": "RULST-013",
+          "type": "clarification",
+          "content": "A Rule of another Realm tree may cite a Draft Rule, as a tool may implement one. A dependency pinned to a release (RLMMNFST-003) keeps the cited text as it was at that release; a local path or a moving source does not, and the risk of Draft remains. The rule speaks of citations because they can be checked; a Rule that uses a term only a Draft Rule defines rests on it in the same way.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-27",
           "revision": 0
         }
       ]
