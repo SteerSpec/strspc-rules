@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.26.33",
-    "timestamp": "2026-11-27T13:28:21Z",
-    "hash": "blake3:7a0091ef8a62809813098181b7ef2656c6b47d3ac2592d92819fe8c3bac5bf2b"
+    "version": "0.26.34",
+    "timestamp": "2026-11-27T13:45:29Z",
+    "hash": "blake3:80e190885fdf6eac0f5bb67d640f04ac6e65f0c7611d202a01cf921ce669c7ed"
   },
   "rules": [
     {
@@ -238,9 +238,9 @@
         "parent": "RUL"
       },
       "rule_set": {
-        "version": "0.22.12",
-        "timestamp": "2026-11-27T13:28:21Z",
-        "hash": "blake3:e90c80d7a55f134d73851501a73c64b1760d2caa9337fa1837a51b60962e195c"
+        "version": "0.22.13",
+        "timestamp": "2026-11-27T13:45:29Z",
+        "hash": "blake3:11ae3097e7ad8ff2776ef2d2f4972377540640cb70df4bdb7f51977a51040bf4"
       },
       "rules": [
         {
@@ -429,7 +429,7 @@
           "id": "RULST-013/02",
           "rule_ref": "RULST-013",
           "type": "clarification",
-          "content": "A Rule of another Realm may cite a Draft Rule, as a tool may implement one. Its dependency is pinned to one version (RLMMNFST-003), so the cited text changes only when the pin does. The rule speaks of citations because they can be checked; a Rule that uses a term only a Draft Rule defines rests on it in the same way.",
+          "content": "A Rule of another Realm tree may cite a Draft Rule, as a tool may implement one. A dependency pinned to a release (RLMMNFST-003) keeps the cited text as it was at that release; a local path or a moving source does not, and the risk of Draft remains. The rule speaks of citations because they can be checked; a Rule that uses a term only a Draft Rule defines rests on it in the same way.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-27",
           "revision": 0
