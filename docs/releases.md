@@ -8,8 +8,12 @@ Releases follow [semantic versioning](https://semver.org/) and are tagged `v<MAJ
 
 **The realm version is the release tag.** Merging `develop` into `main` tags `realm.version` from
 [`rules/core/realm.json`](../rules/core/realm.json), and dependent realms pin it as `dev.steerspec.core@<version>`.
-If the tag already exists on another commit the release is skipped, so bump `realm.version` in the pull request that
-should trigger a release. If it exists on the same commit, the run resumes the release.
+If the tag already exists on another commit the release is skipped, so bump `realm.version` before the pull request
+into `main` that should trigger a release. If it exists on the same commit, the run resumes the release.
+
+The bump is its own pull request into `develop`, titled `chore(release): bump realm.version to <version>`. It carries
+`rules/core/realm.json` and the release stamp of the four schemas, which `tools/build-schema.py` rewrites, and nothing
+else. A pull request that adds a rule or a schema capability doesn't bump the version.
 
 ```mermaid
 flowchart LR
