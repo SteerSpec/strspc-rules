@@ -6,9 +6,9 @@
     "description": "The consumer-side configuration that declares which rules a project subscribes to and how they are enforced."
   },
   "rule_set": {
-    "version": "0.12.23",
-    "timestamp": "2026-11-26T19:38:55Z",
-    "hash": "blake3:ffe03f57cd6217c8a79ce486056e04a9698830f94a6ffa4ffeedb46b6cc3d1a4"
+    "version": "0.12.24",
+    "timestamp": "2026-11-26T20:06:21Z",
+    "hash": "blake3:0f623f98a2cc7062d4eac9527968a30b4cf1fecbe8db445592e9a1805e18a460"
   },
   "rules": [
     {
@@ -184,9 +184,9 @@
         "parent": "SPCFG"
       },
       "rule_set": {
-        "version": "0.4.3",
-        "timestamp": "2026-11-05T07:17:36Z",
-        "hash": "blake3:2af997014429f2ed190f1aa84a49f5bf8b480f8c9e63bad947bba257a5be1d7b"
+        "version": "0.4.4",
+        "timestamp": "2026-11-26T20:06:21Z",
+        "hash": "blake3:dbbacb66cb2d455a2a48058546025e95a9f32970b5d47c69715299fb75c1a1ab"
       },
       "rules": [
         {
@@ -227,9 +227,9 @@
         },
         {
           "id": "SPCFGEVAL-005",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "MAY have an `effort` property with allowed values: low, medium, high.",
+          "body": "MAY have an `effort` property with allowed values: low, medium, high, xhigh, max.",
           "added_by": "github:pleberre",
           "added_at": "2026-10-18",
           "supersedes": null
