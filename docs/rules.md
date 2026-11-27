@@ -17,6 +17,25 @@
 | [`RUL`](../rules/core/RUL.json) | Rules and rule states |
 | [`SPCFG`](../rules/core/SPCFG.json) | SteerSpec configuration: a consumer's `.strspc/` directory |
 
+A sub-entity is defined in the file of its parent entity and has its own rule set.
+
+| Sub-entity | Parent | Covers |
+| ---------- | ------ | ------ |
+| `ENTUQID` | `ENT` | Entity Unique Identifiers |
+| `RLMMNFST` | `RLM` | The realm manifest, `realm.json` |
+| `STDREF` | `RLM` | Standard References: citations of an external standard |
+| `STDRLM` | `RLM` | Standard Realms: realms that transcribe an external standard |
+| `RSTVRS` | `RST` | Rule set versions |
+| `RSTHSH` | `RST` | Rule set hashes |
+| `RULST` | `RUL` | Rule states |
+| `SPCFGSRC` | `SPCFG` | Rule sources in `config.yaml` |
+| `SPCFGEVAL` | `SPCFG` | The evaluator configuration in `config.yaml` |
+| `SPCFGCCH` | `SPCFG` | The cache configuration in `config.yaml` |
+| `SPCFGFAIL` | `SPCFG` | `fail_on`: the rule states that fail a check |
+| `SPCFGCOV` | `SPCFG` | Citation coverage: the entities whose rules a set of files has to cite |
+
+The rules of `STDREF`, `STDRLM` and `SPCFGCOV` are all Draft, so their text may still change.
+
 ```text
 rules/core/
 ├── realm.json                     Realm manifest (namespace metadata, not an entity)
@@ -33,6 +52,7 @@ tools/
 ├── compute-hash.py                Computes Blake3 content hashes for rule-set integrity
 ├── hash_util.py                   Shared Blake3 canonicalization and hashing utilities
 ├── pin_core.py                    Rewrites the core pins in consumer repositories
+├── schema_stamp.py                Writes the core release version into the schemas
 └── tests/                         Unit tests
 ```
 
@@ -51,6 +71,7 @@ flowchart LR
 
     D --> P --> I --> R --> T
     D --> A
+    P -.->|superseded| T
 
     classDef draft fill:#161B22,stroke:#6E7681,color:#E6EDF3
     classDef published fill:#161B22,stroke:#238636,color:#E6EDF3
@@ -61,5 +82,8 @@ flowchart LR
     class I implemented
     class A,R,T ended
 ```
+
+A Published rule can also go straight to Terminated once a rule that supersedes it has reached Published.
+`strspc diff` accepts that transition; the rule that states it, `RULST-012`, is still Draft.
 
 Rule text is immutable once a rule leaves Draft. CI fails only on Implemented rules (`fail_on: [I]`).

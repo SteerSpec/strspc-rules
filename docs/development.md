@@ -2,7 +2,8 @@
 
 ## Development
 
-Prerequisites: Python 3.12+ and [pre-commit](https://pre-commit.com/).
+Prerequisites: Python 3.12+, [pre-commit](https://pre-commit.com/) and, for the rule checks, the
+[`strspc` CLI](https://github.com/SteerSpec/strspc-CLI).
 
 ```bash
 pip install -r requirements.txt
@@ -31,6 +32,15 @@ ruff check . && ruff format --check .                  # Python lint and format
 python3 -m unittest discover -s tools/tests -t tools   # Unit tests
 ```
 
+The rule checks of the `rules` and `check` jobs need the `strspc` CLI:
+
+```bash
+strspc realm validate rules/core/ --recursive --strict --core   # Realm manifest and entity files
+strspc lint rules/core/ --strict --core                         # Entity lint
+strspc diff rules/core/ --base origin/develop --strict          # Lifecycle transitions against the base
+strspc check --static-only                                      # Realm resolution, no AI evaluation
+```
+
 ## CI
 
 Every pull request, release pull requests included, runs these jobs from [`ci.yml`](../.github/workflows/ci.yml):
@@ -45,6 +55,14 @@ Every pull request, release pull requests included, runs these jobs from [`ci.ym
 
 [`build-schema.yml`](../.github/workflows/build-schema.yml) also runs `python3 tools/build-schema.py --check`
 whenever the rules, the schemas or the generator change.
+
+[`pr-title.yml`](../.github/workflows/pr-title.yml) checks that the pull request title follows Conventional Commits:
+a pull request into `develop` is squashed, so its title becomes the commit.
+
+[`auto-approve.yml`](../.github/workflows/auto-approve.yml) runs the
+[strspc-pr-review](https://github.com/SteerSpec/strspc-pr-review) action, which approves a pull request as a bot
+account once CI is green and Copilot's review is clean. It never merges. A pull request that touches a file listed in
+[`CODEOWNERS`](../.github/CODEOWNERS) needs a code owner's approval instead.
 
 Release pull requests (`develop` → `main`) skip the `strspc diff` lifecycle check: they aggregate transitions that
 were validated one pull request at a time on the way into `develop`.

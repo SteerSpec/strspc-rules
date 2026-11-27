@@ -23,6 +23,14 @@ flowchart LR
 
 A minimal `bootstrap.schema.json` is checked in, so CI can validate without running the generator.
 
+The generator also writes `config.v1.schema.json`, the schema of a consumer's `.strspc/config.yaml`, from the
+`SPCFG` rules. It reads Draft rules too, so a schema can accept a field whose rule may still change.
+
+Each of the four schemas carries a top-level `x-steerspec-core-version`: the `realm.version` of the core release it
+came from. A copy vendored into another realm therefore shows its origin. `tools/build-schema.py` writes this stamp,
+and `--check` fails when a stamp doesn't match `realm.version`. JSON Schema 2020-12 ignores unknown keywords. Ajv's
+strict mode rejects them, so an Ajv user needs `strict: false` or `ajv.addKeyword("x-steerspec-core-version")`.
+
 ## Realms
 
 A **realm** is a namespace in which Entity Unique Identifiers (EUIDs) are unique. Each realm is a directory
@@ -32,6 +40,7 @@ version and dependencies.
 - Realm IDs use **reverse domain notation** (e.g. `dev.steerspec.core`) for global uniqueness.
 - Cross-realm entity references use the qualified form `<realm-id>:<EUID>`.
 - The core realm (`dev.steerspec.core`) defines the foundational rules in this repository.
+- A realm may declare sub-realms, one level deep. EUIDs are unique across a realm and its sub-realms.
 
 [`RLM.json`](../rules/core/RLM.json) formalizes these rules, and `realm.v1.schema.json`, a hand-maintained axiom,
 validates the manifest format.
