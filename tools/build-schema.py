@@ -60,6 +60,7 @@ CONFIG_SCHEMA_MAP = {
     ("SPCFG", "SPCFGEVAL"): "$.evaluator",
     ("SPCFG", "SPCFGCCH"): "$.cache",
     ("SPCFG", "SPCFGFAIL"): "$.fail_on",
+    ("SPCFG", "SPCFGCOV"): "$.refs.coverage[]",
 }
 
 # --- Constraint extraction patterns ---
@@ -81,8 +82,8 @@ RE_BLAKE3 = re.compile(r"MUST be a Blake3 hash")
 
 # --- Config constraint extraction patterns ---
 
-# "MUST have a `field` property of type string"
-RE_REQUIRED_PROP = re.compile(r"MUST have a `(\w+)` property")
+# "MUST have a `field` property of type string"  /  "MUST have an `field` property"
+RE_REQUIRED_PROP = re.compile(r"MUST have (?:a|an) `(\w+)` property")
 
 # "MAY have a `field` property of type string"  /  "MAY have an `field` property"
 RE_OPTIONAL_PROP = re.compile(r"MAY have (?:a|an) `(\w+)` property")
@@ -99,6 +100,18 @@ RE_STATE_CODE_LIST = re.compile(r"state code:\s*(.+)")
 # "MAY declare an `evaluate_on` array of rule lifecycle state codes"
 # (top-level SPCFG rule; the array shares its item schema with fail_on)
 RE_STATE_CODE_ARRAY = re.compile(r"MAY declare (?:a|an) `(\w+)` array of rule lifecycle state codes")
+
+# "property holding an array of at least one Entity Unique Identifier"
+# "property holding an array of rule lifecycle state codes"
+RE_ARRAY_PROP = re.compile(r"property holding an array of (at least one )?(.+?)\.?$")
+
+# What an array property holds, as a rule body names it, mapped to the key of
+# its item schema in config_item_schemas().
+ARRAY_ITEM_KINDS = {
+    "Entity Unique Identifier": "entity_id",
+    "file pattern": "file_pattern",
+    "rule lifecycle state code": "state_code",
+}
 
 # Semver regex (simplified but covers standard semver)
 SEMVER_PATTERN = (
@@ -445,15 +458,49 @@ def build_schema(
     return entity_file_schema
 
 
-def extract_config_constraints(rules: list[dict]) -> dict:
+def config_property_schema(rule: dict, item_schemas: dict[str, dict]) -> dict:
+    """Build the schema of the property a "MUST have" or "MAY have" rule declares.
+
+    An array property takes its item schema from item_schemas. Raises RuntimeError
+    for a kind of item no schema is known for, so a rule can't be dropped silently.
+    """
+    body = rule["body"]
+
+    m = RE_ARRAY_PROP.search(body)
+    if m:
+        named = m.group(2)
+        kind = ARRAY_ITEM_KINDS.get(named) or ARRAY_ITEM_KINDS.get(named.removesuffix("s"))
+        if kind is None:
+            raise RuntimeError(f"{rule['id']} declares an array of {named!r}, a kind of item with no schema mapping")
+        if kind not in item_schemas:
+            raise RuntimeError(f"{rule['id']} declares an array of {named!r} but no rule constrains that item")
+        array: dict = {"type": "array"}
+        if m.group(1):
+            array["minItems"] = 1
+        array["items"] = dict(item_schemas[kind])
+        return array
+
+    schema: dict = {"type": "string"}
+    if RE_TYPE_STRING_OR_NULL.search(body):
+        schema = {"oneOf": [{"type": "string"}, {"type": "null"}]}
+    # Check for allowed values (enum)
+    vm = RE_ALLOWED_VALUES.search(body)
+    if vm:
+        schema["enum"] = [v.strip() for v in vm.group(1).split(",")]
+    return schema
+
+
+def extract_config_constraints(rules: list[dict], item_schemas: dict[str, dict] | None = None) -> dict:
     """Extract config schema constraints from SPCFG sub-entity rule bodies.
 
     Returns a dict with 'required' (list), 'properties' (dict of field schemas),
-    and optionally 'items_schema' for array item constraints.
+    and optionally 'items_schema' for array item constraints. item_schemas holds
+    the item schemas that array properties may refer to.
     """
     required: list[str] = []
     properties: dict[str, dict] = {}
     items_schema: dict | None = None
+    item_schemas = item_schemas or {}
 
     for rule in rules:
         body = rule["body"]
@@ -463,28 +510,13 @@ def extract_config_constraints(rules: list[dict]) -> dict:
         if m:
             field = m.group(1)
             required.append(field)
-            schema: dict = {"type": "string"}
-            if RE_TYPE_STRING_OR_NULL.search(body):
-                schema = {"oneOf": [{"type": "string"}, {"type": "null"}]}
-            # Check for allowed values (enum)
-            vm = RE_ALLOWED_VALUES.search(body)
-            if vm:
-                values = [v.strip() for v in vm.group(1).split(",")]
-                schema["enum"] = values
-            properties[field] = schema
+            properties[field] = config_property_schema(rule, item_schemas)
             continue
 
         # Optional property: "MAY have a `field` property ..."
         m = RE_OPTIONAL_PROP.search(body)
         if m:
-            field = m.group(1)
-            schema = {"type": "string"}
-            if RE_TYPE_STRING_OR_NULL.search(body):
-                schema = {"oneOf": [{"type": "string"}, {"type": "null"}]}
-            vm = RE_ALLOWED_VALUES.search(body)
-            if vm:
-                schema["enum"] = [v.strip() for v in vm.group(1).split(",")]
-            properties[field] = schema
+            properties[m.group(1)] = config_property_schema(rule, item_schemas)
             continue
 
         # State code list for array items: "state code: Draft (D), ..."
@@ -504,6 +536,23 @@ def extract_config_constraints(rules: list[dict]) -> dict:
     return result
 
 
+def config_item_schemas(rules_by_entity: dict[tuple[str, str | None], list[dict]]) -> dict[str, dict]:
+    """Item schemas an array property of the config may hold, each taken from the rules that define it."""
+    schemas: dict[str, dict] = {"file_pattern": {"type": "string"}}
+
+    # A state code is what fail_on holds (SPCFGFAIL).
+    fail = extract_config_constraints(rules_by_entity.get(("SPCFG", "SPCFGFAIL"), []))
+    if fail.get("items_schema"):
+        schemas["state_code"] = fail["items_schema"]
+
+    # An Entity Unique Identifier is constrained as in the entity schema (ENTUQID).
+    euid = extract_constraints(rules_by_entity.get(("ENT", "ENTUQID"), []), ENTITY_SCHEMA_MAP[("ENT", "ENTUQID")])
+    if euid:
+        schemas["entity_id"] = {"type": "string", **euid}
+
+    return schemas
+
+
 def build_config_schema(
     rules_by_entity: dict[tuple[str, str | None], list[dict]],
 ) -> dict | None:
@@ -519,13 +568,14 @@ def build_config_schema(
     print("\n  Building config schema from SPCFG rules")
 
     # Extract constraints for each config section
+    item_schemas = config_item_schemas(rules_by_entity)
     sections: dict[str, dict] = {}
     for key, schema_path in CONFIG_SCHEMA_MAP.items():
         rules = rules_by_entity.get(key, [])
         if not rules:
             print(f"  INFO: No rules found for {key} → {schema_path}")
             continue
-        extracted = extract_config_constraints(rules)
+        extracted = extract_config_constraints(rules, item_schemas)
         sections[schema_path] = extracted
         _eid, sid = key
         print(f"  {sid}: {len(rules)} rules → {len(extracted.get('properties', {}))} properties")
@@ -595,6 +645,29 @@ def build_config_schema(
         raise RuntimeError("evaluate_on item schema diverged from fail_on")
     if ("SPCFG", None) in rules_by_entity and "evaluate_on" not in config_properties:
         raise RuntimeError("SPCFG rules do not declare `evaluate_on` — config schema would silently lose it")
+
+    # $.refs.coverage[] → the refs object, holding an array of coverage entries
+    if "$.refs.coverage[]" in sections:
+        cov = sections["$.refs.coverage[]"]
+        # Guard: without a property the entry would accept nothing, and `refs` would be useless.
+        if not cov.get("properties"):
+            raise RuntimeError("SPCFGCOV rules declare no property — the `refs` section would be empty")
+        cov_obj: dict = {"type": "object", "additionalProperties": False}
+        if cov.get("required"):
+            cov_obj["required"] = cov["required"]
+        cov_obj["properties"] = cov["properties"]
+        config_properties["refs"] = {
+            "type": "object",
+            "additionalProperties": False,
+            "properties": {
+                "coverage": {
+                    "type": "array",
+                    # minItems: 1 mirrors SPCFG-011 ("one or more coverage entries")
+                    "minItems": 1,
+                    "items": cov_obj,
+                },
+            },
+        }
 
     config_schema = {
         "$schema": "https://json-schema.org/draft/2020-12/schema",

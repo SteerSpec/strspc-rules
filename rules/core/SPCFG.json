@@ -6,9 +6,9 @@
     "description": "The consumer-side configuration that declares which rules a project subscribes to and how they are enforced."
   },
   "rule_set": {
-    "version": "0.12.9",
-    "timestamp": "2026-11-25T06:51:17Z",
-    "hash": "blake3:b647c60e517fe31c65e3e8be1fa0478f0899f5de4c5b89fb3824177c5b5168e9"
+    "version": "0.12.24",
+    "timestamp": "2026-11-26T20:06:21Z",
+    "hash": "blake3:0f623f98a2cc7062d4eac9527968a30b4cf1fecbe8db445592e9a1805e18a460"
   },
   "rules": [
     {
@@ -100,6 +100,15 @@
       "added_by": "github:pleberre",
       "added_at": "2026-11-25",
       "supersedes": null
+    },
+    {
+      "id": "SPCFG-011",
+      "revision": 0,
+      "state": "D",
+      "body": "MAY declare citation coverage as one or more coverage entries, each naming the Entities whose Rules a set of files has to cite.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-26",
+      "supersedes": null
     }
   ],
   "sub_entities": [
@@ -175,9 +184,9 @@
         "parent": "SPCFG"
       },
       "rule_set": {
-        "version": "0.4.3",
-        "timestamp": "2026-11-05T07:17:36Z",
-        "hash": "blake3:2af997014429f2ed190f1aa84a49f5bf8b480f8c9e63bad947bba257a5be1d7b"
+        "version": "0.4.4",
+        "timestamp": "2026-11-26T20:06:21Z",
+        "hash": "blake3:dbbacb66cb2d455a2a48058546025e95a9f32970b5d47c69715299fb75c1a1ab"
       },
       "rules": [
         {
@@ -218,9 +227,9 @@
         },
         {
           "id": "SPCFGEVAL-005",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "MAY have an `effort` property with allowed values: low, medium, high.",
+          "body": "MAY have an `effort` property with allowed values: low, medium, high, xhigh, max.",
           "added_by": "github:pleberre",
           "added_at": "2026-10-18",
           "supersedes": null
@@ -332,6 +341,105 @@
           "content": "Typical configuration: `fail_on: [I]` fails only on Implemented rule violations. Stricter: `fail_on: [P, I]` also fails on Published rules. The array references rule lifecycle states defined by RULST.",
           "added_by": "github:pleberre",
           "added_at": "2026-03-23",
+          "revision": 0
+        }
+      ]
+    },
+    {
+      "$schema": "./_schema/entity.v1.schema.json",
+      "entity": {
+        "id": "SPCFGCOV",
+        "title": "Citation Coverage",
+        "description": "A coverage entry in the refs object of config.yaml that names the Entities whose Rules a set of files has to cite.",
+        "parent": "SPCFG"
+      },
+      "rule_set": {
+        "version": "0.1.12",
+        "timestamp": "2026-11-26T19:38:55Z",
+        "hash": "blake3:f58819e5900974d8a0edd7c5034a7faa48b5731377a867d1033b739b1ff35257"
+      },
+      "rules": [
+        {
+          "id": "SPCFGCOV-001",
+          "revision": 0,
+          "state": "D",
+          "body": "IS an entry in the `coverage` array of the `refs` object in config.yaml.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-26",
+          "supersedes": null
+        },
+        {
+          "id": "SPCFGCOV-002",
+          "revision": 0,
+          "state": "D",
+          "body": "MUST have an `entities` property holding an array of at least one Entity Unique Identifier.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-26",
+          "supersedes": null
+        },
+        {
+          "id": "SPCFGCOV-003",
+          "revision": 0,
+          "state": "D",
+          "body": "MUST have a `files` property holding an array of at least one file pattern.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-26",
+          "supersedes": null
+        },
+        {
+          "id": "SPCFGCOV-004",
+          "revision": 0,
+          "state": "D",
+          "body": "MAY have a `states` property holding an array of rule lifecycle state codes.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-26",
+          "supersedes": null
+        },
+        {
+          "id": "SPCFGCOV-005",
+          "revision": 0,
+          "state": "D",
+          "body": "Each Rule of an Entity in `entities` whose state `states` names MUST be cited in at least one file that a pattern in `files` matches.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-26",
+          "supersedes": null
+        }
+      ],
+      "notes": [
+        {
+          "id": "SPCFGCOV-001/01",
+          "rule_ref": "SPCFGCOV-001",
+          "type": "example",
+          "content": "`refs: {coverage: [{entities: [README, CLAIM], files: [\".claude/agents/*.md\"]}]}` asks that each Draft, Published or Implemented Rule of README and of CLAIM be cited in at least one agent file.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-26",
+          "revision": 0
+        },
+        {
+          "id": "SPCFGCOV-003/01",
+          "rule_ref": "SPCFGCOV-003",
+          "type": "clarification",
+          "content": "The patterns are those of `strspc refs`: a pattern with no slash matches a file name in any directory, and `dir/**` matches everything under `dir`.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-26",
+          "revision": 0
+        },
+        {
+          "id": "SPCFGCOV-004/01",
+          "rule_ref": "SPCFGCOV-004",
+          "type": "clarification",
+          "content": "An absent `states` is read as Draft (D), Published (P) and Implemented (I), so that a Realm whose Rules are all Draft is checked too.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-26",
+          "revision": 0
+        },
+        {
+          "id": "SPCFGCOV-005/01",
+          "rule_ref": "SPCFGCOV-005",
+          "type": "rationale",
+          "content": "Prompts, agent instructions and documents often list rule identifiers by hand. When a Rule is added, such a list goes stale and nothing fails. A coverage entry turns the missing citation into a finding.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-26",
           "revision": 0
         }
       ]
