@@ -6,9 +6,9 @@
     "description": "A supplemental explanation attached to a specific rule, providing clarification, context, or elaboration."
   },
   "rule_set": {
-    "version": "0.28.25",
-    "timestamp": "2026-11-26T15:48:58Z",
-    "hash": "blake3:0fa34da0ab08ef3aad15c1545637acd17c68177d333d6514991403feea35adda"
+    "version": "0.28.29",
+    "timestamp": "2026-11-27T07:10:22Z",
+    "hash": "blake3:b0f9404a957879943e77e2924d980acfd8c83100f0924c63e102f068ffe71fa8"
   },
   "rules": [
     {
@@ -400,9 +400,9 @@
     },
     {
       "id": "NTE-044",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "A Note of type `override_ack` MUST NOT change once added.",
+      "body": "A Note of type `override_ack` MUST NOT change in any field once added.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-24",
       "supersedes": null
@@ -515,6 +515,33 @@
       "content": "raci/1:{\"enabled\":[\"single-accountable\",\"min-ra\"]} has the format `raci/1` and the payload `{\"enabled\":[\"single-accountable\",\"min-ra\"]}`.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-07",
+      "revision": 0
+    },
+    {
+      "id": "NTE-005/02",
+      "rule_ref": "NTE-005",
+      "type": "clarification",
+      "content": "A Realm Note (NTE-029) is held in a manifest, which has no Rule Set. It is versioned by its own revision (NTE-008). Adding or changing one leaves the version of its Realm unchanged; only the manifest `hash` is recomputed (RLMMNFST-014).",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-27",
+      "revision": 0
+    },
+    {
+      "id": "NTE-044/01",
+      "rule_ref": "NTE-044",
+      "type": "rationale",
+      "content": "The `added_by` of an `override_ack` Note names the contributor who acknowledged (NTE-042), so it is part of the acknowledgement. A rewrite of contributor identifiers therefore leaves the Note as it is, and the Note goes on naming the identifier that contributor had at the time.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-27",
+      "revision": 0
+    },
+    {
+      "id": "NTE-010/01",
+      "rule_ref": "NTE-010",
+      "type": "clarification",
+      "content": "For these types, `added_by` is attribution, and a rewrite of contributor identifiers may change it. An `override_ack` Note differs (NTE-044).",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-27",
       "revision": 0
     }
   ]
