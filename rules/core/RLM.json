@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.41.79",
-    "timestamp": "2026-11-27T16:24:40Z",
-    "hash": "blake3:1cdbb65d65eade357c5c19f15aedf4e505e31dd4ebadbdbeb044bfbbfed3d597"
+    "version": "0.41.80",
+    "timestamp": "2026-11-28T07:35:29Z",
+    "hash": "blake3:1efbacc89eec517a36938481da72c3e27b1d979129bede6da2301dc9356369aa"
   },
   "rules": [
     {
@@ -904,9 +904,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.34",
-        "timestamp": "2026-11-27T16:24:40Z",
-        "hash": "blake3:ef46c153e2e73c2ed0c1310124fad41df9fe49994b19223b3daba5e13d9f71e1"
+        "version": "0.1.35",
+        "timestamp": "2026-11-28T07:35:29Z",
+        "hash": "blake3:d62c035d358ba71ea0ebb67162d584d7ae4388ee99ec52b4de9bc3bcb648ce50"
       },
       "rules": [
         {
@@ -965,9 +965,9 @@
         },
         {
           "id": "STDRLM-007",
-          "revision": 0,
+          "revision": 1,
           "state": "D",
-          "body": "The text of a clause IS the bodies of the live Rules carrying it, in Rule identifier order.",
+          "body": "The text of a clause IS the bodies of the live Rules carrying it.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
           "supersedes": null
