@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.26.36",
-    "timestamp": "2026-11-27T16:12:27Z",
-    "hash": "blake3:2cca665dfa5351cb9a39cffcbce51a3fffe6e6276c18173865c4a971c8ad12b8"
+    "version": "0.28.0",
+    "timestamp": "2026-11-28T07:43:23Z",
+    "hash": "blake3:d3248252ed72942fa57be2f0dda7706ec9aed2d4e0fd6e85b065b7a39c5d647f"
   },
   "rules": [
     {
@@ -140,7 +140,7 @@
     {
       "id": "RUL-015",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MAY have a `clause`, a non-empty string naming the clause of an external standard that the Rule transcribes.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-07",
@@ -149,7 +149,7 @@
     {
       "id": "RUL-016",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MAY have a `profiles` array of unique names of the profiles the Rule belongs to.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-07",
@@ -238,9 +238,9 @@
         "parent": "RUL"
       },
       "rule_set": {
-        "version": "0.22.13",
-        "timestamp": "2026-11-27T13:45:29Z",
-        "hash": "blake3:11ae3097e7ad8ff2776ef2d2f4972377540640cb70df4bdb7f51977a51040bf4"
+        "version": "0.23.0",
+        "timestamp": "2026-11-28T07:43:22Z",
+        "hash": "blake3:b90b00959e65266f7b927998e2dbb1ef1f31032b49015998232ae1f91bdc3748"
       },
       "rules": [
         {
@@ -345,7 +345,7 @@
         {
           "id": "RULST-012",
           "revision": 2,
-          "state": "D",
+          "state": "P",
           "body": "A Published Rule MAY change state to Terminated in or after the change in which a Rule that supersedes it enters Published.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-09",
