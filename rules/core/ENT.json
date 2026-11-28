@@ -6,9 +6,9 @@
     "description": "An object with a unique identity and lifecycle. The unit of organization in the SteerSpec rule system."
   },
   "rule_set": {
-    "version": "0.17.24",
-    "timestamp": "2026-11-26T17:23:34Z",
-    "hash": "blake3:02bceb745064115a836ed307eadbf4d3d51dac671060d32a6487809e6ca67e26"
+    "version": "0.18.0",
+    "timestamp": "2026-11-28T07:43:22Z",
+    "hash": "blake3:4808c913a7972d4126532c2be8e056ef5b379b5b593e5ed195ea23d04f8aa78d"
   },
   "rules": [
     {
@@ -158,7 +158,7 @@
     {
       "id": "ENT-017",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MAY declare a `standards` array of Standard References in its `entity` object.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-01",

@@ -6,9 +6,9 @@
     "description": "A single-phrase behavioral constraint or property definition attached to an entity."
   },
   "rule_set": {
-    "version": "0.26.30",
-    "timestamp": "2026-11-26T15:48:58Z",
-    "hash": "blake3:3fefb08a61d0818f49e7d2c3b1ba2e07e00ddbe183ff5e7c6586fec20fbf7c1d"
+    "version": "0.28.0",
+    "timestamp": "2026-11-28T07:43:23Z",
+    "hash": "blake3:d3248252ed72942fa57be2f0dda7706ec9aed2d4e0fd6e85b065b7a39c5d647f"
   },
   "rules": [
     {
@@ -140,7 +140,7 @@
     {
       "id": "RUL-015",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MAY have a `clause`, a non-empty string naming the clause of an external standard that the Rule transcribes.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-07",
@@ -149,7 +149,7 @@
     {
       "id": "RUL-016",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "MAY have a `profiles` array of unique names of the profiles the Rule belongs to.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-07",
@@ -157,9 +157,9 @@
     },
     {
       "id": "RUL-017",
-      "revision": 0,
+      "revision": 1,
       "state": "D",
-      "body": "A Rule MUST NOT have a `clause` or `profiles` unless its Realm is a Standard Realm.",
+      "body": "A Rule that is not Abandoned, Retired or Terminated MUST NOT have a `clause` or `profiles` unless its Realm is a Standard Realm.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-07",
       "supersedes": null
@@ -238,9 +238,9 @@
         "parent": "RUL"
       },
       "rule_set": {
-        "version": "0.22.9",
-        "timestamp": "2026-11-10T13:07:01Z",
-        "hash": "blake3:e0cd6b46b3fa16862f2368f10f9ff5cb66f939e2f489c47ecf761989076a0cfd"
+        "version": "0.23.0",
+        "timestamp": "2026-11-28T07:43:22Z",
+        "hash": "blake3:b90b00959e65266f7b927998e2dbb1ef1f31032b49015998232ae1f91bdc3748"
       },
       "rules": [
         {
@@ -345,10 +345,19 @@
         {
           "id": "RULST-012",
           "revision": 2,
-          "state": "D",
+          "state": "P",
           "body": "A Published Rule MAY change state to Terminated in or after the change in which a Rule that supersedes it enters Published.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-09",
+          "supersedes": null
+        },
+        {
+          "id": "RULST-013",
+          "revision": 0,
+          "state": "D",
+          "body": "A Rule MUST NOT enter Published while its body cites a Draft Rule of its own Realm tree.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-27",
           "supersedes": null
         }
       ],
@@ -406,6 +415,24 @@
           "added_by": "github:pleberre",
           "added_at": "2026-11-10",
           "revision": 0
+        },
+        {
+          "id": "RULST-013/01",
+          "rule_ref": "RULST-013",
+          "type": "rationale",
+          "content": "Published text is final (RUL-007) and a Draft Rule may still change, so a Published Rule that cites one could change meaning without changing text. A Realm sets the order in which its own Rules are Published.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-27",
+          "revision": 0
+        },
+        {
+          "id": "RULST-013/02",
+          "rule_ref": "RULST-013",
+          "type": "clarification",
+          "content": "A Rule of another Realm tree may cite a Draft Rule, as a tool may implement one. A dependency pinned to a release (RLMMNFST-003) keeps the cited text as it was at that release; a local path or a moving source does not, and the risk of Draft remains. The rule speaks of citations because they can be checked; a Rule that uses a term only a Draft Rule defines rests on it in the same way.",
+          "added_by": "github:pleberre",
+          "added_at": "2026-11-27",
+          "revision": 0
         }
       ]
     }
@@ -454,6 +481,15 @@
       "content": "An effective rule set holds only Published and Implemented Rules (ENT-020), so the replacement that RUL-009 describes starts when the overriding Rule is Published (RUL-019). The inherited Rule stays in the set in the meantime, unless another Rule of the Entity already replaces it, as a Published override does while its successor is in Draft.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-26",
+      "revision": 0
+    },
+    {
+      "id": "RUL-017/01",
+      "rule_ref": "RUL-017",
+      "type": "rationale",
+      "content": "A `clause` or `profiles` is fixed once its Rule leaves Draft (RUL-007), so such a Rule outside a Standard Realm is repaired by superseding it, and the superseded Rule keeps the field as history. A Draft Rule is abandoned and added again.",
+      "added_by": "github:pleberre",
+      "added_at": "2026-11-27",
       "revision": 0
     }
   ]

@@ -143,7 +143,8 @@ itself. Together these keep exactly one transcription of each rule live at any t
   standard realm has one (STDRLM-005), so no rule drops out of the clause list unnoticed. Rules outside
   standard realms have neither `clause` nor `profiles` (RUL-017).
 - **The clause list** (STDRLM-006) is the distinct `clause` values of the live rules. **A clause's text**
-  (STDRLM-007) is the bodies of its live rules, in rule ID order.
+  (STDRLM-007) is the bodies of its live rules. No rule sets their order: a transcription fix gets a new,
+  higher rule ID, so rule ID order doesn't keep the standard's sentence order.
 - **Rule field `profiles`** (RUL-016): the levels the clause belongs to, `["L2", "L3"]` for a requirement
   whose minimum level is 2. Each entry is declared on the realm (STDRLM-008), and the rules of one
   clause declare the same list (STDRLM-009).
