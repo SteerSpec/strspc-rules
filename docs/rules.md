@@ -36,7 +36,9 @@ another sub-entity.
 | `SPCFGFAIL` | `SPCFG` | `fail_on`: the rule states that fail a check |
 | `SPCFGCOV` | `SPCFG` | Citation coverage: the entities whose rules a set of files has to cite |
 
-The rules of `STDREF`, `STDRLM`, `STDCWK` and `SPCFGCOV` are all Draft, so their text may still change.
+The rules of `STDCWK` and `SPCFGCOV` are all Draft, so their text may still change. So are some rules of `STDREF`
+and `STDRLM`: those that define coverage and its figures, and those that say a Standard Realm's rules are never
+Implemented or evaluated.
 
 ```text
 rules/core/
@@ -86,6 +88,6 @@ flowchart LR
 ```
 
 A Published rule can also go straight to Terminated once a rule that supersedes it has reached Published.
-`strspc diff` accepts that transition; the rule that states it, `RULST-012`, is still Draft.
+`RULST-012` states that transition, and `strspc diff` accepts it.
 
 Rule text is immutable once a rule leaves Draft. CI fails only on Implemented rules (`fail_on: [I]`).

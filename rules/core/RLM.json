@@ -6,9 +6,9 @@
     "description": "A namespace in which Entity Unique Identifiers are unique and Rule Identifier Format is consistent. The organizational boundary for rule authoring."
   },
   "rule_set": {
-    "version": "0.41.80",
-    "timestamp": "2026-11-28T07:35:29Z",
-    "hash": "blake3:1efbacc89eec517a36938481da72c3e27b1d979129bede6da2301dc9356369aa"
+    "version": "0.43.0",
+    "timestamp": "2026-11-28T07:43:23Z",
+    "hash": "blake3:8bbab3b6e0f911f5f054422c2fb282c49ec4f197e24354319271d42932ef9b54"
   },
   "rules": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "RLM-016",
       "revision": 1,
-      "state": "D",
+      "state": "P",
       "body": "A Realm tree IS a top-level Realm together with all its declared sub-realms.",
       "added_by": "github:pleberre",
       "added_at": "2026-10-31",
@@ -185,7 +185,7 @@
     {
       "id": "RLM-020",
       "revision": 0,
-      "state": "D",
+      "state": "P",
       "body": "The Realm tree of a sub-realm IS the Realm tree of its top-level Realm.",
       "added_by": "github:pleberre",
       "added_at": "2026-11-03",
@@ -247,9 +247,9 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.13.22",
-        "timestamp": "2026-11-27T15:06:40Z",
-        "hash": "blake3:134883fed84fc4af396bfc7eb56184bad6872906c4fae6397440bf4736b03ea0"
+        "version": "0.23.0",
+        "timestamp": "2026-11-28T07:43:22Z",
+        "hash": "blake3:b605bca1193216bbba6a535b2c5a8ebe219f9556f940f68f6ec74f0758c91da7"
       },
       "rules": [
         {
@@ -309,7 +309,7 @@
         {
           "id": "RLMMNFST-007",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "MAY declare a `standards` array of Standard References in the `realm` object.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
@@ -318,7 +318,7 @@
         {
           "id": "RLMMNFST-008",
           "revision": 1,
-          "state": "D",
+          "state": "P",
           "body": "MAY declare a `kind` field in the `realm` object.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -327,7 +327,7 @@
         {
           "id": "RLMMNFST-009",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "A Realm whose manifest declares no kind IS a code Realm.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -336,7 +336,7 @@
         {
           "id": "RLMMNFST-010",
           "revision": 1,
-          "state": "D",
+          "state": "P",
           "body": "MAY declare a `license` field in the `realm` object.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -345,7 +345,7 @@
         {
           "id": "RLMMNFST-011",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "MAY declare an `attribution` object in the `realm` object, with a non-empty `text` and an absolute `http` or `https` `url`.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -354,7 +354,7 @@
         {
           "id": "RLMMNFST-012",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "MAY declare a `notes` array of Realm Notes.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -363,7 +363,7 @@
         {
           "id": "RLMMNFST-013",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "HAS a `hash`, the Blake3 hash of the manifest without its `hash` field, computed as for a Rule Set Hash.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -372,7 +372,7 @@
         {
           "id": "RLMMNFST-014",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "The `hash` MUST be recomputed in every change to the manifest.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -381,7 +381,7 @@
         {
           "id": "RLMMNFST-015",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "The value of `kind` MUST be `standard`.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-27",
@@ -390,7 +390,7 @@
         {
           "id": "RLMMNFST-016",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "The value of `license` MUST be an SPDX license identifier or match `^LicenseRef-[A-Za-z0-9.-]+$`.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-27",
@@ -472,15 +472,15 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.59",
-        "timestamp": "2026-11-26T16:12:43Z",
-        "hash": "blake3:82f61ab6d1dbccefc47034234a21209e3088e2f1f0304326975c88f8f7cb6785"
+        "version": "0.18.0",
+        "timestamp": "2026-11-28T07:43:22Z",
+        "hash": "blake3:b347be1c92511492e92f6815e56fc9bbb1abf0f890b6f1a95c34a20b10c7591a"
       },
       "rules": [
         {
           "id": "STDREF-001",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "IS a citation of an external standard held in a `standards` array.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
@@ -489,7 +489,7 @@
         {
           "id": "STDREF-002",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "HAS an `id` matching `^[a-z0-9]+(-[a-z0-9]+)*(\\.[a-z0-9]+(-[a-z0-9]+)*)+$`.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
@@ -498,7 +498,7 @@
         {
           "id": "STDREF-003",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "The `id` MUST be unique within its `standards` array.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
@@ -507,7 +507,7 @@
         {
           "id": "STDREF-004",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "HAS a `relation` of `implements` or `derived_from`.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
@@ -516,7 +516,7 @@
         {
           "id": "STDREF-005",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "The relation `implements` IS a claim of coverage of the standard.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
@@ -525,7 +525,7 @@
         {
           "id": "STDREF-006",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "The relation `derived_from` IS a citation of the standard as a source, with no claim of coverage.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
@@ -534,7 +534,7 @@
         {
           "id": "STDREF-007",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "MAY have a `version`, a non-empty free string naming the edition of the standard.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
@@ -543,7 +543,7 @@
         {
           "id": "STDREF-008",
           "revision": 1,
-          "state": "D",
+          "state": "P",
           "body": "MAY have a `url`, the absolute `http` or `https` URL of the standard.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
@@ -552,7 +552,7 @@
         {
           "id": "STDREF-009",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "An `inherits` declaration MUST NOT make a Standard Reference of the inherited Entity available to the `standard` Notes of the inheriting Entity's own Rules.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
@@ -570,7 +570,7 @@
         {
           "id": "STDREF-011",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "A clause IS identified by its `<clause>` together with the `id` and `version` of the Standard Reference its `standard` Note resolves to under NTE-016.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-01",
@@ -624,7 +624,7 @@
         {
           "id": "STDREF-017",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "MAY have a `realm`, the `realm_id` of a Standard Realm that is a dependency of the Realm tree declaring the Standard Reference.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -633,7 +633,7 @@
         {
           "id": "STDREF-018",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "A Standard Reference with a `realm` MUST have a `version` equal to the `edition` of that Realm.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -642,7 +642,7 @@
         {
           "id": "STDREF-019",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "MAY have a `profile` only when it has a `realm`.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -651,7 +651,7 @@
         {
           "id": "STDREF-020",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "The clause list of a Standard Reference with a `realm` IS the clause list of that Realm, limited when it has a `profile` to the clauses whose Rules declare that profile.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -660,7 +660,7 @@
         {
           "id": "STDREF-021",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "The `<clause>` of a `standard` Note whose Standard Reference has a `realm` MUST be in the clause list of that Realm, matched exactly.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -669,7 +669,7 @@
         {
           "id": "STDREF-022",
           "revision": 1,
-          "state": "D",
+          "state": "P",
           "body": "A clause IS excluded for a Standard Reference when the manifest that declares the reference holds a Note of type `exclusion` naming it.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -714,7 +714,7 @@
         {
           "id": "STDREF-027",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "The `profile` of a Standard Reference MUST name one of the `profiles` of the Realm named by its `realm`.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -904,15 +904,15 @@
         "parent": "RLM"
       },
       "rule_set": {
-        "version": "0.1.35",
-        "timestamp": "2026-11-28T07:35:29Z",
-        "hash": "blake3:d62c035d358ba71ea0ebb67162d584d7ae4388ee99ec52b4de9bc3bcb648ce50"
+        "version": "0.20.0",
+        "timestamp": "2026-11-28T07:43:22Z",
+        "hash": "blake3:5c65e2511cbe1f241d46321fda2ecbaa5dccd3e657d4f36d62386ec8d4e70874"
       },
       "rules": [
         {
           "id": "STDRLM-001",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "IS a Realm whose manifest declares the kind `standard`.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -921,7 +921,7 @@
         {
           "id": "STDRLM-002",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "MUST declare an `edition` field in the `realm` object of its manifest, a non-empty string naming the edition of the standard it transcribes.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -930,7 +930,7 @@
         {
           "id": "STDRLM-003",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "MUST declare a `license` field in the `realm` object of its manifest.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -939,7 +939,7 @@
         {
           "id": "STDRLM-004",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "MAY declare a `profiles` array of unique non-empty names in the `realm` object of its manifest.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -948,7 +948,7 @@
         {
           "id": "STDRLM-005",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "Every live Rule of a Standard Realm MUST have a `clause`.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -957,7 +957,7 @@
         {
           "id": "STDRLM-006",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "The clause list of a Standard Realm IS the distinct `clause` values of its live Rules.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -966,7 +966,7 @@
         {
           "id": "STDRLM-007",
           "revision": 1,
-          "state": "D",
+          "state": "P",
           "body": "The text of a clause IS the bodies of the live Rules carrying it.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -975,7 +975,7 @@
         {
           "id": "STDRLM-008",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "Each entry of the `profiles` of a Rule MUST be declared in the `profiles` of its Realm.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -984,7 +984,7 @@
         {
           "id": "STDRLM-009",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "The live Rules carrying one `clause` MUST declare the same `profiles`.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -1011,7 +1011,7 @@
         {
           "id": "STDRLM-012",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "A Rule of a Standard Realm that supersedes another MUST have the `clause` of the Rule it supersedes.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -1020,7 +1020,7 @@
         {
           "id": "STDRLM-013",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "When a Rule of a Standard Realm that supersedes another enters Published, the superseded Rule MUST enter Terminated in the same change.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -1029,7 +1029,7 @@
         {
           "id": "STDRLM-014",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "A live Rule of a Standard Realm IS a Rule that is not Abandoned, Retired or Terminated and is not a Draft Rule that supersedes another.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -1038,7 +1038,7 @@
         {
           "id": "STDRLM-015",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "MUST declare an `attribution` object in the `realm` object of its manifest.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -1047,7 +1047,7 @@
         {
           "id": "STDRLM-016",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "At most one Rule that is not Abandoned MAY supersede a given Rule of a Standard Realm.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -1056,7 +1056,7 @@
         {
           "id": "STDRLM-017",
           "revision": 2,
-          "state": "D",
+          "state": "P",
           "body": "A Draft Rule of a Standard Realm MUST supersede only a Published Rule.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -1065,7 +1065,7 @@
         {
           "id": "STDRLM-018",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "When a Standard Realm declares `profiles`, each of its live Rules MUST declare `profiles`.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-07",
@@ -1074,7 +1074,7 @@
         {
           "id": "STDRLM-019",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "The body of a Rule of a Standard Realm MUST be the wording of the standard for its clause, divided only at sentence ends (RUL-004).",
           "added_by": "github:pleberre",
           "added_at": "2026-11-09",
@@ -1083,7 +1083,7 @@
         {
           "id": "STDRLM-020",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "The body of a Rule of a Standard Realm MAY hold no Key Word.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-09",
@@ -1092,7 +1092,7 @@
         {
           "id": "STDRLM-021",
           "revision": 0,
-          "state": "D",
+          "state": "P",
           "body": "Examples in the body of a Rule of a Standard Realm MAY stay in the body, as an exception to NTE-020.",
           "added_by": "github:pleberre",
           "added_at": "2026-11-09",
